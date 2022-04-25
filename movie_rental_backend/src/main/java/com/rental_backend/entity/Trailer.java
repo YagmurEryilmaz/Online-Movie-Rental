@@ -1,10 +1,10 @@
 package com.rental_backend.entity;
-
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.context.annotation.Primary;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -13,20 +13,12 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 
-
-
-public class MovieRequest {
+public class Trailer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long movieReq_id;
-
-    private String movie_name;
-
-    private String director_name;
-
-    private String movieReq_status;
-
-    @ManyToOne (fetch= FetchType.EAGER)
-    private UserAccount userAccount;
-
+    private Long trailer_id;
+    @ManyToMany(mappedBy = " ", fetch = FetchType.EAGER)
+    @PrimaryKeyJoinColumn(name = "trailer_id", referencedColumnName = "m_id")
+    private Set<Movie> movie;
+    private String t_id;
 }

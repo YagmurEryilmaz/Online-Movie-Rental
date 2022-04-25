@@ -5,6 +5,7 @@ import lombok.experimental.SuperBuilder;
 import org.springframework.context.annotation.Primary;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -13,20 +14,12 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 
-
-
-public class MovieRequest {
+public class MovieLang {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long movieReq_id;
-
-    private String movie_name;
-
-    private String director_name;
-
-    private String movieReq_status;
-
-    @ManyToOne (fetch= FetchType.EAGER)
-    private UserAccount userAccount;
-
+    private Long movieLang_id;
+    @ManyToMany(mappedBy = " ", fetch = FetchType.EAGER)
+    @PrimaryKeyJoinColumn(name = "movieLang_id", referencedColumnName = "m_id")
+    private Set<Movie> movie;
+    private String m_lang;
 }
