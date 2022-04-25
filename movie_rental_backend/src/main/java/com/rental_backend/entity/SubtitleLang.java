@@ -17,7 +17,7 @@ public class SubtitleLang {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long subtitleLang_id;
-    @ManyToMany(mappedBy = " ", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "subtitleLang", fetch = FetchType.EAGER)
     @PrimaryKeyJoinColumn(name = "subtitleLang", referencedColumnName = "m_id")
     private Set<Movie> movie;
     private String s_lang;

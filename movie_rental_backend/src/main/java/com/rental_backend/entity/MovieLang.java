@@ -18,8 +18,8 @@ public class MovieLang {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long movieLang_id;
-    @ManyToMany(mappedBy = " ", fetch = FetchType.EAGER)
 
+    @ManyToMany(mappedBy = "movieLang", fetch = FetchType.EAGER)
     @PrimaryKeyJoinColumn(name = "movieLang", referencedColumnName = "m_id")
     private Set<Movie> movie;
     private String m_lang;

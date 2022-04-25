@@ -46,7 +46,7 @@ public class Movie {
     private Set<Customer> customer;
 
     @OneToMany
-    @JoinColumn(name = "movie")
+    @JoinColumn(name = "rentedMovies")
     private Set<Trailer> trailer;
 
 }

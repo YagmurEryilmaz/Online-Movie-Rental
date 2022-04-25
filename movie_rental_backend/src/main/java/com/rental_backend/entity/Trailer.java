@@ -17,9 +17,9 @@ public class Trailer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long trailer_id;
-    @ManyToMany(mappedBy = " ", fetch = FetchType.EAGER)
-    @PrimaryKeyJoinColumn(name = "trailer_id", referencedColumnName = "m_id")
-    private Set<Movie> movie;
+    @ManyToOne( fetch = FetchType.EAGER)
+    @PrimaryKeyJoinColumn(name = "trailer", referencedColumnName = "m_id")
+    private Movie movie;
     private String t_id;
 
 }
