@@ -1,0 +1,67 @@
+.mainCont{
+	height: 100vh;
+	background-color: black;
+}
+.loginInfo{
+	width:75%;
+	height:40rem;
+	margin: auto;
+	
+	background-color: #52057B ;
+}
+.logoCont{
+	max-width: 100%;
+	width: 25rem;
+	min-width: 400px;
+	min-height: 400px;
+	height: auto;
+	padding: 50px;
+	margin: auto;
+
+}
+.loginTexts{
+	font-family: 'Secular One';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 64px;
+	line-height: 93px;
+	text-align: center;
+	color: #D8E9A8;
+}
+.inputText{
+	font-family: 'Secular One';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 35px;
+	color:  #191A19;
+}
+.labelText{
+	font-family: 'Secular One';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 35px;
+	color: #D8E9A8;
+}
+.btn-outline-warning{
+	color: #D8E9A8;
+	border: 1px solid #D8E9A8 ;
+}
+.signupText{
+	font-family: 'Secular One';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 35px;
+	color: #D8E9A8;
+}
+.signupText:hover{
+	color: #D8E9A8;
+	opacity: 0.5;
+
+}
+.btn-outline-warning:hover, .btn-outline-warning:active,.btn-outline-warning:visited {
+	background-color: #D8E9A8 !important;
+	border: 1px solid #D8E9A8 ;
+}
