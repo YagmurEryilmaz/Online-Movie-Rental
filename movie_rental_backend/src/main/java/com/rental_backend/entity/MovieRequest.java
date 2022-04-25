@@ -27,6 +27,6 @@ public class MovieRequest {
     private String movieReq_status;
 
     @ManyToOne (fetch= FetchType.EAGER)
-    private UserAccount userAccount;
+    private Customer customer;
 
 }
