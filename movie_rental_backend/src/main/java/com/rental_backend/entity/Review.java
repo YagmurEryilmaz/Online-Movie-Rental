@@ -23,4 +23,6 @@ public class Review {
     private double point;
 
     private String comment;
+
+
 }

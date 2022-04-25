@@ -1,8 +1,6 @@
 package com.rental_backend.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
@@ -20,6 +18,7 @@ import java.util.Set;
 @Getter
 @Setter
 @SuperBuilder
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor
 @Entity
 public class UserAccount {

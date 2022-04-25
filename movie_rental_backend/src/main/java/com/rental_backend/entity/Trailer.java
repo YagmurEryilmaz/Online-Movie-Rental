@@ -21,4 +21,5 @@ public class Trailer {
     @PrimaryKeyJoinColumn(name = "trailer_id", referencedColumnName = "m_id")
     private Set<Movie> movie;
     private String t_id;
+
 }

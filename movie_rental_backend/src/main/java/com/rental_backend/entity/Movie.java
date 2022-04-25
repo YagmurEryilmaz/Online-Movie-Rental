@@ -6,11 +6,9 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.springframework.context.annotation.Primary;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -34,6 +32,22 @@ public class Movie {
     private float price;
 
     private Date addition_date;
+
+    @ManyToMany
+    @JoinColumn(name = "movie")
+    private Set<MovieLang> movieLang;
+
+    @ManyToMany
+    @JoinColumn(name = "movie")
+    private Set<SubtitleLang> subtitleLang;
+
+    @ManyToMany
+    @JoinColumn(name = "movie")
+    private Set<Customer> customer;
+
+    @OneToMany
+    @JoinColumn(name = "movie")
+    private Set<Trailer> trailer;
 
 }
 

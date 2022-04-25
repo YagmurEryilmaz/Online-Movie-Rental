@@ -19,7 +19,8 @@ public class MovieLang {
     @Id
     private Long movieLang_id;
     @ManyToMany(mappedBy = " ", fetch = FetchType.EAGER)
-    @PrimaryKeyJoinColumn(name = "movieLang_id", referencedColumnName = "m_id")
+
+    @PrimaryKeyJoinColumn(name = "movieLang", referencedColumnName = "m_id")
     private Set<Movie> movie;
     private String m_lang;
 }
