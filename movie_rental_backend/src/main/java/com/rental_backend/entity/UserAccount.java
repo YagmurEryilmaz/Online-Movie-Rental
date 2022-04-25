@@ -25,7 +25,7 @@ public class UserAccount {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long m_id;
+    private Long u_id;
 
     private String u_name;
 
@@ -36,6 +36,9 @@ public class UserAccount {
     private String email;
 
     private float balance;
+
+
+
 
 }
 
