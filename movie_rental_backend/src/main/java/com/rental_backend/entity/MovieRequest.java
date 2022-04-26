@@ -13,8 +13,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 
-
-
 public class MovieRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
