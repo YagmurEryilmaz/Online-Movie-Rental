@@ -20,7 +20,7 @@ public interface MovieRepository extends CrudRepository<Movie,Long>{
             "or lower(m.director_name) like lower(concat('%', :searchTerm, '%'))")
     List<Movie> search(@Param("searchTerm") String searchTerm);
 
-    List<Movie> findBy
+    
 
 
 }
