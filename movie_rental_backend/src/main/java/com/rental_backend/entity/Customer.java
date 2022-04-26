@@ -29,4 +29,17 @@ public class Customer extends UserAccount{
 
     @OneToMany(mappedBy ="senderCustomer")
     private Set<Gift> receivedGifts;
+
+    @OneToMany(mappedBy ="sender")
+    private Set<FriendRequest> sentRequests;
+
+    @OneToMany(mappedBy ="receiver")
+    private Set<FriendRequest> receivedRequests;
+
+    @OneToMany(mappedBy ="suggestionSender")
+    private Set<Suggestion> sentSuggestions;
+
+    @OneToMany(mappedBy ="suggestionReceiver")
+    private Set<Suggestion> receivedSuggestions;
 }
+
