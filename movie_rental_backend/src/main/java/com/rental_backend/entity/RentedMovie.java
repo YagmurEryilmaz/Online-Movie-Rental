@@ -1,22 +1,26 @@
 package com.rental_backend.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.Set;
 
 @Getter
 @Setter
 @SuperBuilder
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor
 @Entity
 public class RentedMovie {
+
+    private Date exp_date;
+
     @Embeddable
     public static class PrimaryKey implements Serializable {
+
         @Column(nullable = false, updatable = false)
         private long u_id;
 
