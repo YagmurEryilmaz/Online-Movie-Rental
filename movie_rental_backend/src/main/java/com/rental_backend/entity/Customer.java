@@ -23,4 +23,10 @@ public class Customer extends UserAccount{
 
     @ManyToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Movie> rentedMovies;
+
+    @OneToMany(mappedBy ="senderCustomer")
+    private Set<Gift> sentGifts;
+
+    @OneToMany(mappedBy ="senderCustomer")
+    private Set<Gift> receivedGifts;
 }
