@@ -1,4 +1,8 @@
 package com.rental_backend.repository;
+import com.rental_backend.entity.RentedMovie;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface RentedMovieRepository {
+@Repository
+public interface RentedMovieRepository extends CrudRepository<RentedMovie,Long> {
 }
