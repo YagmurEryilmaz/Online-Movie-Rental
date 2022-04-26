@@ -1,8 +1,19 @@
 package com.rental_backend.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
+@Getter
+@Setter
+@SuperBuilder
+@NoArgsConstructor
+@Entity
 public class RentedMovie {
     @Embeddable
     public static class PrimaryKey implements Serializable {
@@ -26,15 +37,15 @@ public class RentedMovie {
 
     @EmbeddedId
     private Rate.PrimaryKey pk;
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name = "u_id", insertable = false, updatable = false)
-    private Customer customer;
+    private Set<Customer> customer;
 
     @ManyToMany
     @JoinColumn(name = "m_id", insertable = false, updatable = false)
-    private Movie movie;
+    private Set<Movie> movie;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "pay_id", insertable = false, updatable = false)
     private Payment payment;
 }

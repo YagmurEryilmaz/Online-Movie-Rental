@@ -23,4 +23,9 @@ public class Payment {
 
     //@OneToOne()
     //private Gift gift;
+
+    //@OneToOne()
+    //private RentedMovie rentedMovie;
+
+
 }

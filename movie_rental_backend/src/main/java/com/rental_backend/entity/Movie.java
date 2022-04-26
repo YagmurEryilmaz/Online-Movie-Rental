@@ -43,7 +43,7 @@ public class Movie {
 
     @ManyToMany
     @JoinColumn(name = "movie")
-    private Set<Customer> customer;
+    private Set<RentedMovie> rentedMovieSet;
 
     @OneToMany
     @JoinColumn(name = "rentedMovies")

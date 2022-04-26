@@ -22,7 +22,7 @@ public class Customer extends UserAccount{
     private Set<MovieRequest> movieRequests;
 
     @ManyToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Movie> rentedMovies;
+    private Set<RentedMovie> rentedMovies;
 
     @OneToMany(mappedBy ="senderCustomer")
     private Set<Gift> sentGifts;
@@ -41,5 +41,7 @@ public class Customer extends UserAccount{
 
     @OneToMany(mappedBy ="suggestionReceiver")
     private Set<Suggestion> receivedSuggestions;
+
+
 }
 
