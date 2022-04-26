@@ -18,7 +18,10 @@ public class Gift {
     @Embeddable
     public static class PrimaryKey implements Serializable {
         @Column(nullable = false, updatable = false)
-        private long u_id;
+        private long sender_id;
+
+        @Column(nullable = false, updatable = false)
+        private long receiver_id;
 
         @Column(nullable = false, updatable = false)
         private long m_id;
@@ -28,9 +31,10 @@ public class Gift {
 
        public PrimaryKey() {}
 
-       public PrimaryKey(Long u_id, Long m_id, Long pay_id) {
+       public PrimaryKey(Long sender_id, Long receiver_id, Long m_id, Long pay_id) {
 
-           this.u_id = u_id;
+           this.sender_id = sender_id;
+           this.receiver_id = receiver_id;
            this.m_id =m_id;
            this.pay_id= pay_id;
        }
@@ -39,9 +43,13 @@ public class Gift {
 
     @EmbeddedId
     private PrimaryKey primaryKey;
-    @OneToMany
-    @JoinColumn(name = "u_id", insertable = false, updatable = false)
-    private Set<Customer> customer;
+    @ManyToOne
+    @JoinColumn(name = "sender_id", insertable = false, updatable = false)
+    private Customer senderCustomer;
+
+    @ManyToOne
+    @JoinColumn(name = "receiver_id", insertable = false, updatable = false)
+    private Customer receiverCustomer;
 
     @ManyToOne
     @JoinColumn(name = "m_id", insertable = false, updatable = false)

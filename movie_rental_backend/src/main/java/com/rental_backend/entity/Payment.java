@@ -4,10 +4,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.context.annotation.Primary;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -23,4 +20,7 @@ public class Payment {
     private String pay_type;
 
     private String pay_status;
+
+    //@OneToOne()
+    //private Gift gift;
 }
