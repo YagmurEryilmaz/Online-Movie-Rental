@@ -24,13 +24,13 @@ public class Movie {
 
     private String genre;
 
-    private String director_name;
+    private String directorName;
 
-    private int production_year;
+    private int productionYear;
 
     private float price;
 
-    private Date addition_date;
+    private Date additionDate;
 
     @ManyToMany
     @JoinColumn(name = "movie")
