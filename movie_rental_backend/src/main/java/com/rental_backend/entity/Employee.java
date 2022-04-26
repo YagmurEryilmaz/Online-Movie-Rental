@@ -13,6 +13,5 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @Entity
 public class Employee extends UserAccount{
-
-
+    private float salary;
 }
