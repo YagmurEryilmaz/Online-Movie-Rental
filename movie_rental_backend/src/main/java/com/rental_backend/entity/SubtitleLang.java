@@ -21,4 +21,9 @@ public class SubtitleLang {
     @PrimaryKeyJoinColumn(name = "subtitleLang", referencedColumnName = "m_id")
     private Set<Movie> movie;
     private String s_lang;
+
+    @OneToMany(mappedBy ="subtitle")
+    private Set<SubtitleRequest> requests;
+
 }
+

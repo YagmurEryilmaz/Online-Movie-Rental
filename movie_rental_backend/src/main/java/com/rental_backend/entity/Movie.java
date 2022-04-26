@@ -55,6 +55,10 @@ public class Movie {
     @OneToMany(mappedBy ="movie")
     private Set<Gift> suggestions;
 
+    @OneToMany(mappedBy ="movie")
+    private Set<SubtitleRequest> requestedSubtitles;
+
+
 }
 
 

@@ -42,6 +42,9 @@ public class Customer extends UserAccount{
     @OneToMany(mappedBy ="suggestionReceiver")
     private Set<Suggestion> receivedSuggestions;
 
+    @OneToMany(mappedBy ="customer")
+    private Set<SubtitleRequest> subtitleRequests;
+
 
 }
 
