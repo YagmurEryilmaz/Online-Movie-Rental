@@ -1,6 +1,8 @@
 package com.rental_backend.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.springframework.context.annotation.Primary;
 
@@ -11,7 +13,6 @@ import java.util.Set;
 @Getter
 @Setter
 @SuperBuilder
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor
 @Entity
 public class Movie {
@@ -51,7 +52,8 @@ public class Movie {
     @OneToMany(mappedBy ="movie")
     private Set<Gift> gifts;
 
-
+    @OneToMany(mappedBy ="movie")
+    private Set<Gift> suggestions;
 
 }
 

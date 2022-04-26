@@ -40,16 +40,16 @@ public class Suggestion {
 
     @EmbeddedId
     private Suggestion.PrimaryKey primaryKey;
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "msender_id", insertable = false, updatable = false)
-    private Set<Customer> suggestionSender;
+    private Customer suggestionSender;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "mreceiver_id", insertable = false, updatable = false)
-    private Set<Customer> suggestionReceiver;
+    private Customer suggestionReceiver;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "m_id", insertable = false, updatable = false)
-    private Set<Movie> movie;
+    private Movie movie;
 
 }
