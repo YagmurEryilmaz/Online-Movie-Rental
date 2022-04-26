@@ -18,7 +18,9 @@ public interface MovieRepository extends CrudRepository<Movie,Long>{
     @Query("select m from Movie m " +
             "where lower(m.title) like lower(concat('%', :searchTerm, '%')) " +
             "or lower(m.director_name) like lower(concat('%', :searchTerm, '%'))")
-    List<Movie> searchByName(@Param("searchTerm") String searchTerm);
+    List<Movie> search(@Param("searchTerm") String searchTerm);
+
+    List<Movie> findBy
 
 
 }
