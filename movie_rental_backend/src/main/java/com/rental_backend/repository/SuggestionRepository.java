@@ -1,4 +1,8 @@
 package com.rental_backend.repository;
+import com.rental_backend.entity.Suggestion;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface SuggestionRepository {
+@Repository
+public interface SuggestionRepository extends CrudRepository<Suggestion,Long> {
 }
