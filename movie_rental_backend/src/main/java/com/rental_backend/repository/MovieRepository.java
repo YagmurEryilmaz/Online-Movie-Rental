@@ -2,6 +2,7 @@ package com.rental_backend.repository;
 
 
 import com.rental_backend.entity.Movie;
+import com.rental_backend.entity.UserAccount;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -24,6 +25,10 @@ public interface MovieRepository extends CrudRepository<Movie,Long>{
             "where lower(m.title) like lower(concat('%', :searchTerm, '%')) " +
             "or lower(m.directorName) like lower(concat('%', :searchTerm, '%'))")
     List<Movie> search(@Param("searchTerm") String searchTerm);
+
+    @Query("delete from Movie where mId= :movieId")
+    List<Movie> deleteMovie(@Param("searchTerm") Long movieId);
+
 
 
 
