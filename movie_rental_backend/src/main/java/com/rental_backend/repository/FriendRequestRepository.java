@@ -1,4 +1,4 @@
 package com.rental_backend.repository;
 
-public class FriendRequestRepository {
+public interface FriendRequestRepository {
 }

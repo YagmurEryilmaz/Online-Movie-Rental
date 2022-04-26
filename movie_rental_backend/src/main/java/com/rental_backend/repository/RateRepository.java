@@ -1,4 +1,4 @@
 package com.rental_backend.repository;
 
-public interface CustomerRepository {
+public interface RateRepository {
 }
