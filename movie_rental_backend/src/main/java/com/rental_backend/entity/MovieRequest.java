@@ -16,13 +16,13 @@ import javax.persistence.*;
 public class MovieRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long movieReq_id;
+    private Long movieReqId;
 
-    private String movie_name;
+    private String movieName;
 
-    private String director_name;
+    private String directorName;
 
-    private String movieReq_status;
+    private String movieReqStatus;
 
     @ManyToOne (fetch= FetchType.EAGER)
     private Customer customer;

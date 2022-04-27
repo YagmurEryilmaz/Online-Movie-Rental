@@ -25,11 +25,11 @@ public class UserAccount {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long u_id;
+    private Long uId;
 
-    private String u_name;
+    private String name;
 
-    private String u_password;
+    private String password;
 
     private Date birthday;
 

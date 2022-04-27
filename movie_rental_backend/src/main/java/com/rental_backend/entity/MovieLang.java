@@ -17,10 +17,10 @@ import java.util.Set;
 public class MovieLang {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long movieLang_id;
+    private Long movieLangId;
 
     @ManyToMany(mappedBy = "movieLang", fetch = FetchType.EAGER)
     @PrimaryKeyJoinColumn(name = "movieLang", referencedColumnName = "m_id")
     private Set<Movie> movie;
-    private String m_lang;
+    private String movieLang;
 }

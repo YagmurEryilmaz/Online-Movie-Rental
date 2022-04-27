@@ -14,12 +14,14 @@ import java.util.Set;
 @Entity
 
 public class Trailer {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long trailer_id;
+    private Long trailerId;
+
     @ManyToOne( fetch = FetchType.EAGER)
-    @PrimaryKeyJoinColumn(name = "trailer", referencedColumnName = "m_id")
+    @PrimaryKeyJoinColumn(name = "trailer", referencedColumnName = "mId")
     private Movie movie;
-    private String t_id;
+
 
 }
