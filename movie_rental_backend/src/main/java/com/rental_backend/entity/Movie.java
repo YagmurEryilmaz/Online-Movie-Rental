@@ -48,11 +48,15 @@ public class Movie {
     @JoinColumn(name = "rentedMovies")
     private Set<Trailer> trailer;
 
+    @OneToMany
+    @JoinColumn(name = "movieRates")
+    private Set<Rate> rates;
+
     @OneToMany(mappedBy ="movie")
     private Set<Gift> gifts;
 
     @OneToMany(mappedBy ="movie")
-    private Set<Gift> suggestions;
+    private Set<Suggestion> suggestions;
 
     @OneToMany(mappedBy ="movie")
     private Set<SubtitleRequest> requestedSubtitles;
