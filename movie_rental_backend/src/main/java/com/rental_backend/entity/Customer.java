@@ -47,6 +47,10 @@ public class Customer extends UserAccount{
     @OneToMany(mappedBy ="customer")
     private Set<SubtitleRequest> subtitleRequests;
 
+    @OneToMany
+    @JoinColumn(name = "movieRates")
+    private Set<Rate> rates;
+
 
 }
 
