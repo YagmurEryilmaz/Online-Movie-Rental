@@ -27,7 +27,7 @@ public interface MovieRepository extends CrudRepository<Movie,Long>{
     List<Movie> search(@Param("searchTerm") String searchTerm);
 
     @Query("delete from Movie where mId= :movieId")
-    List<Movie> deleteMovie(@Param("searchTerm") Long movieId);
+    List<Movie> deleteMovie(@Param("movieId") Long movieId);
 
 
 
