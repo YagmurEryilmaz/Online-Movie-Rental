@@ -10,8 +10,5 @@ import java.util.List;
 
 @Repository
 public interface ReviewRepository extends CrudRepository<Review,Long> {
-    List<Review> findAll();
 
-    @Query("select avg(r.point) as avgPoint from Review r, Movie m group by m")
-    List<Review> findAvgRatePerMovie(@Param("searchTerm") Long movieId);
 }
