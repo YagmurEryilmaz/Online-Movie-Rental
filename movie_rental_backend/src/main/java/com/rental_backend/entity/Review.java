@@ -18,7 +18,7 @@ import javax.persistence.Id;
 public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private long review_id;
+    private long reviewId;
 
     private double point;
 

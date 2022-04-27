@@ -15,11 +15,11 @@ import javax.persistence.*;
 public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long pay_id;
+    private Long payId;
 
-    private String pay_type;
+    private String payType;
 
-    private String pay_status;
+    private String payStatus;
 
     //@OneToOne()
     //private Gift gift;

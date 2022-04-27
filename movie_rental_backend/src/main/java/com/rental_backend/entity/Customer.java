@@ -3,6 +3,7 @@ package com.rental_backend.entity;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import net.bytebuddy.implementation.bind.annotation.Super;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -14,6 +15,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 public class Customer extends UserAccount{
+
+
 
     private int movieCount;
 

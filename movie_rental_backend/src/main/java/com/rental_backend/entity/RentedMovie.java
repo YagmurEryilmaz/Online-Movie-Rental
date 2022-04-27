@@ -16,7 +16,7 @@ import java.util.Set;
 @Entity
 public class RentedMovie {
 
-    private Date exp_date;
+    private Date expDate;
 
     @Embeddable
     public static class PrimaryKey implements Serializable {
@@ -45,6 +45,7 @@ public class RentedMovie {
     @JoinColumn(name = "u_id", insertable = false, updatable = false)
     private Set<Customer> customer;
 
+
     @ManyToMany
     @JoinColumn(name = "m_id", insertable = false, updatable = false)
     private Set<Movie> movie;
@@ -52,4 +53,6 @@ public class RentedMovie {
     @OneToOne
     @JoinColumn(name = "pay_id", insertable = false, updatable = false)
     private Payment payment;
+
+
 }
