@@ -1,0 +1,47 @@
+.sidebar {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.6rem;
+  color: #ffffff;
+  background: #BC6FF1;
+  display: flex;
+}
+
+.sidebar-link {
+  height: 3rem;
+  background: #BC6FF1;
+  margin-left: 1rem;
+  border-radius: 10px;
+  width: 120%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  position: relative;
+}
+
+.hover-effect:hover {
+  background: #A25BD3;
+}
+
+.sidebar-icon {
+  width: 25px;
+  height: 25px;
+}
+
+.logout-div {
+  margin-top: auto;
+}
+.blankSpace{
+	margin-top: 6rem;
+}
+.bottomBlank{
+	margin-top: 20rem;
+	margin-bottom: 3rem;
+
+}

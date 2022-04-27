@@ -1,11 +1,12 @@
 import { useState } from "react";
 import "./css/Login.css";
 import logo from "./img/tickflixLogo.png"
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [loggedIn,setLoggedIn] = useState(false);
 
 
 	const validateEmail = (email) => {
@@ -18,8 +19,11 @@ const Login = () => {
 	const login = (e) =>{
 		e.preventDefault();
 		if (validateEmail(email) && password != ""){
-			window.alert("Successfull Login");
+			window.alert("Successful Login");
+
 			console.log(email, password);
+			setLoggedIn(true);
+			
 		}
 		else if(!validateEmail(email)){
 			window.alert("Enter a valid email");
@@ -50,15 +54,19 @@ const Login = () => {
 									</div>
 								</div>
 							<div className="form-group row py-4 inputText">
-									<label for="inputPass" className="col-sm-3 col-form-label labelText">Password:</label>
-									<div className="col-sm-9">
+									<label for="inputPass" className="col-sm-5 col-form-label labelText">Password:</label>
+									<div className="col-sm-7">
 										<input type="password" className="form-control" id="inputPass" placeholder="Password" onChange = {(e) => setPassword(e.target.value)}/>
 									</div>
 								</div>
 							<div className="row py-4 text-underline text-right signupText">
 								<Link className="row py-4 text-underline text-right signupText" to='/signup'>Don't have an account?</Link>
 							</div>
-							<button type="submit" className="btn btn-outline-warning btn-lg" onClick = {(e) => login(e)}>Sign in</button>
+							<Link to = '/home'>
+								<button type="submit" className="btn btn-outline-warning btn-lg" onClick = {(e) => login(e)}>Sign in</button>
+							</Link>
+							{loggedIn ? (<Navigate to="/home" />) : (null)}
+
 							</form>
 							
 						</div>
