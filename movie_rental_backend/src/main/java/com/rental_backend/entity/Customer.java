@@ -6,6 +6,7 @@ import lombok.experimental.SuperBuilder;
 import net.bytebuddy.implementation.bind.annotation.Super;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.Set;
 
 @Getter
@@ -16,9 +17,14 @@ import java.util.Set;
 @Entity
 public class Customer extends UserAccount{
 
-
+    public Customer(Long u_id, String name, String password, Date birthday, String email )
+    {
+        super(u_id, name, password, birthday,email);
+    }
 
     private int movieCount;
+    private float balance;
+
 
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<MovieRequest> movieRequests;
