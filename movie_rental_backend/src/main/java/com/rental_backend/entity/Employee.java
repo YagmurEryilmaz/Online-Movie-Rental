@@ -11,6 +11,7 @@ import java.sql.Date;
 @SuperBuilder
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @Entity
 public class Employee extends UserAccount{
 

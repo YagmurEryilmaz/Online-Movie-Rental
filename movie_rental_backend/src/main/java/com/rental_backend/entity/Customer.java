@@ -14,7 +14,9 @@ import java.util.Set;
 @SuperBuilder
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @Entity
+
 public class Customer extends UserAccount{
 
     public Customer(Long u_id, String name, String password, Date birthday, String email )
@@ -32,29 +34,28 @@ public class Customer extends UserAccount{
     @ManyToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<RentedMovie> rentedMovies;
 
-    @OneToMany(mappedBy ="senderCustomer")
+    @OneToMany(mappedBy ="senderCustomer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Gift> sentGifts;
 
-    @OneToMany(mappedBy ="senderCustomer")
+    @OneToMany(mappedBy ="senderCustomer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Gift> receivedGifts;
 
-    @OneToMany(mappedBy ="sender")
+    @OneToMany(mappedBy ="sender", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<FriendRequest> sentRequests;
 
-    @OneToMany(mappedBy ="receiver")
+    @OneToMany(mappedBy ="receiver", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<FriendRequest> receivedRequests;
 
-    @OneToMany(mappedBy ="suggestionSender")
+    @OneToMany(mappedBy ="suggestionSender", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Suggestion> sentSuggestions;
 
-    @OneToMany(mappedBy ="suggestionReceiver")
+    @OneToMany(mappedBy ="suggestionReceiver", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Suggestion> receivedSuggestions;
 
-    @OneToMany(mappedBy ="customer")
+    @OneToMany(mappedBy ="customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<SubtitleRequest> subtitleRequests;
 
-    @OneToMany
-    @JoinColumn(name = "movieRates")
+    @OneToMany (mappedBy ="customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Rate> rates;
 
 
