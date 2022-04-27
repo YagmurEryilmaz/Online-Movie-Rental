@@ -36,7 +36,6 @@ public class UserAccount {
 
     private String email;
 
-    private float balance;
 
 
 
