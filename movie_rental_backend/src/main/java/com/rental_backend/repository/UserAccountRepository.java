@@ -13,7 +13,7 @@ import java.util.List;
 public interface UserAccountRepository extends CrudRepository<UserAccount,Long> {
     List<UserAccount> findAll();
 
-    @Query("delete from UserAccount where uId= :userId")
-    List<UserAccount> deleteAcc(@Param("userId") String userId);
+    /*@Query("delete from UserAccount where uId= :userId")
+    List<UserAccount> deleteAcc(@Param("userId") String userId);*/
 
 }

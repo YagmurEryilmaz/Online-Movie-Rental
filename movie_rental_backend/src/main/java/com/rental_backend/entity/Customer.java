@@ -13,11 +13,10 @@ import java.util.Set;
 @SuperBuilder
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor
+@PrimaryKeyJoinColumn(name = "uId")
 @Entity
 public class Customer extends UserAccount{
-
-
-
+    
     private int movieCount;
 
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

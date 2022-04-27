@@ -16,5 +16,5 @@ public interface RateRepository extends CrudRepository<Rate,Long> {
     List<Rate> findAll();
 
     @Query("select avg(r.review.point) as avgPoint from Rate r, Movie m where m.mId= r.movie.mId and m.mId= :movieId group by m")
-    List<Rate> findAvgRatePerMovie(@Param("searchTerm") Long movieId);
+    List<Rate> findAvgRatePerMovie(@Param("movieId") Long movieId);
 }

@@ -21,6 +21,7 @@ import java.util.Set;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class UserAccount {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
