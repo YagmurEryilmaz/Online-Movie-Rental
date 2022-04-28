@@ -5,6 +5,7 @@ import Signup from './Signup';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import Home from './Home';
+import Profile from './Profile';
 import {BrowserRouter, Router, Route, Routes, Switch, Navigate, useHis} from 'react-router-dom';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route exact path = '/' element = {<Login/>}></Route>
         <Route exact path = '/signup' element = {<Signup/>}></Route>
         <Route exact path = '/home' element = {<Home/>}></Route>
+        <Route exact path = '/profile' element = {<Profile/>}></Route>
       </Routes>
     </BrowserRouter>
     

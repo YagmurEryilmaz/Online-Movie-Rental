@@ -8,7 +8,7 @@ const Navbar = ({name, surname, accountType}) =>{
 	return (
 		<>
 			<nav className="navbar navbar-expand-lg tickflix-bg container d-flex">
-				{/*LİNK KOY*/}
+
 				<div className="row navbar-content-area">
 					<div className="col-lg-7 col-md-12 d-flex offset-1 offset-md-0
 				justify-content-md-center justify-content-center align-items-center">
@@ -21,7 +21,7 @@ const Navbar = ({name, surname, accountType}) =>{
 
 							<a href = "#" className="d-none d-lg-block message-logo"></a>
 							<a href = "#" className="d-none d-lg-block cart-logo mx-4"></a>
-							<a href="#" className= "d-none d-lg-block user-logo "></a>
+							<a href="/profile" className= "d-none d-lg-block user-logo "></a>
 							<div className="d-none d-lg-block mx-4">
 								<div>
 									<div className="username">Can Önal</div>
