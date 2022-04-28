@@ -50,9 +50,10 @@ const Profile = () => {
 
 									</ul>
 									<div class="card-body">
-										<a data-toggle="modal" href="#changeAvatar" class="card-link">Edit Profile</a>
-										<ChangeAvatarModal/>
-										<a data-toggle= "modal" href="#changeAvatar" class="card-link">Change Avatar</a>
+
+										<a data-bs-toggle="modal" href="#changeAvatar" class="card-link">Edit Profile  </a>
+
+										<a data-bs-toggle= "modal" href="#changeAvatar" class="card-link">Change Avatar <ChangeAvatarModal/></a>
 									</div>
 							</div>
 						</div>
