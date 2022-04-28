@@ -7,13 +7,16 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
 public interface UserAccountRepository extends CrudRepository<UserAccount,Long> {
     List<UserAccount> findAll();
+    List<UserAccount> findByName(String name);
+    List<UserAccount> findByBirthday(Date Birthday);
 
-    /*@Query("delete from UserAccount where uId= :userId")
-    List<UserAccount> deleteAcc(@Param("userId") String userId);*/
+    @Query("delete from UserAccount u where u.uId= :userId")
+    List<UserAccount> deleteAcc(@Param("userId") Long userId);
 
 }
