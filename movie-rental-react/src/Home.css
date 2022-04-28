@@ -1,0 +1,14 @@
+.currentMovies{
+	height: 387px;
+	overflow: auto;
+	width: 365px;
+	border: 1px #BC6FF1;
+}
+.card-header{
+	position: sticky;
+	top:0;
+}
+img{
+	max-width: 100%;
+	max-height: 100%;
+}
