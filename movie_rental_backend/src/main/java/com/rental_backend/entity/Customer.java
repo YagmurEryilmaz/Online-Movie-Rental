@@ -7,6 +7,7 @@ import net.bytebuddy.implementation.bind.annotation.Super;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -55,6 +56,64 @@ public class Customer extends UserAccount{
     @OneToMany
     @JoinColumn(name = "movieRates")
     private Set<Rate> rates;
+
+    public void addMovieRequest(MovieRequest movieRequest)
+    {
+        if (movieRequests == null)
+            movieRequests = new HashSet<>();
+        movieRequests.add(movieRequest);
+    }
+
+    public void addRentedMovie(RentedMovie rentedMovie)
+    {
+        if (rentedMovies == null)
+            rentedMovies = new HashSet<>();
+        rentedMovies.add(rentedMovie);
+    }
+
+    public void addSentGift(Gift gift)
+    {
+        if (sentGifts == null)
+            sentGifts = new HashSet<>();
+        sentGifts.add(gift);
+    }
+
+    public void addReceivedGift(Gift gift)
+    {
+        if (receivedGifts == null)
+            receivedGifts = new HashSet<>();
+        receivedGifts.add(gift);
+    }
+
+    public void addSentRequest(FriendRequest request)
+    {
+        if (sentRequests == null)
+            sentRequests = new HashSet<>();
+        sentRequests.add(request);
+    }
+
+    public void addReceivedRequest(FriendRequest request)
+    {
+        if (receivedRequests == null)
+            receivedRequests = new HashSet<>();
+        receivedRequests.add(request);
+    }
+
+    public void addSentSuggestion(Suggestion suggestion)
+    {
+        if (sentSuggestions == null)
+            sentSuggestions = new HashSet<>();
+        sentSuggestions.add(suggestion);
+    }
+
+    public void addReceivedSuggestion(Suggestion suggestion)
+    {
+        if (receivedSuggestions == null)
+            receivedSuggestions = new HashSet<>();
+        receivedSuggestions.add(suggestion);
+    }
+
+
 
 
 }
