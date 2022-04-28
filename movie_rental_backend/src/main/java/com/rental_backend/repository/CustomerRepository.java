@@ -10,9 +10,9 @@ import java.util.List;
 @Repository
 public interface CustomerRepository extends CrudRepository<Customer,Long> {
 
-
-    boolean existsByEmail(String email);
     List<Customer> findAll();
+
+
 
 
 }

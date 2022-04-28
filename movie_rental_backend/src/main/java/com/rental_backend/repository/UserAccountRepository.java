@@ -15,8 +15,11 @@ public interface UserAccountRepository extends CrudRepository<UserAccount,Long> 
     List<UserAccount> findAll();
     List<UserAccount> findByName(String name);
     List<UserAccount> findByBirthday(Date Birthday);
+    boolean existsByEmail(String email);
+    boolean existsByPassword(String password);
 
     @Query("delete from UserAccount u where u.uId= :userId")
     List<UserAccount> deleteAcc(@Param("userId") Long userId);
+
 
 }
