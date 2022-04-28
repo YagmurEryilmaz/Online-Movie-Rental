@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface UserAccountRepository extends CrudRepository<UserAccount,Long> {
     List<UserAccount> findAll();
-    List<UserAccount> findByName(String name);
+    List<UserAccount> findByEmail(String email);
     List<UserAccount> findByBirthday(Date Birthday);
     boolean existsByEmail(String email);
     boolean existsByPassword(String password);
