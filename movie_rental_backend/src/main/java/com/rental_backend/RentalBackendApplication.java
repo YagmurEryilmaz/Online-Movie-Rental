@@ -12,7 +12,7 @@ import java.util.List;
 
 @SpringBootApplication
 public class RentalBackendApplication {
-    
+
     public static void main(String[] args) {
         SpringApplication.run(RentalBackendApplication.class, args);
 
