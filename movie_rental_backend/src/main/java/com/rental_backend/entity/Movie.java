@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Primary;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -28,7 +30,7 @@ public class Movie {
 
     private int productionYear;
 
-    private float price;
+    private double price;
 
     private Date additionDate;
 
@@ -46,7 +48,7 @@ public class Movie {
 
     @OneToMany
     @JoinColumn(name = "rentedMovies")
-    private Set<Trailer> trailer;
+    private Set<Trailer> trailers;
 
     @OneToMany
     @JoinColumn(name = "movieRates")
@@ -60,6 +62,27 @@ public class Movie {
 
     @OneToMany(mappedBy ="movie")
     private Set<SubtitleRequest> requestedSubtitles;
+
+    public void addSubtitle(SubtitleLang subtitle)
+    {
+        if (subtitleLang == null)
+            subtitleLang = new HashSet<>();
+        subtitleLang.add(subtitle);
+    }
+
+    public void addTrailer(Trailer trailer)
+    {
+        if (trailers == null)
+            trailers = new HashSet<>();
+        trailers.add(trailer);
+    }
+
+    public void addRating(Rate rate)
+    {
+        if (rates == null)
+            rates = new HashSet<>();
+        rates.add(rate);
+    }
 
 
 }
