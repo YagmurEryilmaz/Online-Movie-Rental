@@ -41,6 +41,7 @@ public class RentedMovie {
 
     @EmbeddedId
     private Rate.PrimaryKey pk;
+
     @ManyToMany
     @JoinColumn(name = "u_id", insertable = false, updatable = false)
     private Set<Customer> customer;
