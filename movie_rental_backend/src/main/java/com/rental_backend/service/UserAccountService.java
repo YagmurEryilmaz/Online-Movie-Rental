@@ -5,6 +5,10 @@ import org.hibernate.annotations.SQLInsert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -16,12 +20,44 @@ public class UserAccountService {
     public UserAccountService(UserAccountRepository userAccountRepository) {
         this.userAccountRepository = userAccountRepository;
     }
-/*
-    public List<Customer> findAll(){}
-    public Customer findById(Long id){}
-    public Customer findByEmail(String email){}
-    public int getAge(Long id){}
-    public boolean existsByEmail(){}*/
+
+
+    public UserAccount addUser(UserAccount user) {
+        return userAccountRepository.save(user);
+    }
+
+
+    public UserAccount removeUser(UserAccount user) {
+        userAccountRepository.deleteById(user.getUId());
+        return user;
+    }
+
+    public List<UserAccount> findAll(){
+
+        return userAccountRepository.findAll();
+    }
+
+    public UserAccount findById(Long id){
+
+        return userAccountRepository.findByUId(id);
+    }
+    public UserAccount findByEmail(String email){
+
+        return userAccountRepository.findByEmail(email);
+    }
+
+    public int getAge(Long id){
+
+        Date birthday = userAccountRepository.findByUId(id).getBirthday();
+        int today = Calendar.getInstance().get(Calendar.YEAR);
+        int age = today - birthday.getYear();
+        return age;
+    }
+    public boolean existsByEmail(String email){
+
+        return userAccountRepository.existsByEmail(email);
+    }
+
 
 
 }

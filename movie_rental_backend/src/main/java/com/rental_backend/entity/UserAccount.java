@@ -36,6 +36,8 @@ public class UserAccount {
 
     private String email;
 
+    private String role;
+
 
 
 

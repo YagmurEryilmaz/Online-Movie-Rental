@@ -37,10 +37,11 @@ public class MovieService {
     public List<Movie> searchMovie(String searchTerm) {
         return movieRepository.search(searchTerm);
     }
-
+/*
     public List<Movie> deleteMovie(Long movieId) {
         return movieRepository.deleteMovie(movieId);
     }
+ */
 
     public MovieRepository getMovieRepository() {
         return movieRepository;
