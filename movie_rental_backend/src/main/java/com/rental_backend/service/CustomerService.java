@@ -8,12 +8,5 @@ import java.util.List;
 
 @Service
 public class CustomerService {
-
-    public List<Customer> getAllCustomers(){}
-    public Customer findById(Long id){}
-    public Customer findByEmail(String email){}
-    public int getAge(Long id){}
-
-
-
+    private CustomerRepository customerRepository;
 }
