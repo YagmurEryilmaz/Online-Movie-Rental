@@ -13,7 +13,10 @@ import java.util.List;
 @Repository
 public interface EmployeeRepository extends CrudRepository<Employee,Long> {
     List<Employee> findAll();
+<<<<<<< Updated upstream
 
     @Query("select u from UserAccount u where u.uId= :userId")
     Customer findByUId(@Param("userId") Long id);
+=======
+>>>>>>> Stashed changes
 }
