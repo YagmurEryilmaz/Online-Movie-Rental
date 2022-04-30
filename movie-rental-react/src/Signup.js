@@ -30,7 +30,7 @@ const Signup = () => {
 				birthday:birthday
 
 			}
-			axios.post("http://127.0.0.1:8080/signup",
+			axios.post("http://127.0.0.1:8080/api/v1/auth/signup",
 				registerInfo
 			).then((response) => {
 				
