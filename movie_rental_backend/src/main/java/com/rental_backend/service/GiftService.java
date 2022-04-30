@@ -16,4 +16,12 @@ public class GiftService {
     public GiftService(GiftRepository giftRepository) {
         this.giftRepository = giftRepository;
     }
+
+    public List<Gift> findByReceiverId(Long receiverId) {
+        return giftRepository.findbyReceiverId(receiverId);
+    }
+    public List<Gift> findBySenderId(Long senderId) {
+        return giftRepository.findbySenderId(senderId);
+    }
+
 }

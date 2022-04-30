@@ -16,15 +16,13 @@ public class FriendRequestService {
     public FriendRequestService(FriendRequestRepository friendRequestRepository) {
         this.friendRequestRepository = friendRequestRepository;
     }
+    public List<FriendRequest> findByReceiverId(Long receiverId) {
+        return friendRequestRepository.findbyReceiverId(receiverId);
+    }
+    public List<FriendRequest> findBySenderId(Long senderId) {
+        return friendRequestRepository.findbySenderId(senderId);
+    }
 
-    /*
-    public List<Customer> getFriends( Long id){}
-    public List<Customer> getFriendRequests(Long id){}
-    public List<Customer> getPendingRequests(Long id){}
-    public List<FriendRequest> findByReceiverId(Long receiverId){}
-    public List <FriendRequest> findBySenderId(Long senderId){}
-
-     */
 
 
 }
