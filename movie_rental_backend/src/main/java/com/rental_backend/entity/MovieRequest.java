@@ -21,7 +21,7 @@ public class MovieRequest {
 
     private String movieName;
 
-    private Date movieProductionYear;
+    private String movieProductionYear;
 
     private String directorName;
 
