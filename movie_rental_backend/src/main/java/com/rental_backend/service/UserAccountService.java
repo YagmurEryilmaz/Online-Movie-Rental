@@ -8,4 +8,12 @@ import java.util.List;
 
 @Service
 public class UserAccountService {
+
+    public List<Customer> findAll(){}
+    public Customer findById(Long id){}
+    public Customer findByEmail(String email){}
+    public int getAge(Long id){}
+    public boolean existsByEmail(){}
+
+
 }

@@ -8,4 +8,12 @@ import java.util.List;
 
 @Service
 public class FriendRequestService {
+
+    public List<Customer> getFriends( Long id){}
+    public List<Customer> getFriendRequests(Long id){}
+    public List<Customer> getPendingRequests(Long id){}
+    public List<FriendRequest> findByReceiverId(Long receiverId){}
+    public List <FriendRequest> findBySenderId(Long senderId){}
+
+
 }
