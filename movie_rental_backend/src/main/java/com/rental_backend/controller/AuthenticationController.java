@@ -57,6 +57,8 @@ public class AuthenticationController {
                 .email(signUpRequest.getEmail())
                 .password(signUpRequest.getPassword())
                 .role(signUpRequest.getRole())
+                .name(signUpRequest.getName())
+                .birthday(signUpRequest.getBirthday())
                 .build();
         userAccountService.addUser(user);
 
