@@ -2,3 +2,8 @@
 	height: 200px;
 	width:200px;
 }
+.suggestionCard{
+	height: 200px;
+	overflow: auto;
+
+}

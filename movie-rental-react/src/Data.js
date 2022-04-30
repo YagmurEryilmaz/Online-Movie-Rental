@@ -78,6 +78,39 @@
 		name: "Can Önal",
 
 		email:"canonalbjk@gmail.com",
-		birthday:"02.08.2001"
+		birthday:"02.08.2001",
+		bio: "Tell people about yourself"
 
 	}]
+
+	export const movie_suggestions = [{
+		m_name:"Star Wars: A new Hope",
+		m_sender_mail:"cekoley@gmail.com",
+		m_sender_name:"Cenk Duran"
+	},
+		{
+			m_name: "Star Wars: A new Hope",
+			m_sender_mail: "cekoley@gmail.com",
+			m_sender_name: "Cenk Duran"
+		},
+		{
+			m_name: "Star Wars: A new Hope",
+			m_sender_mail: "cekoley@gmail.com",
+			m_sender_name: "Cenk Duran"
+		},
+		{
+			m_name: "Star Wars: A new Hope",
+			m_sender_mail: "cekoley@gmail.com",
+			m_sender_name: "Cenk Duran"
+		},
+		{
+			m_name: "Star Wars: A new Hope",
+			m_sender_mail: "cekoley@gmail.com",
+			m_sender_name: "Cenk Duran"
+		},
+		{
+			m_name: "Star Wars: A new Hope",
+			m_sender_mail: "cekoley@gmail.com",
+			m_sender_name: "Cenk Duran"
+		}
+	]

@@ -1,6 +1,7 @@
 import {useState} from "react";
 import { Link } from "react-router-dom";
 import "./css/Login.css";
+import axios from 'axios'
 
 const Signup = () => {
 	const [name, setName] = useState("");
@@ -21,6 +22,19 @@ const Signup = () => {
 		if(validateEmail(mail) && password != "" && name != "" && birthday != ""){
 			window.alert("Success");
 			console.log(name, mail, password, birthday, user);
+			var registerInfo={
+				email:mail,
+				role:user,
+				password:password,
+				name:name,
+				birthday:birthday
+
+			}
+			axios.post("http://127.0.0.1:8080/signup",
+				registerInfo
+			).then((response) => {
+				
+			}).catch(error => {console.log(error); window.alert("database error")});
 
 		}
 		else if(!validateEmail(mail)){
