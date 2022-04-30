@@ -12,14 +12,21 @@ import java.util.List;
 
 @Repository
 public interface UserAccountRepository extends CrudRepository<UserAccount,Long> {
+
+
     List<UserAccount> findAll();
-    List<UserAccount> findByEmail(String email);
-    List<UserAccount> findByBirthday(Date Birthday);
+    UserAccount findByEmail(String email);
     boolean existsByEmail(String email);
-    boolean existsByPassword(String password);
+
+
+    @Query("select u from UserAccount u where u.uId= :userId")
+    UserAccount findByUId(@Param("userId") Long id);
 
     @Query("delete from UserAccount u where u.uId= :userId")
     List<UserAccount> deleteAcc(@Param("userId") Long userId);
+
+
+
 
 
 }
