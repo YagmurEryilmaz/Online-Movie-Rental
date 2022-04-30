@@ -8,8 +8,8 @@ import com.rental_backend.entity.UserAccount;
 import com.rental_backend.service.UserAccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 //import javax.validation.Valid;
@@ -22,26 +22,31 @@ import java.io.IOException;
 public class AuthenticationController {
 
     private final UserAccountService userAccountService;
-    private final PasswordEncoder encoder = new BCryptPasswordEncoder();
+    //private final PasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @PostMapping("/signin")
-    public UserResponse signIn ( @RequestBody LoginRequest loginRequest) throws IOException {
-        String providedPassword = loginRequest.getPassword();
-        String requiredPassword = userAccountService.findByEmail(loginRequest.getEmail()).getPassword();
+    public UserResponse signIn ( @RequestBody LoginRequest loginRequest)  {
 
-        if (encoder.matches(providedPassword,requiredPassword)) {
+        System.out.println("email " + loginRequest.getEmail());
+        if (userAccountService.existsByEmail(loginRequest.getEmail()))
+        {
+            String providedPassword = loginRequest.getPassword();
+            String requiredPassword = userAccountService.findByEmail(loginRequest.getEmail()).getPassword();
+            System.out.println("required " + requiredPassword + " provided " + providedPassword);
+            if (providedPassword == requiredPassword) {
 
-            UserAccount user = userAccountService.findByEmail(loginRequest.getEmail());
-            return UserResponse.builder()
-                    .success(true)
-                    .id(user.getUId())
-                    .email(user.getEmail())
-                    .role(user.getRole())
-                    .build();
+                UserAccount user = userAccountService.findByEmail(loginRequest.getEmail());
+                return UserResponse.builder()
+                        .success(true)
+                        .id(user.getUId())
+                        .email(user.getEmail())
+                        .role(user.getRole())
+                        .build();
+            }
         }
-
+        else
+            System.out.println("no");
         return UserResponse.builder().success(false).build();
-
     }
 
     @PostMapping("/signup")
@@ -54,7 +59,7 @@ public class AuthenticationController {
         UserAccount user = UserAccount
                 .builder()
                 .email(signUpRequest.getEmail())
-                .password(encoder.encode(signUpRequest.getPassword()))
+                .password(signUpRequest.getPassword())
                 .role(signUpRequest.getRole())
                 .build();
         userAccountService.addUser(user);
