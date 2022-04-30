@@ -17,34 +17,34 @@ public class Rate {
     @Embeddable
     public static class PrimaryKey implements Serializable {
         @Column(nullable = false, updatable = false)
-        private long u_id;
+        private long uId;
 
         @Column(nullable = false, updatable = false)
-        private long m_id;
+        private long mId;
 
         @Column(nullable = false, updatable = false)
-        private long review_id;
+        private long reviewId;
 
         public PrimaryKey() {
         }
         public PrimaryKey(Long u_id, Long m_id, Long review_id) {
-            this.u_id = u_id;
-            this.m_id = m_id;
-            this.review_id = review_id;
+            this.uId = uId;
+            this.mId = mId;
+            this.reviewId = reviewId;
         }
     }
 
     @EmbeddedId
     private Rate.PrimaryKey pk;
     @ManyToOne
-    @JoinColumn(name = "u_id", insertable = false, updatable = false)
+    @JoinColumn(name = "uId", insertable = false, updatable = false)
     private Customer customer;
 
     @ManyToOne
-    @JoinColumn(name = "m_id", insertable = false, updatable = false)
+    @JoinColumn(name = "mId", insertable = false, updatable = false)
     private Movie movie;
 
     @OneToOne
-    @JoinColumn(name = "review_id", insertable = false, updatable = false)
+    @JoinColumn(name = "reviewId", insertable = false, updatable = false)
     private Review review;
 }

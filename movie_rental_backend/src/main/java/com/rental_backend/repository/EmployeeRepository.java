@@ -14,6 +14,7 @@ import java.util.List;
 public interface EmployeeRepository extends CrudRepository<Employee,Long> {
     List<Employee> findAll();
 
-    @Query("select u from UserAccount u where u.uId= :userId")
-    Customer findByUId(@Param("userId") Long id);
+    @Query("select e from Employee e where e.uId= :userId")
+    Employee findByUId(@Param("userId") Long id);
+
 }

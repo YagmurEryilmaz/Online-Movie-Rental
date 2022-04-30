@@ -16,9 +16,9 @@ import java.sql.Date;
 @Entity
 public class Employee extends UserAccount{
 
-    /*public Employee(Long u_id, String name, String password, Date birthday, String email )
+    public Employee(Long uId, String name, String password, Date birthday, String email, String role )
     {
-        super(u_id, name, password, birthday,email);
-    }*/
+        super(uId, name, password, birthday,email, role);
+    }
     private float salary;
 }
