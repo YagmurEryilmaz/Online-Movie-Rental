@@ -49,4 +49,8 @@ public class CustomerService {
     // methods related to Gift repo
     public int getReceivedGiftCount(Long receiverId){ return giftRepository.findNumOfReceivedGifts(receiverId);}
 
+    // methods that are come from customer entity
+
+
+
 }

@@ -5,6 +5,7 @@ import lombok.experimental.SuperBuilder;
 import org.springframework.context.annotation.Primary;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -19,6 +20,8 @@ public class MovieRequest {
     private Long movieReqId;
 
     private String movieName;
+
+    private Date movieProductionYear;
 
     private String directorName;
 
