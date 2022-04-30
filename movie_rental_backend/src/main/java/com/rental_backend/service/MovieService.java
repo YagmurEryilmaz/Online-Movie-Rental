@@ -14,6 +14,10 @@ public class MovieService {
 
     private MovieRepository movieRepository;
 
+    @Autowired
+    public MovieService(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
+    }
     public List<Movie> getAllMovies(){
         return movieRepository.findAll();
     }
@@ -30,17 +34,18 @@ public class MovieService {
         return movieRepository.findByProductionYear(prodYear);
     }
 
+    public List<Movie> searchMovie(String searchTerm) {
+        return movieRepository.search(searchTerm);
+    }
+
+    public List<Movie> deleteMovie(Long movieId) {
+        return movieRepository.deleteMovie(movieId);
+    }
+
     public MovieRepository getMovieRepository() {
         return movieRepository;
     }
 
-    public void setMovieRepository(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
-    }
 
-    @Autowired
-    public MovieService(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
-    }
 
 }
