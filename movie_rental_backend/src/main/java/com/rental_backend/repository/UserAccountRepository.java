@@ -15,8 +15,8 @@ public interface UserAccountRepository extends CrudRepository<UserAccount,Long> 
 
 
     List<UserAccount> findAll();
-    UserAccount findByEmail(String email);
-    boolean existsByEmail(String email);
+    UserAccount findUserAccountByEmail(String email);
+    boolean existsUserAccountByEmail(String email);
 
 
     @Query("select u from UserAccount u where u.uId= :userId")

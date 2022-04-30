@@ -43,7 +43,7 @@ public class UserAccountService {
     }
     public UserAccount findByEmail(String email){
 
-        return userAccountRepository.findByEmail(email);
+        return userAccountRepository.findUserAccountByEmail(email);
     }
 
     public int getAge(Long id){
@@ -55,7 +55,7 @@ public class UserAccountService {
     }
     public boolean existsByEmail(String email){
 
-        return userAccountRepository.existsByEmail(email);
+        return userAccountRepository.existsUserAccountByEmail(email);
     }
 
 

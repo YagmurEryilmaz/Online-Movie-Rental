@@ -27,13 +27,11 @@ public class AuthenticationController {
     @PostMapping("/signin")
     public UserResponse signIn ( @RequestBody LoginRequest loginRequest)  {
 
-        System.out.println("email " + loginRequest.getEmail());
         if (userAccountService.existsByEmail(loginRequest.getEmail()))
         {
             String providedPassword = loginRequest.getPassword();
             String requiredPassword = userAccountService.findByEmail(loginRequest.getEmail()).getPassword();
-            System.out.println("required " + requiredPassword + " provided " + providedPassword);
-            if (providedPassword == requiredPassword) {
+            if (providedPassword.equals(requiredPassword)) {
 
                 UserAccount user = userAccountService.findByEmail(loginRequest.getEmail());
                 return UserResponse.builder()
@@ -44,8 +42,6 @@ public class AuthenticationController {
                         .build();
             }
         }
-        else
-            System.out.println("no");
         return UserResponse.builder().success(false).build();
     }
 
