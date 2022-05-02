@@ -38,7 +38,7 @@ public class AuthenticationController {
             if (providedPassword.equals(requiredPassword)) {
                 UserAccount user = userAccountService.findByEmail(loginRequest.getEmail());
                 //employee not included for now
-                if(user.getRole() == "customer") {
+                if(user.getRole().equals("customer")) {
                     Customer customer = (Customer) user;
                     return UserResponse.builder()
                             .success(true)
@@ -75,12 +75,18 @@ public class AuthenticationController {
                 .birthday(signUpRequest.getBirthday())
                 .build();
         if(user.getRole().equals("customer")) {
+            Customer customer = Customer
+                    .builder()
+                    .email(signUpRequest.getEmail())
+                    .password(signUpRequest.getPassword())
+                    .role(signUpRequest.getRole())
+                    .name(signUpRequest.getName())
+                    .birthday(signUpRequest.getBirthday())
+                    .build();
             //customerService.addUser((Customer)user);
-            userAccountService.addUser(user);
-        }else {
-            userAccountService.addUser(user);
+            customerService.addUser(customer);
         }
-
+        userAccountService.addUser(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
