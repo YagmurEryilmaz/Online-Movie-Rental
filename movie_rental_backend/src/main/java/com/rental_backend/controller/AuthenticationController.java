@@ -15,9 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 //import javax.validation.Valid;
-import javax.crypto.*;
 import java.io.IOException;
-import java.security.*;
 
 
 @RestController
@@ -29,7 +27,7 @@ public class AuthenticationController {
     private final UserAccountService userAccountService;
     private final CustomerService customerService;
     //private final PasswordEncoder encoder = new BCryptPasswordEncoder();
-    /*
+
     @GetMapping("/signin")
     public UserResponse signIn ( @RequestBody LoginRequest loginRequest)  {
 
@@ -49,7 +47,7 @@ public class AuthenticationController {
                             .email(customer.getEmail())
                             .role(customer.getRole())
                             .build();
-                }
+                } */
                 return UserResponse.builder()
                         .success(true)
                         .id(user.getUId())
@@ -60,11 +58,14 @@ public class AuthenticationController {
             }
         }
         return UserResponse.builder().success(false).build();
-    } */
-    @GetMapping("/signin/{email}/{password}")
-    public boolean loginInstructor(@PathVariable String email, @PathVariable String password) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
-        return userAccountService.login(email,password);
     }
+
+    /*
+       @GetMapping("/signin/{email}/{password}")
+       public boolean loginInstructor(@PathVariable String email, @PathVariable String password) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
+           return userAccountService.login(email,password);
+       }
+       */
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser( @RequestBody SignupRequest signUpRequest) {
 
