@@ -37,6 +37,7 @@ public class AuthenticationController {
             String requiredPassword = userAccountService.findByEmail(loginRequest.getEmail()).getPassword();
             if (providedPassword.equals(requiredPassword)) {
                 UserAccount user = userAccountService.findByEmail(loginRequest.getEmail());
+                /*
                 //employee not included for now
                 if(user.getRole().equals("customer")) {
                     Customer customer = (Customer) user;
@@ -46,14 +47,14 @@ public class AuthenticationController {
                             .email(customer.getEmail())
                             .role(customer.getRole())
                             .build();
-                } else {
-                    return UserResponse.builder()
-                            .success(true)
-                            .id(user.getUId())
-                            .email(user.getEmail())
-                            .role(user.getRole())
-                            .build();
-                }
+                } */
+                return UserResponse.builder()
+                        .success(true)
+                        .id(user.getUId())
+                        .email(user.getEmail())
+                        .role(user.getRole())
+                        .build();
+
             }
         }
         return UserResponse.builder().success(false).build();
@@ -85,8 +86,9 @@ public class AuthenticationController {
                     .build();
             //customerService.addUser((Customer)user);
             customerService.addUser(customer);
+        }else {
+            userAccountService.addUser(user);
         }
-        userAccountService.addUser(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
