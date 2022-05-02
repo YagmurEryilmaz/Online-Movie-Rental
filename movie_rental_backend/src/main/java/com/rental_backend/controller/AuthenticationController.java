@@ -31,7 +31,7 @@ public class AuthenticationController {
     @PostMapping("/signin")
     public UserResponse signIn ( @RequestBody LoginRequest loginRequest)  {
 
-        if (userAccountService.existsByEmail(loginRequest.getEmail()))
+        if (loginRequest.getEmail() != null)
         {
             String providedPassword = loginRequest.getPassword();
             String requiredPassword = userAccountService.findByEmail(loginRequest.getEmail()).getPassword();
