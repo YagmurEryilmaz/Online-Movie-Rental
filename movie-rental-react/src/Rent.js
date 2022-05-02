@@ -10,13 +10,13 @@ var all_movie_data = []
 
 const Rent = () =>{
 	const [moviesSet, setMoviesSet] = useState(false);
-	useEffect(() => {
-		axios.get("http://127.0.0.1:8080/api/v1/auth/getAllMovies").then((response)=>{
+	
+		 axios.get("http://127.0.0.1:8080/api/v1/auth/getAllMovies").then((response)=>{
 			console.log(response.data)
 			all_movie_data = response.data
 		}).catch((error)=>{console.log(error)})
 
-	}, []);
+	
 	return(
 		<div className='container'>
 			<div className="row">
