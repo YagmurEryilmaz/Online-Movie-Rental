@@ -6,8 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
-import javax.crypto.*;
-import java.security.*;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -62,7 +66,7 @@ public class UserAccountService {
 
         return userAccountRepository.existsUserAccountByEmail(email);
     }
-
+    /*
     public boolean login(String email, String password) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         Optional<UserAccount> user = Optional.ofNullable(userAccountRepository.findUserAccountByEmail(email));
         if (user.isPresent()) {
@@ -70,7 +74,7 @@ public class UserAccountService {
             return decode(u.getPassword()).equals(password);
         }
         return false;
-    }
+    } */
 
 
 
