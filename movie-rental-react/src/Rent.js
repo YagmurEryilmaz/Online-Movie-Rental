@@ -6,14 +6,14 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { movie_data } from "./Data";
 
-var all_movie_data = []
+
 
 const Rent = () =>{
-	const [moviesSet, setMoviesSet] = useState(false);
+	const [all_movie_data, setMovies] = useState([]);
 	useEffect(() => {
 		axios.get("http://127.0.0.1:8080/api/v1/auth/getAllMovies").then((response)=>{
 			console.log(response.data)
-			all_movie_data = response.data
+			setMovies(response.data)
 		}).catch((error)=>{console.log(error)})
 
 	}, []);
