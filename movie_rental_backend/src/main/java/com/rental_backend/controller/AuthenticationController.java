@@ -6,6 +6,8 @@ import com.rental_backend.dto.SignupRequest;
 import com.rental_backend.dto.UserResponse;
 import com.rental_backend.entity.UserAccount;
 import com.rental_backend.service.UserAccountService;
+import com.rental_backend.entity.Customer;
+import com.rental_backend.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,6 +25,7 @@ import java.io.IOException;
 public class AuthenticationController {
 
     private final UserAccountService userAccountService;
+    private final CustomerService customerService;
     //private final PasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @PostMapping("/signin")
@@ -33,14 +36,24 @@ public class AuthenticationController {
             String providedPassword = loginRequest.getPassword();
             String requiredPassword = userAccountService.findByEmail(loginRequest.getEmail()).getPassword();
             if (providedPassword.equals(requiredPassword)) {
-
                 UserAccount user = userAccountService.findByEmail(loginRequest.getEmail());
-                return UserResponse.builder()
-                        .success(true)
-                        .id(user.getUId())
-                        .email(user.getEmail())
-                        .role(user.getRole())
-                        .build();
+                //employee not included for now
+                if(user.getRole() == "customer") {
+                    Customer customer = (Customer) user;
+                    return UserResponse.builder()
+                            .success(true)
+                            .id(customer.getUId())
+                            .email(customer.getEmail())
+                            .role(customer.getRole())
+                            .build();
+                } else {
+                    return UserResponse.builder()
+                            .success(true)
+                            .id(user.getUId())
+                            .email(user.getEmail())
+                            .role(user.getRole())
+                            .build();
+                }
             }
         }
         return UserResponse.builder().success(false).build();
@@ -61,7 +74,13 @@ public class AuthenticationController {
                 .name(signUpRequest.getName())
                 .birthday(signUpRequest.getBirthday())
                 .build();
-        userAccountService.addUser(user);
+        if(user.getRole() == "customer") {
+            Customer customer = (Customer) user;
+            userAccountService.addUser(customer);
+        }else {
+            userAccountService.addUser(user);
+        }
+
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
