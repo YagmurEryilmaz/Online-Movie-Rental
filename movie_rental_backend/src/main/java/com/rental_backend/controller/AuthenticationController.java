@@ -1,5 +1,4 @@
 package com.rental_backend.controller;
-
 import com.rental_backend.dto.LoginRequest;
 import com.rental_backend.dto.MessageResponse;
 import com.rental_backend.dto.SignupRequest;
@@ -13,30 +12,26 @@ import org.springframework.http.ResponseEntity;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
 //import javax.validation.Valid;
 import java.io.IOException;
-
-
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("api/v1/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
-
     private final UserAccountService userAccountService;
     private final CustomerService customerService;
     //private final PasswordEncoder encoder = new BCryptPasswordEncoder();
-
-    @GetMapping("/signin")
+    @PostMapping("/signin")
     public UserResponse signIn ( @RequestBody LoginRequest loginRequest)  {
 
         if (userAccountService.existsByEmail(loginRequest.getEmail()))
-        {
-            String providedPassword = loginRequest.getPassword();
-            String requiredPassword = userAccountService.findByEmail(loginRequest.getEmail()).getPassword();
-            if (providedPassword.equals(requiredPassword)) {
-                UserAccount user = userAccountService.findByEmail(loginRequest.getEmail());
+            if (loginRequest.getEmail() != null)
+            {
+                String providedPassword = loginRequest.getPassword();
+                String requiredPassword = userAccountService.findByEmail(loginRequest.getEmail()).getPassword();
+                if (providedPassword.equals(requiredPassword)) {
+                    UserAccount user = userAccountService.findByEmail(loginRequest.getEmail());
                 /*
                 //employee not included for now
                 if(user.getRole().equals("customer")) {
@@ -48,31 +43,21 @@ public class AuthenticationController {
                             .role(customer.getRole())
                             .build();
                 } */
-                return UserResponse.builder()
-                        .success(true)
-                        .id(user.getUId())
-                        .email(user.getEmail())
-                        .role(user.getRole())
-                        .build();
-
+                    return UserResponse.builder()
+                            .success(true)
+                            .id(user.getUId())
+                            .email(user.getEmail())
+                            .role(user.getRole())
+                            .build();
+                }
             }
-        }
         return UserResponse.builder().success(false).build();
     }
-
-    /*
-       @GetMapping("/signin/{email}/{password}")
-       public boolean loginInstructor(@PathVariable String email, @PathVariable String password) throws InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
-           return userAccountService.login(email,password);
-       }
-       */
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser( @RequestBody SignupRequest signUpRequest) {
-
         if (userAccountService.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
         }
-
         UserAccount user = UserAccount
                 .builder()
                 .email(signUpRequest.getEmail())
@@ -95,9 +80,6 @@ public class AuthenticationController {
         }else {
             userAccountService.addUser(user);
         }
-
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
-
-
 }
