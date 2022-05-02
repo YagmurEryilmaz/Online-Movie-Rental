@@ -27,6 +27,9 @@ public class CustomerService {
         this.giftRepository=giftRepository;
         this.movieRequestRepository= movieRequestRepository;
     }
+    public Customer addUser(Customer customer) {
+        return customerRepository.save(customer);
+    }
     public List<Customer> findAll() {
         return customerRepository.findAll();
     }

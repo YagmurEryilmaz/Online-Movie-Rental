@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="d7abf9b3-aa8d-41ee-b626-020991094c7b" name="movie_rental@localhost Mapping">
+      <data-sources db="4a97fa81-7bc8-43df-bb49-d15be0f0f870" />
+      <scope>
+        <node kind="database" negative="1">
+          <node kind="schema" negative="1" />
+        </node>
+      </scope>
+    </mapping>
+  </component>
+</project>

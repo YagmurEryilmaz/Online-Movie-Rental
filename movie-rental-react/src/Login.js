@@ -20,14 +20,20 @@ const Login = () => {
 	const login = (e) =>{
 		e.preventDefault();
 		if (validateEmail(email) && password != ""){
-			let loginInfo = {
-				email: email,
-				password: password
-			}
-			axios.get("http://127.0.0.1:8080/api/v1/auth/signin",
-				loginInfo).then((response)=>{
+
+
+
+
+
+			axios.post("http://127.0.0.1:8080/api/v1/auth/signin",
+				{data: {
+					email: email,
+				password:password
+		}
+		}).then((response)=>{
+				console.log(response.data)
 					if(response.data!=null){
-						if(response.dat.success == true){
+						if(response.data.success == true){
 							console.log(email, password);
 							setLoggedIn(true);
 							window.alert("Logged In")

@@ -74,9 +74,9 @@ public class AuthenticationController {
                 .name(signUpRequest.getName())
                 .birthday(signUpRequest.getBirthday())
                 .build();
-        if(user.getRole() == "customer") {
-            Customer customer = (Customer) user;
-            userAccountService.addUser(customer);
+        if(user.getRole().equals("customer")) {
+            //customerService.addUser((Customer)user);
+            userAccountService.addUser(user);
         }else {
             userAccountService.addUser(user);
         }
