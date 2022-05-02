@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./css/Login.css";
 import logo from "./img/tickflixLogo.png"
 import { Link, Navigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
 	const [email, setEmail] = useState("");
@@ -19,10 +20,22 @@ const Login = () => {
 	const login = (e) =>{
 		e.preventDefault();
 		if (validateEmail(email) && password != ""){
-			window.alert("Successful Login");
+			let loginInfo = {
+				email: email,
+				password: password
+			}
+			axios.get("http://127.0.0.1:8080/api/v1/auth/signin",
+				loginInfo).then((response)=>{
+					if(response.data!=null){
+						if(response.dat.success == true){
+							console.log(email, password);
+							setLoggedIn(true);
+							window.alert("Logged In")
 
-			console.log(email, password);
-			setLoggedIn(true);
+						}
+					}
+
+				}).catch((error => {console.log(error); window.alert("DB Err")}))
 			
 		}
 		else if(!validateEmail(email)){
