@@ -32,6 +32,8 @@ public class Movie {
 
     private double price;
 
+    private String posterUrl;
+
     private Date additionDate;
 
     @ManyToMany

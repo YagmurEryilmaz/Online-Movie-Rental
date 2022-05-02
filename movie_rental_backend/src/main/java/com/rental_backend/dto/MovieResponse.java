@@ -18,5 +18,7 @@ public class MovieResponse {
 
     private double price;
 
+    private String posterUrl;
+
     private Date additionDate;
 }
