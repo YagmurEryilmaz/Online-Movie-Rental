@@ -34,13 +34,16 @@ const Rent = () =>{
 									<div class="card">
 										<div className="row">
 											<div className="col-4">
-												<img src={movies.img_url} alt={movies.title} />
+												<img src={movies.poster_url} alt={movies.title} />
 											</div>
 											<div class="col-8 card-body">
 												<h5 class="card-title">{movies.title}</h5>
-												<p class="card-text"><span className = "fw-bold">Director:</span> {movies.director}</p>
-												<p class="card-text"><span className="fw-bold">Prod. Year:</span> {movies.prod_year}</p>
+												<p class="card-text"><span className = "fw-bold">Director:</span> {movies.director_name}</p>
+												<p class="card-text"><span className="fw-bold">Prod. Year:</span> {movies.production_year}</p>
 												<p class="card-text"><span className="fw-bold">Price:</span> {movies.price}$</p>
+												<p class="card-text"><span className="fw-bold">Genre:</span> {movies.genre}$</p>
+
+												
 
 											
 												<a data-bs-toggle = "modal" href="#" class="btn btn-primary">Detailed Information</a>
