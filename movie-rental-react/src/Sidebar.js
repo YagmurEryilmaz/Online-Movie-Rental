@@ -20,7 +20,7 @@ const Sidebar = () => {
 				<Link to="/profile" className="text-decoration-none text-white">
 					<section className="sidebar-link mb-1 hover-effect"><img src={PersonIcon} className="sidebar-icon ms-lg-2" /><span className="ms-lg-2 ms-1">Profile</span></section>
 				</Link>
-				<Link to="/home" className="text-decoration-none text-white">
+				<Link to="/rent" className="text-decoration-none text-white">
 					<section className="sidebar-link mb-1 hover-effect"><img src={RentIcon} className="ms-lg-2 sidebar-icon" /><span className="ms-lg-2 ms-1">Rent</span></section>
 				</Link>
 				<Link to="/" className="text-decoration-none text-white bottomBlank">
