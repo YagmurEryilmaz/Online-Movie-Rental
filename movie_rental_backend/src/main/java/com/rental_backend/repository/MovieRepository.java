@@ -19,6 +19,9 @@ public interface MovieRepository extends CrudRepository<Movie,Long>{
     List <Movie> findByGenre(String genre);
     List <Movie> findByProductionYear(int productionYear);
 
+    @Query("select m from Movie m where m.mId = :id")
+    Movie findMovieById(@Param("id") Long id);
+
     @Query("select m from Movie m " +
             "where lower(m.title) like lower(concat('%', :searchTerm, '%')) " +
             "or lower(m.directorName) like lower(concat('%', :searchTerm, '%'))")

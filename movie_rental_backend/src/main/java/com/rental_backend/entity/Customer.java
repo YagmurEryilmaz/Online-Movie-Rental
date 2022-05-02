@@ -57,14 +57,14 @@ public class Customer extends UserAccount{
     @JoinColumn(name = "movieRates")
     private Set<Rate> rates;
 
-    public void addMovieRequest(MovieRequest movieRequest, Long userId)
+    public void addMovieRequest(MovieRequest movieRequest)
     {
         if (movieRequests == null)
             movieRequests = new HashSet<>();
         movieRequests.add(movieRequest);
     }
 
-    public void addRentedMovie(RentedMovie rentedMovie, Long userId)
+    public void addRentedMovie(RentedMovie rentedMovie)
     {
         if (rentedMovies == null)
             rentedMovies = new HashSet<>();

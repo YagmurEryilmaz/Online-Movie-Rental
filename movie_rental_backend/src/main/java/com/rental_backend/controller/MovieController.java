@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/auth")
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("api/v1/movie")
 @RequiredArgsConstructor
 public class MovieController {
 

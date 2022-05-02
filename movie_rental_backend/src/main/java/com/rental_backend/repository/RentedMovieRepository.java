@@ -16,16 +16,15 @@ import java.util.LongSummaryStatistics;
 @Repository
 public interface RentedMovieRepository extends CrudRepository<RentedMovie,Long> {
 
-    Date now = Date.valueOf(LocalDate.now());
 
     List<RentedMovie> findAll();
-    //List<RentedMovie> findByUserId(Long uId);
-    //boolean existsById(RentedMovie rentedMovie);
 
+    @Query("select m from RentedMovie m where m.pk = :id")
+    RentedMovie findRentedMovieById(@Param("id") Long id);
 
-   @Query("select r.movie from RentedMovie r where r.pk.uId = :userId and r.expDate > :now ")
-    List<RentedMovie> getCurrentlyRented(@Param("userId") Long userId);
+   @Query("select r.movie from RentedMovie r where r.pk.uId = :userId and r.expDate > :date ")
+    List<RentedMovie> getCurrentlyRented(@Param("userId") Long userId, @Param("date") Date now);
 
-    @Query("select r.movie from RentedMovie r where r.pk.uId= :userId and r.expDate <= :now")
-    List<RentedMovie> getPreviouslyRented(@Param("userId") Long userId);
+    @Query("select r.movie from RentedMovie r where r.pk.uId= :userId and r.expDate <= :date")
+    List<RentedMovie> getPreviouslyRented(@Param("userId") Long userId , @Param("date") Date now);
 }

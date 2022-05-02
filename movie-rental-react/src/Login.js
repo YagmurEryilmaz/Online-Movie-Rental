@@ -26,10 +26,9 @@ const Login = () => {
 
 
 			axios.post("http://127.0.0.1:8080/api/v1/auth/signin",
-				{data: {
+				 {
 					email: email,
 				password:password
-		}
 		}).then((response)=>{
 				console.log(response.data)
 					if(response.data!=null){

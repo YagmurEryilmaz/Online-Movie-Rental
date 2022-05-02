@@ -22,6 +22,13 @@ public class MovieService {
         return movieRepository.findAll();
     }
 
+    public Movie findMovieById(Long id) {
+        return movieRepository.findMovieById(id);
+    }
+    public Movie addMovie(Movie movie) {
+        return movieRepository.save(movie);
+    }
+
     public List<Movie> findMovieByTitle(String title) {
         return movieRepository.findByTitle(title);
     }
@@ -47,6 +54,11 @@ public class MovieService {
         return movieRepository;
     }
 
+    public Movie addRented(Long m_id, RentedMovie rm){
+        Movie movie = movieRepository.findMovieById(m_id);
+        movie.addRented(rm);
+        return movieRepository.save(movie);
+    }
 
 
 }

@@ -86,6 +86,12 @@ public class Movie {
         rates.add(rate);
     }
 
+    public void addRented(RentedMovie rentedMovie)
+    {
+        if (rentedMovieSet == null)
+            rentedMovieSet = new HashSet<>();
+        rentedMovieSet.add(rentedMovie);
+    }
 
 }
 

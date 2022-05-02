@@ -38,4 +38,8 @@ public class EmployeeService {
     public EmployeeRepository getEmployeeRepository() {
         return employeeRepository;
     }
+
+    public Employee addUser(Employee employee) {
+        return employeeRepository.save(employee);
+    }
 }

@@ -5,9 +5,13 @@ import com.rental_backend.exception.MovieRequestNotFoundException;
 import com.rental_backend.exception.RentedMovieNotFoundException;
 import com.rental_backend.repository.*;
 import org.hibernate.annotations.SQLInsert;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
+
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -34,17 +38,34 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
+    public Customer removeUser(Customer customer) {
+        customerRepository.deleteById(customer.getUId());
+        return customer;
+    }
+
+    public Customer findById(Long id) {
+        return customerRepository.findByUId(id);
+    }
+
+    public Customer addRented(Long c_id, RentedMovie rm){
+        Customer customer = customerRepository.findByUId(c_id);
+        customer.addRentedMovie(rm);
+        return customerRepository.save(customer);
+    }
+
     // methods related to Rented Movie repo
     public List<RentedMovie> findAllRentedMovies() {
         return rentedMovieRepository.findAll();
     }
 
     public List<RentedMovie> getCurrentlyRentedMovies(Long userId) {
-        return rentedMovieRepository.getCurrentlyRented(userId);
+        Date now = Date.valueOf(LocalDate.now());
+        return rentedMovieRepository.getCurrentlyRented(userId, now);
     }
 
     public List<RentedMovie> getPreviouslyRentedMovies(Long userId) {
-        return rentedMovieRepository.getPreviouslyRented(userId);
+        Date now = Date.valueOf(LocalDate.now());
+        return rentedMovieRepository.getPreviouslyRented(userId, now);
     }
 
     // methods related to Friend Request repo
