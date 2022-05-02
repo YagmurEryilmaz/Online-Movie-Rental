@@ -6,12 +6,14 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { movie_data } from "./Data";
 
+const all_movie_data = []
 
 const Rent = () =>{
 	const [moviesSet, setMoviesSet] = useState(false);
 	useEffect(() => {
 		axios.get("http://127.0.0.1:8080/api/v1/auth/getAllMovies").then((response)=>{
 			console.log(response.data)
+			all_movie_data = response.data
 		}).catch((error)=>{console.log(error)})
 
 	}, []);
@@ -26,7 +28,7 @@ const Rent = () =>{
 						<Navbar />
 					</div>
 					<div class="row moviesRent overflow-auto">
-						{movie_data.map((movies) => {
+						{all_movie_data.map((movies) => {
 							return(
 								<div class="col-sm-6 mt-3">
 									<div class="card">
