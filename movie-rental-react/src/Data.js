@@ -1,3 +1,4 @@
+import movieIcon from "./img/iceAge.png";
 
 	export const movie_data = [{
 		addition_date: "21.02.2021",
@@ -9,7 +10,8 @@
 		prod_year: 2001,
 
 		exp_date: "23.04.2020",
-		img_url: "./img/iceAge.png"
+		img_url: "https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
+		m_id: "123435"
 		
 
 	},
@@ -22,7 +24,8 @@
 		director: "Cenk Duran",
 		prod_year: 2001,
 		exp_date: "23.04.2020",
-		img_url :"./img/iceAge.png"
+		img_url :"https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
+		m_id: "123435"
 
 	},
 	{
@@ -34,7 +37,8 @@
 		director: "Cenk Duran",
 		prod_year: 2001,
 		exp_date: "23.04.2020",
-		img_url : "./img/iceAge.png"
+		img_url : "https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
+		m_id: "123435"
 
 	},
 	{
@@ -46,7 +50,8 @@
 		director: "Cenk Duran",
 		prod_year: 2001,
 		exp_date: "23.04.2020",
-		img_url :"./img/iceAge.png"
+		img_url :"https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
+		m_id: "123435"
 
 	},
 	{
@@ -58,7 +63,8 @@
 		director: "Cenk Duran",
 		prod_year: 2001,
 		exp_date: "23.04.2020",
-		img_url: "./img/iceAge.png"
+		img_url: "https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
+		m_id: "123435"
 
 	},
 	{
@@ -70,9 +76,90 @@
 		director: "Cenk Duran",
 		prod_year: 2001,
 		exp_date: "23.04.2020",
-		img_url: "./img/iceAge.png"
+		img_url: "https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
+		m_id: "123435"
 
-	}]
+	},
+		{
+			addition_date: "21.02.2021",
+			price: 13,
+			title: "Ice Age",
+			genre: "Animation",
+
+			director: "Cenk Duran",
+			prod_year: 2001,
+
+			exp_date: "23.04.2020",
+			img_url: "https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
+			m_id: "123435"
+
+
+		},
+		{
+			addition_date: "21.02.2021",
+			price: 13,
+			title: "Ice Age",
+			genre: "Animation",
+
+			director: "Cenk Duran",
+			prod_year: 2001,
+			exp_date: "23.04.2020",
+			img_url: "https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
+			m_id: "123435"
+
+		},
+		{
+			addition_date: "21.02.2021",
+			price: 13,
+			title: "Ice Age",
+			genre: "Animation",
+
+			director: "Cenk Duran",
+			prod_year: 2001,
+			exp_date: "23.04.2020",
+			img_url: "https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
+			m_id: "123435"
+
+		},
+		{
+			addition_date: "21.02.2021",
+			price: 13,
+			title: "Ice Age",
+			genre: "Animation",
+
+			director: "Cenk Duran",
+			prod_year: 2001,
+			exp_date: "23.04.2020",
+			img_url: "https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
+			m_id: "123435"
+
+		},
+		{
+			addition_date: "21.02.2021",
+			price: 13,
+			title: "Ice Age",
+			genre: "Animation",
+
+			director: "Cenk Duran",
+			prod_year: 2001,
+			exp_date: "23.04.2020",
+			img_url: "https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
+			m_id: "123435"
+
+		},
+		{
+			addition_date: "21.02.2021",
+			price: 13,
+			title: "Ice Age",
+			genre: "Animation",
+
+			director: "Cenk Duran",
+			prod_year: 2001,
+			exp_date: "23.04.2020",
+			img_url: "https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
+			m_id: "123435"
+
+		}]
 
 	export const user_data = [{
 		name: "Can Önal",

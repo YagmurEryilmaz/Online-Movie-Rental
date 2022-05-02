@@ -28,7 +28,7 @@ const Home = ()=>{
 											<li class="list-group-item border-info">
 												<div className="row">
 													<div className="col-4">
-														<img className="cardImg" src= {iceAgeIcon} alt={movie_data.title} />
+														<img className="cardImg" src= {movie_data.img_url} alt={movie_data.title} />
 
 													</div>
 													<div className="col-8">
@@ -66,7 +66,7 @@ const Home = ()=>{
 											<li class="list-group-item border-info">
 												<div className="row">
 													<div className="col-4">
-														<img className="cardImg" src={iceAgeIcon} alt={movie_data.title} />
+														<img className="cardImg" src= {movie_data.img_url} alt={movie_data.title} />
 
 													</div>
 													<div className="col-8">
