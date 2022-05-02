@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { movie_data } from "./Data";
 
-const all_movie_data = []
+var all_movie_data = []
 
 const Rent = () =>{
 	const [moviesSet, setMoviesSet] = useState(false);
