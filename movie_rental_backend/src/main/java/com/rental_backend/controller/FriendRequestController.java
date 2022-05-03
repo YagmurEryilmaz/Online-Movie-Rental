@@ -32,25 +32,5 @@ public class FriendRequestController {
         return ResponseEntity.ok(friendRequestService.findBySenderId(friendRequestDto.getSender_id()));
     }
 
-    @GetMapping("/getPendingRequests")
-    public int getPendingRequests(@RequestBody FriendRequestDto friendRequestDto){
-        return customerService.getPendingFriendRequestCount(friendRequestDto.getReceiver_id());
-    }
-
-    @GetMapping("/getNumOfReceivedRequests")
-    public int getNumOfReceivedRequests(@RequestBody FriendRequestDto friendRequestDto){
-        return customerService.getReceivedFriendRequestCount(friendRequestDto.getReceiver_id());
-    }
-
-    @GetMapping("/getNumOfSentRequests")
-    public int getNumOfSentRequests(@RequestBody FriendRequestDto friendRequestDto){
-        return customerService.getSentFriendRequestCount(friendRequestDto.getSender_id());
-    }
-
-    @GetMapping("/getNumOfFriends")
-    public int getNumOfFriends(@RequestBody FriendRequestDto friendRequestDto){
-        return customerService.getFriendCount(friendRequestDto.getReceiver_id(), friendRequestDto.getSender_id());
-    }
-
 }
 
