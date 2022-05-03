@@ -67,7 +67,7 @@ public class AuthenticationController {
             customerService.addUser(customer);
         }
 
-        else if (signUpRequest.getRole().equals("employee"))
+        else if (signUpRequest.getRole().equals("admin"))
         {
             Employee employee = Employee
                     .builder()

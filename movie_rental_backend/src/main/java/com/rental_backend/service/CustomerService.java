@@ -72,7 +72,7 @@ public class CustomerService {
 
     public int getPendingFriendRequestCount(Long receiverId){ return friendRequestRepository.findNumOfPendingRequests(receiverId);}
     public int getReceivedFriendRequestCount(Long receiverId){ return friendRequestRepository.findNumOfReceivedRequests(receiverId);}
-    public int getSendedFriendRequestCount(Long senderId){ return friendRequestRepository.findNumOfSendedRequests(senderId);}
+    public int getSentFriendRequestCount(Long senderId){ return friendRequestRepository.findNumOfSentRequests(senderId);}
     public int getFriendCount(Long receiverId, Long senderId){ return friendRequestRepository.findNumOfFriends(receiverId, senderId);}
 
     // methods related to Gift repo

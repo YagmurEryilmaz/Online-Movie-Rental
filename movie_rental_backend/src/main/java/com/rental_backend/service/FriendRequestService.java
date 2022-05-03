@@ -23,6 +23,4 @@ public class FriendRequestService {
         return friendRequestRepository.findbySenderId(senderId);
     }
 
-
-
 }

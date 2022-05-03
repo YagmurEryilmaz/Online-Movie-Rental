@@ -16,10 +16,10 @@ public interface FriendRequestRepository extends CrudRepository<FriendRequest,Lo
 
     List<FriendRequest> findAll();
 
-    @Query("select fr.receiver.name from FriendRequest fr, Customer c where fr.sender.uId = c.uId and fr.sender.uId = :senderId ")
+    @Query("select fr.sender.name from FriendRequest fr, Customer c where fr.sender.uId = c.uId and fr.sender.uId = :senderId ")
     List<FriendRequest> findbySenderId(@Param("senderId") Long senderId);
 
-    @Query("select fr.sender.name from FriendRequest fr, Customer c where fr.receiver.uId = c.uId and fr.receiver.uId = :receiverId ")
+    @Query("select fr.receiver.name from FriendRequest fr, Customer c where fr.receiver.uId = c.uId and fr.receiver.uId = :receiverId ")
     List<FriendRequest> findbyReceiverId(@Param("receiverId") Long receiverId);
 
     @Query("select count(fr.receiver.receivedRequests) from FriendRequest fr, Customer c where (fr.friendReq_status = 'accepted' and fr.receiver.uId = c.uId and fr.receiver.uId = :receiverId) or (fr.friendReq_status = 'accepted' and fr.sender.uId = :senderId and fr.sender.uId = c.uId ) ")
@@ -32,6 +32,6 @@ public interface FriendRequestRepository extends CrudRepository<FriendRequest,Lo
     int findNumOfReceivedRequests(@Param("receiverId") Long receiverId);
 
     @Query("select count(fr.sender.sentRequests) from FriendRequest fr, Customer c where fr.sender.uId = c.uId and fr.sender.uId = :senderId")
-    int findNumOfSendedRequests(@Param("senderId") Long senderId);
+    int findNumOfSentRequests(@Param("senderId") Long senderId);
 
 }
