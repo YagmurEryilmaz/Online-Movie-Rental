@@ -2,12 +2,16 @@ package com.rental_backend.entity;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.SQLInsert;
+import org.hibernate.annotations.SQLUpdate;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.repository.query.Param;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -35,6 +39,16 @@ public class Movie {
     private String posterUrl;
 
     private Date additionDate;
+    public Movie(long mId, String title, String genre, String directorName, int productionYear, double price, String posterUrl, Date additionDate) {
+        this.mId = mId;
+        this.title = title;
+        this.genre = genre;
+        this.directorName = directorName;
+        this.productionYear = productionYear;
+        this.price = price;
+        this.posterUrl = posterUrl;
+        this.additionDate = additionDate;
+    }
 
     @ManyToMany
     @JoinColumn(name = "movie")
@@ -92,7 +106,6 @@ public class Movie {
             rentedMovieSet = new HashSet<>();
         rentedMovieSet.add(rentedMovie);
     }
-
 }
 
 
