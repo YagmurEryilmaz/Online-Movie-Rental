@@ -38,11 +38,11 @@ public class SuggestionController {
     public ResponseEntity<Suggestion> addSuggestion(@RequestBody SuggestionDto suggestionDto) {
         return new ResponseEntity<>(suggestionService.addSuggestion(suggestion, suggestionDto.getM_id()), HttpStatus.CREATED);
     }
-/*
+
     @GetMapping("/getSuggestionsBySender")
-    public ResponseEntity<List<Suggestion>> getSuggestionsBySender(@RequestBody SuggestionDto suggestionDto){
+    public ResponseEntity<List<Suggestion>> getSuggestionsBySender(@PathVariable SuggestionDto suggestionDto){
         return ResponseEntity.ok(suggestionService.findSuggestionBySenderId(suggestionDto.getMsender_id()));
-    }*/
+    }
 
 
 }
