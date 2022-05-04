@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class SuggestionDto {
-    private Long msender_id;
-    private Long mreceiver_id;
-    private Long m_id;
+    private int msender_id;
+    private int mreceiver_id;
+    private int m_id;
 
 }

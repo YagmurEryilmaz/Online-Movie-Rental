@@ -16,16 +16,16 @@ public class SuggestionService {
     public SuggestionService(SuggestionRepository suggestionRepository) {
         this.suggestionRepository = suggestionRepository;
     }
-    public List<Suggestion> findSuggestionByReceiverId(Long receiverId) {
+    public List<Suggestion> findSuggestionByReceiverId(int receiverId) {
         return suggestionRepository.findSuggestionByReceiverId(receiverId);
     }
     public Suggestion addSuggestion(Suggestion suggestion) {
         return suggestionRepository.save(suggestion);
     }
-    public List<Suggestion> findSuggestionBySenderId(Long senderId) {
+    public List<Suggestion> findSuggestionBySenderId(int senderId) {
         return suggestionRepository.findSuggestionBySenderId(senderId);
     }
-    public Suggestion addSuggestion(Suggestion suggestion, Long mId) {
+    public Suggestion addSuggestion(Suggestion suggestion, int mId) {
         return suggestionRepository.save(suggestion);
     }
 }
