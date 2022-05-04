@@ -19,15 +19,15 @@ import java.util.List;
 public class SuggestionController {
     private SuggestionService suggestionService;
     private CustomerService customerService;
-    private long id= 1;
+
     @Autowired
     public SuggestionController(SuggestionService suggestionService) {
         this.suggestionService = suggestionService;
     }
 
     @GetMapping("/getSuggestionsByReceiver")
-    public ResponseEntity<List<Suggestion>> getSuggestionsByReceiver(@RequestBody SuggestionDto suggestionDto){
-        return ResponseEntity.ok(suggestionService.findSuggestionByReceiverId(id));
+    public ResponseEntity<List<Suggestion>> getSuggestionsByReceiver(@PathVariable SuggestionDto suggestionDto){
+        return ResponseEntity.ok(suggestionService.findSuggestionByReceiverId(suggestionDto.getMreceiver_id()));
     }
 /*
     @GetMapping("/getSuggestionsBySender")
