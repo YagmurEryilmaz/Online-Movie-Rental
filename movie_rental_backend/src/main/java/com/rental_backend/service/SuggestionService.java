@@ -16,4 +16,10 @@ public class SuggestionService {
     public SuggestionService(SuggestionRepository suggestionRepository) {
         this.suggestionRepository = suggestionRepository;
     }
+    public List<Suggestion> findSuggestionByReceiverId(Long receiverId) {
+        return suggestionRepository.findSuggestionByReceiverId(receiverId);
+    }
+    public List<Suggestion> findSuggestionBySenderId(Long senderId) {
+        return suggestionRepository.findSuggestionBySenderId(senderId);
+    }
 }
