@@ -58,12 +58,12 @@ public class CustomerService {
         return rentedMovieRepository.findAll();
     }
 
-    public List<RentedMovie> getCurrentlyRentedMovies(Long userId) {
+    public List<Movie> getCurrentlyRentedMovies(Long userId) {
         Date now = Date.valueOf(LocalDate.now());
         return rentedMovieRepository.getCurrentlyRented(userId, now);
     }
 
-    public List<RentedMovie> getPreviouslyRentedMovies(Long userId) {
+    public List<Movie> getPreviouslyRentedMovies(Long userId) {
         Date now = Date.valueOf(LocalDate.now());
         return rentedMovieRepository.getPreviouslyRented(userId, now);
     }

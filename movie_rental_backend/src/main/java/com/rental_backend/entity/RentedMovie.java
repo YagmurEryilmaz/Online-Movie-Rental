@@ -42,14 +42,14 @@ public class RentedMovie {
     @EmbeddedId
     private RentedMovie.PrimaryKey pk;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "uId", insertable = false, updatable = false)
-    private Set<Customer> customer;
+    private Customer customer;
 
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "mId", insertable = false, updatable = false)
-    private Set<Movie> movie;
+    private Movie movie;
 
     @OneToOne
     @JoinColumn(name = "payId", insertable = false, updatable = false)

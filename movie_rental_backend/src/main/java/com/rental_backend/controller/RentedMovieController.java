@@ -4,6 +4,8 @@ package com.rental_backend.controller;
 import com.rental_backend.dto.MessageResponse;
 import com.rental_backend.dto.RentRequest;
 import com.rental_backend.entity.RentedMovie;
+import com.rental_backend.repository.RentedMovieRepository;
+import com.rental_backend.service.CustomerService;
 import com.rental_backend.service.RentedMovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,26 +19,29 @@ public class RentedMovieController {
 
     private final RentedMovieService rentedMovieService;
 
+
     @PostMapping("/rent")
     public ResponseEntity<?> rentMovie(@RequestBody RentRequest request)
     {
-        System.out.println("cid " + request.getCustomer());
-        System.out.println("mid " + request.getMovie());
-        System.out.println("pid " + request.getPay());
-        rentedMovieService.rentMovie(request.getCustomer(), request.getMovie(), request.getPay());
-        return ResponseEntity.ok(new MessageResponse("rented"));
+        try {
+            rentedMovieService.rentMovie(request.getCustomer(), request.getMovie(), request.getPay(),request.getExpDate());
+            return ResponseEntity.ok(new MessageResponse("rented"));
+        }
+        catch (RuntimeException r){
+            return ResponseEntity.badRequest().body(new MessageResponse(r.getMessage()));
+        }
     }
 
-    @GetMapping("/current/{id}")
-    public ResponseEntity<?> getCurrentlyRented(@PathVariable Long id)
+    @GetMapping("/current/{userId}")
+    public ResponseEntity<?> getCurrentlyRented(@PathVariable Long userId)
     {
-        return ResponseEntity.ok(rentedMovieService.getCurrentlyRented(id));
+        return ResponseEntity.ok(rentedMovieService.getCurrentlyRented(userId));
     }
 
-    @GetMapping("/previous/{id}")
-    public ResponseEntity<?> getPreviouslyRented(@PathVariable Long id)
+    @GetMapping("/previous/{userId}")
+    public ResponseEntity<?> getPreviouslyRented(@PathVariable Long userId)
     {
-        return ResponseEntity.ok(rentedMovieService.getPreviouslyRented(id));
+        return ResponseEntity.ok(rentedMovieService.getPreviouslyRented(userId));
     }
 
 }

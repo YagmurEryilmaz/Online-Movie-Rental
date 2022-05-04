@@ -29,8 +29,8 @@ public class Customer extends UserAccount{
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<MovieRequest> movieRequests;
 
-    @ManyToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<RentedMovie> rentedMovies;
+    //@OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    //private Set<RentedMovie> rentedMovies;
 
     @OneToMany(mappedBy ="senderCustomer")
     private Set<Gift> sentGifts;
@@ -65,10 +65,10 @@ public class Customer extends UserAccount{
     }
 
     public void addRentedMovie(RentedMovie rentedMovie)
-    {
+    {/*
         if (rentedMovies == null)
             rentedMovies = new HashSet<>();
-        rentedMovies.add(rentedMovie);
+        rentedMovies.add(rentedMovie);*/
     }
 
     public void addSentGift(Gift gift)

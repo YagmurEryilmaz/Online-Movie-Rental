@@ -28,9 +28,10 @@ public class Rate {
         public PrimaryKey() {
         }
         public PrimaryKey(Long u_id, Long m_id, Long review_id) {
-            this.uId = uId;
-            this.mId = mId;
-            this.reviewId = reviewId;
+            this.uId = u_id;
+            this.mId = m_id;
+            this.reviewId = review_id;
+
         }
     }
 

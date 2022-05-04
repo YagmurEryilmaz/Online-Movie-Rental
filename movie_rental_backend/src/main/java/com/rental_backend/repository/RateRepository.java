@@ -15,6 +15,12 @@ import java.util.List;
 public interface RateRepository extends CrudRepository<Rate,Long> {
     List<Rate> findAll();
 
+    @Query("select r from Rate r where r.pk = :id")
+    Rate findRateById(@Param("id") Long id);
+
     @Query("select avg(r.review.point) as avgPoint from Rate r, Movie m where m.mId= r.movie.mId and m.mId= :movieId group by m")
     Float findAvgRatePerMovie(@Param("movieId") Long movieId);
+
+    @Query("select r from Rate r where r.pk.mId = :movieId")
+    List <Rate> getAllByMovie(@Param("movieId") Long movieId);
 }

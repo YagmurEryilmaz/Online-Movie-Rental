@@ -16,4 +16,8 @@ public class ReviewService {
     public ReviewService(ReviewRepository reviewRepository) {
         this.reviewRepository = reviewRepository;
     }
+
+    public Review save(Review review){
+        return reviewRepository.save(review);
+    }
 }

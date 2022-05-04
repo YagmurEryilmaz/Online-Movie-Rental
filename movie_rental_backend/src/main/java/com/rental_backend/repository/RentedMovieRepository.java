@@ -19,12 +19,16 @@ public interface RentedMovieRepository extends CrudRepository<RentedMovie,Long> 
 
     List<RentedMovie> findAll();
 
+    @Query("select r from RentedMovie r where r.pk.uId = :cId and r.pk.mId = :mId")
+    List <RentedMovie> findRentedMovieByCustomerAndMovie(@Param("mId") Long mId, @Param("cId") Long cId);
+
     @Query("select m from RentedMovie m where m.pk = :id")
     RentedMovie findRentedMovieById(@Param("id") Long id);
 
    @Query("select r.movie from RentedMovie r where r.pk.uId = :userId and r.expDate > :date ")
-    List<RentedMovie> getCurrentlyRented(@Param("userId") Long userId, @Param("date") Date now);
+    List<Movie> getCurrentlyRented(@Param("userId") Long userId, @Param("date") Date date);
 
     @Query("select r.movie from RentedMovie r where r.pk.uId= :userId and r.expDate <= :date")
-    List<RentedMovie> getPreviouslyRented(@Param("userId") Long userId , @Param("date") Date now);
+    List<Movie> getPreviouslyRented(@Param("userId") Long userId , @Param("date") Date date);
+
 }
