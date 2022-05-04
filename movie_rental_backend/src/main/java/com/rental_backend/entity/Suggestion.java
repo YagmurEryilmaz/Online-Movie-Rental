@@ -26,7 +26,6 @@ public class Suggestion {
         @Column(nullable = false, updatable = false)
         private long m_id;
 
-        public PrimaryKey() {}
 
         public PrimaryKey(Long msender_id, Long mreceiver_id, Long m_id) {
 
