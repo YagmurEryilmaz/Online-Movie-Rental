@@ -1,13 +1,8 @@
 package com.rental_backend;
 
-import com.rental_backend.entity.Customer;
-import com.rental_backend.entity.Movie;
-import com.rental_backend.entity.Trailer;
-import com.rental_backend.entity.UserAccount;
-import com.rental_backend.repository.CustomerRepository;
-import com.rental_backend.repository.MovieRepository;
-import com.rental_backend.repository.TrailerRepository;
-import com.rental_backend.repository.UserAccountRepository;
+import com.rental_backend.entity.*;
+import com.rental_backend.entity.Suggestion.PrimaryKey;
+import com.rental_backend.repository.*;
 import com.rental_backend.service.CustomerService;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.InitializingBean;
@@ -27,6 +22,10 @@ public class RentalBackendApplication {
   private UserAccountRepository userAccountRepository;
   @Autowired
   private CustomerRepository customerRepository;
+  @Autowired
+  private EmployeeRepository employeeRepository;
+  @Autowired
+  private SuggestionRepository suggestionRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(RentalBackendApplication.class, args);
@@ -49,7 +48,8 @@ public class RentalBackendApplication {
             customerRepository.save(new Customer(0000000001, "Can Önal", "can", new Date(102, 02, 05), "bjk@gmail.com", "customer"));
             customerRepository.save(new Customer(0000000002, "Yağmur Eryılmaz" ,"yağmur", new Date(106,01,01),"yagmurery12@gmail.com","customer"));
             customerRepository.save(new Customer(0000000003, "Elif Cenesiz" ,"elif", new Date(110,04,07),"elif@gmail.com","customer"));
-            userAccountRepository.save(new UserAccount(0000000004, "Cenk Duran" ,"cenk", new Date(82,07,07),"cekoley@gmail.com","admin"));
+            employeeRepository.save(new Employee(0000000004L, "Cenk Duran" ,"cenk", new Date(82,07,07),"cekoley@gmail.com","admin"));
+
         };
     }
 
