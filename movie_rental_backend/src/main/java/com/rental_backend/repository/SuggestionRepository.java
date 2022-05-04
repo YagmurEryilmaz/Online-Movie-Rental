@@ -14,9 +14,9 @@ public interface SuggestionRepository extends CrudRepository<Suggestion,Long> {
 
     List<Suggestion> findAll();
 
-    @Query("select s.movie.title, s.suggestionSender.email, s.suggestionSender.name from Suggestion s, Customer c where s.primaryKey.msender_id = c.uId and s.primaryKey.msender_id = :senderId ")
+    @Query("select s.movie.title from Suggestion s, Customer c where s.primaryKey.msender_id = c.uId and s.primaryKey.msender_id = :senderId ")
     List<Suggestion> findSuggestionBySenderId(@Param("senderId") Long senderId);
 
-    @Query("select s.movie.title from Suggestion s, Customer c where s.primaryKey.mreceiver_id = c.uId and s.primaryKey.mreceiver_id = :receiverId ")
+    @Query("select s.movie.title,s.suggestionSender.email,s.suggestionSender.name from Suggestion s, Customer c where s.primaryKey.mreceiver_id = c.uId and s.primaryKey.mreceiver_id = :receiverId ")
     List<Suggestion> findSuggestionByReceiverId(@Param("receiverId") Long receiverId);
 }
