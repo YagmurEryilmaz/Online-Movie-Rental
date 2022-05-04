@@ -84,7 +84,7 @@ public class CustomerService {
         if (customerRepository.existsById(userId)) {
             Customer customer = customerRepository.findById(userId).get();
             if (movieRequestRepository.existsById(movieRequest.getMovieReqId())) {
-                customer.addMovieRequest(movieRequestRepository.findById(userId), userId);
+                customer.addMovieRequest(movieRequestRepository.findById(movieRequest.getMovieReqId()));
                 return customerRepository.save(customer);
             }
             else {
