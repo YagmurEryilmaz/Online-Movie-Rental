@@ -28,11 +28,11 @@ public class SuggestionController {
     public ResponseEntity<List<Suggestion>> getSuggestionsByReceiver(@RequestBody SuggestionDto suggestionDto){
         return ResponseEntity.ok(suggestionService.findSuggestionByReceiverId(suggestionDto.getMreciever_id()));
     }
-
+/*
     @GetMapping("/getSuggestionsBySender")
     public ResponseEntity<List<Suggestion>> getSuggestionsBySender(@RequestBody SuggestionDto suggestionDto){
         return ResponseEntity.ok(suggestionService.findSuggestionBySenderId(suggestionDto.getMsender_id()));
-    }
+    }*/
 
 
 }
