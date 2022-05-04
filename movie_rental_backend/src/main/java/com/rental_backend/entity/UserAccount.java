@@ -38,7 +38,14 @@ public class UserAccount {
 
     private String role;
 
-
+    public UserAccount(long uId, String name, String password, Date birthday, String email, String role) {
+        this.uId = uId;
+        this.name = name;
+        this.password = password;
+        this.birthday = birthday;
+        this.email = email;
+        this.role = role;
+    }
 
 
 
