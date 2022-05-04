@@ -19,6 +19,9 @@ public class SuggestionService {
     public List<Suggestion> findSuggestionByReceiverId(Long receiverId) {
         return suggestionRepository.findSuggestionByReceiverId(receiverId);
     }
+    public Suggestion addSuggestion(Suggestion suggestion) {
+        return suggestionRepository.save(suggestion);
+    }
     public List<Suggestion> findSuggestionBySenderId(Long senderId) {
         return suggestionRepository.findSuggestionBySenderId(senderId);
     }
