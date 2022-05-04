@@ -21,7 +21,8 @@ public class MovieRequestService {
     public List<MovieRequest> getAllMovieRequests(){
         return movieRequestRepository.findAll();
     }
-    public MovieRequest addRequest(MovieRequest movieRequest, String movieName) {
+
+    public MovieRequest addRequest(MovieRequest movieRequest) {
         return movieRequestRepository.save(movieRequest);
     }
     //public List<Movie> requestMovie(@RequestBody )

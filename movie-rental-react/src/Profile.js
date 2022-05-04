@@ -49,9 +49,20 @@ const Profile = () => {
 			window.alert("Please fill all required fields");
 		}
 		else{
+			var movieInfo = {
+				movieName: movieName,
+				directorName: dirName,
+				movieProductionYear: prodYear,
+				movie_req_status: ""
 
-			window.alert("Movie Request Sent");
+			}
+			axios.post("http://127.0.0.1:8080/api/v1/movieRequest/addMovieRequest",movieInfo).then(
+				console.log("done")
+				
+			).catch((err)=>{console.log(err)})
+
 			console.log(movieName, prodYear, dirName);
+			window.alert("Movie Request Sent");
 		}
 
 	}
