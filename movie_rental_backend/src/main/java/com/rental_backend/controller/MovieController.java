@@ -5,6 +5,7 @@ import com.rental_backend.entity.Movie;
 import com.rental_backend.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,11 @@ public class MovieController {
     public ResponseEntity<List<Movie>> getAllMovies() {
 
         return ResponseEntity.ok(movieService.getAllMovies());
+    }
+
+    @PostMapping("/addMovieToSystem")
+    public ResponseEntity<Movie> addMovie(@RequestBody Movie movie){
+        return new ResponseEntity<>(movieService.addMovie(movie), HttpStatus.CREATED);
     }
 
 
