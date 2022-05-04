@@ -35,8 +35,8 @@ public class SuggestionController {
     }
 
     @PostMapping("/addSuggestion")
-    public ResponseEntity<Suggestion> addSuggestion(@RequestBody SuggestionDto suggestionDto) {
-        return new ResponseEntity<>(suggestionService.addSuggestion(suggestion, suggestionDto.getM_id()), HttpStatus.CREATED);
+    public ResponseEntity<Suggestion> addSuggestion(@RequestBody Suggestion suggestion) {
+        return new ResponseEntity<>(suggestionService.addSuggestion(suggestion), HttpStatus.CREATED);
     }
 
     @GetMapping("/getSuggestionsBySender")

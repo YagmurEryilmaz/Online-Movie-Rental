@@ -31,11 +31,11 @@ const Profile = () => {
 
 
 	useEffect(() => {
-		axios.get("http://127.0.0.1:8080/api/v1/suggestion/getSuggestionsByReceiver").then(
+		axios.post("http://127.0.0.1:8080/api/v1/suggestion/addSuggestion",{mreceiver_id:1, msender_id:2, m_id:1}).then(
 			(response) => {
 				setFriendSuggestions(response.data);
 			}
-		).catch((err) => console.log(err.request))
+		).catch((err) => console.log(err.response))
 	},[])
 	
 	const changePP = (avatar) =>{
@@ -124,7 +124,7 @@ const Profile = () => {
 									<div class="card-header border border-info bg-light">
 										Suggested Movies
 									</div>
-									{friendSuggestions.map((suggestion) => {
+									{movie_suggestions.map((suggestion) => {
 										return(
 											<div class="card-body border border-info ">
 												<h5 class="card-title">Movie Name: {suggestion.title}</h5>
