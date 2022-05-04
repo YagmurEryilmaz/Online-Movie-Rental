@@ -12,7 +12,7 @@ const Rent = () =>{
 	const [all_movie_data, setMovies] = useState([]);
 	useEffect(() => {
 		axios.get("http://127.0.0.1:8080/api/v1/movie/getAllMovies").then((response)=>{
-
+			console.log(response.data)
 			setMovies(response.data)
 		}).catch((error)=>{console.log(error)})
 

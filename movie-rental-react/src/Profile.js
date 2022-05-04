@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import ChangeAvatarModal from "./ChangeAvatarModal";
@@ -17,8 +17,6 @@ import "./Profile.css"
 import { user_data } from "./Data";
 import { movie_suggestions } from "./Data";
 
-import axios from "axios";
-
 const Profile = () => {
 	const [profilePhoto, setProfilePhoto] = useState(defaultAvatar);
 	const [name,setName] = useState(user_data[0].name);
@@ -28,16 +26,6 @@ const Profile = () => {
 	const[movieName, setMovieName] = useState("");
 	const [prodYear, setProdYear] = useState("");
 	const[dirName, setDirName] = useState("");
-	const[friendSuggestions, setFriendSuggestions] = useState([]);
-	
-
-	useEffect(()=>{
-		axios.get("http://127.0.0.1:8080/api/v1/suggestion/getSuggestionsByReceiver").then(
-			(response) => {
-				setFriendSuggestions(response.data);
-			}
-		).catch((err) => console.log(err.request))
-	})
 	
 	const changePP = (avatar) =>{
 		setProfilePhoto(avatar);
@@ -125,11 +113,11 @@ const Profile = () => {
 									<div class="card-header border border-info bg-light">
 										Suggested Movies
 									</div>
-									{friendSuggestions.map((suggestion) => {
+									{movie_suggestions.map((suggestion) => {
 										return(
 											<div class="card-body border border-info ">
-												<h5 class="card-title">Movie Name: {suggestion.title}</h5>
-												<p class="card-text">From: {suggestion.name}({suggestion.email})</p>
+												<h5 class="card-title">Movie Name: {suggestion.m_name}</h5>
+												<p class="card-text">From: {suggestion.m_sender_name}({suggestion.m_sender_mail})</p>
 												<a href="#" class="btn btn-primary">Go to Movie</a>
 											</div>
 										)
