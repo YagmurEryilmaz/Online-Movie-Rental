@@ -6,6 +6,6 @@ import lombok.Data;
 public class SuggestionDto {
     private Long msender_id;
     private Long mreceiver_id;
-    private String m_id;
+    private Long m_id;
 
 }
