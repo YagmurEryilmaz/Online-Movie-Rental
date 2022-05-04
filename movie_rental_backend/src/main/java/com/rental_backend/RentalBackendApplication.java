@@ -1,9 +1,10 @@
 package com.rental_backend;
 
-import com.rental_backend.entity.Movie;
-import com.rental_backend.entity.Trailer;
-import com.rental_backend.repository.MovieRepository;
-import com.rental_backend.repository.TrailerRepository;
+import com.rental_backend.entity.*;
+import com.rental_backend.entity.Suggestion.PrimaryKey;
+import com.rental_backend.repository.*;
+import com.rental_backend.service.CustomerService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -17,20 +18,38 @@ import java.util.List;
 public class RentalBackendApplication {
   @Autowired
   private MovieRepository movieRepository;
+  @Autowired
+  private UserAccountRepository userAccountRepository;
+  @Autowired
+  private CustomerRepository customerRepository;
+  @Autowired
+  private EmployeeRepository employeeRepository;
+  @Autowired
+  private SuggestionRepository suggestionRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(RentalBackendApplication.class, args);
 
     }
     @Bean
-    InitializingBean movieInit() {
+    InitializingBean databaseInit() {
         return () -> {
-            movieRepository.save(new Movie(21001,"Into the Wild" ,"Adventure","Can Önal",2002, 49.9, "www.movie1url", new Date(2022,05,31)));
-            movieRepository.save(new Movie(21002,"Up" ,"Animation","Yağmur Eryılmaz",2006, 35, "www.movie2url", new Date(2021,05,31)));
-            movieRepository.save(new Movie(21003,"Pride and Prejudice" ,"Romantic","Elif Cenesiz",1999, 65.5, "www.movie3url", new Date(2020,05,31)));
-            movieRepository.save(new Movie(21004,"Iron Man" ,"Action","Can Önal",2005, 50.5, "www.movie4url", new Date(2020,05,10)));
-            movieRepository.save(new Movie(21005,"Darkness In the Shadow" ,"Action","Cenk Duran",2009, 90, "www.movie1url", new Date(2019,05,15)));
-            movieRepository.save(new Movie(21006,"Undefined Memories" ,"Romantic","Can Önal",1997, 60.5, "www.movie1url", new Date(2020,07,29)));
+            movieRepository.save(new Movie(21001,"Into the Wild" ,"Adventure","Can Önal",2002, 49.9, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(122,05,31)));
+            movieRepository.save(new Movie(21002,"Up" ,"Animation","Yağmur Eryılmaz",2006, 35, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(121,05,31)));
+            movieRepository.save(new Movie(21003,"Pride and Prejudice" ,"Romantic","Elif Cenesiz",1999, 65.5, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(120,05,31)));
+            movieRepository.save(new Movie(21004,"Iron Man" ,"Action","Can Önal",2005, 50.5, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(120,05,10)));
+            movieRepository.save(new Movie(21005,"Darkness In the Shadow" ,"Action","Cenk Duran",2009, 90, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(119,05,15)));
+            movieRepository.save(new Movie(21006,"Undefined Memories" ,"Romantic","Can Önal",1997, 60.5, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(120,07,29)));
+
+            /*userAccountRepository.save(new UserAccount(0000000001, "Can Önal", "can", new Date(102, 02, 05), "bjk@gmail.com", "customer"));
+            userAccountRepository.save(new UserAccount(0000000002, "Yağmur Eryılmaz" ,"yağmur", new Date(106,01,01),"yagmurery12@gmail.com","customer"));
+            userAccountRepository.save(new UserAccount(0000000003, "Elif Cenesiz" ,"elif", new Date(110,04,07),"elif@gmail.com","customer"));
+            */
+            customerRepository.save(new Customer(0000000001, "Can Önal", "can", new Date(102, 02, 05), "bjk@gmail.com", "customer"));
+            customerRepository.save(new Customer(0000000002, "Yağmur Eryılmaz" ,"yağmur", new Date(106,01,01),"yagmurery12@gmail.com","customer"));
+            customerRepository.save(new Customer(0000000003, "Elif Cenesiz" ,"elif", new Date(110,04,07),"elif@gmail.com","customer"));
+            employeeRepository.save(new Employee(0000000004L, "Cenk Duran" ,"cenk", new Date(82,07,07),"cekoley@gmail.com","admin"));
+
         };
     }
 

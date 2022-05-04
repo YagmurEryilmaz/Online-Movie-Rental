@@ -19,10 +19,10 @@ import java.util.Set;
 @Entity
 public class Customer extends UserAccount{
 
-    /*public Customer(Long u_id, String name, String password, Date birthday, String email )
+    public Customer(long uId, String name, String password, Date birthday, String email, String role)
     {
-        super(u_id, name, password, birthday,email);
-    }*/
+        super(uId, name, password, birthday, email, role);
+    }
     private int movieCount;
     private float balance;
 

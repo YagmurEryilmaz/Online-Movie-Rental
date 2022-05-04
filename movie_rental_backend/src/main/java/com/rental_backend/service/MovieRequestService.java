@@ -5,6 +5,8 @@ import org.hibernate.annotations.SQLInsert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import java.util.List;
 
 @Service
@@ -16,4 +18,12 @@ public class MovieRequestService {
     public MovieRequestService(MovieRequestRepository movieRequestRepository) {
         this.movieRequestRepository = movieRequestRepository;
     }
+    public List<MovieRequest> getAllMovieRequests(){
+        return movieRequestRepository.findAll();
+    }
+
+    public MovieRequest addRequest(MovieRequest movieRequest) {
+        return movieRequestRepository.save(movieRequest);
+    }
+    //public List<Movie> requestMovie(@RequestBody )
 }

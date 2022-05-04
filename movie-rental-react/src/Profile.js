@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import ChangeAvatarModal from "./ChangeAvatarModal";
@@ -15,6 +15,7 @@ import avatar8 from "./img/avatars/image_part_008.png"
 import avatar9 from "./img/avatars/image_part_009.png"
 import "./Profile.css"
 import { user_data } from "./Data";
+import axios from "axios";
 import { movie_suggestions } from "./Data";
 
 const Profile = () => {
@@ -26,6 +27,16 @@ const Profile = () => {
 	const[movieName, setMovieName] = useState("");
 	const [prodYear, setProdYear] = useState("");
 	const[dirName, setDirName] = useState("");
+	const [friendSuggestions, setFriendSuggestions] = useState([]);
+
+
+	useEffect(() => {
+		axios.post("http://127.0.0.1:8080/api/v1/suggestion/addSuggestion",{mreceiver_id:1, msender_id:2, m_id:1}).then(
+			(response) => {
+				setFriendSuggestions(response.data);
+			}
+		).catch((err) => console.log(err.response))
+	},[])
 	
 	const changePP = (avatar) =>{
 		setProfilePhoto(avatar);
@@ -38,9 +49,20 @@ const Profile = () => {
 			window.alert("Please fill all required fields");
 		}
 		else{
+			var movieInfo = {
+				movieName: movieName,
+				directorName: dirName,
+				movieProductionYear: prodYear,
+				movie_req_status: ""
 
-			window.alert("Movie Request Sent");
+			}
+			axios.post("http://127.0.0.1:8080/api/v1/movieRequest/addMovieRequest",movieInfo).then(
+				console.log("done")
+				
+			).catch((err)=>{console.log(err)})
+
 			console.log(movieName, prodYear, dirName);
+			window.alert("Movie Request Sent");
 		}
 
 	}
@@ -116,8 +138,8 @@ const Profile = () => {
 									{movie_suggestions.map((suggestion) => {
 										return(
 											<div class="card-body border border-info ">
-												<h5 class="card-title">Movie Name: {suggestion.m_name}</h5>
-												<p class="card-text">From: {suggestion.m_sender_name}({suggestion.m_sender_mail})</p>
+												<h5 class="card-title">Movie Name: {suggestion.title}</h5>
+												<p class="card-text">From: {suggestion.name}({suggestion.email})</p>
 												<a href="#" class="btn btn-primary">Go to Movie</a>
 											</div>
 										)
