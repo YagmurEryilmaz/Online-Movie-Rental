@@ -9,5 +9,8 @@
         </node>
       </scope>
     </mapping>
+    <mapping uuid="81bdb361-554e-4782-83ed-c7454412a8a4" name="movie_rental@localhost Mapping [2]">
+      <data-sources db="0ef1e53f-9b17-40b8-8c04-d9cd38c2621d" />
+    </mapping>
   </component>
 </project>
