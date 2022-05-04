@@ -4,12 +4,16 @@ import com.rental_backend.dto.SuggestionDto;
 import com.rental_backend.entity.Suggestion;
 import com.rental_backend.service.CustomerService;
 import com.rental_backend.service.SuggestionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+@RestController
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("api/v1/suggestion")
+@RequiredArgsConstructor
 
 public class SuggestionController {
     private SuggestionService suggestionService;
