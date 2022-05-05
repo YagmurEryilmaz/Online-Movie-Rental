@@ -10,7 +10,7 @@ import java.util.Set;
 @Getter
 @Setter
 @SuperBuilder
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor
 @Entity
 
@@ -23,4 +23,10 @@ public class MovieLang {
     @PrimaryKeyJoinColumn(name = "movieLang", referencedColumnName = "m_id")
     private Set<Movie> movie;
     private String movieLang;
+
+    /*public MovieLang(Long movieLangId, Set<Movie> movie,String movieLang){
+        this.movieLangId = movieLangId;
+        this.movie = movie;
+        this.movieLang = movieLang;
+    }*/
 }

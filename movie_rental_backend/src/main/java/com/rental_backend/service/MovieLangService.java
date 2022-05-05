@@ -16,4 +16,8 @@ public class MovieLangService {
     public MovieLangService(MovieLangRepository movieLangRepository) {
         this.movieLangRepository = movieLangRepository;
     }
+
+    public MovieLang addLanguage(MovieLang movieLang) {
+        return movieLangRepository.save(movieLang);
+    }
 }
