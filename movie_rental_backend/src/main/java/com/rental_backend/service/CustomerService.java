@@ -34,6 +34,11 @@ public class CustomerService {
     public Customer addUser(Customer customer) {
         return customerRepository.save(customer);
     }
+
+    public void deleteUser(Customer customer) {
+        customerRepository.deleteUser(customer.getEmail());
+    }
+
     public List<Customer> findAll() {
         return customerRepository.findAll();
     }
@@ -58,16 +63,6 @@ public class CustomerService {
         return rentedMovieRepository.findAll();
     }
 
-    public List<Movie> getCurrentlyRentedMovies(Long userId) {
-        Date now = Date.valueOf(LocalDate.now());
-        return rentedMovieRepository.getCurrentlyRented(userId, now);
-    }
-
-    public List<Movie> getPreviouslyRentedMovies(Long userId) {
-        Date now = Date.valueOf(LocalDate.now());
-        return rentedMovieRepository.getPreviouslyRented(userId, now);
-    }
-
     // methods related to Friend Request repo
 
     public int getPendingFriendRequestCount(Long receiverId){ return friendRequestRepository.findNumOfPendingRequests(receiverId);}
@@ -80,21 +75,6 @@ public class CustomerService {
 
     // methods that are come from customer entity
 
-    /*public Customer addMovieRequest(MovieRequest movieRequest, Long userId) throws MovieRequestNotFoundException, CustomerNotFoundException {
-        if (customerRepository.existsById(userId)) {
-            Customer customer = customerRepository.findById(userId).get();
-            if (movieRequestRepository.existsById(movieRequest.getMovieReqId())) {
-                customer.addMovieRequest(movieRequestRepository.findById(movieRequest.getMovieReqId()));
-                return customerRepository.save(customer);
-            }
-            else {
-                throw new MovieRequestNotFoundException("Movie request with name " + movieRequest.getMovieName() + " does not exist.");
-            }
-        }
-        else {
-            throw new CustomerNotFoundException("Customer with id " + userId + " does not exist.");
-        }
-    }
     /*public Customer addRentedMovie(RentedMovie rentedMovie, Long userId) throws RentedMovieNotFoundException, CustomerNotFoundException {
         if (customerRepository.existsById(userId)) {
             Customer customer = customerRepository.findById(userId).get();

@@ -8,6 +8,7 @@ import com.rental_backend.entity.Movie;
 import com.rental_backend.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -63,4 +64,11 @@ public class CustomerController {
     public int getNumOfFriends(@RequestBody FriendRequestDto friendRequestDto){
         return customerService.getFriendCount(friendRequestDto.getReceiver_id(), friendRequestDto.getSender_id());
     }
+
+    @DeleteMapping("/deleteUser")
+    public ResponseEntity<?> deleteUser(@RequestBody Customer customer) {
+        customerService.deleteUser(customer);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }

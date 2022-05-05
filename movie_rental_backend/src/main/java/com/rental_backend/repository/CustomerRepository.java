@@ -16,4 +16,7 @@ public interface CustomerRepository extends CrudRepository<Customer,Long> {
     @Query("select c from Customer c where c.uId= :userId")
     Customer findByUId(@Param("userId") Long id);
 
+    @Query("delete from Customer c where c.email= :email")
+    void deleteUser(@Param("email") String email);
+
 }
