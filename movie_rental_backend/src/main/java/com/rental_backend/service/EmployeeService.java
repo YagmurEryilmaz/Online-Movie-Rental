@@ -27,11 +27,6 @@ public class EmployeeService {
     public List<Employee> getAllEmployee(){
         return employeeRepository.findAll();
     }
-    //!!Entities are not used, it may need to change
-    public List<Movie> deleteMovie(Long id,Long movieId) {
-        return movieRepository.deleteMovie(movieId);
-    }
-
     public List<UserAccount> deleteAccount(Long id, Long uId) {
         return userAccountRepository.deleteAcc(uId);
     }

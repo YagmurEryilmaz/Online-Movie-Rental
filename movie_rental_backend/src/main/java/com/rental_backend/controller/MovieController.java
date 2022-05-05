@@ -25,13 +25,17 @@ public class MovieController {
     }
     @GetMapping("/getAllMovies")
     public ResponseEntity<List<Movie>> getAllMovies() {
-
         return ResponseEntity.ok(movieService.getAllMovies());
     }
 
     @PostMapping("/addMovieToSystem")
     public ResponseEntity<Movie> addMovie(@RequestBody Movie movie){
         return new ResponseEntity<>(movieService.addMovie(movie), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/deleteMovie")
+    public ResponseEntity<?> deleteMovie(@RequestBody MovieResponse movieResponse){
+        return new ResponseEntity<>(movieService.deleteMovie(movieResponse.getTitle(), movieResponse.getDirectorName()), HttpStatus.NO_CONTENT);
     }
 
 
