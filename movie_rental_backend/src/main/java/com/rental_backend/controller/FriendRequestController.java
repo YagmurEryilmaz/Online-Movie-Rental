@@ -1,10 +1,12 @@
 package com.rental_backend.controller;
  import com.rental_backend.dto.FriendRequestDto;
  import com.rental_backend.entity.FriendRequest;
+ import com.rental_backend.entity.Suggestion;
  import com.rental_backend.service.CustomerService;
  import com.rental_backend.service.FriendRequestService;
  import lombok.RequiredArgsConstructor;
  import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.http.HttpStatus;
  import org.springframework.http.ResponseEntity;
  import org.springframework.web.bind.annotation.*;
  import java.util.List;
@@ -30,6 +32,11 @@ public class FriendRequestController {
     @GetMapping("/getFriendRequestsBySender")
     public ResponseEntity<List<FriendRequest>> getRequestsBySender(@PathVariable FriendRequestDto friendRequestDto){
         return ResponseEntity.ok(friendRequestService.findBySenderId(friendRequestDto.getSender_id()));
+    }
+
+    @PostMapping("/createFriendRequest")
+    public ResponseEntity<FriendRequest> createFriendRequest(@RequestBody FriendRequest fr) {
+        return new ResponseEntity<>(friendRequestService.addFriendRequest(fr), HttpStatus.CREATED);
     }
 
 }

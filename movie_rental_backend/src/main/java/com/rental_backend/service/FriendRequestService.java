@@ -22,5 +22,9 @@ public class FriendRequestService {
     public List<FriendRequest> findBySenderId(Long senderId) {
         return friendRequestRepository.findbySenderId(senderId);
     }
+    public FriendRequest addFriendRequest(FriendRequest fr) {
+        return friendRequestRepository.save(fr);
+    }
+
 
 }
