@@ -29,6 +29,12 @@ public class MovieController {
         return ResponseEntity.ok(movieService.getAllMovies());
     }
 
+    @GetMapping("/getMovieById")
+    public ResponseEntity<Movie> getMovieById(@PathVariable Long mId) {
+        return ResponseEntity.ok(movieService.findById(mId));
+    }
+
+
     @PostMapping("/addMovieToSystem")
     public ResponseEntity<Movie> addMovie(@RequestBody Movie movie){
         return new ResponseEntity<>(movieService.addMovie(movie), HttpStatus.CREATED);

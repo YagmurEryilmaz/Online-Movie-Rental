@@ -20,6 +20,7 @@ public interface MovieRepository extends CrudRepository<Movie,Long>{
     List<Movie> findByTitle(String title);
     List <Movie> findByGenre(String genre);
     List <Movie> findByProductionYear(int productionYear);
+    Movie findById(long mId);
 
     @Query("select m from Movie m where m.mId = :id")
     Movie findMovieById(@Param("id") Long id);

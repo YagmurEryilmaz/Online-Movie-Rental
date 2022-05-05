@@ -36,6 +36,10 @@ public class MovieService {
         return movieRepository.findByGenre(genre);
     }
 
+    public Movie findById(long id) {
+        return movieRepository.findById(id);
+    }
+
     public List<Movie> findMovieByProdYear(int prodYear) {
         return movieRepository.findByProductionYear(prodYear);
     }
