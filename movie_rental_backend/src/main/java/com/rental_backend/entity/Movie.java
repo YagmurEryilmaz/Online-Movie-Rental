@@ -39,6 +39,7 @@ public class Movie {
     private String posterUrl;
 
     private Date additionDate;
+
     public Movie(long mId, String title, String genre, String directorName, int productionYear, double price, String posterUrl, Date additionDate) {
         this.mId = mId;
         this.title = title;

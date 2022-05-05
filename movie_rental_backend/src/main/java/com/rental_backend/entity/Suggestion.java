@@ -18,20 +18,20 @@ public class Suggestion {
     @Embeddable
     public static class PrimaryKey implements Serializable {
         @Column(nullable = false, updatable = false)
-        private int msender_id;
+        private Long msender_id;
 
         @Column(nullable = false, updatable = false)
-        private int mreceiver_id;
+        private Long mreceiver_id;
 
         @Column(nullable = false, updatable = false)
-        private int m_id;
+        private Long m_id;
 
 
-        public PrimaryKey(int msender_id,int mreceiver_id,int m_id) {
+        public PrimaryKey(Long msender_id,Long mreceiver_id,Long m_id) {
 
             this.msender_id = msender_id;
             this.mreceiver_id= mreceiver_id;
-            this.m_id =m_id;
+            this.m_id = m_id;
 
         }
 
