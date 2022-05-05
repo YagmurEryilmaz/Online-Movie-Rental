@@ -27,8 +27,8 @@ public interface MovieRepository extends CrudRepository<Movie,Long>{
             "or lower(m.directorName) like lower(concat('%', :searchTerm, '%'))")
     List<Movie> search(@Param("searchTerm") String searchTerm);
 
-    @Query("delete from Movie where mId= :movieId")
-    List<Movie> deleteMovie(@Param("movieId") Long movieId);
+    @Query("delete from Movie where title= :title and directorName = :directorName")
+    List<Movie> deleteMovie(@Param("title") String title, @Param("directorName") String directorName);
 
 
 

@@ -28,7 +28,6 @@ public class MovieService {
     public Movie addMovie(Movie movie) {
         return movieRepository.save(movie);
     }
-
     public List<Movie> findMovieByTitle(String title) {
         return movieRepository.findByTitle(title);
     }
@@ -44,11 +43,11 @@ public class MovieService {
     public List<Movie> searchMovie(String searchTerm) {
         return movieRepository.search(searchTerm);
     }
-/*
-    public List<Movie> deleteMovie(Long movieId) {
-        return movieRepository.deleteMovie(movieId);
+
+    public List<Movie> deleteMovie(String title, String directorName) {
+        return movieRepository.deleteMovie(title, directorName);
     }
- */
+
 
     public MovieRepository getMovieRepository() {
         return movieRepository;
