@@ -23,5 +23,8 @@ public class GiftService {
     public List<Gift> findBySenderId(Long senderId) {
         return giftRepository.findbySenderId(senderId);
     }
+    public Gift addGift(Gift g) {
+        return giftRepository.save(g);
+    }
 
 }

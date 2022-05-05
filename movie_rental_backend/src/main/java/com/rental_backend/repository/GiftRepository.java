@@ -17,7 +17,7 @@ public interface GiftRepository extends CrudRepository<Gift,Long> {
     @Query("select g.movie.title from Gift g, Customer c where g.senderCustomer.uId = c.uId and g.senderCustomer.uId = :senderId ")
     List<Gift> findbySenderId(@Param("senderId") Long senderId);
 
-    @Query("select g.movie.title from Gift g, Customer c where g.receiverCustomer.uId = c.uId and g.receiverCustomer.uId = :receiverId ")
+    @Query("select g.movie.title, g.senderCustomer.email, g.senderCustomer.name from Gift g, Customer c where g.receiverCustomer.uId = c.uId and g.receiverCustomer.uId = :receiverId ")
     List<Gift> findbyReceiverId(@Param("receiverId") Long receiverId);
 
     @Query("select count(g.receiverCustomer.receivedGifts) from Gift g, Customer c where g.receiverCustomer.uId = c.uId and g.receiverCustomer.uId = :receiverId")
