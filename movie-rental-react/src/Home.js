@@ -1,6 +1,7 @@
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import iceAgeIcon from "./img/iceAge.png"
+import SuggestModal from "./SuggestModal";
 
 import "./Home.css";
 import { movie_data } from "./Data";
@@ -83,6 +84,11 @@ const Home = ()=>{
 														<div className="fs-5 fw-light">
 															Expiration Date: {movie_data.exp_date}
 														</div>
+														<button type = "button" data-bs-toggle = "modal" data-bs-target = {String(`#suggestModal${movie_data.m_id}`)} className="btn btn-primary" onClick>
+															Suggest
+														</button>
+														<SuggestModal mId = {movie_data.m_id}/>
+
 													</div>
 												</div>
 

@@ -77,8 +77,8 @@ const Profile = () => {
 					<div className='row  align-items-between'>
 						<Navbar />
 					</div>
-					<div className="row align-items-center ">
-						<div className="col-6 mt-5">
+					<div className="row overflow-auto">
+						<div className="col-6 mt-5 overflow-auto ">
 							<div className="card border border-info ">
 								<div className=" d-flex justify-content-center">
 									<img src= {profilePhoto} className=" card-img-top" alt="..."/>
@@ -102,7 +102,7 @@ const Profile = () => {
 									
 							</div>
 						</div>
-						<div className="col-6">
+						<div className="col-6 overflow-auto">
 							<div className="row createMovieRequest mt-5 ms-2 ">
 								<form className = "border border-2 rounded-2 border-info">
 									<div className="fs-3">

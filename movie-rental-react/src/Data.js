@@ -11,7 +11,7 @@ import movieIcon from "./img/iceAge.png";
 
 		exp_date: "23.04.2020",
 		img_url: "https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
-		m_id: "123435"
+		m_id: "12435"
 		
 
 	},
@@ -25,7 +25,7 @@ import movieIcon from "./img/iceAge.png";
 		prod_year: 2001,
 		exp_date: "23.04.2020",
 		img_url :"https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
-		m_id: "123435"
+		m_id: "12345"
 
 	},
 	{
@@ -38,7 +38,7 @@ import movieIcon from "./img/iceAge.png";
 		prod_year: 2001,
 		exp_date: "23.04.2020",
 		img_url : "https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
-		m_id: "123435"
+		m_id: "23435"
 
 	},
 	{
@@ -51,7 +51,7 @@ import movieIcon from "./img/iceAge.png";
 		prod_year: 2001,
 		exp_date: "23.04.2020",
 		img_url :"https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
-		m_id: "123435"
+		m_id: "12343"
 
 	},
 	{
@@ -64,7 +64,7 @@ import movieIcon from "./img/iceAge.png";
 		prod_year: 2001,
 		exp_date: "23.04.2020",
 		img_url: "https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
-		m_id: "123435"
+		m_id: "12335"
 
 	},
 	{
@@ -77,7 +77,7 @@ import movieIcon from "./img/iceAge.png";
 		prod_year: 2001,
 		exp_date: "23.04.2020",
 		img_url: "https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
-		m_id: "123435"
+		m_id: "13435"
 
 	},
 		{
@@ -91,7 +91,7 @@ import movieIcon from "./img/iceAge.png";
 
 			exp_date: "23.04.2020",
 			img_url: "https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
-			m_id: "123435"
+			m_id: "12340"
 
 
 		},
@@ -105,7 +105,7 @@ import movieIcon from "./img/iceAge.png";
 			prod_year: 2001,
 			exp_date: "23.04.2020",
 			img_url: "https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
-			m_id: "123435"
+			m_id: "12348"
 
 		},
 		{
@@ -118,7 +118,7 @@ import movieIcon from "./img/iceAge.png";
 			prod_year: 2001,
 			exp_date: "23.04.2020",
 			img_url: "https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
-			m_id: "123435"
+			m_id: "123498"
 
 		},
 		{
@@ -131,7 +131,7 @@ import movieIcon from "./img/iceAge.png";
 			prod_year: 2001,
 			exp_date: "23.04.2020",
 			img_url: "https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
-			m_id: "123435"
+			m_id: "12343567"
 
 		},
 		{
@@ -144,7 +144,7 @@ import movieIcon from "./img/iceAge.png";
 			prod_year: 2001,
 			exp_date: "23.04.2020",
 			img_url: "https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
-			m_id: "123435"
+			m_id: "345683"
 
 		},
 		{
@@ -157,7 +157,7 @@ import movieIcon from "./img/iceAge.png";
 			prod_year: 2001,
 			exp_date: "23.04.2020",
 			img_url: "https://image.tmdb.org/t/p/original/6gb6yzeLYBSHx4wukpOM7UOumRF.jpg",
-			m_id: "123435"
+			m_id: "768697"
 
 		}]
 
