@@ -13,8 +13,9 @@ package com.rental_backend.controller;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("api/v1/friendrequest")
+@RequestMapping("api/v1/friendRequest")
 @RequiredArgsConstructor
+
 public class FriendRequestController {
 
     private FriendRequestService friendRequestService;

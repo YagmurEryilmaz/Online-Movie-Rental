@@ -16,4 +16,12 @@ public class SubtitleRequestService {
     public SubtitleRequestService(SubtitleRequestRepository subtitleRequestRepository) {
         this.subtitleRequestRepository = subtitleRequestRepository;
     }
+
+    public List<SubtitleRequest> getAllSubtitleRequests(){
+        return subtitleRequestRepository.findAll();
+    }
+
+    public SubtitleRequest addSubtitleRequest(SubtitleRequest subtitleRequest) {
+        return subtitleRequestRepository.save(subtitleRequest);
+    }
 }
