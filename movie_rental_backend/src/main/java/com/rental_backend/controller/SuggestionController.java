@@ -1,8 +1,6 @@
 package com.rental_backend.controller;
 
-import com.rental_backend.dto.MovieRequestDto;
 import com.rental_backend.dto.SuggestionDto;
-import com.rental_backend.entity.MovieRequest;
 import com.rental_backend.entity.Suggestion;
 import com.rental_backend.service.CustomerService;
 import com.rental_backend.service.SuggestionService;
@@ -31,17 +29,17 @@ public class SuggestionController {
 
     @GetMapping("/getSuggestionsByReceiver")
     public ResponseEntity<List<Suggestion>> getSuggestionsByReceiver(@PathVariable SuggestionDto suggestionDto){
-        return ResponseEntity.ok(suggestionService.findSuggestionByReceiverId(suggestionDto.getMreceiver_id()));
+        return ResponseEntity.ok(suggestionService.findSuggestionByReceiverId(suggestionDto.getReceiverId()));
     }
 
     @PostMapping("/addSuggestion")
-    public ResponseEntity<Suggestion> addSuggestion(@RequestBody Suggestion suggestion) {
-        return new ResponseEntity<>(suggestionService.addSuggestion(suggestion), HttpStatus.CREATED);
+    public ResponseEntity<Suggestion> addSuggestion(@RequestBody SuggestionDto s) {
+        return new ResponseEntity<>(suggestionService.addSuggestion(s.getSenderId(), s.getReceiverId(), s.getMovieId()), HttpStatus.CREATED);
     }
 
     @GetMapping("/getSuggestionsBySender")
     public ResponseEntity<List<Suggestion>> getSuggestionsBySender(@PathVariable SuggestionDto suggestionDto){
-        return ResponseEntity.ok(suggestionService.findSuggestionBySenderId(suggestionDto.getMsender_id()));
+        return ResponseEntity.ok(suggestionService.findSuggestionBySenderId(suggestionDto.getSenderId()));
     }
 
 

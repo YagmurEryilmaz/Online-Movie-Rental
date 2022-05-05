@@ -37,6 +37,7 @@ public class RateController {
 
     @GetMapping("/{movieId}")
     public ResponseEntity<List<RateResponse>> getRatesByMovie(@PathVariable Long movieId){
+
         List <RateResponse> response = new ArrayList<>();
         rateService.getRatesByMovie(movieId).stream().forEach((r) -> response.add(new RateResponse(r)));
         return ResponseEntity.ok(response);
