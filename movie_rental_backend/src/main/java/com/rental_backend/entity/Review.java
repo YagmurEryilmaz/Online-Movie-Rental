@@ -11,7 +11,6 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @SuperBuilder
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor
 @Entity
 public class Review {
@@ -23,5 +22,9 @@ public class Review {
 
     private String comment;
 
-
+    public Review(long reviewId, double point, String comment) {
+        this.reviewId = reviewId;
+        this.point = point;
+        this.comment = comment;
+    }
 }
