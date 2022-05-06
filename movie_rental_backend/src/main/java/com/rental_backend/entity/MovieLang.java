@@ -1,5 +1,6 @@
 package com.rental_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.context.annotation.Primary;
@@ -21,6 +22,7 @@ public class MovieLang {
 
     @ManyToMany(mappedBy = "movieLang", fetch = FetchType.EAGER)
     @PrimaryKeyJoinColumn(name = "movieLang", referencedColumnName = "m_id")
+    @JsonIgnore
     private Set<Movie> movie;
     private String movieLang;
 

@@ -34,7 +34,7 @@ const DetailedInfoModal = (props) =>{
 												<ul>
 													{mov.movieLang.map((lang) => {
 														return(
-															<li>{lang}</li>
+															<li>{lang.movieLang}</li>
 														)
 													})}
 												</ul>
