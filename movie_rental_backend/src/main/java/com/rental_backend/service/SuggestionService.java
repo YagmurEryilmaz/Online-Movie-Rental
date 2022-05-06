@@ -39,7 +39,4 @@ public class SuggestionService {
     public List<Suggestion> findSuggestionBySenderId(Long senderId) {
         return suggestionRepository.findSuggestionBySenderId(senderId);
     }
-    public Suggestion addSuggestion(Suggestion suggestion, int mId) {
-        return suggestionRepository.save(suggestion);
-    }
 }

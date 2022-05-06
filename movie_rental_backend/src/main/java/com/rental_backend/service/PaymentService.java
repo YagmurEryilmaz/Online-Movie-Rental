@@ -16,4 +16,8 @@ public class PaymentService {
     public PaymentService(PaymentRepository paymentRepository) {
         this.paymentRepository = paymentRepository;
     }
+
+    public Payment findById(long pay_id) {
+        return paymentRepository.findByPayId(pay_id);
+    }
 }

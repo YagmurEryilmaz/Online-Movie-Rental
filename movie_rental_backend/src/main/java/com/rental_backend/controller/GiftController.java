@@ -1,6 +1,7 @@
 package com.rental_backend.controller;
 
 import com.rental_backend.dto.FriendRequestDto;
+import com.rental_backend.dto.GiftDto;
 import com.rental_backend.entity.FriendRequest;
 import com.rental_backend.entity.Gift;
 import com.rental_backend.service.GiftService;
@@ -27,18 +28,18 @@ public class GiftController {
     }
 
     @GetMapping("/getGiftsByReceiver")
-    public ResponseEntity<List<Gift>> getGiftsByReceiver(@PathVariable FriendRequestDto friendRequestDto){
-        return ResponseEntity.ok(giftService.findByReceiverId(friendRequestDto.getReceiver_id()));
+    public ResponseEntity<List<Gift>> getGiftsByReceiver(@PathVariable GiftDto giftDto){
+        return ResponseEntity.ok(giftService.findByReceiverId(giftDto.getReceiver_id()));
     }
 
     @GetMapping("/getGiftsBySender")
-    public ResponseEntity<List<Gift>> getGiftsBySender(@PathVariable FriendRequestDto friendRequestDto){
-        return ResponseEntity.ok(giftService.findBySenderId(friendRequestDto.getSender_id()));
+    public ResponseEntity<List<Gift>> getGiftsBySender(@PathVariable GiftDto giftDto){
+        return ResponseEntity.ok(giftService.findBySenderId(giftDto.getSender_id()));
     }
 
     @PostMapping("/createGift")
-    public ResponseEntity<Gift> createGift(@RequestBody Gift g){
-        return new ResponseEntity<>(giftService.addGift(g), HttpStatus.CREATED);
+    public ResponseEntity<Gift> createGift(@RequestBody GiftDto giftDto){
+        return new ResponseEntity<>(giftService.addGift(giftDto.getSender_id(), giftDto.getReceiver_id(), giftDto.getM_id(), giftDto.getPay_id()), HttpStatus.CREATED);
     }
 
 

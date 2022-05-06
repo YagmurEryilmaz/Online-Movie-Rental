@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface PaymentRepository extends CrudRepository<Payment,Long> {
-    List<Payment> findByPayId(Long payId);
+    Payment findByPayId(Long payId);
 }
