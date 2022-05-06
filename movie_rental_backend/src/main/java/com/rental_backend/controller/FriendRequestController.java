@@ -36,8 +36,8 @@ public class FriendRequestController {
     }
 
     @PostMapping("/createFriendRequest")
-    public ResponseEntity<FriendRequest> createFriendRequest(@RequestBody FriendRequest fr) {
-        return new ResponseEntity<>(friendRequestService.addFriendRequest(fr), HttpStatus.CREATED);
+    public ResponseEntity<FriendRequest> createFriendRequest(@RequestBody FriendRequestDto fr) {
+        return new ResponseEntity<>(friendRequestService.addFriendRequest(fr.getSender_id(), fr.getReceiver_id()), HttpStatus.CREATED);
     }
 
 }

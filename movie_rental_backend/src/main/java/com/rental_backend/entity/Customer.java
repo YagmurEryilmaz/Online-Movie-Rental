@@ -30,19 +30,24 @@ public class Customer extends UserAccount{
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<MovieRequest> movieRequests;
 
-    //@OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    //private Set<RentedMovie> rentedMovies;
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<RentedMovie> rentedMovies;
 
     @OneToMany(mappedBy ="senderCustomer")
+    @JsonIgnore
     private Set<Gift> sentGifts;
 
-    @OneToMany(mappedBy ="senderCustomer")
+    @OneToMany(mappedBy ="receiverCustomer")
+    @JsonIgnore
     private Set<Gift> receivedGifts;
 
     @OneToMany(mappedBy ="sender")
+    @JsonIgnore
     private Set<FriendRequest> sentRequests;
 
     @OneToMany(mappedBy ="receiver")
+    @JsonIgnore
     private Set<FriendRequest> receivedRequests;
 
 

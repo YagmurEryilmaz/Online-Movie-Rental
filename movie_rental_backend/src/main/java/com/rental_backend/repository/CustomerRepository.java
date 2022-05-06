@@ -13,6 +13,9 @@ public interface CustomerRepository extends CrudRepository<Customer,Long> {
 
     List<Customer> findAll();
 
+
+    List<Customer> findByEmail(String email);
+
     @Query("select c from Customer c where c.uId= :userId")
     Customer findByUId(@Param("userId") Long id);
 

@@ -33,7 +33,6 @@ public class FriendRequest {
             this.receiver_id = receiver_id;
 
         }
-
     }
 
     @EmbeddedId

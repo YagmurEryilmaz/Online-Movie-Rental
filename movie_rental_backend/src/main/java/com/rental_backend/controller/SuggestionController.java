@@ -27,9 +27,9 @@ public class SuggestionController {
         this.suggestionService = suggestionService;
     }
 
-    @GetMapping("/getSuggestionsByReceiver")
-    public ResponseEntity<List<Suggestion>> getSuggestionsByReceiver(@PathVariable SuggestionDto suggestionDto){
-        return ResponseEntity.ok(suggestionService.findSuggestionByReceiverId(suggestionDto.getReceiverId()));
+    @GetMapping("/getSuggestionsByReceiver/{receiverId}")
+    public ResponseEntity<List<Suggestion>> getSuggestionsByReceiver(@PathVariable Long receiverId){
+        return ResponseEntity.ok(suggestionService.findSuggestionByReceiverId(receiverId));
     }
 
     @PostMapping("/addSuggestion")
@@ -37,9 +37,9 @@ public class SuggestionController {
         return new ResponseEntity<>(suggestionService.addSuggestion(s.getSenderId(), s.getReceiverId(), s.getMovieId()), HttpStatus.CREATED);
     }
 
-    @GetMapping("/getSuggestionsBySender")
-    public ResponseEntity<List<Suggestion>> getSuggestionsBySender(@PathVariable SuggestionDto suggestionDto){
-        return ResponseEntity.ok(suggestionService.findSuggestionBySenderId(suggestionDto.getSenderId()));
+    @GetMapping("/getSuggestionsBySender/{senderId}")
+    public ResponseEntity<List<Suggestion>> getSuggestionsBySender(@PathVariable Long senderId){
+        return ResponseEntity.ok(suggestionService.findSuggestionBySenderId(senderId));
     }
 
 

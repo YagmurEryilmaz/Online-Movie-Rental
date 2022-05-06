@@ -1,9 +1,7 @@
 package com.rental_backend.service;
 import com.rental_backend.entity.*;
 import com.rental_backend.repository.*;
-import org.hibernate.annotations.SQLInsert;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -11,10 +9,12 @@ import java.util.List;
 public class FriendRequestService {
 
     private FriendRequestRepository friendRequestRepository;
+    private CustomerService customerService;
 
     @Autowired
-    public FriendRequestService(FriendRequestRepository friendRequestRepository) {
+    public FriendRequestService(FriendRequestRepository friendRequestRepository, CustomerService customerService) {
         this.friendRequestRepository = friendRequestRepository;
+        this.customerService = customerService;
     }
     public List<FriendRequest> findByReceiverId(Long receiverId) {
         return friendRequestRepository.findbyReceiverId(receiverId);
@@ -22,7 +22,17 @@ public class FriendRequestService {
     public List<FriendRequest> findBySenderId(Long senderId) {
         return friendRequestRepository.findbySenderId(senderId);
     }
-    public FriendRequest addFriendRequest(FriendRequest fr) {
+    public FriendRequest addFriendRequest(Long senderId, Long receiverId) {
+
+        FriendRequest.PrimaryKey key = new FriendRequest.PrimaryKey(senderId, receiverId);
+
+        FriendRequest fr = FriendRequest.builder()
+                .primaryKey(key)
+                .receiver(customerService.findById(receiverId))
+                .sender(customerService.findById(senderId))
+                .friendReq_status("pending")
+                .build();
+
         return friendRequestRepository.save(fr);
     }
 
