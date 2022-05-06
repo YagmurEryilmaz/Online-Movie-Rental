@@ -73,6 +73,7 @@ public class Movie {
     private Set<Rate> rates;
 
     @OneToMany(mappedBy ="movie")
+    @JsonIgnore
     private Set<Gift> gifts;
 
     @OneToMany(mappedBy ="movie")
