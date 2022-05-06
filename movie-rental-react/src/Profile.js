@@ -31,9 +31,10 @@ const Profile = () => {
 
 
 	useEffect(() => {
-		axios.post("http://127.0.0.1:8080/api/v1/suggestion/addSuggestion",{mreceiver_id:1, msender_id:2, m_id:1}).then(
+		axios.post("http://127.0.0.1:8080/api/v1/suggestion/addSuggestion",{receiverId:1, senderId:2, movieId:1}).then(
 			(response) => {
 				setFriendSuggestions(response.data);
+				console.log("data");
 			}
 		).catch((err) => console.log(err.response))
 	},[])

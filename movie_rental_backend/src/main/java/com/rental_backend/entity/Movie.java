@@ -1,5 +1,6 @@
 package com.rental_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.SQLInsert;
@@ -75,6 +76,7 @@ public class Movie {
     private Set<Gift> gifts;
 
     @OneToMany(mappedBy ="movie")
+    @JsonIgnore
     private Set<Suggestion> suggestions;
 
     @OneToMany(mappedBy ="movie")

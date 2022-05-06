@@ -1,6 +1,7 @@
 package com.rental_backend.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import net.bytebuddy.implementation.bind.annotation.Super;
@@ -44,10 +45,13 @@ public class Customer extends UserAccount{
     @OneToMany(mappedBy ="receiver")
     private Set<FriendRequest> receivedRequests;
 
+
     @OneToMany(mappedBy ="suggestionSender")
+    @JsonIgnore
     private Set<Suggestion> sentSuggestions;
 
     @OneToMany(mappedBy ="suggestionReceiver")
+    @JsonIgnore
     private Set<Suggestion> receivedSuggestions;
 
     @OneToMany(mappedBy ="customer")
