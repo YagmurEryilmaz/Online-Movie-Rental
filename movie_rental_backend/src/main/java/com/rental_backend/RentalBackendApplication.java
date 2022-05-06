@@ -30,6 +30,8 @@ public class RentalBackendApplication {
   private MovieLangRepository movieLangRepository;
   @Autowired
   private MovieLangService movieLangService;
+  @Autowired
+  private PaymentRepository paymentRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(RentalBackendApplication.class, args);
@@ -79,14 +81,8 @@ public class RentalBackendApplication {
             customerRepository.save(new Customer(0000000002, "Yağmur Eryılmaz" ,"yağmur", new Date(106,01,01),"yagmurery12@gmail.com","customer"));
             customerRepository.save(new Customer(0000000003, "Elif Cenesiz" ,"elif", new Date(110,04,07),"elif@gmail.com","customer"));
             employeeRepository.save(new Employee(0000000004L, "Cenk Duran" ,"cenk", new Date(82,07,07),"cekoley@gmail.com","admin"));
+            paymentRepository.save(new Payment(1L, "credit card", "paid"));
 
-            //movieLangRepository.save(new MovieLang(2L,movies,"German"));
-            //movieLangRepository.save(new MovieLang(3L,movies,"Turkish"));
-            //movieLangRepository.save(new MovieLang(4L,movies,"French"));
-            //MovieLang movie = movieLangService.addLanguage(new MovieLang(1L, movies, "English"));
-            //movieLangRepository.save(movie);
-            //MovieLang movie2 = movieLangService.addLanguage(new MovieLang(2L,movies,"German"));
-            //movieLangRepository.save(movie2);
             //suggestionRepository.save(new Suggestion(1,2,1));
         };
     }

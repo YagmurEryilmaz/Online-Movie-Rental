@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @SuperBuilder
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor
 @Entity
 public class Payment {
