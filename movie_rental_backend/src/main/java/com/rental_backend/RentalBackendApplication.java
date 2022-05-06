@@ -48,7 +48,7 @@ public class RentalBackendApplication {
             HashSet<SubtitleRequest> subtitleRequests = new HashSet<>();
             HashSet<Movie> movies = new HashSet<>();
 
-            /*
+
             movies.add(movieRepository.findMovieById(21001L));
             movieLangs.add(movieLangRepository.save(new MovieLang(1L,movies,"German")));
             movies.add(movieRepository.findMovieById(21002L));
@@ -63,7 +63,7 @@ public class RentalBackendApplication {
             movieLangs.add(movieLangRepository.save(new MovieLang(4L,movies,"Turkish")));
             movies.add(movieRepository.findMovieById(21006L));
             movieLangs.add(movieLangRepository.save(new MovieLang(2L,movies,"English")));
-             */
+
             movieRepository.save(new Movie(21001L,"Into the Wild" ,"Adventure","Can Önal",2002, 49.9, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(122,05,31),movieLangs,subtitleLangs,rentedMovies,trailers,rates,gifts,suggestions,subtitleRequests));
             movieRepository.save(new Movie(21002L,"Up" ,"Animation","Yağmur Eryılmaz",2006, 35, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(121,05,31),movieLangs,subtitleLangs,rentedMovies,trailers,rates,gifts,suggestions,subtitleRequests));
             movieRepository.save(new Movie(21003L,"Pride and Prejudice" ,"Romantic","Elif Cenesiz",1999, 65.5, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(120,05,31),movieLangs,subtitleLangs,rentedMovies,trailers,rates,gifts,suggestions,subtitleRequests));
