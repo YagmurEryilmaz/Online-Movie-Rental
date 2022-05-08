@@ -1,10 +1,20 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import {Link} from 'react-router-dom'
 
 
 import "./Navbar.css";
+import axios from "axios";
 const Navbar = ({name, surname, accountType}) =>{
 	const [click, setClick] = useState(false)
+	const [numOfFriendRequests, setNumOfFriendRequests] = useState(0)
+
+	useEffect(() => {
+		axios.get("http://127.0.0.1:8080/api/v1/customer/getNumOfReceivedRequests").then((response)=>{
+			setNumOfFriendRequests(response.data)
+		}).catch((error)=>{console.log(error)})
+
+	}, []);
+
 	return (
 		<>
 			<nav className="navbar navbar-expand-lg tickflix-bg container d-flex">
@@ -18,8 +28,9 @@ const Navbar = ({name, surname, accountType}) =>{
 					</div>
 					<div className="col-lg-5 d-flex align-items-center">
 						<div className="ml-auto d-flex align-items-center">
-
-							<a href = "#" className="d-none d-lg-block message-logo"></a>
+							<a href = "#" className= "notification d-none d-lg-block message-logo hover-effect">
+								<span className="badge">{numOfFriendRequests}</span>
+							</a>
 							<a href = "#" className="d-none d-lg-block cart-logo mx-4"></a>
 							<a href="/profile" className= "d-none d-lg-block user-logo "></a>
 							<div className="d-none d-lg-block mx-4">
