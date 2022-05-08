@@ -2,6 +2,7 @@ package com.rental_backend.controller;
 
 import com.rental_backend.dto.MovieResponse;
 import com.rental_backend.entity.Movie;
+import com.rental_backend.exception.MovieNotFoundException;
 import com.rental_backend.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +41,10 @@ public class MovieController {
         return new ResponseEntity<>(movieService.addMovie(movie), HttpStatus.CREATED);
     }
 
-    @PostMapping("/deleteMovie")
-    public ResponseEntity<?> deleteMovie(@RequestBody MovieResponse movieResponse){
-        return new ResponseEntity<>(movieService.deleteMovie(movieResponse.getTitle(), movieResponse.getDirectorName()), HttpStatus.NO_CONTENT);
+    @DeleteMapping("/deleteMovie")
+    public ResponseEntity<?> deleteMovie(@PathVariable MovieResponse movieResponse) throws MovieNotFoundException {
+        movieService.deleteMovie(movieResponse.getTitle(), movieResponse.getDirectorName());
+        return new ResponseEntity<>( HttpStatus.NO_CONTENT);
     }
 
 

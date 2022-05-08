@@ -1,6 +1,7 @@
 package com.rental_backend.service;
 
 import com.rental_backend.entity.*;
+import com.rental_backend.exception.MovieNotFoundException;
 import com.rental_backend.repository.*;
 import org.hibernate.annotations.SQLInsert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,10 +49,14 @@ public class MovieService {
         return movieRepository.search(searchTerm);
     }
 
-    public List<Movie> deleteMovie(String title, String directorName) {
-        return movieRepository.deleteMovie(title, directorName);
+    public void deleteMovie(String title, String directorName) throws MovieNotFoundException {
+        if (movieRepository.existsByTitleAndDirectorName(title,directorName)) {
+            movieRepository.deleteMovie(title, directorName);
+        }
+        else {
+            throw new MovieNotFoundException("Movie with title " + title + " does not exist.");
+        }
     }
-
 
     public MovieRepository getMovieRepository() {
         return movieRepository;

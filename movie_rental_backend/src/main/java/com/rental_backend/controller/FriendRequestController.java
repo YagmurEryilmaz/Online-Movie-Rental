@@ -40,5 +40,11 @@ public class FriendRequestController {
         return new ResponseEntity<>(friendRequestService.addFriendRequest(fr.getSender_id(), fr.getReceiver_id()), HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/deleteFriendRequest")
+    public ResponseEntity<?> deleteFriendRequest(@PathVariable FriendRequestDto fr) {
+        friendRequestService.deleteFriendRequest(fr.getSender_id(),fr.getReceiver_id());
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }
 

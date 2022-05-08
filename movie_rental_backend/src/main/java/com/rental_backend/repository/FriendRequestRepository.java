@@ -2,6 +2,7 @@ package com.rental_backend.repository;
 
 import com.rental_backend.entity.Customer;
 import com.rental_backend.entity.FriendRequest;
+import com.rental_backend.entity.Movie;
 import com.rental_backend.entity.Suggestion;
 import org.hibernate.annotations.SQLInsert;
 import org.springframework.data.jpa.repository.Query;
@@ -33,5 +34,9 @@ public interface FriendRequestRepository extends CrudRepository<FriendRequest,Lo
 
     @Query("select count(fr.sender.sentRequests) from FriendRequest fr, Customer c where fr.sender.uId = c.uId and fr.sender.uId = :senderId")
     int findNumOfSentRequests(@Param("senderId") Long senderId);
+
+    @Query("delete from FriendRequest where sender.uId= :senderId and receiver.uId=:receiverId")
+    void deleteFriendRequest(@Param("senderId") Long senderId, @Param("receiverId") Long receiverId);
+
 
 }

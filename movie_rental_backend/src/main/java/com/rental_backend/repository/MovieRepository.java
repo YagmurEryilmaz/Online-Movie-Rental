@@ -20,6 +20,7 @@ public interface MovieRepository extends CrudRepository<Movie,Long>{
     List<Movie> findByTitle(String title);
     List <Movie> findByGenre(String genre);
     List <Movie> findByProductionYear(int productionYear);
+    boolean existsByTitleAndDirectorName(String title, String directorName);
     Movie findById(long mId);
 
     @Query("select m from Movie m where m.mId = :id")
@@ -33,7 +34,7 @@ public interface MovieRepository extends CrudRepository<Movie,Long>{
     @Transactional
     @Modifying
     @Query("delete from Movie where title= :title and directorName = :directorName")
-    List<Movie> deleteMovie(@Param("title") String title, @Param("directorName") String directorName);
+    void deleteMovie(@Param("title") String title, @Param("directorName") String directorName);
 
 
 
