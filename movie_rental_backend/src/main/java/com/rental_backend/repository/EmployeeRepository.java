@@ -15,6 +15,6 @@ public interface EmployeeRepository extends CrudRepository<Employee,Long> {
     List<Employee> findAll();
 
     @Query("select e.uId from Employee e where e.uId= :userId")
-    Employee findByUId(@Param("userId") Long id);
+    Employee findByUId(@Param("userId") Long userId);
 
 }

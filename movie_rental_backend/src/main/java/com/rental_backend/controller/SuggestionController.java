@@ -14,7 +14,6 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("api/v1/suggestion")
-
 @RequiredArgsConstructor
 
 public class SuggestionController {

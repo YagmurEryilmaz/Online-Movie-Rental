@@ -12,14 +12,18 @@ import java.util.List;
 public interface CustomerRepository extends CrudRepository<Customer,Long> {
 
     List<Customer> findAll();
-
+    boolean existsCustomerByEmail(String email);
+    boolean existsCustomerByuId(Long uId);
 
     List<Customer> findByEmail(String email);
 
     @Query("select c.uId from Customer c where c.uId= :userId")
-    Customer findByUId(@Param("userId") Long id);
+    Customer findByUId(@Param("userId") Long userId);
 
     @Query("delete from Customer c where c.email= :email")
-    void deleteUser(@Param("email") String email);
+    void deleteUserByEmail(@Param("email") String email);
+
+    @Query("delete from Customer c where c.uId= :uId")
+    void deleteUserByUId(@Param("uId") Long uId);
 
 }

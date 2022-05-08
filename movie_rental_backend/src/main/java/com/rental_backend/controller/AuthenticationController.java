@@ -39,7 +39,7 @@ public class AuthenticationController {
 
                     return UserResponse.builder()
                             .success(true)
-                            .id(user.getUId())
+                            .uId(user.getUId())
                             .email(user.getEmail())
                             .role(user.getRole())
                             .build();

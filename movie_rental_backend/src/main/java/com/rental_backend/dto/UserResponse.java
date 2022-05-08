@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Date;
 import java.util.List;
 
 @Setter
@@ -13,7 +14,13 @@ public class UserResponse {
 
     private boolean success;
 
-    private Long id;
+    private Long uId;
+
+    private String name;
+
+    private String password;
+
+    private Date birthday;
 
     private String email;
 

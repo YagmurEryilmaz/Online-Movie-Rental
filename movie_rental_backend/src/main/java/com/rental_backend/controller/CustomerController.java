@@ -1,5 +1,6 @@
 package com.rental_backend.controller;
 
+import com.rental_backend.dto.CustomerDto;
 import com.rental_backend.dto.FriendRequestDto;
 import com.rental_backend.dto.MovieResponse;
 import com.rental_backend.entity.Customer;
@@ -16,7 +17,6 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("api/v1/customer")
-
 @RequiredArgsConstructor
 
 public class CustomerController {
@@ -70,9 +70,15 @@ public class CustomerController {
         return customerService.getFriendCount(friendRequestDto.getReceiver_id(), friendRequestDto.getSender_id());
     }
 
-    @DeleteMapping("/deleteUser")
-    public ResponseEntity<?> deleteUser(@RequestBody Customer customer) {
-        customerService.deleteUser(customer);
+    @DeleteMapping("/deleteUserByEmail")
+    public ResponseEntity<?> deleteUserByEmail(@PathVariable CustomerDto customerDto) {
+        customerService.deleteUserByEmail(customerDto.getEmail());
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping("/deleteUserByUId")
+    public ResponseEntity<?> deleteUserByUId(@PathVariable CustomerDto customerDto) {
+        customerService.deleteUserByUId(customerDto.getUId());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

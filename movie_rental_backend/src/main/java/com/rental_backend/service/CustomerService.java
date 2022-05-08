@@ -35,17 +35,27 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public void deleteUser(Customer customer) {
-        customerRepository.deleteUser(customer.getEmail());
+    public void deleteUserByEmail(String email) {
+        if (customerRepository.existsCustomerByEmail(email)) {
+            customerRepository.deleteUserByEmail(email);
+        }
+        else {
+            throw new CustomerNotFoundException("Customer with email " + email + " does not exist.");
+        }
+
+    }
+    public void deleteUserByUId(Long uId) {
+        if (customerRepository.existsCustomerByuId(uId)) {
+            customerRepository.deleteUserByUId(uId);
+        }
+        else {
+            throw new CustomerNotFoundException("Customer with id " + uId + " does not exist.");
+        }
+
     }
 
     public List<Customer> findAll() {
         return customerRepository.findAll();
-    }
-
-    public Customer removeUser(Customer customer) {
-        customerRepository.deleteById(customer.getUId());
-        return customer;
     }
 
     public Customer findById(Long id) {

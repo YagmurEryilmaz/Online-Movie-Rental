@@ -17,13 +17,14 @@ public interface UserAccountRepository extends CrudRepository<UserAccount,Long> 
     List<UserAccount> findAll();
     UserAccount findUserAccountByEmail(String email);
     boolean existsUserAccountByEmail(String email);
+    boolean existsUserAccountByuId(Long uId);
 
 
     @Query("select u.uId from UserAccount u where u.uId= :userId")
     UserAccount findByUId(@Param("userId") Long id);
 
-    @Query("delete from UserAccount u where u.uId= :userId")
-    List<UserAccount> deleteAcc(@Param("userId") Long userId);
+    @Query("delete from UserAccount u where u.uId= :uId")
+    void deleteUserByUId(@Param("uId") Long uId);
 
 
 

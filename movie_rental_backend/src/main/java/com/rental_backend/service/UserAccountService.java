@@ -1,6 +1,7 @@
 package com.rental_backend.service;
 
 import com.rental_backend.entity.UserAccount;
+import com.rental_backend.exception.CustomerNotFoundException;
 import com.rental_backend.repository.UserAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
@@ -29,11 +30,25 @@ public class UserAccountService {
         return userAccountRepository.save(user);
     }
 
-    public UserAccount removeUser(UserAccount user) {
-        userAccountRepository.deleteById(user.getUId());
+    public UserAccount deleteAndReturnUser(UserAccount user) {
+        if (userAccountRepository.existsUserAccountByuId(user.getUId())) {
+            userAccountRepository.deleteUserByUId(user.getUId());
+        }
+        else {
+            throw new CustomerNotFoundException("Customer with id " + user.getUId() + " does not exist.");
+        }
         return user;
     }
 
+    public void deleteUserByUId(Long uId) {
+        if (userAccountRepository.existsUserAccountByuId(uId)) {
+            userAccountRepository.deleteUserByUId(uId);
+        }
+        else {
+            throw new CustomerNotFoundException("Customer with id " + uId + " does not exist.");
+        }
+
+    }
     public List<UserAccount> findAll() {
         return userAccountRepository.findAll();
     }

@@ -1,5 +1,7 @@
 package com.rental_backend.service;
 import com.rental_backend.entity.*;
+import com.rental_backend.exception.CustomerNotFoundException;
+import com.rental_backend.exception.MovieNotFoundException;
 import com.rental_backend.repository.*;
 import org.apache.catalina.User;
 import org.hibernate.annotations.SQLInsert;
@@ -27,9 +29,7 @@ public class EmployeeService {
     public List<Employee> getAllEmployee(){
         return employeeRepository.findAll();
     }
-    public List<UserAccount> deleteAccount(Long id, Long uId) {
-        return userAccountRepository.deleteAcc(uId);
-    }
+
     public EmployeeRepository getEmployeeRepository() {
         return employeeRepository;
     }
