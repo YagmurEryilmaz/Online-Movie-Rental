@@ -23,10 +23,10 @@ public interface MovieRepository extends CrudRepository<Movie,Long>{
     boolean existsByTitleAndDirectorName(String title, String directorName);
     Movie findById(long mId);
 
-    @Query("select m from Movie m where m.mId = :id")
+    @Query("select m.title from Movie m where m.mId = :id")
     Movie findMovieById(@Param("id") Long id);
 
-    @Query("select m from Movie m " +
+    @Query("select m.title from Movie m " +
             "where lower(m.title) like lower(concat('%', :searchTerm, '%')) " +
             "or lower(m.directorName) like lower(concat('%', :searchTerm, '%'))")
     List<Movie> search(@Param("searchTerm") String searchTerm);
