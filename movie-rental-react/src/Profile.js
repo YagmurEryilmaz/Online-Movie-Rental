@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import ChangeAvatarModal from "./ChangeAvatarModal";
 import EditProfileModal from "./EditProfileModal";
+import AddFriendModal from "./AddFriendModal";
 import defaultAvatar from "./img/avatars/default_avatar.png";
 import avatar1 from "./img/avatars/image_part_001.png";
 import avatar2 from "./img/avatars/image_part_002.png"
@@ -102,6 +103,9 @@ const Profile = () => {
 									<EditProfileModal mail = {mail} bio = {bio} changeMail = {setMail} changeBio = {setBio} />
 									
 							</div>
+							<div className="col-6 mt-5">
+								<button className = "btn btn-primary" data-bs-toggle = "modal" data-bs-target = "#addFriend">Add Friend</button>
+							</div>
 						</div>
 						<div className="col-6 overflow-auto">
 							<div className="row createMovieRequest mt-5 ms-2 ">
@@ -150,10 +154,11 @@ const Profile = () => {
 						</div>
 					</div>
 					<div className="row">
-
+					
 					</div>
 				</div>
 			</div>
+			<AddFriendModal/>
 		</div>
 	)
 

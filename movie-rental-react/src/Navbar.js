@@ -1,5 +1,8 @@
 import {useEffect, useState} from "react";
 import {Link} from 'react-router-dom'
+import Badge from '@mui/material/Badge';
+import MailIcon from '@mui/icons-material/Mail';
+import { IconButton } from "@mui/material";
 
 
 import "./Navbar.css";
@@ -20,17 +23,19 @@ const Navbar = ({name, surname, accountType}) =>{
 			<nav className="navbar navbar-expand-lg tickflix-bg container d-flex">
 
 				<div className="row navbar-content-area">
-					<div className="col-lg-7 col-md-12 d-flex offset-1 offset-md-0
-				justify-content-md-center justify-content-center align-items-center">
+					<div className="col-lg-7 col-md-12 d-flex offset-1 offset-md-0 justify-content-md-center justify-content-center align-items-center">
 						<a className="navbar-brand" href="/home"><div className="tickflix-logo"></div></a>
 						<span className="navbar-logo-text ml-md-4 ml-1">TickFlix</span>
 						<span className="navbar-name-text ml-lg-4 ml-3 px-2 d-none d-sm-inline">Online Movie Rental</span>
 					</div>
 					<div className="col-lg-5 d-flex align-items-center">
 						<div className="ml-auto d-flex align-items-center">
-							<a href = "#" className= "notification d-none d-lg-block message-logo hover-effect">
-								<span className="badge">{numOfFriendRequests}</span>
-							</a>
+							<IconButton size = "large">
+
+								<Badge badgeContent={numOfFriendRequests} color="primary">
+									<MailIcon fontSize = "inherit" style ={{color: 'white'}} />
+								</Badge>
+							</IconButton>
 							<a href = "#" className="d-none d-lg-block cart-logo mx-4"></a>
 							<a href="/profile" className= "d-none d-lg-block user-logo "></a>
 							<div className="d-none d-lg-block mx-4">
