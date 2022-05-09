@@ -14,6 +14,8 @@ import java.util.Set;
 @Entity
 
 public class Rate {
+
+    private int point;
     @Embeddable
     public static class PrimaryKey implements Serializable {
         @Column(nullable = false, updatable = false)
@@ -22,15 +24,11 @@ public class Rate {
         @Column(nullable = false, updatable = false)
         private long mId;
 
-        @Column(nullable = false, updatable = false)
-        private long reviewId;
-
         public PrimaryKey() {
         }
-        public PrimaryKey(Long u_id, Long m_id, Long review_id) {
+        public PrimaryKey(Long u_id, Long m_id) {
             this.uId = u_id;
             this.mId = m_id;
-            this.reviewId = review_id;
 
         }
     }
@@ -45,7 +43,4 @@ public class Rate {
     @JoinColumn(name = "mId", insertable = false, updatable = false)
     private Movie movie;
 
-    @OneToOne
-    @JoinColumn(name = "reviewId", insertable = false, updatable = false)
-    private Review review;
 }

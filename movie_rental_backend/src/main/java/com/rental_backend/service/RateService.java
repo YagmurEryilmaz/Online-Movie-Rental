@@ -31,32 +31,32 @@ public class RateService {
         return rateRepository.findRateById(id);
     }
 
-    public void rateMovie(Long m_id, Long u_id, String comment, Double points){
+
+    public void rateMovie(Long m_id, Long u_id, int points){
 
         if (!rentedMovieService.isRentedCurrently(u_id, m_id) && !rentedMovieService.isRentedPreviously(u_id, m_id))
             throw new RuntimeException("cannot rate");
         else{
 
-            Review review = Review.builder()
+            /*Review review = Review.builder()
                     .point(points)
-                    .comment(comment)
                     .build();
-            reviewService.save(review);
-            Rate.PrimaryKey key = new Rate.PrimaryKey(u_id, m_id, review.getReviewId());
+            reviewService.save(review);*/
+            Rate.PrimaryKey key = new Rate.PrimaryKey(u_id, m_id);
 
             Rate rate = Rate.builder()
                     .pk(key)
+                    .point(points)
                     .movie(movieService.findMovieById(m_id))
                     .customer(customerService.findById(u_id))
-                    .review(review)
                     .build();
 
             rateRepository.save(rate);
         }
     }
 
-    public float getAverageRate(Long movieId){
-        return rateRepository.findAvgRatePerMovie(movieId);
+    public float getAveragePoint(Long movieId){
+        return rateRepository.findAvgPointPerMovie(movieId);
     }
 
     public List<Rate> getRatesByMovie(Long movieId){

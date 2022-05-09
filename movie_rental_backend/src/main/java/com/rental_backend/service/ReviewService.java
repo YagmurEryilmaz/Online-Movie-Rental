@@ -21,7 +21,13 @@ public class ReviewService {
     public Review save(Review review){
         return reviewRepository.save(review);
     }
-    public Review addComment(long reviewId, double point, String comment) {
+
+    /*public Review addReview(long reviewId, double point, String comment) {
         return reviewRepository.save(new Review(reviewId,point,comment));
+    }*/
+
+    public Review addOnlyPoints(Long reviewId, double point) {
+        return reviewRepository.save(new Review(reviewId,point));
     }
+
 }

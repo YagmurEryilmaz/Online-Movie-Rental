@@ -20,11 +20,9 @@ public class Review {
 
     private double point;
 
-    private String comment;
-
-    public Review(long reviewId, double point, String comment) {
+    public Review(long reviewId, double point) {
         this.reviewId = reviewId;
         this.point = point;
-        this.comment = comment;
+
     }
 }

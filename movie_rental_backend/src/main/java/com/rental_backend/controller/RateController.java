@@ -22,11 +22,11 @@ public class RateController {
 
     private final RateService rateService;
 
-    @PostMapping
+    @PostMapping("/rateMovie")
     public ResponseEntity rateMovie(@RequestBody RateRequest request){
 
         try{
-            rateService.rateMovie(request.getMovie(), request.getCustomer(), request.getComment(), request.getPoints());
+            rateService.rateMovie(request.getMovie(), request.getCustomer(), request.getPoint());
             return ResponseEntity.ok(new MessageResponse("rate"));
         }
         catch (RuntimeException r){
@@ -43,9 +43,9 @@ public class RateController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/getAverage/{movieId}")
-    public ResponseEntity<?> getAverageRate(@PathVariable Long movieId){
-        return ResponseEntity.ok(rateService.getAverageRate(movieId));
+    @GetMapping("/getAveragePoint")
+    public ResponseEntity<?> getAveragePoint(@PathVariable Long movieId){
+        return ResponseEntity.ok(rateService.getAveragePoint(movieId));
     }
 
 

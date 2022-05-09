@@ -9,15 +9,13 @@ import lombok.Setter;
 public class RateResponse {
 
     private String customerName;
-    private String comment;
-    private Double points;
+    private int points;
 
 
-    public RateResponse (Rate rate)
+    public RateResponse(Rate rate)
     {
         this.customerName = rate.getCustomer().getName();
-        this.comment = rate.getReview().getComment();
-        this.points = rate.getReview().getPoint();
+        this.points = rate.getPoint();
 
     }
 
