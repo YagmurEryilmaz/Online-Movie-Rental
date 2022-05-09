@@ -35,7 +35,7 @@ public class RateService {
     public void rateMovie(Long m_id, Long u_id, int points){
 
         if (!rentedMovieService.isRentedCurrently(u_id, m_id) && !rentedMovieService.isRentedPreviously(u_id, m_id))
-            throw new RuntimeException("cannot rate");
+           throw new RuntimeException("cannot rate");
         else{
 
             /*Review review = Review.builder()

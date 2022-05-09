@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {Link} from 'react-router-dom'
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
+import NotificationModal from "./NotificationModal";
 import { IconButton } from "@mui/material";
 
 
@@ -30,12 +31,15 @@ const Navbar = ({name, surname, accountType}) =>{
 					</div>
 					<div className="col-lg-5 d-flex align-items-center">
 						<div className="ml-auto d-flex align-items-center">
+							<a href="#notifications" data-bs-toggle = "modal">
+
 							<IconButton size = "large">
 
 								<Badge badgeContent={numOfFriendRequests} color="primary">
 									<MailIcon fontSize = "inherit" style ={{color: 'white'}} />
 								</Badge>
 							</IconButton>
+							</a>
 							<a href = "#" className="d-none d-lg-block cart-logo mx-4"></a>
 							<a href="/profile" className= "d-none d-lg-block user-logo "></a>
 							<div className="d-none d-lg-block mx-4">
@@ -84,6 +88,7 @@ const Navbar = ({name, surname, accountType}) =>{
 					</div>
 				}
 			</nav>
+			<NotificationModal/>
 		</>
 	)
 }

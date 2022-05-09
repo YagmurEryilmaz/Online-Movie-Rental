@@ -17,7 +17,7 @@ public interface CustomerRepository extends CrudRepository<Customer,Long> {
 
     List<Customer> findByEmail(String email);
 
-    @Query("select c.uId from Customer c where c.uId= :userId")
+    @Query("select c from Customer c where c.uId= :userId")
     Customer findByUId(@Param("userId") Long userId);
 
     @Query("delete from Customer c where c.email= :email")

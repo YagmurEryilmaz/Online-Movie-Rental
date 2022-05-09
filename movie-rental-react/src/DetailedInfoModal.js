@@ -32,8 +32,17 @@ const DetailedInfoModal = (props) =>{
 	}
 
 	const handleRate = () => {
-		window.alert("Rating Submitted");
-		console.log(rating)
+		var ratePost = {
+			movie: mov.mid,
+			customer: 1,
+			point: rating
+		}
+		axios.post("http://127.0.0.1:8080/api/v1/rate/rateMovie",ratePost).then(
+			() =>{
+				window.alert("Rating Submitted")
+			}
+		).catch((err) => {console.log(err.response)})
+
 	}
 
 	return(
@@ -144,7 +153,7 @@ const DetailedInfoModal = (props) =>{
 								</div>
 									<div class="modal-body d-flex justify-content-center">
 										<iframe width="720" height="315"
-											src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1&mute=1">
+											src="https://www.youtube.com/embed/tgbNymZ7vqY">
 
 										</iframe>
 
