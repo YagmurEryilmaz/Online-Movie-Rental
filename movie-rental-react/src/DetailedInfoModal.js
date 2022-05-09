@@ -80,7 +80,9 @@ const DetailedInfoModal = (props) =>{
 											<p class="card-text"><span className="fw-bold">Subtitle Languages:</span></p>
 											<ul>
 												{mov.subtitleLang.map((subt)=>{
-													<li>{subt}</li>
+													return(
+													<li>{subt.s_lang}</li>
+													)
 												})}
 											</ul>
 											</div>

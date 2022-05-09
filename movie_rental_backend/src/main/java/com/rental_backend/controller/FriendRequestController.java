@@ -37,7 +37,7 @@ public class FriendRequestController {
 
     @PostMapping("/createFriendRequest")
     public ResponseEntity<FriendRequest> createFriendRequest(@RequestBody FriendRequestDto fr) {
-        return new ResponseEntity<>(friendRequestService.addFriendRequest(fr.getSender_id(), fr.getReceiver_id()), HttpStatus.CREATED);
+        return new ResponseEntity<>(friendRequestService.addFriendRequest(fr.getSender_email(), fr.getReceiver_email()), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/deleteFriendRequest")

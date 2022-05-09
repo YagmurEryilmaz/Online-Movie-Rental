@@ -65,6 +65,9 @@ public class CustomerService {
         return customerRepository.findByUId(id);
     }
 
+    public Customer findByEmail(String email) {
+        return customerRepository.findByEmail(email);
+    }
     public Customer addRented(Long c_id, RentedMovie rm){
         Customer customer = customerRepository.findByUId(c_id);
         customer.addRentedMovie(rm);

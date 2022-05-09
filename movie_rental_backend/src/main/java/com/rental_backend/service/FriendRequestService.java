@@ -23,14 +23,17 @@ public class FriendRequestService {
     public List<FriendRequest> findBySenderId(Long senderId) {
         return friendRequestRepository.findbySenderId(senderId);
     }
-    public FriendRequest addFriendRequest(Long senderId, Long receiverId) {
+    public FriendRequest addFriendRequest(String senderEmail, String receiverEmail) {
 
-        FriendRequest.PrimaryKey key = new FriendRequest.PrimaryKey(senderId, receiverId);
+        Customer sender = customerService.findByEmail(senderEmail);
+        Customer receiver = customerService.findByEmail(receiverEmail);
+
+        FriendRequest.PrimaryKey key = new FriendRequest.PrimaryKey(sender.getUId(), receiver.getUId());
 
         FriendRequest fr = FriendRequest.builder()
                 .primaryKey(key)
-                .receiver(customerService.findById(receiverId))
-                .sender(customerService.findById(senderId))
+                .receiver(receiver)
+                .sender(sender)
                 .friendReq_status("pending")
                 .build();
 

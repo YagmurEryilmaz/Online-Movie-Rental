@@ -15,10 +15,11 @@ public interface CustomerRepository extends CrudRepository<Customer,Long> {
     boolean existsCustomerByEmail(String email);
     boolean existsCustomerByuId(Long uId);
 
-    List<Customer> findByEmail(String email);
-
     @Query("select c from Customer c where c.uId= :userId")
     Customer findByUId(@Param("userId") Long userId);
+
+    @Query("select c from Customer c where c.email= :email")
+    Customer findByEmail(@Param("email") String email);
 
     @Query("delete from Customer c where c.email= :email")
     void deleteUserByEmail(@Param("email") String email);
