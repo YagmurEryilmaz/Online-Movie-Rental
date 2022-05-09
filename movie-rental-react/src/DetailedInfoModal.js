@@ -1,11 +1,28 @@
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import { ReactDOM } from "react";
+import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+
+
 const DetailedInfoModal = (props) =>{
 
 	const [mov,setMov] = useState(props.movie);
+	const [rating, setRating] = useState(2);
+	const [isRated,setIsRated] = useState(false);
+	const subtitles = ["French", "Turkish", "German", "Arabic", "Dutch","Spanish", "Chinese"]
+	const [reqSubtitle, setReqSubtitle] = useState(subtitles[0])
+	const [inputValue, setInputValue] = useState('');
 
-	
+	const handleRate = () => {
+		window.alert("Rating Submitted");
+		console.log(rating)
+	}
 
 	return(
 		<div class="modal fade" id= {`detailedInfoModal${props.movie.mid}`} tabindex="-1">
@@ -50,13 +67,47 @@ const DetailedInfoModal = (props) =>{
 									</div>
 								
 							</div>
-							<div className="col-4">
-								<div className="container">
-									<p ><span className="fw-bold">Rating</span></p>
+							<div className="col-4 ">
+								<div className="container mb-3">
+									<Typography component="legend">Rating</Typography>
+									{!isRated ? <Rating
+										name="simple-controlled"
+										value={rating}
+										onChange={(event, newValue) => {
+											setRating(newValue);
+											setIsRated(true);
+											handleRate();
+										}}
+									/> : <Rating
+										name="read-only"
+										value={rating}
+											readOnly />}
+									
+									
 
-								
 								</div>
-								<div className="btn btn-primary">Add To Cart</div>
+								<div className="col-8 mb-3 btn btn-primary">Add To Cart</div>
+								<button data-bs-target="#exampleModal" className="col-8 mb-3  btn btn-primary" data-bs-toggle = "modal" type= "button">Watch Trailer</button>
+									
+
+									<Autocomplete 
+										value={reqSubtitle}
+										onChange={(event, newValue) => {
+											setReqSubtitle(newValue);
+										}}
+										inputValue={inputValue}
+										onInputChange={(event, newInputValue) => {
+											setInputValue(newInputValue);
+										}}
+										id="controllable-states-demo"
+										options={subtitles}
+										sx={{width: 170}}
+										renderInput={(params) => <TextField {...params} label="Subtitle Request" />}
+									/>
+									<Button variant="contained" endIcon={<SendIcon />}>
+										Send
+									</Button>
+
 
 							</div>
 						</div>
