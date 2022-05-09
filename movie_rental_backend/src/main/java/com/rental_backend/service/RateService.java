@@ -13,17 +13,15 @@ public class RateService {
     private final RateRepository rateRepository;
     private final MovieService movieService;
     private final CustomerService customerService;
-    private final ReviewService reviewService;
     private final RentedMovieService rentedMovieService;
 
     @Autowired
     public RateService(RateRepository rateRepository, MovieService movieService,
-                       CustomerService customerService, ReviewService reviewService, RentedMovieService rentedMovieService) {
+                       CustomerService customerService, RentedMovieService rentedMovieService) {
 
         this.rateRepository = rateRepository;
         this.movieService = movieService;
         this.customerService = customerService;
-        this.reviewService = reviewService;
         this.rentedMovieService = rentedMovieService;
     }
 
@@ -38,10 +36,6 @@ public class RateService {
            throw new RuntimeException("cannot rate");
         else{
 
-            /*Review review = Review.builder()
-                    .point(points)
-                    .build();
-            reviewService.save(review);*/
             Rate.PrimaryKey key = new Rate.PrimaryKey(u_id, m_id);
 
             Rate rate = Rate.builder()
