@@ -35,7 +35,7 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.findAll());
     }
     @GetMapping("/getAllCustomerEmails")
-    public ResponseEntity<List<Customer>> getAllCustomerEmails() {
+    public ResponseEntity<List<String>> getAllCustomerEmails() {
         return ResponseEntity.ok(customerService.findAllEmails());
     }
 

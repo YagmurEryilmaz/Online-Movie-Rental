@@ -1,14 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import axios from "axios";
 
+
 const AddFriendModal = () => {
 	const [value, setValue] = useState("");
-	const friends = ["jcanonal@gmail.com", "canonalbjk@gmail.com", "cekoley@gmail.com", "yagmurery123@hotmail.com", "elifcen@gmail.com"]
+	const [friends,setFriends] = useState([]);
 	const handleClick= () =>{
 		window.alert("Request Submitted");
 	}
+	useEffect(()=>{
+		axios.get("http://127.0.0.1:8080/api/v1/customer/getAllCustomerEmails").then(
+			(response) => {
+				setFriends(response.data)
+			}
+		).catch((err)=>{console.log(err)});
+	},[])
 	return(
 		<div class="modal fade" id="addFriend" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">

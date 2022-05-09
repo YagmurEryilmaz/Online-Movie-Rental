@@ -57,7 +57,7 @@ public class CustomerService {
     public List<Customer> findAll() {
         return customerRepository.findAll();
     }
-    public List<Customer> findAllEmails() {
+    public List<String> findAllEmails() {
         return customerRepository.findAllEmails();
     }
 

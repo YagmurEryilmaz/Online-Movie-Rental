@@ -22,11 +22,11 @@ const DetailedInfoModal = (props) =>{
 
 	const handleClick = ()=>{
 		var subt = {
-			c_id: 1,
-			m_id: mov.mid,
+
+			movieName: mov.title,
 			requestedSubLang: reqSubtitle
 		}
-		axios.post("http://127.0.0.1/api/v1/subtitleRequest/addSubtitleRequest",subt ).then(
+		axios.post("http://127.0.0.1:8080/api/v1/subtitleRequest/addSubtitleRequest",subt ).then(
 			window.alert("Request Submitted")
 		).catch((err) => console.log(err))
 	}
