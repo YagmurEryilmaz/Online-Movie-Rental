@@ -80,8 +80,8 @@ public class Movie {
     @JsonIgnore
     private Set<Suggestion> suggestions;
 
-    @OneToMany(mappedBy ="movie")
-    private Set<SubtitleRequest> requestedSubtitles;
+   /* @OneToMany(mappedBy ="movie")
+    private Set<SubtitleRequest> requestedSubtitles;*/
 
     public void addSubtitle(SubtitleLang subtitle)
     {

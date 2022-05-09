@@ -35,6 +35,7 @@ public class FriendRequestService {
 
         return friendRequestRepository.save(fr);
     }
+
     public void deleteFriendRequest(Long senderId, Long receiverId) {
         friendRequestRepository.deleteFriendRequest(senderId, receiverId);
     }

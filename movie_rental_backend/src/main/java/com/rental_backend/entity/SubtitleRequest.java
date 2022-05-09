@@ -1,9 +1,7 @@
 package com.rental_backend.entity;
 
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
@@ -12,52 +10,21 @@ import java.io.Serializable;
 @Getter
 @Setter
 @SuperBuilder
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor
 @Entity
+
 public class SubtitleRequest {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    private Long subtitleReqId;
 
+    private String movieName;
 
-    @Embeddable
-    public static class PrimaryKey implements Serializable {
-        @Column(nullable = false, updatable = false)
-        private long c_id;
+    private String requestedSubLang;
 
-        @Column(nullable = false, updatable = false)
-        private long m_id;
-
-        @Column(nullable = false, updatable = false)
-        private long s_id;
-
-        public PrimaryKey() {}
-
-        public PrimaryKey(Long c_id, Long m_id, Long s_id) {
-
-            this.c_id = c_id;
-            this.m_id= m_id;
-            this.s_id =s_id;
-
-        }
-
-    }
-
-    @EmbeddedId
-    private Suggestion.PrimaryKey id;
-
-    @ManyToOne
-    @JoinColumn(name = "c", insertable = false, updatable = false)
+    @ManyToOne (fetch= FetchType.EAGER)
     private Customer customer;
-
-    @ManyToOne
-    @JoinColumn(name = "m_id", insertable = false, updatable = false)
-    private Movie movie;
-
-    @ManyToOne
-    @JoinColumn(name = "s_id", insertable = false, updatable = false)
-    private SubtitleLang subtitle;
-
-
-
-
 
 
 }

@@ -57,6 +57,9 @@ public class CustomerService {
     public List<Customer> findAll() {
         return customerRepository.findAll();
     }
+    public List<Customer> findAllEmails() {
+        return customerRepository.findAllEmails();
+    }
 
     public Customer findById(Long id) {
         return customerRepository.findByUId(id);

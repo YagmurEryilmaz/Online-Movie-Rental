@@ -22,8 +22,8 @@ public class SubtitleLang {
     private Set<Movie> movie;
     private String s_lang;
 
-    @OneToMany(mappedBy ="subtitle")
-    private Set<SubtitleRequest> requests;
+    /*@OneToMany(mappedBy ="subtitle")
+    private Set<SubtitleRequest> requests;*/
 
 }
 

@@ -16,6 +16,8 @@ import java.util.List;
 
 public class FriendRequest {
 
+    private String friendReq_status;
+
     @Embeddable
     public static class PrimaryKey implements Serializable {
         @Column(nullable = false, updatable = false)
@@ -47,6 +49,6 @@ public class FriendRequest {
     @ManyToOne(fetch= FetchType.EAGER)
     private Customer sender;
 
-    private String friendReq_status;
+
 
 }

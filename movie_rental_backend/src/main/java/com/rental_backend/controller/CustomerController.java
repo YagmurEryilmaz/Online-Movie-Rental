@@ -30,9 +30,13 @@ public class CustomerController {
         this.movieService = movieService;
     }
 
-    @GetMapping("/getAllMovies")
+    @GetMapping("/getAllCustomers")
     public ResponseEntity<List<Customer>> getAllCustomers() {
         return ResponseEntity.ok(customerService.findAll());
+    }
+    @GetMapping("/getAllCustomerEmails")
+    public ResponseEntity<List<Customer>> getAllCustomerEmails() {
+        return ResponseEntity.ok(customerService.findAllEmails());
     }
 
     @PostMapping("/searchMoviesByTitle")
