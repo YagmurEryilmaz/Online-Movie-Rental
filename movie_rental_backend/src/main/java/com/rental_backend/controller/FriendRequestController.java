@@ -1,5 +1,6 @@
 package com.rental_backend.controller;
  import com.rental_backend.dto.FriendRequestDto;
+ import com.rental_backend.dto.MessageResponse;
  import com.rental_backend.entity.FriendRequest;
  import com.rental_backend.entity.Suggestion;
  import com.rental_backend.service.CustomerService;
@@ -40,11 +41,21 @@ public class FriendRequestController {
         return new ResponseEntity<>(friendRequestService.addFriendRequest(fr.getSender_email(), fr.getReceiver_email()), HttpStatus.CREATED);
     }
 
+    public ResponseEntity<?> acceptRequest(@RequestBody FriendRequestDto fr){
+        friendRequestService.acceptRequest(fr.getSender_email(), fr.getReceiver_id());
+        return ResponseEntity.ok(new MessageResponse("request accepted"));
+    }
+
+    public ResponseEntity<?> rejectRequest(@RequestBody FriendRequestDto fr){
+        friendRequestService.rejectRequest(fr.getSender_email(), fr.getReceiver_id());
+        return ResponseEntity.ok(new MessageResponse("request accepted"));
+    }
     @DeleteMapping("/deleteFriendRequest")
     public ResponseEntity<?> deleteFriendRequest(@PathVariable FriendRequestDto fr) {
         friendRequestService.deleteFriendRequest(fr.getSender_id(),fr.getReceiver_id());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 
 }
 

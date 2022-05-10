@@ -40,16 +40,20 @@ public class FriendRequestService {
         return friendRequestRepository.save(fr);
     }
 
-    public void acceptRequest(Long senderId, Long receiverId)
+    public void acceptRequest(String senderEmail, Long receiverId)
     {
-        FriendRequest request = friendRequestRepository.findRequest(senderId,receiverId);
+        Customer sender = customerService.findByEmail(senderEmail);
+
+        FriendRequest request = friendRequestRepository.findRequest(receiverId,sender.getUId());
         request.setFriendReq_status("accepted");
         friendRequestRepository.save(request);
     }
 
-    public void rejectRequest(Long senderId, Long receiverId)
+    public void rejectRequest(String senderEmail, Long receiverId)
     {
-        FriendRequest request = friendRequestRepository.findRequest(senderId,receiverId);
+        Customer sender = customerService.findByEmail(senderEmail);
+
+        FriendRequest request = friendRequestRepository.findRequest(receiverId,sender.getUId());
         request.setFriendReq_status("rejected");
         friendRequestRepository.save(request);
     }
