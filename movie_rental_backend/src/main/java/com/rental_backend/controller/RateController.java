@@ -35,7 +35,7 @@ public class RateController {
 
     }
 
-    @GetMapping("/{movieId}")
+    @GetMapping("/getRatesByMovie")
     public ResponseEntity<List<RateResponse>> getRatesByMovie(@PathVariable Long movieId){
 
         List <RateResponse> response = new ArrayList<>();
@@ -43,8 +43,8 @@ public class RateController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/getAveragePoint")
-    public ResponseEntity<?> getAveragePoint(@PathVariable Long movieId){
+    @GetMapping("/getAveragePoint/{movieId}")
+    public ResponseEntity<?> getAveragePoint(@PathVariable("movieId") Long movieId){
         return ResponseEntity.ok(rateService.getAveragePoint(movieId));
     }
 

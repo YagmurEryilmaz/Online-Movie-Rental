@@ -13,12 +13,23 @@ import WatchTrailerModal from "./WatchTrailerModal";
 
 const DetailedInfoModal = (props) =>{
 
+	
 	const [mov,setMov] = useState(props.movie);
-	const [rating, setRating] = useState(2);
+	const [rating, setRating] = useState();
+	const [ratingAvg, setRatingAvg] = useState();
 	const [isRated,setIsRated] = useState(false);
 	const subtitles = ["French", "Turkish", "German", "Arabic", "Dutch","Spanish", "Chinese"]
 	const [reqSubtitle, setReqSubtitle] = useState(subtitles[0])
 	const [inputValue, setInputValue] = useState('');
+	useEffect(() => {
+		var movieId = mov.mid;
+		axios.get(`http://127.0.0.1:8080/api/v1/rate/getAveragePoint/${movieId}`).then(
+			(response) => {
+				setRatingAvg(response.data);
+				console.log(response.data)
+			}
+			).catch((err)=>{console.log(err.response)})
+		},[isRated])
 
 	const handleClick = ()=>{
 		var subt = {
@@ -32,16 +43,20 @@ const DetailedInfoModal = (props) =>{
 	}
 
 	const handleRate = () => {
+		
 		var ratePost = {
 			movie: mov.mid,
 			customer: 1,
 			point: rating
 		}
 		axios.post("http://127.0.0.1:8080/api/v1/rate/rateMovie",ratePost).then(
-			() =>{
-				window.alert("Rating Submitted")
+			(response) =>{
+				if(response.data == "rate"){
+					window.alert("Rating Submitted")
+
+				}
 			}
-		).catch((err) => {console.log(err.response)})
+		).catch((err) => {window.alert((err.response.data.message))})
 
 	}
 
@@ -94,13 +109,16 @@ const DetailedInfoModal = (props) =>{
 							<div className="col-4 ">
 								<div className="container mb-3">
 									<Typography component="legend">Rating</Typography>
+									<h3><span className ="fs-4 fw-light">{ratingAvg}</span><span className = "fs-4 fw-light">/5</span></h3>
 									{!isRated ? <Rating
 										name="simple-controlled"
-										value={rating}
+										value={ratingAvg}
 										onChange={(event, newValue) => {
-											setRating(newValue);
-											setIsRated(true);
-											handleRate();
+											var val = newValue;
+											setRating(val);
+
+											
+
 										}}
 									/> : <Rating
 										name="read-only"
@@ -141,7 +159,9 @@ const DetailedInfoModal = (props) =>{
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
+							<button type="button" onClick={() => {
+								setIsRated(true);
+								handleRate()}}class="btn btn-primary">Save changes</button>
 					</div>
 				</div>
 			</div>
