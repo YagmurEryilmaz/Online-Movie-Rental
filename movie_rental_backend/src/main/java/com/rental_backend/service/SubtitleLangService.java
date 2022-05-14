@@ -6,14 +6,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class SubtitleLangService {
 
     private SubtitleLangRepository subtitleLangRepository;
+    private MovieService movieService;
 
     @Autowired
-    public SubtitleLangService(SubtitleLangRepository subtitleLangRepository) {
+    public SubtitleLangService(SubtitleLangRepository subtitleLangRepository, MovieService movieService) {
         this.subtitleLangRepository = subtitleLangRepository;
+        this.movieService = movieService;
     }
+
+    public SubtitleLang findById(Long id){
+        return subtitleLangRepository.findSubtitleLangById(id);
+    }
+
+    public Set<SubtitleLang> getSubtitleLang (Long movieId){
+       return movieService.findMovieById(movieId).getSubtitleLang();
+    }
+
+    //public Movie addSubtitle (Long movieId, )
+
+
 }
