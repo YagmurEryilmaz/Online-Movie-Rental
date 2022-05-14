@@ -1,11 +1,8 @@
 package com.rental_backend.service;
 import com.rental_backend.entity.*;
 import com.rental_backend.repository.*;
-import org.hibernate.annotations.SQLInsert;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -16,8 +13,9 @@ public class MovieRequestService {
     private CustomerRepository customerRepository;
 
     @Autowired
-    public MovieRequestService(MovieRequestRepository movieRequestRepository) {
+    public MovieRequestService(MovieRequestRepository movieRequestRepository, CustomerRepository customerRepository) {
         this.movieRequestRepository = movieRequestRepository;
+        this.customerRepository = customerRepository;
     }
     public List<MovieRequest> getAllMovieRequests(){
         return movieRequestRepository.findAll();
