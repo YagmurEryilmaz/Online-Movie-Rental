@@ -9,6 +9,7 @@ import Rent from './Rent';
 import stateProto from './redux/state';
 import {connect} from "react-redux"
 import {BrowserRouter, Router, Route, Routes, Switch, Navigate, useHis} from 'react-router-dom';
+import {Logout} from "@mui/icons-material";
 
 function App({loggedIn}) {
   return (
@@ -19,6 +20,7 @@ function App({loggedIn}) {
         <Route exact path = '/home' element = {!loggedIn ? <Navigate to ="/"/> : <Home/>}></Route>
         <Route exact path = '/profile' element = {!loggedIn ? <Navigate to ="/"/> : <Profile/>}></Route>
         <Route exact path = '/rent' element = {!loggedIn ? <Navigate to ="/"/> : <Rent/>}></Route>
+
       </Routes>
     </BrowserRouter>
     
