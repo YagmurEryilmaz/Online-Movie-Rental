@@ -18,6 +18,7 @@ public class Trailer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long trailerId;
+    private String trailerUrl;
 
     @ManyToOne( fetch = FetchType.EAGER)
     @PrimaryKeyJoinColumn(name = "trailer", referencedColumnName = "mId")

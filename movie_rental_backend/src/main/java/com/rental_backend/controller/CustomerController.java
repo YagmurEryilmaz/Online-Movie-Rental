@@ -74,6 +74,12 @@ public class CustomerController {
         return customerService.getFriendCount(friendRequestDto.getReceiver_id(), friendRequestDto.getSender_id());
     }
 
+    @PatchMapping("/updateUserInfoByUId/{uId}/{email}")
+    public ResponseEntity<?> updateUserInfoByUId(@PathVariable Long uId, @PathVariable String email) {
+        customerService.updateUserByUId(uId, email);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
     @DeleteMapping("/deleteUserByEmail")
     public ResponseEntity<?> deleteUserByEmail(@PathVariable CustomerDto customerDto) {
         customerService.deleteUserByEmail(customerDto.getEmail());
