@@ -2,18 +2,44 @@ import { useState, useEffect } from "react";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import axios from "axios";
+import {connect} from "react-redux";
 
 
-const AddFriendModal = () => {
+const AddFriendModal = ({uid, mail}) => {
 	const [value, setValue] = useState("");
 	const [friends,setFriends] = useState([]);
+	const [customers, setCustomers] = useState([]);
 	const handleClick= () =>{
-		window.alert("Request Submitted");
-	}
+		if(value.length>0){
+			var receiver = customers.find(c =>{return  c.email === value});
+			var id = receiver.uid
+			var friendInfo = {
+				sender_id : uid,
+				sender_email: mail,
+				receiver_email : value,
+				receiver_id: id
+
+				
+			}
+			console.log(friendInfo);
+			axios.post("http://127.0.0.1:8080/api/v1/friendRequest/createFriendRequest",friendInfo).then(
+				(response) => {
+					if(response)
+					{
+						window.alert("Request Submitted")
+					}
+				}
+			
+			).catch((err) => {console.log(err)})
+			
+			}
+}
 	useEffect(()=>{
-		axios.get("http://127.0.0.1:8080/api/v1/customer/getAllCustomerEmails").then(
+		axios.get("http://127.0.0.1:8080/api/v1/customer/getAllCustomers").then(
 			(response) => {
-				setFriends(response.data)
+				setCustomers(response.data);
+				var emails = response.data.map((customer)=> customer.email);
+				setFriends(emails)
 			}
 		).catch((err)=>{console.log(err)});
 	},[])
@@ -49,4 +75,10 @@ const AddFriendModal = () => {
 		</div>
 	)
 }
-export default AddFriendModal;
+const mapStateToProps = (state) => {
+	return {
+		uid: state.uid,
+		mail: state.email
+	}
+}
+export default connect(mapStateToProps)(AddFriendModal);

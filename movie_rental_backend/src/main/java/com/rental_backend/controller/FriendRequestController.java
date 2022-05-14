@@ -27,18 +27,22 @@ public class FriendRequestController {
         this.friendRequestService = friendRequestService;
     }
 
-    @GetMapping("/getFriendRequestsByReceiver")
-    public ResponseEntity<List<FriendRequest>> getRequestsByReceiver(@RequestBody FriendRequestDto friendRequestDto){
-        return ResponseEntity.ok(friendRequestService.findByReceiverId(friendRequestDto.getReceiver_id()));
+    @GetMapping("/getFriendRequestsByReceiver/{receiver_id}")
+
+    public ResponseEntity<List<FriendRequest>> getRequestsByReceiver(@PathVariable("receiver_id") Long receiver_id){
+        return ResponseEntity.ok(friendRequestService.findByReceiverId(receiver_id));
     }
 
-    @GetMapping("/getFriendRequestsBySender")
-    public ResponseEntity<List<FriendRequest>> getRequestsBySender(@RequestBody FriendRequestDto friendRequestDto){
-        return ResponseEntity.ok(friendRequestService.findBySenderId(friendRequestDto.getSender_id()));
+    @GetMapping("/getFriendRequestsBySender/{sender_id}")
+    public ResponseEntity<List<FriendRequest>> getRequestsBySender(@PathVariable("sender_id") Long sender_id) {
+        return ResponseEntity.ok(friendRequestService.findBySenderId(sender_id));
     }
+
+
 
     @PostMapping("/createFriendRequest")
     public ResponseEntity<FriendRequest> createFriendRequest(@RequestBody FriendRequestDto fr) {
+        //System.out.println(fr);
         return new ResponseEntity<>(friendRequestService.addFriendRequest(fr.getSender_email(), fr.getReceiver_email()), HttpStatus.CREATED);
     }
 

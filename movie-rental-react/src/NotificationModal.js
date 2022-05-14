@@ -1,6 +1,19 @@
+import axios from "axios";
 import { useState } from "react";
-const NotificationModal = () => {
-	const [requests,setRequests] = useState(["a"])
+import { useEffect } from "react";
+import { connect } from "react-redux";
+const NotificationModal = ({uid}) => {
+	const [requests,setRequests] = useState([])
+	
+	useEffect(()=> {
+		axios.get(`http://127.0.0.1:8080/api/v1/friendRequest/getFriendRequestsByReceiver/${uid}`).then(
+			(response) =>{
+				console.log(response.data)
+				setRequests(response.data);
+			}
+		).catch((err) => {console.log(err)})
+			
+	},[])
 	return(
 		<div class="modal fade" id="notifications" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
@@ -21,8 +34,12 @@ const NotificationModal = () => {
 
 											<li class="list-group-item">
 
-												<span className="fw-bold">From: Can Onal</span>
-												<span className = "mx-3 fw-light">canonal@gmail.com</span>
+
+												<span className="fw-bold">From: {request.sender.name}</span>
+												<span className="fw-light mx-3">({request.sender.email})</span>
+
+											
+
 
 													<div className="float-end btn btn-danger">Decline</div>
 													<div className="float-end me-3 btn btn-success">Accept</div>
@@ -48,4 +65,9 @@ const NotificationModal = () => {
 		</div>
 	)
 }
-export default NotificationModal;
+const mapStateToProps = state => {
+	return{
+		uid: state.uid,
+	}
+}
+export default connect(mapStateToProps)(NotificationModal);

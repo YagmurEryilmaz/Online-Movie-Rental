@@ -17,12 +17,14 @@ public interface UserAccountRepository extends CrudRepository<UserAccount,Long> 
 
 
     List<UserAccount> findAll();
-    UserAccount findUserAccountByEmail(String email);
+
     boolean existsUserAccountByEmail(String email);
     boolean existsUserAccountByuId(Long uId);
 
+    @Query("select u from UserAccount u where u.email= :email")
+    UserAccount findUserAccountByEmail(String email);
 
-    @Query("select u.uId from UserAccount u where u.uId= :userId")
+    @Query("select u from UserAccount u where u.uId= :userId")
     UserAccount findByUId(@Param("userId") Long id);
 
     @Modifying
