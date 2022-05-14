@@ -65,7 +65,7 @@ public class Movie {
     private Set<RentedMovie> rentedMovieSet;
 
     @OneToMany
-    @JoinColumn(name = "rentedMovies")
+    @JoinColumn(name = "movie")
     private Set<Trailer> trailers;
 
     @OneToMany
