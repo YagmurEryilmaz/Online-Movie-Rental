@@ -75,8 +75,9 @@ public class CustomerController {
     }
 
     @PatchMapping("/updateUserInfoByUId/{uId}/{email}")
-    public ResponseEntity<Customer> updateUserInfoByUId(@PathVariable Long uId, @PathVariable String email) {
-        return ResponseEntity.ok(customerService.updateUserByUId(uId, email));
+    public ResponseEntity<?> updateUserInfoByUId(@PathVariable Long uId, @PathVariable String email) {
+        customerService.updateUserByUId(uId, email);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/deleteUserByEmail")

@@ -54,9 +54,9 @@ public class CustomerService {
 
     }
 
-    public Customer updateUserByUId(Long uId, String email)
+    public void updateUserByUId(Long uId, String email)
     {
-        return customerRepository.updateUserByUId(uId,email);
+        customerRepository.updateUserByUId(uId,email);
     }
 
     public List<Customer> findAll() {
