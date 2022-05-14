@@ -31,12 +31,12 @@ public class RentedMovieService {
         this.paymentService = paymentService;
     }
 
-    public void rentMovie( Long c_id, Long m_id, Long p_id, Date expDate )
+    public void rentMovie( Long c_id, Long m_id, Date expDate )
     {
         if (isRentedCurrently(c_id, m_id))
             throw new RuntimeException("currently rented");
         else {
-            RentedMovie.PrimaryKey key = new RentedMovie.PrimaryKey(c_id, m_id, p_id);
+            RentedMovie.PrimaryKey key = new RentedMovie.PrimaryKey(c_id, m_id);
             RentedMovie rentedMovie = RentedMovie.builder()
                     .pk(key)
                     .customer(customerService.findById(c_id))

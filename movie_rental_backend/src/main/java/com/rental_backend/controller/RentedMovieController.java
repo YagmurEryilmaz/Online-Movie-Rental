@@ -24,13 +24,13 @@ public class RentedMovieController {
     @PostMapping("/rent")
     public ResponseEntity<?> rentMovie(@RequestBody RentRequest request)
     {
-        try {
-            rentedMovieService.rentMovie(request.getCustomer(), request.getMovie(), request.getPay(),request.getExpDate());
+        //try {
+            rentedMovieService.rentMovie(request.getCustomer(), request.getMovie(),request.getExpDate());
             return ResponseEntity.ok(new MessageResponse("rented"));
-        }
-        catch (RuntimeException r){
-            return ResponseEntity.badRequest().body(new MessageResponse(r.getMessage()));
-        }
+        //}
+        //catch (RuntimeException r){
+        //    return ResponseEntity.badRequest().body(new MessageResponse(r.getMessage()));
+        //}
     }
 
     @GetMapping("/current/{userId}")

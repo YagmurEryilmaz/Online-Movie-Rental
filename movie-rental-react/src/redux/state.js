@@ -5,6 +5,7 @@ export const stateProto = {
 	rentedMovies:[],
 	accountType:"",
 	cart:[],
-	email: ""
+	email: "",
+	friendRequests:[],
 
 }

@@ -27,15 +27,13 @@ public class RentedMovie {
         @Column(nullable = false, updatable = false)
         private long mId;
 
-        @Column(nullable = false, updatable = false)
-        private long payId;
+
 
         public PrimaryKey() {
         }
-        public PrimaryKey(Long uId, Long mId, Long payId) {
+        public PrimaryKey(Long uId, Long mId) {
             this.uId = uId;
             this.mId = mId;
-            this.payId = payId;
         }
     }
 

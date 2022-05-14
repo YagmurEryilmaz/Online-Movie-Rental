@@ -2,10 +2,22 @@ import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import iceAgeIcon from "./img/iceAge.png"
 import SuggestModal from "./SuggestModal";
+import {connect} from "react-redux";
+import { useEffect } from "react";
+import axios from "axios";
 
 import "./Home.css";
 import { movie_data } from "./Data";
-const Home = ()=>{
+import { useState } from "react";
+const Home = ({uid})=>{
+	const [movies, setMovies] = useState([]);
+	useEffect (()=>{
+		axios.get(`http://127.0.0.1:8080/api/v1/rent/current/${uid}`).then((response)=>{
+			setMovies(response.data);
+			console.log(response.data);
+		}).catch((error)=>{console.log(error)})
+
+	},[])
 	
 	return(
 		<div className='container'>
@@ -109,4 +121,10 @@ const Home = ()=>{
 		</div>
 	)
 }
-export default Home;
+const mapStateToProps = (state) => {
+	return {
+		uid: state.uid,
+	}
+}
+
+export default connect(mapStateToProps)(Home);

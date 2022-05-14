@@ -55,7 +55,34 @@ const reducer = (state,action) =>{
 			email: action.payload.email
 		}
 	}
+	if(action.type == "FETCH_REQUESTS"){
+		var theNewRequests = []
 
+		return{
+			...state,
+			friendRequests: action.payload.requests,
+		}
+
+	}
+	if(action.type == "ACCEPT_REQUEST"){
+		var theNewRequests = []
+		if(action.payload){
+			theNewRequests = state?.friendRequests.filter(request => request !== action.payload.request)
+		}
+		return{
+			...state,
+			friendRequests: theNewRequests,
+		}
+
+		
+	}
+	if(action.type == "EMPTY_CART "){
+		var emptyCart = []
+		return{
+			...state,
+			cart: []
+		}
+	}
 	return state;
 }
 export default reducer;

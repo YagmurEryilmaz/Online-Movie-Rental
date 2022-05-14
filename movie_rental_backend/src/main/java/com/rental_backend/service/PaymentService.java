@@ -38,7 +38,7 @@ public class PaymentService {
                     .payStatus("paid")
                     .build();
             paymentRepository.save(payment);
-            rentedMovieService.rentMovie(c_id, m_id, payId, expDate);
+            rentedMovieService.rentMovie(c_id, m_id,  expDate);
         }
 
     }
