@@ -13,6 +13,7 @@ import java.util.List;
 public class MovieRequestService {
 
     private MovieRequestRepository movieRequestRepository;
+    private CustomerRepository customerRepository;
 
     @Autowired
     public MovieRequestService(MovieRequestRepository movieRequestRepository) {
@@ -22,8 +23,16 @@ public class MovieRequestService {
         return movieRequestRepository.findAll();
     }
 
-    public MovieRequest addRequest(MovieRequest movieRequest) {
-        return movieRequestRepository.save(movieRequest);
+    public MovieRequest addRequest(Long cId, String movieName, String drectorName, int productionYear ) {
+
+        MovieRequest m = MovieRequest.builder()
+                                    .movieName(movieName)
+                                    .directorName(drectorName)
+                                    .movieProductionYear(productionYear)
+                                    .movieReqStatus("pending")
+                                    .customer(customerRepository.findByUId(cId))
+                                    .build();
+        return movieRequestRepository.save(m);
     }
     //public List<Movie> requestMovie(@RequestBody )
 }
