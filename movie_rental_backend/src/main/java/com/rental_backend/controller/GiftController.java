@@ -27,14 +27,14 @@ public class GiftController {
         this.giftService = giftService;
     }
 
-    @GetMapping("/getGiftsByReceiver")
-    public ResponseEntity<List<Gift>> getGiftsByReceiver(@PathVariable GiftDto giftDto){
-        return ResponseEntity.ok(giftService.findByReceiverId(giftDto.getReceiver_id()));
+    @GetMapping("/getGiftsByReceiver/{receiver_id}")
+    public ResponseEntity<List<Gift>> getGiftsByReceiver(@PathVariable("receiver_id") Long receiver_id){
+        return ResponseEntity.ok(giftService.findByReceiverId(receiver_id));
     }
 
-    @GetMapping("/getGiftsBySender")
-    public ResponseEntity<List<Gift>> getGiftsBySender(@PathVariable GiftDto giftDto){
-        return ResponseEntity.ok(giftService.findBySenderId(giftDto.getSender_id()));
+    @GetMapping("/getGiftsBySender/{sender_id}")
+    public ResponseEntity<List<Gift>> getGiftsBySender(@PathVariable("sender_id") Long sender_id){
+        return ResponseEntity.ok(giftService.findBySenderId(sender_id));
     }
 
     @PostMapping("/createGift")
