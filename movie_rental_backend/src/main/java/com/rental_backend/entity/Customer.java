@@ -14,19 +14,14 @@ import java.util.Set;
 @Getter
 @Setter
 @SuperBuilder
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor
 @PrimaryKeyJoinColumn(name = "uId")
 @Entity
 public class Customer extends UserAccount{
 
-    public Customer(long uId, String name, String password, Date birthday, String email, String role)
-    {
-        super(uId, name, password, birthday, email, role);
-    }
     private int movieCount;
     private float balance;
-
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<MovieRequest> movieRequests;
 
@@ -66,6 +61,22 @@ public class Customer extends UserAccount{
     @JoinColumn(name = "movieRates")
     private Set<Rate> rates;
 
+    public Customer(long uId, String name, String password, Date birthday, String email, String role, int movieCount, float balance, Set<MovieRequest> movieRequests,Set<RentedMovie> rentedMovies,Set<Gift> sentGifts,Set<Gift> receivedGifts,Set<FriendRequest> sentRequests,Set<FriendRequest> receivedRequests,Set<Suggestion> sentSuggestions,Set<Suggestion> receivedSuggestions,Set<SubtitleRequest> subtitleRequests,Set<Rate> rates)
+    {
+        super(uId, name, password, birthday, email, role);
+        this.movieCount = movieCount;
+        this.balance = balance;
+        this.movieRequests = movieRequests;
+        this.rentedMovies = rentedMovies;
+        this.sentGifts = sentGifts;
+        this.receivedGifts = receivedGifts;
+        this.sentRequests = sentRequests;
+        this.receivedRequests = receivedRequests;
+        this.sentSuggestions = sentSuggestions;
+        this.receivedSuggestions = receivedSuggestions;
+        this.subtitleRequests = subtitleRequests;
+        this.rates = rates;
+    }
     public void addMovieRequest(MovieRequest movieRequest)
     {
         if (movieRequests == null)
