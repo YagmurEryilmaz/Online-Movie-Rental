@@ -4,5 +4,7 @@ export const stateProto = {
 	balance: 0,
 	rentedMovies:[],
 	accountType:"",
+	cart:[],
+	email: ""
 
 }

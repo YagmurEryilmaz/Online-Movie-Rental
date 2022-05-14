@@ -1,14 +1,31 @@
 import { useState } from "react";
-const EditProfileModal = (props) =>{
-	const [mailM, setMailM] = useState(props.mail);
+import { connect } from "react-redux";
+import axios from "axios";
+const EditProfileModal = ({update_mail,email, name, uid, ...props}) =>{
+
+	const [mailM,setMailM] = useState(email);
 	const [bioM, setBioM] = useState(props.bio);
 	const [isClicked, setIsClicked] = useState(false);
 	const handleSubmit = () => {
-		props.changeMail(mailM);
+		if(mailM == "" || bioM == ""){
+			window.alert("Please fill all required fields");
+		}
+		else{
+			var updateData = {
+				email: mailM,
+			}
+			axios.patch(`http://127.0.0.1:8080/api/v1/customer/updateUserInfoByUId/${uid}/${mailM}`).then(
+				(response) => {
+					console.log(mailM);
+					window.alert("Profile Updated");
+					update_mail(mailM)
+
+				}).catch((err) => console.log(err.response));
+			}
 		props.changeBio(bioM);
 		setIsClicked(true)
 	}
-	console.log(mailM, bioM)
+
 
 
 	return(
@@ -26,7 +43,7 @@ const EditProfileModal = (props) =>{
 						<form>
 							<div class="form-group">
 								<label for="exampleFormControlInput1">Email address:</label>
-								<input onChange = {(e) => setMailM(e.target.value)} type="email" class="form-control" id="exampleFormControlInput1" placeholder={mailM}/>
+								<input onChange = {(e) => setMailM(e.target.value)} type="email" class="form-control" id="exampleFormControlInput1" placeholder={email}/>
   							</div>
 
 							<div class="form-group">
@@ -44,4 +61,22 @@ const EditProfileModal = (props) =>{
 		</div>
 	)
 }
-export default EditProfileModal;
+const mapStateToProps = (state) => {
+	return {
+		email: state.email,
+		name: state.name,
+		uid: state.uid
+	}
+}
+const mapDispatchToProps = (dispatch) => {
+	return {
+		update_mail: (mail) => {
+			dispatch({
+				type: "UPDATE_MAIL",
+				payload: {email:mail}
+			})
+		}
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfileModal);

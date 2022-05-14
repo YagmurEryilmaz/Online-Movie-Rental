@@ -5,9 +5,11 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationModal from "./NotificationModal";
 import { IconButton } from "@mui/material";
 import { connect } from "react-redux";
+import CartModal from "./CartModal";
 
 import "./Navbar.css";
 import axios from "axios";
+
 const Navbar = ({name, balance, role }) =>{
 	console.log()
 	const [click, setClick] = useState(false)
@@ -41,7 +43,7 @@ const Navbar = ({name, balance, role }) =>{
 								</Badge>
 							</IconButton>
 							</a>
-							<a href = "#" className="d-none d-lg-block cart-logo mx-4"></a>
+							<a href = "#cartModal" data-bs-toggle = "modal"className="d-none d-lg-block cart-logo mx-4"></a>
 							<a href="/profile" className= "d-none d-lg-block user-logo "></a>
 							<div className="d-none d-lg-block mx-4">
 								<div>
@@ -52,7 +54,7 @@ const Navbar = ({name, balance, role }) =>{
 						</div>
 					</div>
 				</div>
-				
+				<CartModal/>
 				<NotificationModal/>
 			</nav>
 
@@ -61,7 +63,7 @@ const Navbar = ({name, balance, role }) =>{
 }
 const mapStateToProps = state =>
 {
-	console.log("state.name")
+
 	return {
 		name:state.name,
 		balance:state.balance,

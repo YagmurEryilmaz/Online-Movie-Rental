@@ -8,19 +8,23 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
+import { connect } from "react-redux";
+
 import WatchTrailerModal from "./WatchTrailerModal";
 
 
-const DetailedInfoModal = (props) =>{
+const DetailedInfoModal = ({cart, add_to_cart, ...props}) =>{
 
 	
 	const [mov,setMov] = useState(props.movie);
 	const [rating, setRating] = useState();
 	const [ratingAvg, setRatingAvg] = useState();
 	const [isRated,setIsRated] = useState(false);
+	const [trailer, setTrailer] = useState("");
 	const subtitles = ["French", "Turkish", "German", "Arabic", "Dutch","Spanish", "Chinese"]
 	const [reqSubtitle, setReqSubtitle] = useState(subtitles[0])
 	const [inputValue, setInputValue] = useState('');
+	
 	useEffect(() => {
 		var movieId = mov.mid;
 		console.log("inside useEffect")
@@ -30,8 +34,17 @@ const DetailedInfoModal = (props) =>{
 				console.log(response.data)
 			}
 			).catch((err)=>{console.log(err.response)})
+		axios.get(`http://127.0.0.1/api/v1/trailer/getTrailerByMovie/${movieId}`).then(
+			(response) => {
+				setTrailer(response.data);
+				console.log(response.data)
+			}
+		).catch((err)=>{console.log(err.response)})
 
 		},[isRated])
+
+		
+		var contains = cart.indexOf(mov);
 
 	const handleClick = ()=>{
 		var subt = {
@@ -126,7 +139,8 @@ const DetailedInfoModal = (props) =>{
 									
 
 								</div>
-								<div className="col-8 mb-3 btn btn-primary">Add To Cart</div>
+									{(contains === - 1) ? <div onClick = {() => add_to_cart(mov)} className="col-8 mb-3 btn btn-primary">Add To Cart</div> : <button type="button" className="col-8 mb-3 btn btn-secondary" disabled>Already In Cart</button> }
+
 								<button type="button" data-bs-target="#watchTrailer" className="col-8 mb-3  btn btn-primary" data-bs-toggle = "modal" >Watch Trailer</button>
 								
 
@@ -175,7 +189,7 @@ const DetailedInfoModal = (props) =>{
 								</div>
 									<div class="modal-body d-flex justify-content-center">
 										<iframe width="720" height="315"
-											src="https://www.youtube.com/embed/tgbNymZ7vqY">
+											src={trailer}>
 
 										</iframe>
 
@@ -190,5 +204,17 @@ const DetailedInfoModal = (props) =>{
 		
 	)
 }
-export default DetailedInfoModal;
+const mapStateToProps = (state) => {
+	return {
+		cart: state.cart
+	}
+}
+const mapDispatchToProps = (dispatch) => {
+	return {
+		add_to_cart: (mov) => {
+			dispatch({type: "ADD_TO_CART", payload: {movie:mov}})
+		}
+	}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(DetailedInfoModal);
 

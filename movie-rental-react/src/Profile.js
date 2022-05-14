@@ -18,13 +18,14 @@ import "./Profile.css"
 import { user_data } from "./Data";
 import axios from "axios";
 import { movie_suggestions } from "./Data";
+import { connect } from "react-redux";
 
-const Profile = () => {
+const Profile = ({name, mail, birthday}) => {
 	const [profilePhoto, setProfilePhoto] = useState(defaultAvatar);
-	const [name,setName] = useState(user_data[0].name);
-	const [mail,setMail] = useState(user_data[0].email);
+
+
 	const [bio,setBio] = useState(user_data[0].bio);
-	const birthday = user_data[0].birthday;
+
 	const[movieName, setMovieName] = useState("");
 	const [prodYear, setProdYear] = useState("");
 	const[dirName, setDirName] = useState("");
@@ -100,7 +101,7 @@ const Profile = () => {
 										<a data-bs-toggle= "modal" href="#changeAvatar" className="card-link">Change Avatar </a>
 									</div>
 									<ChangeAvatarModal avatars={avatars} changeAvatar={changePP} def_avatar={profilePhoto} />
-									<EditProfileModal mail = {mail} bio = {bio} changeMail = {setMail} changeBio = {setBio} />
+									<EditProfileModal bio = {bio} changeBio = {setBio} />
 									
 							</div>
 							<div className="col-6 mt-5">
@@ -163,4 +164,11 @@ const Profile = () => {
 	)
 
 }
-export default Profile;
+const mapStateToProps = (state) => {
+	return {
+		name: state.name,
+		mail: state.email,
+		birthday: state.birthday
+	}
+}
+export default connect(mapStateToProps)(Profile);

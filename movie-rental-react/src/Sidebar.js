@@ -4,10 +4,12 @@ import HomeIcon from "./img/House.png"
 import PersonIcon from "./img/user-logo.png"
 import RentIcon from "./img/rentIcon.png"
 import LogoutIcon from "./img/logout.png"
+import {connect} from "react-redux";
 
 import {Link} from 'react-router-dom'
 
-const Sidebar = () => {
+const Sidebar = ({logout, role}) => {
+	
 	return (
 		<div className="sidebar">
 			<aside className="d-flex flex-column">
@@ -24,7 +26,7 @@ const Sidebar = () => {
 					<section className="sidebar-link mb-1 hover-effect"><img src={RentIcon} className="ms-lg-2 sidebar-icon" /><span className="ms-lg-2 ms-1">Rent</span></section>
 				</Link>
 				<Link to="/" className="text-decoration-none text-white bottomBlank">
-					<section className="sidebar-link mb-1 hover-effect"><img src={LogoutIcon} className="ms-lg-2 sidebar-icon" /><span className="ms-lg-2 ms-1">Logout</span></section>
+					<section className="sidebar-link mb-1 hover-effect" onClick={logout}><img src={LogoutIcon}  className="ms-lg-2 sidebar-icon" /><span className="ms-lg-2 ms-1">Logout</span></section>
 				</Link>
 				
 				
@@ -32,4 +34,13 @@ const Sidebar = () => {
 		</div>
 	)
 }
-export default Sidebar;
+const mapStateToProps = state => {
+	console.log(state)
+	return {role: state.role}
+}
+
+const mapDispatchToProps = dispatch => {
+
+	return {logout: () => dispatch({type: "LOGOUT"})}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
