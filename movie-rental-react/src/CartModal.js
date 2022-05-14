@@ -25,6 +25,7 @@ const CartModal = ({cart, remove_from_cart,uid, empty_cart}) => {
 		}
 		empty_cart();
 		
+		
 	}
 	return(
 		<div className="modal fade" id="cartModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -56,7 +57,7 @@ const CartModal = ({cart, remove_from_cart,uid, empty_cart}) => {
 					</div>
 					<div className="modal-footer">
 						<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						<button type="button" className="btn btn-primary" onClick = {()=>{checkout()}}>Checkout</button>
+						<button type="button" className="btn btn-primary" onClick={() => {checkout();}}>Checkout</button>
 					</div>
 				</div>
 			</div>

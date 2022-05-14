@@ -50,7 +50,7 @@ public class RentedMovieService {
 
     }
 
-    public List<Movie> getCurrentlyRented( Long userId){
+    public List<RentedMovie> getCurrentlyRented( Long userId){
         Date now = Date.valueOf(LocalDate.now());
         return rentedMovieRepository.getCurrentlyRented(userId, now);
     }
@@ -61,7 +61,7 @@ public class RentedMovieService {
     }
 
     public Boolean isRentedCurrently(Long c_id, Long m_id){
-        List <Movie> current = getCurrentlyRented(c_id);
+        List <RentedMovie> current = getCurrentlyRented(c_id);
         Movie movie = movieService.findMovieById(m_id);
         return current.contains(movie);
     }

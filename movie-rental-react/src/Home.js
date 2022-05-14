@@ -36,27 +36,27 @@ const Home = ({uid})=>{
 									Current Movies
 								</div>
 								<ul className="list-group border-info list-group-flush">
-									{movie_data.map((movie_data)=> {
+									{movies.map((movieObj)=> {
 										return(
 											<li class="list-group-item border-info">
 												<div className="row">
 													<div className="col-4">
-														<img className="cardImg" src= {movie_data.img_url} alt={movie_data.title} />
+														<img className="cardImg" src={movieObj.movie.posterUrl} alt={movieObj.movie.title} />
 
 													</div>
 													<div className="col-8">
 
 														<div className = "fs-4 fw-bold">
-															{movie_data.title}
+															{movieObj.movie.title}
 														</div>
 														<div className="fs-5 fw-normal">
-															Director: {movie_data.director}
+															Director: {movieObj.movie.directorName}
 														</div>
 														<div className="fs-5 fw-light">
-															Prod. Year: {movie_data.prod_year}
+															Prod. Year: {movieObj.movie.productionYear}
 														</div>
 														<div className="fs-5 fw-light">
-															Expiration Date: {movie_data.exp_date}
+															Expiration Date: {movieObj.expDate}
 														</div>
 													</div>
 												</div>

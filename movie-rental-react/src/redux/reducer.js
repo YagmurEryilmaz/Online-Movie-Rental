@@ -76,8 +76,7 @@ const reducer = (state,action) =>{
 
 		
 	}
-	if(action.type == "EMPTY_CART "){
-		var emptyCart = []
+	if(action.type == "EMPTY_CART"){
 		return{
 			...state,
 			cart: []
