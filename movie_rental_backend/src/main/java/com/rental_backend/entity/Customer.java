@@ -22,7 +22,9 @@ public class Customer extends UserAccount{
 
     private int movieCount;
     private float balance;
+
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<MovieRequest> movieRequests;
 
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

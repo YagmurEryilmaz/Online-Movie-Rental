@@ -7,6 +7,7 @@ package com.rental_backend.controller;
  import com.rental_backend.service.FriendRequestService;
  import lombok.RequiredArgsConstructor;
  import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.data.jpa.repository.Modifying;
  import org.springframework.http.HttpStatus;
  import org.springframework.http.ResponseEntity;
  import org.springframework.web.bind.annotation.*;
@@ -27,12 +28,12 @@ public class FriendRequestController {
     }
 
     @GetMapping("/getFriendRequestsByReceiver")
-    public ResponseEntity<List<FriendRequest>> getRequestsByReceiver(@PathVariable FriendRequestDto friendRequestDto){
+    public ResponseEntity<List<FriendRequest>> getRequestsByReceiver(@RequestBody FriendRequestDto friendRequestDto){
         return ResponseEntity.ok(friendRequestService.findByReceiverId(friendRequestDto.getReceiver_id()));
     }
 
     @GetMapping("/getFriendRequestsBySender")
-    public ResponseEntity<List<FriendRequest>> getRequestsBySender(@PathVariable FriendRequestDto friendRequestDto){
+    public ResponseEntity<List<FriendRequest>> getRequestsBySender(@RequestBody FriendRequestDto friendRequestDto){
         return ResponseEntity.ok(friendRequestService.findBySenderId(friendRequestDto.getSender_id()));
     }
 
@@ -41,14 +42,18 @@ public class FriendRequestController {
         return new ResponseEntity<>(friendRequestService.addFriendRequest(fr.getSender_email(), fr.getReceiver_email()), HttpStatus.CREATED);
     }
 
+    @Modifying
+    @PostMapping("/accept")
     public ResponseEntity<?> acceptRequest(@RequestBody FriendRequestDto fr){
         friendRequestService.acceptRequest(fr.getSender_email(), fr.getReceiver_id());
         return ResponseEntity.ok(new MessageResponse("request accepted"));
     }
 
+    @Modifying
+    @PostMapping("/reject")
     public ResponseEntity<?> rejectRequest(@RequestBody FriendRequestDto fr){
         friendRequestService.rejectRequest(fr.getSender_email(), fr.getReceiver_id());
-        return ResponseEntity.ok(new MessageResponse("request accepted"));
+        return ResponseEntity.ok(new MessageResponse("request rejected"));
     }
     @DeleteMapping("/deleteFriendRequest")
     public ResponseEntity<?> deleteFriendRequest(@PathVariable FriendRequestDto fr) {
