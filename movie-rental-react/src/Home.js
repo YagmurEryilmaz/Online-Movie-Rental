@@ -11,11 +11,16 @@ import { movie_data } from "./Data";
 import { useState } from "react";
 const Home = ({uid})=>{
 	const [movies, setMovies] = useState([]);
+	const [prevMov, setPrevMov] = useState([]);
 	useEffect (()=>{
 		axios.get(`http://127.0.0.1:8080/api/v1/rent/current/${uid}`).then((response)=>{
 			setMovies(response.data);
 			console.log(response.data);
 		}).catch((error)=>{console.log(error)})
+		axios.get(`http://127.0.0.1:8080/api/v1/rent/previous/${uid}`).then((response)=>{
+			setPrevMov(response.data);
+			console.log(response.data);
+		}).catch((err )=>{console.log(err)})
 
 	},[])
 	
@@ -74,35 +79,35 @@ const Home = ({uid})=>{
 									Previously Rented Movies
 								</div>
 								<ul className="list-group border-info list-group-flush">
-									{movie_data.map((movie_data) => {
+									{prevMov.map((movieObj) => {
 										return (
 											<li class="list-group-item border-info">
 												<div className="row">
 													<div className="col-4">
-														<img className="cardImg" src= {movie_data.img_url} alt={movie_data.title} />
+														<img className="cardImg" src={movieObj.movie.posterUrl} alt={movieObj.movie.title} />
 
 													</div>
 													<div className="col-8">
 
 														<div className="fs-4 fw-bold">
-															{movie_data.title}
+															{movieObj.movie.title}
 														</div>
 														<div className="fs-5 fw-normal">
-															Director: {movie_data.director}
+															Director: {movieObj.movie.directorName}
 														</div>
 														<div className="fs-5 fw-light">
-															Prod. Year: {movie_data.prod_year}
+															Prod. Year: {movieObj.movie.productionYear}
 														</div>
 														<div className="fs-5 fw-light">
-															Expiration Date: {movie_data.exp_date}
+															Expiration Date: {movieObj.expDate}
 														</div>
-														<button type = "button" data-bs-toggle = "modal" data-bs-target = {String(`#suggestModal${movie_data.m_id}`)} className="btn btn-primary" onClick>
+														<button type="button" data-bs-toggle="modal" data-bs-target={String(`#suggestModal${movieObj.movie.mid}`)} className="btn btn-primary">
 															Suggest
 														</button>
-														<SuggestModal mId = {movie_data.m_id}/>
-
+														<SuggestModal mId = {movieObj.movie.mid}/>
 													</div>
 												</div>
+												
 
 											</li>
 										)

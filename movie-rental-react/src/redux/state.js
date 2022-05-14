@@ -7,5 +7,7 @@ export const stateProto = {
 	cart:[],
 	email: "",
 	friendRequests:[],
+	uid: -1,
+
 
 }

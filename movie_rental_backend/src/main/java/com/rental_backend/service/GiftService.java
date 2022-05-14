@@ -27,15 +27,14 @@ public class GiftService {
     public List<Gift> findBySenderId(Long senderId) {
         return giftRepository.findbySenderId(senderId);
     }
-    public Gift addGift(Long sender_id, Long receiver_id, Long m_id, Long pay_id) {
-        Gift.PrimaryKey primaryKey = new Gift.PrimaryKey(sender_id,receiver_id,m_id,pay_id);
+    public Gift addGift(Long sender_id, Long receiver_id, Long m_id) {
+        Gift.PrimaryKey primaryKey = new Gift.PrimaryKey(sender_id,receiver_id,m_id);
 
         Gift gift = Gift.builder()
                 .primaryKey(primaryKey)
                 .senderCustomer(customerService.findById(sender_id))
                 .receiverCustomer(customerService.findById(receiver_id))
                 .movie(movieService.findMovieById(m_id))
-                .payment(paymentService.findById(pay_id))
                 .build();
         return giftRepository.save(gift);
     }

@@ -4,7 +4,7 @@ const CartModal = ({cart, remove_from_cart,uid, empty_cart}) => {
 	const cartTotal = cart.reduce((acc, curr) => acc + curr.price, 0);
 	const checkout = () => {
 		var date = new Date();
-		date.setDate(date.getDate() + 7);
+		date.setDate(date.getDate() - 7);
 		for (let index = 0; index < cart.length; index++) {
 			var movieO = {
 				movie: cart[index].mid,
@@ -46,6 +46,7 @@ const CartModal = ({cart, remove_from_cart,uid, empty_cart}) => {
 										<li className="list-group-item">
 											<span className="fw-bold">Movie Name:</span> <span>{movie.title}</span>
 											<span className="mx-3 fw-light">Price: {movie.price}$</span>
+											
 											<div onClick = {() => remove_from_cart(movie)} className="float-end btn btn-danger">Remove</div>
 										</li>
 									)

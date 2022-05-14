@@ -1,22 +1,49 @@
 import axios from "axios";
 import { useState } from "react";
+import { useEffect } from "react";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-const SuggestModal = (props) => {
+import {connect} from "react-redux";
+const SuggestModal = ({uid, ...props}) => {
 
 	const [movieId, setMovieId] = useState(props.mId);
 
 	const [message,setMessage] = useState("");
 	const [value,setValue] = useState("");
-	const friends = ["jcanonal@gmail.com", "canonalbjk@gmail.com", "cekoley@gmail.com", "yagmurery123@hotmail.com", "elifcen@gmail.com"]
+	const [friends,setFriends] = useState([]);
+	const [customers, setCustomers] = useState([]);
+	useEffect(() => {
+		axios.get("http://127.0.0.1:8080/api/v1/customer/getAllCustomers").then(
+			(response) => {
+				setCustomers(response.data);
+				var emails = response.data.map((customer) => customer.email);
+				setFriends(emails)
+			}
+		).catch((err) => {console.log(err.response)});
+	}, [])
+
 	const handleSubmit = () => {
 		if(value == ""){
 			window.alert("Please enter a valid email")
 		}
 		else{
-			window.alert("Suggestion Sent")
-			console.log(value, message)
+			var receiver = customers.find(c => {return c.email === value});
+			var suggestion = {
+				senderId: uid,
+				receiverId: receiver.uid,
+				movieId: movieId
+			}
+			axios.post("http://127.0.0.1:8080/api/v1/suggestion/addSuggestion",suggestion).then(
+				(response) => {
+					if(response)
+					{
+						window.alert("Suggestion submitted")
+					}
+				}
+			).catch((err) => {console.log(err.response)})
+
+			console.log(suggestion)
 		}
 		
 
@@ -49,11 +76,16 @@ const SuggestModal = (props) => {
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						<button onClick={() => handleSubmit()} type="submit" className="btn btn-primary">Submit</button>
+						<button onClick={() => handleSubmit()} data-bs-dismiss="modal" type="submit" className="btn btn-primary">Submit</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	)
 }
-export default SuggestModal;
+const mapStateToProps = (state) => {
+	return {
+		uid: state.uid
+	}
+}
+export default connect(mapStateToProps)(SuggestModal);

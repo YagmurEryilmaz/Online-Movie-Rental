@@ -9,7 +9,8 @@ const reducer = (state,action) =>{
 			name: theName,
 			accountType: theAccType,
 			loggedIn :true,
-			email: theEmail
+			email: theEmail,
+			uid: action.payload.uid
 
 		}
 

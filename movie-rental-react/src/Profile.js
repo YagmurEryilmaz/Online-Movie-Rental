@@ -4,6 +4,8 @@ import Sidebar from "./Sidebar";
 import ChangeAvatarModal from "./ChangeAvatarModal";
 import EditProfileModal from "./EditProfileModal";
 import AddFriendModal from "./AddFriendModal";
+import DetailedInfoModal from "./DetailedInfoModal";
+import { Link } from "react-router-dom";
 import defaultAvatar from "./img/avatars/default_avatar.png";
 import avatar1 from "./img/avatars/image_part_001.png";
 import avatar2 from "./img/avatars/image_part_002.png"
@@ -20,7 +22,7 @@ import axios from "axios";
 import { movie_suggestions } from "./Data";
 import { connect } from "react-redux";
 
-const Profile = ({name, mail, birthday}) => {
+const Profile = ({name, mail, uid,birthday}) => {
 	const [profilePhoto, setProfilePhoto] = useState(defaultAvatar);
 
 
@@ -33,13 +35,12 @@ const Profile = ({name, mail, birthday}) => {
 
 
 	useEffect(() => {
-		axios.post("http://127.0.0.1:8080/api/v1/suggestion/addSuggestion",{receiverId:1, senderId:2, movieId:1}).then(
-			(response) => {
-				setFriendSuggestions(response.data);
-				console.log("data");
-			}
-		).catch((err) => console.log(err.response))
-	},[])
+		axios.get(`http://127.0.0.1:8080/api/v1/suggestion/getSuggestionsByReceiver/${uid}`).then((response)=>{
+			console.log(response.data)
+			setFriendSuggestions(response.data)
+		}).catch((error)=>{console.log(error)})
+	}, [])
+	
 	
 	const changePP = (avatar) =>{
 		setProfilePhoto(avatar);
@@ -141,12 +142,14 @@ const Profile = ({name, mail, birthday}) => {
 									<div class="card-header border border-info bg-light">
 										Suggested Movies
 									</div>
-									{movie_suggestions.map((suggestion) => {
+									{friendSuggestions.map((suggestion) => {
 										return(
 											<div class="card-body border border-info ">
-												<h5 class="card-title">Movie Name: {suggestion.title}</h5>
-												<p class="card-text">From: {suggestion.name}({suggestion.email})</p>
-												<a href="#" class="btn btn-primary">Go to Movie</a>
+												<h5 class="card-title">Movie Name: {suggestion.movie.title}</h5>
+												<p class="card-text">From: {suggestion.suggestionSender.name}({suggestion.suggestionSender.email})</p>
+												
+												<a href= {String(`#detailedInfoModal${suggestion.movie.mid}`)} data-bs-toggle = "modal" class="btn btn-primary">Go to Movie</a>
+												<DetailedInfoModal movie = {suggestion.movie} />
 											</div>
 										)
 									})}
@@ -168,7 +171,8 @@ const mapStateToProps = (state) => {
 	return {
 		name: state.name,
 		mail: state.email,
-		birthday: state.birthday
+		birthday: state.birthday,
+		uid: state.uid
 	}
 }
 export default connect(mapStateToProps)(Profile);

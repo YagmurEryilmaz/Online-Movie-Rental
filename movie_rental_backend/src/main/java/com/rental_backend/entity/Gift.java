@@ -26,17 +26,15 @@ public class Gift {
         @Column(nullable = false, updatable = false)
         private long m_id;
 
-        @Column(nullable = false, updatable = false)
-        private long pay_id;
+
 
        public PrimaryKey() {}
 
-       public PrimaryKey(Long sender_id, Long receiver_id, Long m_id, Long pay_id) {
+       public PrimaryKey(Long sender_id, Long receiver_id, Long m_id) {
 
            this.sender_id = sender_id;
            this.receiver_id = receiver_id;
            this.m_id =m_id;
-           this.pay_id= pay_id;
        }
 
     }

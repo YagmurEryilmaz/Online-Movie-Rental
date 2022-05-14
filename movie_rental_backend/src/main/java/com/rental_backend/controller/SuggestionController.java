@@ -27,7 +27,7 @@ public class SuggestionController {
     }
 
     @GetMapping("/getSuggestionsByReceiver/{receiverId}")
-    public ResponseEntity<List<Suggestion>> getSuggestionsByReceiver(@PathVariable Long receiverId){
+    public ResponseEntity<List<Suggestion>> getSuggestionsByReceiver(@PathVariable("receiverId") Long receiverId){
         return ResponseEntity.ok(suggestionService.findSuggestionByReceiverId(receiverId));
     }
 

@@ -28,7 +28,7 @@ public interface RentedMovieRepository extends CrudRepository<RentedMovie,Long> 
    @Query("select r from RentedMovie r where r.pk.uId = :userId and r.expDate > :date ")
     List<RentedMovie> getCurrentlyRented(@Param("userId") Long userId, @Param("date") Date date);
 
-    @Query("select r.movie from RentedMovie r where r.pk.uId= :userId and r.expDate <= :date")
-    List<Movie> getPreviouslyRented(@Param("userId") Long userId , @Param("date") Date date);
+    @Query("select r from RentedMovie r where r.pk.uId= :userId and r.expDate <= :date")
+    List<RentedMovie> getPreviouslyRented(@Param("userId") Long userId , @Param("date") Date date);
 
 }
