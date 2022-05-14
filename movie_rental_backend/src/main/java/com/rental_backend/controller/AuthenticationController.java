@@ -42,6 +42,7 @@ public class AuthenticationController {
                             .uId(user.getUId())
                             .email(user.getEmail())
                             .role(user.getRole())
+                            .name(user.getName())
                             .build();
                 }
             }
