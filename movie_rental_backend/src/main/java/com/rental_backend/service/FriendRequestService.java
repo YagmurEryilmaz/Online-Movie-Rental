@@ -1,7 +1,6 @@
 package com.rental_backend.service;
 import com.rental_backend.entity.*;
 import com.rental_backend.repository.*;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -12,13 +11,11 @@ public class FriendRequestService {
 
     private FriendRequestRepository friendRequestRepository;
     private CustomerService customerService;
-    private UserAccountService userAccountService;
 
     @Autowired
-    public FriendRequestService(FriendRequestRepository friendRequestRepository, CustomerService customerService, UserAccountService userAccountService) {
+    public FriendRequestService(FriendRequestRepository friendRequestRepository, CustomerService customerService) {
         this.friendRequestRepository = friendRequestRepository;
         this.customerService = customerService;
-        this.userAccountService=userAccountService;
     }
     public List<FriendRequest> findByReceiverId(Long receiverId) {
         return friendRequestRepository.findbyReceiverId(receiverId);
@@ -28,8 +25,8 @@ public class FriendRequestService {
     }
     public FriendRequest addFriendRequest(String senderEmail, String receiverEmail) {
 
-        UserAccount sender = userAccountService.findByEmail(senderEmail);
-        UserAccount receiver =  userAccountService.findByEmail(receiverEmail);
+        Customer sender = customerService.findByEmail(senderEmail);
+        Customer receiver = customerService.findByEmail(receiverEmail);
 
         FriendRequest.PrimaryKey key = new FriendRequest.PrimaryKey(sender.getUId(), receiver.getUId());
 

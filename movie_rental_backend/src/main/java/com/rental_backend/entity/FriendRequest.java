@@ -43,11 +43,11 @@ public class FriendRequest {
 
     @JoinColumn(name = "receiver_id", insertable = false, updatable = false)
     @ManyToOne(fetch= FetchType.EAGER)
-    private UserAccount receiver;
+    private Customer receiver;
 
     @JoinColumn(name = "sender_id", insertable = false, updatable = false)
     @ManyToOne(fetch= FetchType.EAGER)
-    private UserAccount sender;
+    private Customer sender;
 
 
 

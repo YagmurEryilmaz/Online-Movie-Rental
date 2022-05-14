@@ -4,7 +4,6 @@ import com.rental_backend.entity.Suggestion;
 import com.rental_backend.service.SuggestionService;
 import com.rental_backend.service.TrailerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +17,6 @@ import java.util.List;
 public class TrailerController {
 
     private TrailerService trailerService;
-    @Autowired
     public TrailerController(TrailerService trailerService) {
         this.trailerService = trailerService;
     }

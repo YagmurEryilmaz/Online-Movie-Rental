@@ -32,6 +32,7 @@ public interface FriendRequestRepository extends CrudRepository<FriendRequest,Lo
     @Query("select count(fr.receiver.receivedRequests) from FriendRequest fr, Customer c where (fr.friendReq_status = 'accepted' and fr.receiver.uId = c.uId and fr.receiver.uId = :receiverId) or (fr.friendReq_status = 'accepted' and fr.sender.uId = :senderId and fr.sender.uId = c.uId ) ")
     int findNumOfFriends(@Param("receiverId")  Long receiverId, @Param("senderId")Long senderId);
 
+
     @Query("select fr.receiver.receivedRequests from FriendRequest fr, Customer c where (fr.friendReq_status = 'accepted' and fr.receiver.uId = c.uId and fr.receiver.uId = :receiverId) or (fr.friendReq_status = 'accepted' and fr.sender.uId = :senderId and fr.sender.uId = c.uId ) ")
     List<FriendRequest> findAcceptedFriendRequests(@Param("receiverId")  Long receiverId, @Param("senderId")Long senderId);
 
