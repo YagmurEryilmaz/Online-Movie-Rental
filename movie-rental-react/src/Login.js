@@ -3,11 +3,13 @@ import "./css/Login.css";
 import logo from "./img/tickflixLogo.png"
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
+import { connect } from "react-redux";
 
-const Login = () => {
+const Login = ({login_account, loggedIn}) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [loggedIn,setLoggedIn] = useState(false);
+
+	
 
 
 	const validateEmail = (email) => {
@@ -29,12 +31,13 @@ const Login = () => {
 				 {
 					email: email,
 				password:password
-		}).then((response)=>{
+			}).then((response)=>{
 				console.log(response.data)
 					if(response.data!=null){
 						if(response.data.success == true){
 							console.log(email, password);
-							setLoggedIn(true);
+							login_account(response.data)
+
 							window.alert("Logged In")
 
 						}
@@ -98,4 +101,12 @@ const Login = () => {
 		</div>
 	)
 }
-export default Login;
+const mapDispatchToProps = (dispatch) => {
+	return {
+		login_account: (payload) => dispatch({type: "LOGIN", payload: {...payload}}),
+	}
+}
+const mapStateToProps = (state) => {
+	return {loggedIn: state.loggedIn}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

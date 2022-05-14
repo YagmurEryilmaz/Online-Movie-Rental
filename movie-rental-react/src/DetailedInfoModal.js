@@ -23,12 +23,14 @@ const DetailedInfoModal = (props) =>{
 	const [inputValue, setInputValue] = useState('');
 	useEffect(() => {
 		var movieId = mov.mid;
+		console.log("inside useEffect")
 		axios.get(`http://127.0.0.1:8080/api/v1/rate/getAveragePoint/${movieId}`).then(
 			(response) => {
 				setRatingAvg(response.data);
 				console.log(response.data)
 			}
 			).catch((err)=>{console.log(err.response)})
+
 		},[isRated])
 
 	const handleClick = ()=>{
@@ -53,7 +55,6 @@ const DetailedInfoModal = (props) =>{
 			(response) =>{
 				if(response.data == "rate"){
 					window.alert("Rating Submitted")
-
 				}
 			}
 		).catch((err) => {window.alert((err.response.data.message))})
@@ -116,13 +117,10 @@ const DetailedInfoModal = (props) =>{
 										onChange={(event, newValue) => {
 											var val = newValue;
 											setRating(val);
-
-											
-
 										}}
 									/> : <Rating
 										name="read-only"
-										value={rating}
+										value={ratingAvg}
 											readOnly />}
 									
 									
@@ -160,8 +158,10 @@ const DetailedInfoModal = (props) =>{
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 							<button type="button" onClick={() => {
-								setIsRated(true);
-								handleRate()}}class="btn btn-primary">Save changes</button>
+								setIsRated(true)
+								handleRate()
+								}}
+								class="btn btn-primary">Save changes</button>
 					</div>
 				</div>
 			</div>
