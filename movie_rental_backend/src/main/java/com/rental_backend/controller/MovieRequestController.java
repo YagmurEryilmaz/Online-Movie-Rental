@@ -36,7 +36,7 @@ public class MovieRequestController {
     }
 
     @PostMapping("/addMovieRequest")
-    public ResponseEntity<MovieRequest> addMovieRequest(@RequestBody MovieRequest movieReq) {
-        return new ResponseEntity<>(movieRequestService.addRequest(movieReq), HttpStatus.CREATED);
+    public ResponseEntity<MovieRequest> addMovieRequest(@RequestBody MovieRequestDto movieRequestDto) {
+        return new ResponseEntity<>(movieRequestService.addRequest(movieRequestDto.getCustomerId(),movieRequestDto.getMovieName(),movieRequestDto.getDirectorName(),movieRequestDto.getMovieProductionYear()), HttpStatus.CREATED);
     }
 }

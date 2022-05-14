@@ -6,9 +6,11 @@ import lombok.Data;
 public class MovieRequestDto {
     private Long movieReqId;
 
-    private String movieName;
+    private Long customerId;
 
-    private String movieProductionYear;
+    private int movieProductionYear;
+    
+    private String movieName;
 
     private String directorName;
 
