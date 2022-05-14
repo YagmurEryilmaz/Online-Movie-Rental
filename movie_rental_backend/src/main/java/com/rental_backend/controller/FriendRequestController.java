@@ -28,14 +28,17 @@ public class FriendRequestController {
     }
 
     @GetMapping("/getFriendRequestsByReceiver")
+
     public ResponseEntity<List<FriendRequest>> getRequestsByReceiver(@PathVariable("receiver_id") Long receiver_id){
         return ResponseEntity.ok(friendRequestService.findByReceiverId(receiver_id));
     }
 
     @GetMapping("/getFriendRequestsBySender")
-    public ResponseEntity<List<FriendRequest>> getRequestsBySender(@PathVariable("sender_id") Long sender_id){
+    public ResponseEntity<List<FriendRequest>> getRequestsBySender(@PathVariable("sender_id") Long sender_id) {
         return ResponseEntity.ok(friendRequestService.findBySenderId(sender_id));
     }
+
+
 
     @PostMapping("/createFriendRequest")
     public ResponseEntity<FriendRequest> createFriendRequest(@RequestBody FriendRequestDto fr) {
