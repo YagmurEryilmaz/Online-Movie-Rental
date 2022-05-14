@@ -1,6 +1,5 @@
 package com.rental_backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -39,25 +38,16 @@ public class UserAccount {
 
     private String role;
 
-    @OneToMany(mappedBy ="sender")
-    @JsonIgnore
-    private Set<FriendRequest> sentRequests;
-
-    @OneToMany(mappedBy ="receiver")
-    @JsonIgnore
-    private Set<FriendRequest> receivedRequests;
-
-
-    public UserAccount(long uId, String name, String password, Date birthday, String email, String role,Set<FriendRequest> sentRequests,Set<FriendRequest> receivedRequests) {
+    public UserAccount(long uId, String name, String password, Date birthday, String email, String role) {
         this.uId = uId;
         this.name = name;
         this.password = password;
         this.birthday = birthday;
         this.email = email;
         this.role = role;
-        this.sentRequests = sentRequests;
-        this.receivedRequests = receivedRequests;
     }
+
+
 
 }
 

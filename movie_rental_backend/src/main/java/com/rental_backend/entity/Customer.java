@@ -39,6 +39,15 @@ public class Customer extends UserAccount{
     @JsonIgnore
     private Set<Gift> receivedGifts;
 
+    @OneToMany(mappedBy ="sender")
+    @JsonIgnore
+    private Set<FriendRequest> sentRequests;
+
+    @OneToMany(mappedBy ="receiver")
+    @JsonIgnore
+    private Set<FriendRequest> receivedRequests;
+
+
     @OneToMany(mappedBy ="suggestionSender")
     @JsonIgnore
     private Set<Suggestion> sentSuggestions;
@@ -54,15 +63,17 @@ public class Customer extends UserAccount{
     @JoinColumn(name = "movieRates")
     private Set<Rate> rates;
 
-    public Customer(long uId, String name, String password, Date birthday, String email, String role, int movieCount, float balance, Set<MovieRequest> movieRequests,Set<RentedMovie> rentedMovies,Set<Gift> sentGifts,Set<Gift> receivedGifts,Set<Suggestion> sentSuggestions,Set<Suggestion> receivedSuggestions,Set<SubtitleRequest> subtitleRequests,Set<Rate> rates,Set<FriendRequest> sentRequests,Set<FriendRequest> receivedRequests)
+    public Customer(long uId, String name, String password, Date birthday, String email, String role, int movieCount, float balance, Set<MovieRequest> movieRequests,Set<RentedMovie> rentedMovies,Set<Gift> sentGifts,Set<Gift> receivedGifts,Set<FriendRequest> sentRequests,Set<FriendRequest> receivedRequests,Set<Suggestion> sentSuggestions,Set<Suggestion> receivedSuggestions,Set<SubtitleRequest> subtitleRequests,Set<Rate> rates)
     {
-        super(uId, name, password, birthday, email, role, sentRequests, receivedRequests);
+        super(uId, name, password, birthday, email, role);
         this.movieCount = movieCount;
         this.balance = balance;
         this.movieRequests = movieRequests;
         this.rentedMovies = rentedMovies;
         this.sentGifts = sentGifts;
         this.receivedGifts = receivedGifts;
+        this.sentRequests = sentRequests;
+        this.receivedRequests = receivedRequests;
         this.sentSuggestions = sentSuggestions;
         this.receivedSuggestions = receivedSuggestions;
         this.subtitleRequests = subtitleRequests;
@@ -94,6 +105,20 @@ public class Customer extends UserAccount{
         if (receivedGifts == null)
             receivedGifts = new HashSet<>();
         receivedGifts.add(gift);
+    }
+
+    public void addSentRequest(FriendRequest request)
+    {
+        if (sentRequests == null)
+            sentRequests = new HashSet<>();
+        sentRequests.add(request);
+    }
+
+    public void addReceivedRequest(FriendRequest request)
+    {
+        if (receivedRequests == null)
+            receivedRequests = new HashSet<>();
+        receivedRequests.add(request);
     }
 
     public void addSentSuggestion(Suggestion suggestion)

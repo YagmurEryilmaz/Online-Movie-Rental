@@ -34,7 +34,7 @@ const DetailedInfoModal = ({cart, add_to_cart, ...props}) =>{
 				console.log(response.data)
 			}
 			).catch((err)=>{console.log(err.response)})
-		axios.get(`http://127.0.0.1/api/v1/trailer/getTrailerByMovie/${movieId}`).then(
+		axios.get(`http://127.0.0.1:8080/api/v1/trailer/getTrailerByMovie/${movieId}`).then(
 			(response) => {
 				setTrailer(response.data);
 				console.log(response.data)

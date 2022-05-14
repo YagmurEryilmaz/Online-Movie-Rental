@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { useEffect } from "react";
 const NotificationModal = () => {
-	const [requests,setRequests] = useState(["a"])
+	const [requests,setRequests] = useState([])
+	useEffect(()=> {
+		
+	})
 	return(
 		<div class="modal fade" id="notifications" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
