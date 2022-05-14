@@ -74,8 +74,8 @@ public class CustomerController {
         return customerService.getFriendCount(friendRequestDto.getReceiver_id(), friendRequestDto.getSender_id());
     }
 
-    @PatchMapping(path = "/updateUserInfoByUId/{uId}", headers = "email")
-    public ResponseEntity<Customer> updateUserInfoByUId(@PathVariable Long uId, @RequestHeader String email) {
+    @PatchMapping("/updateUserInfoByUId/{uId}/{email}")
+    public ResponseEntity<Customer> updateUserInfoByUId(@PathVariable Long uId, @PathVariable String email) {
         return ResponseEntity.ok(customerService.updateUserByUId(uId, email));
     }
 
