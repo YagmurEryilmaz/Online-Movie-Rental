@@ -7,6 +7,8 @@ import org.hibernate.annotations.SQLInsert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
+
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -31,8 +33,22 @@ public class MovieService {
     public List<Movie> getBySubtitleLang(String sLang) {
         return movieRepository.findBySubtitleLang(sLang);
     }
-    public Movie addMovie(Movie movie) {
-        return movieRepository.save(movie);
+
+    public Movie addMovie(String title, String genre, String directorName, int productionYear, double price, String posterUrl, Date additionDate, Set<MovieLang> movieLang, Set<SubtitleLang> subtitleLang) {
+
+            Movie s = Movie.builder()
+                    .title(title)
+                    .genre(genre)
+                    .directorName(directorName)
+                    .productionYear(productionYear)
+                    .price(price)
+                    .posterUrl(posterUrl)
+                    .additionDate(additionDate)
+                    .subtitleLang(subtitleLang)
+                    .movieLang(movieLang)
+                    .build();
+            return movieRepository.save(s);
+
     }
 
     public void updateMoviePrice(Long mId, double price)

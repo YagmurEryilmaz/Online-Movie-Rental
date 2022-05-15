@@ -6,6 +6,7 @@ import EditProfileModal from "./EditProfileModal";
 import AddFriendModal from "./AddFriendModal";
 import DetailedInfoModal from "./DetailedInfoModal";
 import { Link } from "react-router-dom";
+import { Navigate } from "react-router";
 import defaultAvatar from "./img/avatars/default_avatar.png";
 import avatar1 from "./img/avatars/image_part_001.png";
 import avatar2 from "./img/avatars/image_part_002.png"
@@ -67,6 +68,7 @@ const Profile = ({name, mail, uid,birthday}) => {
 
 			console.log(movieName, prodYear, dirName);
 			window.alert("Movie Request Sent");
+
 		}
 
 	}
@@ -125,9 +127,9 @@ const Profile = ({name, mail, uid,birthday}) => {
 									</div>
 									<div class="mb-3">
 										<label for="exampleFormControlInput1" class="form-label">Production Year</label>
-										<input type="text"  onChange = {(e)=> setProdYear(e.target.value)} class="form-control" id="exampleFormControlInput1" required />
+										<input type="number" min="1900" max="2022" step="1"   onChange = {(e)=> setProdYear(e.target.value)} class="form-control" id="exampleFormControlInput1" required />
 									</div>
-									<button type="submit" onClick = {() => handleSubmit()} className="btn btn-info mb-3">
+									<button type="button" onClick = {() => handleSubmit()} className="btn btn-info mb-3">
 										Send Request
 									</button>
 

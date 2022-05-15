@@ -11,13 +11,20 @@ import java.util.List;
 public class MovieLangService {
 
     private MovieLangRepository movieLangRepository;
+    private MovieService movieService;
 
     @Autowired
     public MovieLangService(MovieLangRepository movieLangRepository) {
         this.movieLangRepository = movieLangRepository;
     }
 
-    public MovieLang addLanguage(MovieLang movieLang) {
-        return movieLangRepository.save(movieLang);
+    public MovieLang addMovieLang(String mLang,Long mId ) {
+
+        MovieLang ml = MovieLang.builder()
+                .movieLang(mLang)
+                .movie(movieService.findMovieById(mId))
+                .build();
+        return movieLangRepository.save(ml);
     }
+
 }

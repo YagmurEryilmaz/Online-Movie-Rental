@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 const NotificationModal = ({uid, fetch_requests, friendRequests, accept_request, email}) => {
 	const [requests,setRequests] = useState([])
+	const [gifts, setGifts] = useState([])
 	
 	
 	useEffect(()=> {
@@ -15,6 +16,12 @@ const NotificationModal = ({uid, fetch_requests, friendRequests, accept_request,
 				
 			}
 		).catch((err) => {console.log(err)})
+		axios.get(`http://127.0.0.1:8080/api/v1/gift/getGiftsByReceiver/${uid}`).then(
+			(response) =>{
+
+				setGifts(response.data)
+			}
+		)
 			
 	},[])
 	const acceptRequest = (request) => {
@@ -64,29 +71,39 @@ const NotificationModal = ({uid, fetch_requests, friendRequests, accept_request,
 							<ul class="list-group list-group-flush">
 								{friendRequests.map((request)=>{
 									return(
-										
-
 											<li class="list-group-item">
-
-
 												<span className="fw-bold">From: {request.sender.name}</span>
 												<span className="fw-light mx-3">({request.sender.email})</span>
-
-											
-
-
-											<div className="float-end btn btn-danger" onClick={() => declineRequest(request)}>Decline</div>
-													<div className="float-end me-3 btn btn-success" onClick = {()=>acceptRequest(request)}>Accept</div>
-
-
-
+												<div className="float-end btn btn-danger" onClick={() => declineRequest(request)}>
+													Decline
+												</div>
+												<div className="float-end me-3 btn btn-success" onClick = {()=>acceptRequest(request)}>
+													Accept
+												</div>
 											</li>
 
 									)
-								})
+								})}	
+							</ul>
+						</div>
+					</div>
+					<div class="modal-body overflow auto">
+						<div class="card" >
+							<div class="card-header">
+								Gifts
+							</div>
+							<ul class="list-group list-group-flush">
+								{gifts.map((gift) => {
+									console.log(gifts)
+									return (
+										<li class="list-group-item">
+											<span className="fw-bold">{gift.senderCustomer.name} </span>
+											 <span>has sent you the movie: </span>
+											 <span className="fw-bold">{gift.movie.title}</span>	
+										</li>
 
-								}
-								
+									)
+								})}
 							</ul>
 						</div>
 					</div>

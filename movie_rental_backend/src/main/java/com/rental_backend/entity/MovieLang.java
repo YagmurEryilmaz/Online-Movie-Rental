@@ -19,12 +19,13 @@ public class MovieLang {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long movieLangId;
+    private String movieLang;
 
-    @ManyToMany(mappedBy = "movieLang", fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @PrimaryKeyJoinColumn(name = "movieLang", referencedColumnName = "m_id")
     @JsonIgnore
-    private Set<Movie> movie;
-    private String movieLang;
+    private Movie movie;
+
 
     /*public MovieLang(Long movieLangId, Set<Movie> movie,String movieLang){
         this.movieLangId = movieLangId;

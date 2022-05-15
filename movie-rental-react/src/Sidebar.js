@@ -22,9 +22,12 @@ const Sidebar = ({logout, role}) => {
 				<Link to="/profile" className="text-decoration-none text-white">
 					<section className="sidebar-link mb-1 hover-effect"><img src={PersonIcon} className="sidebar-icon ms-lg-2" /><span className="ms-lg-2 ms-1">Profile</span></section>
 				</Link>
+				{
+					(role === "customer") ? 
 				<Link to="/rent" className="text-decoration-none text-white">
 					<section className="sidebar-link mb-1 hover-effect"><img src={RentIcon} className="ms-lg-2 sidebar-icon" /><span className="ms-lg-2 ms-1">Rent</span></section>
-				</Link>
+				</Link>:(null)
+				}
 				<Link to="/" className="text-decoration-none text-white bottomBlank">
 					<section className="sidebar-link mb-1 hover-effect" onClick={logout}><img src={LogoutIcon}  className="ms-lg-2 sidebar-icon" /><span className="ms-lg-2 ms-1">Logout</span></section>
 				</Link>
@@ -36,7 +39,7 @@ const Sidebar = ({logout, role}) => {
 }
 const mapStateToProps = state => {
 	console.log(state)
-	return {role: state.role}
+	return {role: state.accountType}
 }
 
 const mapDispatchToProps = dispatch => {

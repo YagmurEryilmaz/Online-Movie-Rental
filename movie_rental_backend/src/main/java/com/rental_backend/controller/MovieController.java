@@ -36,8 +36,8 @@ public class MovieController {
     }
 
     @PostMapping("/addMovieToSystem")
-    public ResponseEntity<Movie> addMovie(@RequestBody Movie movie){
-        return new ResponseEntity<>(movieService.addMovie(movie), HttpStatus.CREATED);
+    public ResponseEntity<Movie> addMovie(@RequestBody MovieResponse m){
+        return new ResponseEntity<>(movieService.addMovie(m.getTitle(),m.getGenre(),m.getDirectorName(),m.getProductionYear(),m.getPrice(),m.getPosterUrl(),m.getAdditionDate(),m.getMovieLang(),m.getSubtitleLang()), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/deleteMovie")
