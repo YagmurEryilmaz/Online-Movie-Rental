@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface GiftRepository extends CrudRepository<Gift,Long> {
 
-    @Query("select g.movie.title from Gift g, Customer c where g.senderCustomer.uId = c.uId and g.senderCustomer.uId = :senderId ")
+    @Query("select g from Gift g, Customer c where g.senderCustomer.uId = c.uId and g.senderCustomer.uId = :senderId ")
     List<Gift> findbySenderId(@Param("senderId") Long senderId);
 
     @Query("select g from Gift g, Customer c where g.receiverCustomer.uId = c.uId and g.receiverCustomer.uId = :receiverId ")

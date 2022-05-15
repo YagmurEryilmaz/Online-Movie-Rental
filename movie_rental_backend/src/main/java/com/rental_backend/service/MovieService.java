@@ -34,7 +34,7 @@ public class MovieService {
         return movieRepository.findBySubtitleLang(sLang);
     }
 
-    public Movie addMovie(String title, String genre, String directorName, int productionYear, double price, String posterUrl, Date additionDate, Set<MovieLang> movieLang, Set<SubtitleLang> subtitleLang) {
+    public Movie addMovie(String title, String genre, String directorName, int productionYear, double price, String posterUrl, Date additionDate, Set<MovieLang> movieLang, Set<SubtitleLang> subtitleLang, Set<Trailer> trailer) {
 
             Movie s = Movie.builder()
                     .title(title)
@@ -46,6 +46,7 @@ public class MovieService {
                     .additionDate(additionDate)
                     .subtitleLang(subtitleLang)
                     .movieLang(movieLang)
+                    .trailers(trailer)
                     .build();
             return movieRepository.save(s);
 
