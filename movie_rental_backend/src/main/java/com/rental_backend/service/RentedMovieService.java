@@ -31,6 +31,10 @@ public class RentedMovieService {
         this.paymentService = paymentService;
     }
 
+    public RentedMovie findMovieById(Long id) {
+        return rentedMovieRepository.findRentedMovieByMovieId(id);
+    }
+
     public void rentMovie( Long c_id, Long m_id, Date expDate )
     {
         if (isRentedCurrently(c_id, m_id))

@@ -12,22 +12,27 @@ public class GiftService {
     private CustomerService customerService;
     private MovieService movieService;
     private PaymentService paymentService;
+    private RentedMovieRepository rentedMovieRepository;
 
     @Autowired
-    public GiftService(GiftRepository giftRepository, CustomerService customerService, MovieService movieService, PaymentService paymentService) {
+    public GiftService(GiftRepository giftRepository, CustomerService customerService, MovieService movieService, PaymentService paymentService,RentedMovieRepository rentedMovieRepository) {
         this.giftRepository = giftRepository;
         this.customerService = customerService;
         this.movieService = movieService;
         this.paymentService = paymentService;
+        this.rentedMovieRepository=rentedMovieRepository;
     }
 
     public List<Gift> findByReceiverId(Long receiverId) {
+
         return giftRepository.findbyReceiverId(receiverId);
     }
     public List<Gift> findBySenderId(Long senderId) {
         return giftRepository.findbySenderId(senderId);
     }
     public Gift addGift(Long sender_id, Long receiver_id, Long m_id) {
+
+        rentedMovieRepository.save(rentedMovieRepository.findRentedMovieByMovieId(m_id));
         Gift.PrimaryKey primaryKey = new Gift.PrimaryKey(sender_id,receiver_id,m_id);
 
         Gift gift = Gift.builder()
