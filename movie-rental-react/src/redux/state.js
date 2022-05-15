@@ -8,6 +8,7 @@ export const stateProto = {
 	email: "",
 	friendRequests:[],
 	uid: -1,
+	numOfRequests:0
 
 
 }

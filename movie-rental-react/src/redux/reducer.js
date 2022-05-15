@@ -13,6 +13,7 @@ const reducer = (state,action) =>{
 			email: theEmail,
 			uid: action.payload.uid
 
+
 		}
 
 		
@@ -63,17 +64,20 @@ const reducer = (state,action) =>{
 		return{
 			...state,
 			friendRequests: action.payload.requests,
+			numOfRequests: action.payload.requests.length
 		}
 
 	}
 	if(action.type == "ACCEPT_REQUEST"){
 		var theNewRequests = []
+		var theNewNumOfRequests = state.numOfRequests - 1
 		if(action.payload){
 			theNewRequests = state?.friendRequests.filter(request => request !== action.payload.request)
 		}
 		return{
 			...state,
 			friendRequests: theNewRequests,
+			numOfRequests: theNewNumOfRequests
 		}
 
 		

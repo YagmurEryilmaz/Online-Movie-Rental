@@ -52,6 +52,15 @@ const EmployeeProfilePage = ({name, mail, uid, birthday}) => {
 		}).catch((error) => {console.log(error)})
 	}, [])
 
+	var trailers = 
+		{
+			trailerId: 7,
+			trailerUrl: "trailerUrl",
+		}
+	
+	var trailerSet = new Array()
+	trailerSet.push(trailers);
+	console.log(trailerSet)
 
 	const changePP = (avatar) => {
 		setProfilePhoto(avatar);
@@ -65,7 +74,22 @@ const EmployeeProfilePage = ({name, mail, uid, birthday}) => {
 		}
 		else {
 			var date = new Date();
+			
 			date.setDate(date.getDate());
+			
+			var trailers =
+			{
+				trailerId: 7,
+				trailerUrl: trailerUrl,
+			}
+
+			var trailerSet = new Set()
+			trailerSet.add(trailers);
+			console.log(trailerSet)
+
+			
+			var subtSet = new Set(subtitleArr);
+			var langSet = new Set(movieLang);
 			var movieInfo = {
 				title: movieName,
 				directorName: dirName,
@@ -74,14 +98,15 @@ const EmployeeProfilePage = ({name, mail, uid, birthday}) => {
 				price: price,
 				posterUrl: posterUrl,
 				additionDate: date,
-				trailerUrl: trailerUrl,
-				subtitleLang: subtitleArr,
-				movieLang: movieLang
+				trailers: trailerSet,
+				
 
 			}
 			axios.post("http://127.0.0.1:8080/api/v1/movie/addMovieToSystem", movieInfo).then(
-
-				window.alert("movie added")
+				(response) => {
+					if(response)
+						window.alert("movie added")
+				}
 
 			).catch((err) => {console.log(err)})
 

@@ -11,17 +11,12 @@ import CartModal from "./CartModal";
 import "./Navbar.css";
 import axios from "axios";
 
-const Navbar = ({name, balance, role }) =>{
+const Navbar = ({name, balance, friendRequests, numOfRequests,role }) =>{
 	console.log()
 	const [click, setClick] = useState(false)
-	const [numOfFriendRequests, setNumOfFriendRequests] = useState(0)
 
-	useEffect(() => {
-		axios.get("http://127.0.0.1:8080/api/v1/customer/getNumOfReceivedRequests").then((response)=>{
-			setNumOfFriendRequests(response.data)
-		}).catch((error)=>{console.log(error)})
 
-	}, []);
+	
 
 	return (
 		<>
@@ -42,7 +37,7 @@ const Navbar = ({name, balance, role }) =>{
 
 							<IconButton size = "large">
 
-								<Badge badgeContent={numOfFriendRequests} color="primary">
+								<Badge badgeContent={numOfRequests} color="primary">
 									<MailIcon fontSize = "inherit" style ={{color: 'white'}} />
 								</Badge>
 							</IconButton>
@@ -79,6 +74,8 @@ const mapStateToProps = state =>
 		name:state.name,
 		balance:state.balance,
 		role: state.accountType,
+		friendRequests: state.friendRequests,
+		numOfRequests: state.numOfRequests
 	}
 }
 

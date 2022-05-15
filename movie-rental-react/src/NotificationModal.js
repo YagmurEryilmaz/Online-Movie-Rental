@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { connect } from "react-redux";
-const NotificationModal = ({uid, fetch_requests, friendRequests, accept_request, email}) => {
+const NotificationModal = ({uid, fetch_requests, friendRequests, numOfRequests, accept_request, email}) => {
 	const [requests,setRequests] = useState([])
 	const [gifts, setGifts] = useState([])
 	
@@ -10,9 +10,12 @@ const NotificationModal = ({uid, fetch_requests, friendRequests, accept_request,
 	useEffect(()=> {
 		axios.get(`http://127.0.0.1:8080/api/v1/friendRequest/getFriendRequestsByReceiver/${uid}`).then(
 			(response) =>{
-				console.log(response.data)
-				setRequests(response.data);
-				fetch_requests(response.data);
+				var pendingRequests = response.data.filter((request)=>{return request.friendReq_status === "pending"})
+
+				console.log(pendingRequests)
+
+				setRequests(pendingRequests);
+				fetch_requests(pendingRequests);
 				
 			}
 		).catch((err) => {console.log(err)})
@@ -20,6 +23,7 @@ const NotificationModal = ({uid, fetch_requests, friendRequests, accept_request,
 			(response) =>{
 
 				setGifts(response.data)
+				
 			}
 		)
 			
@@ -120,7 +124,8 @@ const mapStateToProps = state => {
 	return{
 		uid: state.uid,
 		email: state.email,
-		friendRequests: state.friendRequests
+		friendRequests: state.friendRequests,
+		numOfRequests: state.numOfRequests,
 	}
 }
 const mapDispatchToProps = dispatch => {

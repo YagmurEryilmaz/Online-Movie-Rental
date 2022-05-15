@@ -53,7 +53,7 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 		).catch((err) => {console.log(err.response)})
 		
 	}, [isRated])
-	var trailerLink = mov.trailers[0].trailerUrl
+	var trailerLink = mov.trailers[0]?.trailerUrl
 	console.log(mov.trailers[0].trailerUrl)
 	var subtitlesArr = mov.subtitleLang.map((sub) => {
 		return sub.s_lang
