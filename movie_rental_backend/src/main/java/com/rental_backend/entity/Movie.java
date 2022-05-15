@@ -56,7 +56,7 @@ public class Movie {
     @JoinColumn(name = "movie")
     private Set<MovieLang> movieLang;
 
-    @ManyToMany
+    @OneToMany
     @JoinColumn(name = "movie")
     private Set<SubtitleLang> subtitleLang;
 

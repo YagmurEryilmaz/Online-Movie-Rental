@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface MovieRepository extends CrudRepository<Movie,Long>{
@@ -20,6 +21,7 @@ public interface MovieRepository extends CrudRepository<Movie,Long>{
     List<Movie> findByTitle(String title);
     List <Movie> findByGenre(String genre);
     List <Movie> findByProductionYear(int productionYear);
+    List<Movie> findBySubtitleLang(String subtitleLang);
     boolean existsByTitleAndDirectorName(String title, String directorName);
     Movie findById(long mId);
 
@@ -40,6 +42,8 @@ public interface MovieRepository extends CrudRepository<Movie,Long>{
     @Transactional
     @Query("update Movie m set m.price=:price where m.mId=:mId ")
     void updateMoviePrice(@Param("mId") Long mId, @Param("price") double price);
+
+
 
 
 

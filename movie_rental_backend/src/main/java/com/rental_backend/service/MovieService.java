@@ -9,6 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class MovieService {
@@ -25,6 +26,10 @@ public class MovieService {
 
     public Movie findMovieById(Long id) {
         return movieRepository.findMovieById(id);
+    }
+
+    public List<Movie> getBySubtitleLang(String sLang) {
+        return movieRepository.findBySubtitleLang(sLang);
     }
     public Movie addMovie(Movie movie) {
         return movieRepository.save(movie);

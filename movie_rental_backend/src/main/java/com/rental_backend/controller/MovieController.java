@@ -35,7 +35,6 @@ public class MovieController {
         return ResponseEntity.ok(movieService.findById(mId));
     }
 
-
     @PostMapping("/addMovieToSystem")
     public ResponseEntity<Movie> addMovie(@RequestBody Movie movie){
         return new ResponseEntity<>(movieService.addMovie(movie), HttpStatus.CREATED);
@@ -52,6 +51,5 @@ public class MovieController {
         movieService.updateMoviePrice(mId, price);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 
 }
