@@ -36,13 +36,26 @@ public class AuthenticationController {
                 String requiredPassword = userAccountService.findByEmail(loginRequest.getEmail()).getPassword();
                 if (providedPassword.equals(requiredPassword)) {
                     UserAccount user = userAccountService.findByEmail(loginRequest.getEmail());
-
+                    if(user.getRole().equals("customer") ){
+                        float balance  = customerService.findByEmail(loginRequest.getEmail()).getBalance();
+                        return UserResponse.builder()
+                                .success(true)
+                                .uId(user.getUId())
+                                .birthday(user.getBirthday())
+                                .email(user.getEmail())
+                                .role(user.getRole())
+                                .name(user.getName())
+                                .balance(balance)
+                                .build();
+                    }
                     return UserResponse.builder()
                             .success(true)
                             .uId(user.getUId())
+                            .birthday(user.getBirthday())
                             .email(user.getEmail())
                             .role(user.getRole())
                             .name(user.getName())
+                            .balance(0)
                             .build();
                 }
             }

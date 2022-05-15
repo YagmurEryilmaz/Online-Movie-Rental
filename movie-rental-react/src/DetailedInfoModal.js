@@ -56,7 +56,7 @@ const DetailedInfoModal = ({cart, uid, add_to_cart, ...props}) =>{
 
 		
 		var contains = cart.indexOf(mov);
-
+	var trailerLink = mov.trailers[0].trailerUrl
 	const handleClick = ()=>{
 		var subt = {
 
@@ -171,7 +171,7 @@ const DetailedInfoModal = ({cart, uid, add_to_cart, ...props}) =>{
 								</div>
 									{(contains === - 1) ? <div onClick = {() => add_to_cart(mov)} className="col-8 mb-3 btn btn-primary">Add To Cart</div> : <button type="button" className="col-8 mb-3 btn btn-secondary" disabled>Already In Cart</button> }
 
-								<button type="button" data-bs-target="#watchTrailer" className="col-8 mb-3  btn btn-primary" data-bs-toggle = "modal" >Watch Trailer</button>
+									<a href={trailerLink} target="_blank" className="col-8 mb-3  btn btn-primary"> Watch Trailer </a>
 								
 
 									
@@ -228,26 +228,7 @@ const DetailedInfoModal = ({cart, uid, add_to_cart, ...props}) =>{
 				</div>
 			</div>
 		</div>
-		<div class="modal fade" id="watchTrailer" tabindex="-1">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">{props.movie.title} Trailer</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-								</div>
-									<div class="modal-body d-flex justify-content-center">
-										<iframe width="720" height="315"
-											src={trailer}>
-
-										</iframe>
-
-									</div>
-								<div class="modal-footer">
-							<a data-bs-toggle="modal" href={String(`#detailedInfoModal${props.movie.mid}`)} class="btn btn-primary">Back to Detailed Info</a>
-					</div>
-				</div>
-			</div>
-		</div>
+		
 		</>
 		
 	)

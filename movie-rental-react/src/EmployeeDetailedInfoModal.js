@@ -51,14 +51,16 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 				console.log(response.data)
 			}
 		).catch((err) => {console.log(err.response)})
-		axios.get(`http://127.0.0.1:8080/api/v1/trailer/getTrailerByMovie/${movieId}`).then(
-			(response) => {
-				setTrailer(response.data);
-				console.log(response.data)
-			}
-		).catch((err) => {console.log(err.response)})
-
+		
 	}, [isRated])
+	var trailerLink = mov.trailers[0].trailerUrl
+	console.log(mov.trailers[0].trailerUrl)
+	var subtitlesArr = mov.subtitleLang.map((sub) => {
+		return sub.s_lang
+	})
+	var movieLangArr = mov.movieLang.map((lang)=>{
+		return lang.movieLang
+	})
 
 	const deleteMovie = () => {
 		if(window.confirm("Are you sure you want to delete this movie?")){
@@ -75,7 +77,7 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 	}
 	const addLang = ()=> {
 		if(movieLang !== ""){
-			if(mov.movieLang.indexOf(movieLang)!== -1){
+			if(movieLangArr.indexOf(movieLang)!== -1){
 				window.alert("Movie language already exists")
 			}
 			else{
@@ -85,7 +87,7 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 	}
 	const addSubtitle = () =>{
 		if(subtitle !== ""){
-			if(mov.subtitleLang.indexOf(subtitle)!== -1){
+			if(subtitlesArr.indexOf(subtitle)!== -1){
 				window.alert("Subtitle language already exists")
 			}
 			else{
@@ -174,8 +176,8 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 									<input onChange={(e) => setLang(e.target.value)}className="my-2" type="text" />
 									<button type="button" onClick={() => {addLang()}} className="col-8 mb-3  btn btn-primary" >Add Language</button>
 
-									<button type="button" data-bs-target="#watchTrailer" className="col-8 mb-3  btn btn-primary" data-bs-toggle="modal" >Watch Trailer</button>
 									
+									<a href={trailerLink} target = "_blank" className="col-8 mb-3  btn btn-primary"> Watch Trailer </a>
 
 									<button type="button" onClick={() => deleteMovie()} className="col-8 mb-3 btn btn-danger">Delete Movie</button>
 								</div>
@@ -192,26 +194,7 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 					</div>
 				</div>
 			</div>
-			<div class="modal fade" id="watchTrailer" tabindex="-1">
-				<div class="modal-dialog modal-lg">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">{props.movie.title} Trailer</h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body d-flex justify-content-center">
-							<iframe width="720" height="315"
-								src={trailer}>
-
-							</iframe>
-
-						</div>
-						<div class="modal-footer">
-							<a data-bs-toggle="modal" href={String(`#detailedInfoModal${props.movie.mid}`)} class="btn btn-primary">Back to Detailed Info</a>
-						</div>
-					</div>
-				</div>
-			</div>
+			
 		</>
 
 	)

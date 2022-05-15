@@ -3,6 +3,7 @@ const reducer = (state,action) =>{
 		var theName = action.payload.name;
 		var theAccType = action.payload.role
 		var theEmail = action.payload.email;
+		var theBalance = action.payload.balance;
 		return{
 			...state,
 			...action.payload,

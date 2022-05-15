@@ -56,7 +56,10 @@ const Navbar = ({name, balance, role }) =>{
 							<div className="d-none d-lg-block mx-4">
 								<div>
 									<div className="username">{name}</div>
-									<div className="credit text-light">{balance} $</div>
+									{
+										(role === "customer") ? <div className="credit text-light">{balance}$</div>:(null)
+									}
+
 								</div>
 							</div>
 						</div>

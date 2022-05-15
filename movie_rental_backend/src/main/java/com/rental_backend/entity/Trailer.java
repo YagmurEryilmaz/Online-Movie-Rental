@@ -1,4 +1,5 @@
 package com.rental_backend.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.context.annotation.Primary;
@@ -22,6 +23,7 @@ public class Trailer {
 
     @ManyToOne( fetch = FetchType.EAGER)
     @PrimaryKeyJoinColumn(name = "trailer", referencedColumnName = "mId")
+    @JsonIgnore
     private Movie movie;
 
 

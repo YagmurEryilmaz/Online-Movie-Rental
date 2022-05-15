@@ -24,5 +24,7 @@ public class UserResponse {
 
     private String email;
 
+    private float balance;
+
     private String role;
 }
