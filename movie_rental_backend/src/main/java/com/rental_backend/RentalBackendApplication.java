@@ -128,27 +128,27 @@ public class RentalBackendApplication {
             movie6.setSubtitleLang(subtitleLangs6);
             movieRepository.save(movie6);
 
-            trailers.add(trailerRepository.save(new Trailer(1L,"https://www.youtube.com/watch?v=SDnYMbYB-nU",movieRepository.findMovieById(3L))));
+            trailers.add(trailerRepository.save(new Trailer(1L,"https://www.youtube.com/watch?v=SDnYMbYB-nU",movieRepository.findMovieById(1L))));
             movie1.setTrailers(trailers);
             movieRepository.save(movie1);
 
-            trailers2.add(trailerRepository.save(new Trailer(2L,"https://www.youtube.com/watch?v=JfVOs4VSpmA",movieRepository.findMovieById(4L))));
+            trailers2.add(trailerRepository.save(new Trailer(2L,"https://www.youtube.com/watch?v=JfVOs4VSpmA",movieRepository.findMovieById(2L))));
             movie2.setTrailers(trailers2);
             movieRepository.save(movie2);
 
-            trailers3.add(trailerRepository.save(new Trailer(3L,"https://www.youtube.com/watch?v=JfVOs4VSpmA",movieRepository.findMovieById(5L))));
+            trailers3.add(trailerRepository.save(new Trailer(3L,"https://www.youtube.com/watch?v=JfVOs4VSpmA",movieRepository.findMovieById(3L))));
             movie3.setTrailers(trailers3);
             movieRepository.save(movie3);
 
-            trailers4.add(trailerRepository.save(new Trailer(4L,"https://www.youtube.com/watch?v=JfVOs4VSpmA",movieRepository.findMovieById(6L))));
+            trailers4.add(trailerRepository.save(new Trailer(4L,"https://www.youtube.com/watch?v=JfVOs4VSpmA",movieRepository.findMovieById(4L))));
             movie4.setTrailers(trailers4);
             movieRepository.save(movie4);
 
-            trailers5.add(trailerRepository.save(new Trailer(5L,"https://www.youtube.com/watch?v=JfVOs4VSpmA",movieRepository.findMovieById(7L))));
+            trailers5.add(trailerRepository.save(new Trailer(5L,"https://www.youtube.com/watch?v=JfVOs4VSpmA",movieRepository.findMovieById(5L))));
             movie5.setTrailers(trailers5);
             movieRepository.save(movie5);
 
-            trailers6.add(trailerRepository.save(new Trailer(6L,"https://www.youtube.com/watch?v=JfVOs4VSpmA",movieRepository.findMovieById(8L))));
+            trailers6.add(trailerRepository.save(new Trailer(6L,"https://www.youtube.com/watch?v=JfVOs4VSpmA",movieRepository.findMovieById(6L))));
             movie6.setTrailers(trailers6);
             movieRepository.save(movie6);
 
