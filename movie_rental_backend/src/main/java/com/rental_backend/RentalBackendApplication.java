@@ -61,7 +61,7 @@ public class RentalBackendApplication {
             HashSet<Movie> movies = new HashSet<>();
 
 
-            movies.add(movieRepository.findMovieById(21001L));
+            /*movies.add(movieRepository.findMovieById(21001L));
             movieLangs.add(movieLangRepository.save(new MovieLang(1L,movies,"German")));
             movies.add(movieRepository.findMovieById(21002L));
             movieLangs.add(movieLangRepository.save(new MovieLang(2L,movies,"English")));
@@ -74,7 +74,7 @@ public class RentalBackendApplication {
             movies.add(movieRepository.findMovieById(21005L));
             movieLangs.add(movieLangRepository.save(new MovieLang(4L,movies,"Turkish")));
             movies.add(movieRepository.findMovieById(21006L));
-            movieLangs.add(movieLangRepository.save(new MovieLang(2L,movies,"English")));
+            movieLangs.add(movieLangRepository.save(new MovieLang(2L,movies,"English")));*/
 
 
             /*subtitleLangs.add(subtitleLangRepository.save(new SubtitleLang(1111L,movies,"English")));

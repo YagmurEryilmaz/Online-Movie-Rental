@@ -52,7 +52,7 @@ public class Movie {
         this.additionDate = additionDate;
     }
 
-    @ManyToMany
+    @OneToMany
     @JoinColumn(name = "movie")
     private Set<MovieLang> movieLang;
 
