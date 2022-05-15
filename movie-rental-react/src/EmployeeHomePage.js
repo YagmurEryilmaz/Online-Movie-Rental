@@ -1,4 +1,4 @@
-
+import EmployeeDetailedInfoModal from "./EmployeeDetailedInfoModal";
 import Navbar from "./Navbar"
 import Sidebar from "./Sidebar"
 import {useState, useEffect} from "react";
@@ -73,8 +73,8 @@ const EmployeeHomepage = () => {
 
 
 
-												<a data-bs-toggle="modal" href={String(`#detailedInfoModal${movies.mid}`)} class="btn btn-primary">Detailed Information</a>
-
+												<a data-bs-toggle="modal" href={String(`#employeeDetailedInfoModal${movies.mid}`)} class="btn btn-primary">Detailed Information</a>
+												<EmployeeDetailedInfoModal movie={movies} />
 											</div>
 
 										</div>
