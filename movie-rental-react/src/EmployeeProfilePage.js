@@ -60,8 +60,8 @@ const EmployeeProfilePage = ({name, mail, uid, birthday}) => {
 		avatar1, avatar2, avatar3, avatar4, avatar5, avatar6, avatar6, avatar7, avatar8, avatar9
 	]
 	const handleSubmit = () => {
-		if(movieName == "" || prodYear == "" || dirName == "") {
-			window.alert("Please fill all required fields");
+		if(movieName == "" || prodYear < 1900 || dirName == "" || genre == "" || price == 0 || movieLang.length == 0 || subtitleArr.length == 0) {
+			window.alert("Please fill all required fields correctly!");
 		}
 		else {
 			var date = new Date();
@@ -75,12 +75,13 @@ const EmployeeProfilePage = ({name, mail, uid, birthday}) => {
 				posterUrl: posterUrl,
 				additionDate: date,
 				trailerUrl: trailerUrl,
-				
+				subtitleLang: subtitleArr,
+				movieLang: movieLang
 
 			}
 			axios.post("http://127.0.0.1:8080/api/v1/movie/addMovieToSystem", movieInfo).then(
 
-				window.alert("Movie Request Sent")
+				window.alert("movie added")
 
 			).catch((err) => {console.log(err)})
 
@@ -142,7 +143,7 @@ const EmployeeProfilePage = ({name, mail, uid, birthday}) => {
 									</div>
 									<div class="mb-3">
 										<label for="exampleFormControlInput1" class="form-label">Production Year</label>
-										<input type="number" onChange={(e) => setProdYear(e.target.value)} class="form-control" id="exampleFormControlInput1" required />
+										<input type="number" min = "1900" max = "2022" step = "1"  onChange={(e) => setProdYear(e.target.value)} class="form-control" id="exampleFormControlInput1" required />
 									</div>
 									<div class="mb-3">
 										<label for="exampleFormControlInput1" class="form-label">Genre</label>
