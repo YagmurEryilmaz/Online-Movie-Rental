@@ -29,6 +29,12 @@ public class MovieService {
     public Movie addMovie(Movie movie) {
         return movieRepository.save(movie);
     }
+
+    public void updateMoviePrice(Long mId, double price)
+    {
+        movieRepository.updateMoviePrice(mId,price);
+    }
+
     public List<Movie> findMovieByTitle(String title) {
         return movieRepository.findByTitle(title);
     }

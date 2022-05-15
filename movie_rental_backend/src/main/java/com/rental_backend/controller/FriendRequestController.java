@@ -38,11 +38,18 @@ public class FriendRequestController {
         return ResponseEntity.ok(friendRequestService.findBySenderId(sender_id));
     }
 
+    @GetMapping("/getFriends/{userId}")
+    public ResponseEntity<List<FriendRequest>> getFriends(@PathVariable("userId") Long userId) {
+        return ResponseEntity.ok(friendRequestService.getFriends(userId));
+    }
 
+    @GetMapping("/getAcceptedRequests/{sender_id}/{receiver_id}")
+    public ResponseEntity<List<FriendRequest>> getAcceptedRequests(@PathVariable("sender_id") Long sender_id,@PathVariable("receiver_id") Long receiver_id) {
+        return ResponseEntity.ok(friendRequestService.getAcceptedRequests(sender_id,receiver_id));
+    }
 
     @PostMapping("/createFriendRequest")
     public ResponseEntity<FriendRequest> createFriendRequest(@RequestBody FriendRequestDto fr) {
-        //System.out.println(fr);
         return new ResponseEntity<>(friendRequestService.addFriendRequest(fr.getSender_email(), fr.getReceiver_email()), HttpStatus.CREATED);
     }
 

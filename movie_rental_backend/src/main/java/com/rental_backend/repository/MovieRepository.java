@@ -36,6 +36,11 @@ public interface MovieRepository extends CrudRepository<Movie,Long>{
     @Query("delete from Movie where title= :title and directorName = :directorName")
     void deleteMovie(@Param("title") String title, @Param("directorName") String directorName);
 
+    @Modifying
+    @Transactional
+    @Query("update Movie m set m.price=:price where m.mId=:mId ")
+    void updateMoviePrice(@Param("mId") Long mId, @Param("price") double price);
+
 
 
 
