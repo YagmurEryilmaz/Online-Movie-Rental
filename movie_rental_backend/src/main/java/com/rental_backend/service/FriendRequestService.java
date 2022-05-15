@@ -73,6 +73,11 @@ public class FriendRequestService {
         return friendRequestRepository.getFriends(userId);
     }
 
+    public List <FriendRequest> getAcceptedRequests(Long senderId, Long receiverId)
+    {
+        return friendRequestRepository.findAcceptedFriendRequests(senderId,receiverId);
+    }
+
     public void deleteFriendRequest(Long senderId, Long receiverId) {
         friendRequestRepository.deleteFriendRequest(senderId, receiverId);
     }

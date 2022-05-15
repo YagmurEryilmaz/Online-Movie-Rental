@@ -24,6 +24,16 @@ public class SubtitleLangService {
         return subtitleLangRepository.findSubtitleLangById(id);
     }
 
+    public SubtitleLang addSubtitleLang(Long mId, String sLang ) {
+
+        SubtitleLang s = SubtitleLang.builder()
+                .s_lang(sLang)
+                .movie(movieService.findMovieById(mId))
+                .build();
+        return subtitleLangRepository.save(s);
+    }
+
+
     public Set<SubtitleLang> getSubtitleLang (Long movieId){
        return movieService.findMovieById(movieId).getSubtitleLang();
     }

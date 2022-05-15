@@ -35,7 +35,6 @@ public class MovieController {
         return ResponseEntity.ok(movieService.findById(mId));
     }
 
-
     @PostMapping("/addMovieToSystem")
     public ResponseEntity<Movie> addMovie(@RequestBody Movie movie){
         return new ResponseEntity<>(movieService.addMovie(movie), HttpStatus.CREATED);
@@ -47,5 +46,10 @@ public class MovieController {
         return new ResponseEntity<>( HttpStatus.NO_CONTENT);
     }
 
+    @PatchMapping("/updateMoviePrice/{mId}/{price}")
+    public ResponseEntity<?> updateUserInfoByUId(@PathVariable Long mId, @PathVariable double price) {
+        movieService.updateMoviePrice(mId, price);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
 }
