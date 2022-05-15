@@ -127,7 +127,7 @@ const Profile = ({name, mail, uid,birthday}) => {
 									</div>
 									<div class="mb-3">
 										<label for="exampleFormControlInput1" class="form-label">Production Year</label>
-										<input type="text"  onChange = {(e)=> setProdYear(e.target.value)} class="form-control" id="exampleFormControlInput1" required />
+										<input type="number" min="1900" max="2022" step="1"   onChange = {(e)=> setProdYear(e.target.value)} class="form-control" id="exampleFormControlInput1" required />
 									</div>
 									<button type="button" onClick = {() => handleSubmit()} className="btn btn-info mb-3">
 										Send Request
