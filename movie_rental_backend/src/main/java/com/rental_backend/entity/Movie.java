@@ -66,6 +66,7 @@ public class Movie {
 
     @OneToMany
     @JoinColumn(name = "movie")
+    @JsonIgnore
     private Set<Trailer> trailers;
 
     @OneToMany

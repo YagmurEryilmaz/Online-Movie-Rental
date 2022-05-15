@@ -43,6 +43,11 @@ public class RentalBackendApplication {
     InitializingBean databaseInit() {
         return () -> {
             HashSet<MovieLang> movieLangs = new HashSet<>();
+            HashSet<MovieLang> movieLangs2 = new HashSet<>();
+            HashSet<MovieLang> movieLangs3 = new HashSet<>();
+            HashSet<MovieLang> movieLangs4 = new HashSet<>();
+            HashSet<MovieLang> movieLangs5 = new HashSet<>();
+            HashSet<MovieLang> movieLangs6 = new HashSet<>();
 
             HashSet<SubtitleLang> subtitleLangs = new HashSet<>();
             HashSet<SubtitleLang> subtitleLangs2 = new HashSet<>();
@@ -51,8 +56,6 @@ public class RentalBackendApplication {
             HashSet<SubtitleLang> subtitleLangs5 = new HashSet<>();
             HashSet<SubtitleLang> subtitleLangs6 = new HashSet<>();
 
-            HashSet<RentedMovie> rentedMovies = new HashSet<>();
-
             HashSet<Trailer> trailers = new HashSet<>();
             HashSet<Trailer> trailers2 = new HashSet<>();
             HashSet<Trailer> trailers3 = new HashSet<>();
@@ -60,6 +63,7 @@ public class RentalBackendApplication {
             HashSet<Trailer> trailers5 = new HashSet<>();
             HashSet<Trailer> trailers6 = new HashSet<>();
 
+            HashSet<RentedMovie> rentedMovies = new HashSet<>();
             HashSet<Rate> rates = new HashSet<>();
             HashSet<Gift> gifts = new HashSet<>();
             HashSet<Gift> sentgifts = new HashSet<>();
@@ -98,33 +102,62 @@ public class RentalBackendApplication {
             Movie movie5 = movieRepository.save(new Movie(21005L,"Darkness In the Shadow" ,"Action","Cenk Duran",2009, 90, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(119,05,15),movieLangs,subtitleLangs,rentedMovies,trailers,rates,gifts,suggestions));
             Movie movie6 = movieRepository.save(new Movie(21006L,"Undefined Memories" ,"Romantic","Can Önal",1997, 60.5, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(120,07,29),movieLangs,subtitleLangs,rentedMovies,trailers,rates,gifts,suggestions));
 
-            subtitleLangs.add(subtitleLangRepository.save(new SubtitleLang(1111L,"English", movieRepository.findMovieById(1L))));
+            movieLangs.add(movieLangRepository.save(new MovieLang(1111L, "English", movieRepository.findMovieById(102L))));
+            movie1.setMovieLang(movieLangs);
+            movieRepository.save(movie1);
+
+            movieLangs2.add(movieLangRepository.save(new MovieLang(2222L, "German", movieRepository.findMovieById(21L))));
+            movieLangs2.add(movieLangRepository.save(new MovieLang(3333L,"Dutch",movieRepository.findMovieById(722L))));
+            movie2.setMovieLang(movieLangs2);
+            movieRepository.save(movie2);
+
+            movieLangs3.add(movieLangRepository.save(new MovieLang(4444L,"English", movieRepository.findMovieById(37L))));
+            movieLangs3.add(movieLangRepository.save(new MovieLang(5555L,"French", movieRepository.findMovieById(89L))));
+            movie3.setMovieLang(movieLangs3);
+            movieRepository.save(movie3);
+
+            movieLangs4.add(movieLangRepository.save(new MovieLang(6666L,"English", movieRepository.findMovieById(321L))));
+            movie4.setMovieLang(movieLangs4);
+            movieRepository.save(movie4);
+
+            movieLangs5.add(movieLangRepository.save(new MovieLang(7777L,"English", movieRepository.findMovieById(3323L))));
+            movieLangs5.add(movieLangRepository.save(new MovieLang(8888L,"Turkish", movieRepository.findMovieById(13L))));
+            movieLangs5.add(movieLangRepository.save(new MovieLang(9999L,"French", movieRepository.findMovieById(13323L))));
+            movie5.setMovieLang(movieLangs5);
+            movieRepository.save(movie5);
+
+            movieLangs6.add(movieLangRepository.save(new MovieLang(10000L,"English", movieRepository.findMovieById(32L))));
+            movieLangs6.add(movieLangRepository.save(new MovieLang(11111L,"Turkish", movieRepository.findMovieById(14L))));
+            movie6.setMovieLang(movieLangs6);
+            movieRepository.save(movie6);
+
+            subtitleLangs.add(subtitleLangRepository.save(new SubtitleLang(1111L,"English", movieRepository.findMovieById(131L))));
             movie1.setSubtitleLang(subtitleLangs);
             movieRepository.save(movie1);
 
-            subtitleLangs2.add(subtitleLangRepository.save(new SubtitleLang(2222L,"German", movieRepository.findMovieById(2L))));
-            subtitleLangs2.add(subtitleLangRepository.save(new SubtitleLang(6666L,"Dutch", movieRepository.findMovieById(7L))));
+            subtitleLangs2.add(subtitleLangRepository.save(new SubtitleLang(2222L,"German", movieRepository.findMovieById(22L))));
+            subtitleLangs2.add(subtitleLangRepository.save(new SubtitleLang(3333L,"Dutch", movieRepository.findMovieById(77L))));
             movie2.setSubtitleLang(subtitleLangs2);
             movieRepository.save(movie2);
 
-            subtitleLangs3.add(subtitleLangRepository.save(new SubtitleLang(1111L,"English", movieRepository.findMovieById(3L))));
-            subtitleLangs3.add(subtitleLangRepository.save(new SubtitleLang(7777L,"French", movieRepository.findMovieById(8L))));
+            subtitleLangs3.add(subtitleLangRepository.save(new SubtitleLang(4444L,"English", movieRepository.findMovieById(33L))));
+            subtitleLangs3.add(subtitleLangRepository.save(new SubtitleLang(5555L,"French", movieRepository.findMovieById(88L))));
             movie3.setSubtitleLang(subtitleLangs3);
             movieRepository.save(movie3);
 
-            subtitleLangs4.add(subtitleLangRepository.save(new SubtitleLang(8888L,"English", movieRepository.findMovieById(9L))));
-            subtitleLangs4.add(subtitleLangRepository.save(new SubtitleLang(4444L,"Turkish", movieRepository.findMovieById(4L))));
+            subtitleLangs4.add(subtitleLangRepository.save(new SubtitleLang(6666L,"English", movieRepository.findMovieById(9L))));
+            subtitleLangs4.add(subtitleLangRepository.save(new SubtitleLang(7777L,"Turkish", movieRepository.findMovieById(4L))));
             movie4.setSubtitleLang(subtitleLangs4);
             movieRepository.save(movie4);
 
-            subtitleLangs5.add(subtitleLangRepository.save(new SubtitleLang(9999L,"Turkish", movieRepository.findMovieById(13L))));
-            subtitleLangs5.add(subtitleLangRepository.save(new SubtitleLang(10101010L,"German", movieRepository.findMovieById(12L))));
-            subtitleLangs5.add(subtitleLangRepository.save(new SubtitleLang(11111111L,"Dutch", movieRepository.findMovieById(11L))));
+            subtitleLangs5.add(subtitleLangRepository.save(new SubtitleLang(8888L,"Turkish", movieRepository.findMovieById(133L))));
+            subtitleLangs5.add(subtitleLangRepository.save(new SubtitleLang(9999L,"German", movieRepository.findMovieById(1221L))));
+            subtitleLangs5.add(subtitleLangRepository.save(new SubtitleLang(10000L,"Dutch", movieRepository.findMovieById(112121L))));
             movie5.setSubtitleLang(subtitleLangs5);
             movieRepository.save(movie5);
 
-            subtitleLangs6.add(subtitleLangRepository.save(new SubtitleLang(13131313L,"English", movieRepository.findMovieById(1L))));
-            subtitleLangs5.add(subtitleLangRepository.save(new SubtitleLang(12121212L,"Dutch", movieRepository.findMovieById(11L))));
+            subtitleLangs6.add(subtitleLangRepository.save(new SubtitleLang(11111L,"English", movieRepository.findMovieById(12323L))));
+            subtitleLangs6.add(subtitleLangRepository.save(new SubtitleLang(12222L,"Dutch", movieRepository.findMovieById(114242L))));
             movie6.setSubtitleLang(subtitleLangs6);
             movieRepository.save(movie6);
 
