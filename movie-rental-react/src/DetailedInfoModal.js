@@ -69,11 +69,15 @@ const DetailedInfoModal = ({cart, uid, add_to_cart, ...props}) =>{
 	}
 	const sendGift = () =>{
 		var receiver = customers.find(c => {return c.email === reqEmail});
+		var date = new Date();
+		date.setDate(date.getDate() + 7);
 		var gift = {
 			sender_id: uid,
 			receiver_id: receiver.uid,
 			m_id: mov.mid,
+			expDate: date
 		}
+		console.log(gift);
 		axios.post("http://127.0.0.1:8080/api/v1/gift/createGift",gift ).then(
 			(response) => {
 				if(response){

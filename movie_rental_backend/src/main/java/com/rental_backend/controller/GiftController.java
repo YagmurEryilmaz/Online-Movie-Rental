@@ -39,7 +39,7 @@ public class GiftController {
 
     @PostMapping("/createGift")
     public ResponseEntity<Gift> createGift(@RequestBody GiftDto giftDto){
-        return new ResponseEntity<>(giftService.addGift(giftDto.getSender_id(), giftDto.getReceiver_id(), giftDto.getM_id()), HttpStatus.CREATED);
+        return new ResponseEntity<>(giftService.addGift(giftDto.getSender_id(), giftDto.getReceiver_id(), giftDto.getM_id(), giftDto.getExpDate()),HttpStatus.CREATED);
     }
 
 
