@@ -8,16 +8,18 @@ import Profile from './Profile';
 import Rent from './Rent';
 import stateProto from './redux/state';
 import {connect} from "react-redux"
+import EmployeeHomepage from './EmployeeHomePage';
+import EmployeeProfilePage from './EmployeeProfilePage';
 import {BrowserRouter, Router, Route, Routes, Switch, Navigate, useHis} from 'react-router-dom';
 
-function App({loggedIn}) {
+function App({loggedIn, role}) {
   return (
     <BrowserRouter>
       <Routes>
         <Route exact path = '/' element = {<Login/>}></Route>
         <Route exact path = '/signup' element = {<Signup/>}></Route>
-        <Route exact path = '/home' element = {!loggedIn ? <Navigate to ="/"/> : <Home/>}></Route>
-        <Route exact path = '/profile' element = {!loggedIn ? <Navigate to ="/"/> : <Profile/>}></Route>
+        <Route exact path = '/home' element = {!loggedIn ? <Navigate to ="/"/> :(role === "customer") ? <Home/> : <EmployeeHomepage/>}></Route>
+        <Route exact path = '/profile' element = {!loggedIn ? <Navigate to ="/"/> : (role ==="customer") ? <Profile/>:<EmployeeProfilePage/>}></Route>
         <Route exact path = '/rent' element = {!loggedIn ? <Navigate to ="/"/> : <Rent/>}></Route>
       </Routes>
     </BrowserRouter>
@@ -28,6 +30,7 @@ function App({loggedIn}) {
 const mapStateToProps = state =>{
     return{
       loggedIn: state.loggedIn,
+      role: state.accountType
     };
 }
 
