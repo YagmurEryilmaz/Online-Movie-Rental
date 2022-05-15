@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationModal from "./NotificationModal";
+
 import { IconButton } from "@mui/material";
 import { connect } from "react-redux";
 import CartModal from "./CartModal";
@@ -28,7 +29,10 @@ const Navbar = ({name, balance, role }) =>{
 
 				<div className="row navbar-content-area">
 					<div className="col-lg-7 col-md-12 d-flex offset-1 offset-md-0 justify-content-md-center justify-content-center align-items-center">
-						<a className="navbar-brand" href="/home"><div className="tickflix-logo"></div></a>
+						<Link to="/home">
+							<a className="navbar-brand" ><div className="tickflix-logo"></div></a>
+						</Link>
+
 						<span className="navbar-logo-text ml-md-4 ml-1">TickFlix</span>
 						<span className="navbar-name-text ml-lg-4 ml-3 px-2 d-none d-sm-inline">Online Movie Rental</span>
 					</div>
@@ -43,8 +47,12 @@ const Navbar = ({name, balance, role }) =>{
 								</Badge>
 							</IconButton>
 							</a>
-							<a href = "#cartModal" data-bs-toggle = "modal"className="d-none d-lg-block cart-logo mx-4"></a>
-							<a href="/profile" className= "d-none d-lg-block user-logo "></a>
+							{
+								(role === "customer") ? <a href = "#cartModal" data-bs-toggle = "modal"className="d-none d-lg-block cart-logo mx-4"></a>:(null)
+							}
+							<Link to = "/profile">
+								<a className= "d-none d-lg-block user-logo "></a>
+							</Link>
 							<div className="d-none d-lg-block mx-4">
 								<div>
 									<div className="username">{name}</div>
@@ -67,7 +75,7 @@ const mapStateToProps = state =>
 	return {
 		name:state.name,
 		balance:state.balance,
-		role: state.role,
+		role: state.accountType,
 	}
 }
 
