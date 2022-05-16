@@ -21,11 +21,11 @@ public class Payment {
 
     private String payStatus;
 
-    //@OneToOne()
-    //private Gift gift;
+    @OneToOne(mappedBy = "payment")
+    private Gift gift;
 
-    //@OneToOne()
-    //private RentedMovie rentedMovie;
+    @OneToOne(mappedBy = "payment")
+    private RentedMovie rentedMovie;
 
 
 }
