@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 import WatchTrailerModal from "./WatchTrailerModal";
 
 
-const DetailedInfoModal = ({cart, uid, detMovie, add_to_cart, ...props}) =>{
+const DetailedInfoModal = ({cart, uid, detMovie,balance, update_balance, add_to_cart, ...props}) =>{
 
 	
 	const [mov,setMov] = useState({});
@@ -41,14 +41,17 @@ const DetailedInfoModal = ({cart, uid, detMovie, add_to_cart, ...props}) =>{
 		console.log()
 		var movieId = props.movie.mid;
 
-
+		axios.get(`http://127.0.0.1:8080/api/v1/friendRequest/getFriendEmails/${uid}`).then(
+			(response) => {
+				setFriends(response.data);
+			}
+		).catch((err) => {console.log(err.response)});
 		console.log(movieId)
 		console.log("inside useEffect")
 		axios.get("http://127.0.0.1:8080/api/v1/customer/getAllCustomers").then(
 			(response) => {
 				setCustomers(response.data);
-				var emails = response.data.map((customer) => customer.email);
-				setFriends(emails)
+				
 			}
 		).catch((err) => {console.log(err)});
 		axios.get(`http://127.0.0.1:8080/api/v1/rate/getAveragePoint/${movieId}`).then(
@@ -77,23 +80,38 @@ const DetailedInfoModal = ({cart, uid, detMovie, add_to_cart, ...props}) =>{
 		).catch((err) => console.log(err))
 	}
 	const sendGift = () =>{
-		var receiver = customers.find(c => {return c.email === reqEmail});
-		var date = new Date();
-		date.setDate(date.getDate() + 7);
-		var gift = {
-			sender_id: uid,
-			receiver_id: receiver.uid,
-			m_id: props.movie.mid,
-			expDate: date
+		if(props.movie.price > balance){
+			window.alert("You don't have enough balance to gift this movie")
 		}
-		console.log(gift);
-		axios.post("http://127.0.0.1:8080/api/v1/gift/createGift",gift ).then(
-			(response) => {
-				if(response){
-					window.alert("Gift Sent")
-				}
+		else{
+
+			var receiver = customers.find(c => {return c.email === reqEmail});
+			var newBalance = balance - props.movie.price;
+			var date = new Date();
+			date.setDate(date.getDate() + 7);
+			var gift = {
+				sender_id: uid,
+				receiver_id: receiver.uid,
+				m_id: props.movie.mid,
+				expDate: date
 			}
-		).catch((err) => console.log(err))
+			console.log(gift);
+			axios.post("http://127.0.0.1:8080/api/v1/gift/createGift",gift ).then(
+				(response) => {
+					if(response){
+						window.alert("Gift Sent")
+					}
+				}
+			).catch((err) => console.log(err))
+			axios.patch(`http://127.0.0.1:8080/api/v1/customer/updateBalance/${uid}/${newBalance}`).then(
+				(response) => {
+					if(response) {
+						console.log("balance update")
+						update_balance(newBalance)
+					}
+				}
+			).catch((err) => console.log(err))
+		}
 	}
 
 	const handleRate = () => {
@@ -247,6 +265,7 @@ const mapStateToProps = (state) => {
 		cart: state.cart,
 		uid: state.uid,
 		detMovie: state.detMovie,
+		balance: state.balance,
 
 	}
 }
@@ -255,7 +274,8 @@ const mapDispatchToProps = (dispatch) => {
 		add_to_cart: (detMovie) => {
 			dispatch({type: "ADD_TO_CART", payload: {movie: detMovie
 }})
-		}
+		},
+		update_balance: (balance) => dispatch({type: "UPDATE_BALANCE", payload: {balance: balance}})
 	}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(DetailedInfoModal);

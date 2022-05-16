@@ -39,7 +39,11 @@ public class RateService {
     }
 
     public float getAveragePoint(Long movieId){
-        return rateRepository.findAvgPointPerMovie(movieId);
+        if(rateRepository.findAvgPointPerMovie(movieId) == null) {
+            throw new RuntimeException("Not Rated By Anyone Yet");
+        }else
+            return rateRepository.findAvgPointPerMovie(movieId);
+
     }
 
     public List<Rate> getRatesByMovie(Long movieId){

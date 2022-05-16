@@ -17,10 +17,14 @@ public class RentedMovieController {
     private final RentedMovieService rentedMovieService;
 
     @PostMapping("/rent")
-    public ResponseEntity<?> rentMovie(@RequestBody RentRequest request)
+    public ResponseEntity rentMovie(@RequestBody RentRequest request)
     {
+        try{
             rentedMovieService.rentMovie(request.getCustomer(), request.getMovie(),request.getExpDate());
             return ResponseEntity.ok(new MessageResponse("rented"));
+        }catch (RuntimeException r){
+            return ResponseEntity.badRequest().body(r.getMessage());
+        }
     }
 
     @GetMapping("/current/{userId}")

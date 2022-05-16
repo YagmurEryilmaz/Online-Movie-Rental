@@ -43,7 +43,12 @@ public class RateController {
 
     @GetMapping("/getAveragePoint/{movieId}")
     public ResponseEntity<?> getAveragePoint(@PathVariable("movieId") Long movieId){
-        return ResponseEntity.ok(rateService.getAveragePoint(movieId));
+        try{
+            return ResponseEntity.ok(rateService.getAveragePoint(movieId));
+        }
+        catch (RuntimeException r) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Not Rated By Anyone Yet"));
+        }
     }
 
 
