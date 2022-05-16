@@ -35,9 +35,15 @@ public class CustomerController {
     public ResponseEntity<List<Customer>> getAllCustomers() {
         return ResponseEntity.ok(customerService.findAll());
     }
+
     @GetMapping("/getAllCustomerEmails")
     public ResponseEntity<List<String>> getAllCustomerEmails() {
         return ResponseEntity.ok(customerService.findAllEmails());
+    }
+
+    @GetMapping("/getFriendEmails/{uId}")
+    public ResponseEntity<List<String>> getFriendEmails(@PathVariable("uId") Long uId) {
+        return ResponseEntity.ok(customerService.getFriendEmail(uId));
     }
 
     @PostMapping("/searchMoviesByTitle")
