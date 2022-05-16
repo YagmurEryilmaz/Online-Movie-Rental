@@ -193,11 +193,8 @@ public class RentalBackendApplication {
             customerRepository.save(new Customer(0000000002, "Yağmur Eryılmaz" ,"yağmur", new Date(106,01,01),"yagmurery12@gmail.com","customer",5, 30.5F,movieRequests,rentedMovies,sentgifts,receivedgifts,sentFRequests,receivedFRequests,sentsuggestions,receivedsuggestions,subtitleRequests,rates));
             customerRepository.save(new Customer(0000000003, "Elif Cenesiz" ,"elif", new Date(110,04,07),"elif@gmail.com","customer",1, 55.75F,movieRequests,rentedMovies,sentgifts,receivedgifts,sentFRequests,receivedFRequests,sentsuggestions,receivedsuggestions,subtitleRequests,rates));
             employeeRepository.save(new Employee(0000000004L, "Cenk Duran" ,"cenk", new Date(82,07,07),"cekoley@gmail.com","admin", 4500F));
-<<<<<<< Updated upstream
           //  paymentRepository.save(new Payment(1L, "credit card", "paid"));
-=======
             //paymentRepository.save(new Payment(1L, "credit card", "paid"));
->>>>>>> Stashed changes
 
             //suggestionRepository.save(new Suggestion(1,2,1));
         };
