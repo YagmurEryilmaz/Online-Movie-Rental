@@ -12,7 +12,7 @@ const CartModal = ({cart, remove_from_cart,uid,balance,update_balance, email, em
 		else if(option == "balance" && cartTotal < balance){
 			var newBalance = balance - cartTotal;
 			var date = new Date();
-			date.setDate(date.getDate() - 7);
+			date.setDate(date.getDate() + 7);
 			for (let index = 0; index < cart.length; index++) {
 				var paymentObj = {
 					movie: cart[index].mid,
