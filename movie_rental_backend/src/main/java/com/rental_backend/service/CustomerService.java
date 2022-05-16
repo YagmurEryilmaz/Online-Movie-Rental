@@ -1,19 +1,12 @@
 package com.rental_backend.service;
 import com.rental_backend.entity.*;
 import com.rental_backend.exception.CustomerNotFoundException;
-import com.rental_backend.exception.MovieRequestNotFoundException;
-import com.rental_backend.exception.RentedMovieNotFoundException;
 import com.rental_backend.repository.*;
-import org.hibernate.annotations.SQLInsert;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Locale;
 
 @Service
 public class CustomerService {
@@ -76,7 +69,6 @@ public class CustomerService {
     }
     public Customer addRented(Long c_id, RentedMovie rm){
         Customer customer = customerRepository.findByUId(c_id);
-        customer.addRentedMovie(rm);
         return customerRepository.save(customer);
     }
 

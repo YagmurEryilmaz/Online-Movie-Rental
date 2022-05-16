@@ -4,18 +4,11 @@ import com.rental_backend.entity.UserAccount;
 import com.rental_backend.exception.CustomerNotFoundException;
 import com.rental_backend.repository.UserAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
-
-import javax.crypto.*;
-import java.security.*;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Optional;
 
-import static java.lang.Long.decode;
 
 @Service
 public class UserAccountService {
@@ -25,11 +18,6 @@ public class UserAccountService {
     public UserAccountService(UserAccountRepository userAccountRepository) {
         this.userAccountRepository = userAccountRepository;
     }
-
-    public UserAccount addUser(UserAccount user) {
-        return userAccountRepository.save(user);
-    }
-
     public UserAccount deleteAndReturnUser(UserAccount user) {
         if (userAccountRepository.existsUserAccountByuId(user.getUId())) {
             userAccountRepository.deleteUserByUId(user.getUId());

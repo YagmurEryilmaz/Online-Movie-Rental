@@ -1,16 +1,11 @@
 package com.rental_backend.repository;
 
-import com.rental_backend.entity.Customer;
-import com.rental_backend.entity.FriendRequest;
 import com.rental_backend.entity.Gift;
-import com.rental_backend.entity.Suggestion;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
-
 @Repository
 public interface GiftRepository extends CrudRepository<Gift,Long> {
 

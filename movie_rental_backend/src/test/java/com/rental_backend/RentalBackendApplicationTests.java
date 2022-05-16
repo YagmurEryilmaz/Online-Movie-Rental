@@ -13,22 +13,4 @@ import java.util.List;
 @SpringBootTest
 class RentalBackendApplicationTests {
 
-    @Autowired
-    MovieRepository movieRepository;
-    //@Autowired
-    //TrailerRepository trailerRepository;
-
-    @Test
-    void contextLoads() {
-
-        Movie movie = Movie.builder().title("Titanic").price(20.00).build();
-        //Trailer trailer = Trailer.builder().build();
-        //movie.addTrailer(trailer);
-
-        movieRepository.save(movie);
-        List <Movie>list = movieRepository.findAll();
-        System.out.println("TEEEST");
-        System.out.println(list.get(0).getTitle());
-    }
-
 }

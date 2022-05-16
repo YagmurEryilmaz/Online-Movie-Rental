@@ -1,6 +1,4 @@
 package com.rental_backend.repository;
-import com.rental_backend.entity.FriendRequest;
-import com.rental_backend.entity.Rate;
 import com.rental_backend.entity.Suggestion;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -11,9 +9,7 @@ import java.util.List;
 
 @Repository
 public interface SuggestionRepository extends CrudRepository<Suggestion,Long> {
-
     List<Suggestion> findAll();
-
     @Query("select s from Suggestion s, Customer c where s.primaryKey.msender_id = c.uId and s.primaryKey.msender_id = :senderId ")
     List<Suggestion> findSuggestionBySenderId(@Param("senderId") Long senderId);
 

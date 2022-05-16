@@ -2,10 +2,7 @@ package com.rental_backend.entity;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.springframework.context.annotation.Primary;
-
 import javax.persistence.*;
-import java.util.Date;
 
 @Getter
 @Setter

@@ -3,10 +3,8 @@ package com.rental_backend.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.springframework.context.annotation.Primary;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -26,10 +24,4 @@ public class MovieLang {
     @JsonIgnore
     private Movie movie;
 
-
-    /*public MovieLang(Long movieLangId, Set<Movie> movie,String movieLang){
-        this.movieLangId = movieLangId;
-        this.movie = movie;
-        this.movieLang = movieLang;
-    }*/
 }

@@ -3,13 +3,8 @@ package com.rental_backend.controller;
 
 import com.rental_backend.dto.MessageResponse;
 import com.rental_backend.dto.RentRequest;
-import com.rental_backend.entity.RentedMovie;
-import com.rental_backend.repository.RentedMovieRepository;
-import com.rental_backend.service.CustomerService;
 import com.rental_backend.service.RentedMovieService;
-import com.rental_backend.service.SubtitleRequestService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 @RestController
@@ -24,13 +19,8 @@ public class RentedMovieController {
     @PostMapping("/rent")
     public ResponseEntity<?> rentMovie(@RequestBody RentRequest request)
     {
-        //try {
             rentedMovieService.rentMovie(request.getCustomer(), request.getMovie(),request.getExpDate());
             return ResponseEntity.ok(new MessageResponse("rented"));
-        //}
-        //catch (RuntimeException r){
-        //    return ResponseEntity.badRequest().body(new MessageResponse(r.getMessage()));
-        //}
     }
 
     @GetMapping("/current/{userId}")

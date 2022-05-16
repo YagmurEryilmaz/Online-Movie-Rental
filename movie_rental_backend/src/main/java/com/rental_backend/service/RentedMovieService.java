@@ -1,17 +1,12 @@
 package com.rental_backend.service;
 import com.rental_backend.entity.*;
 import com.rental_backend.repository.*;
-import org.hibernate.annotations.SQLInsert;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class RentedMovieService {
@@ -48,8 +43,6 @@ public class RentedMovieService {
                     .expDate(expDate)
                     .build();
             rentedMovieRepository.save(rentedMovie);
-            //customerService.addRented(c_id, rentedMovie);
-            //movieService.addRented(m_id,rentedMovie);
         }
 
     }
