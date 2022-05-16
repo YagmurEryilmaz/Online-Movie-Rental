@@ -41,7 +41,9 @@ public class Movie {
 
     private Date additionDate;
 
-    public Movie(long mId, String title, String genre, String directorName, int productionYear, double price, String posterUrl, Date additionDate) {
+    private String trailerUrl;
+
+    public Movie(long mId, String title, String genre, String directorName, int productionYear, double price, String posterUrl, Date additionDate,String trailerUrl) {
         this.mId = mId;
         this.title = title;
         this.genre = genre;
@@ -50,6 +52,7 @@ public class Movie {
         this.price = price;
         this.posterUrl = posterUrl;
         this.additionDate = additionDate;
+        this.trailerUrl = trailerUrl;
     }
 
     @OneToMany (mappedBy ="movie", cascade = CascadeType.REMOVE)
@@ -64,9 +67,9 @@ public class Movie {
     @JoinColumn(name = "movie" )
     private Set<RentedMovie> rentedMovieSet;
 
-    @OneToMany(mappedBy = "movie",cascade = CascadeType.REMOVE)
+    /*@OneToMany(mappedBy = "movie",cascade = CascadeType.REMOVE)
     @JsonIgnore
-    private Set<Trailer> trailers;
+    private Set<Trailer> trailers;*/
 
     @OneToMany
     @JoinColumn(name = "movieRates")
@@ -90,12 +93,12 @@ public class Movie {
         subtitleLang.add(subtitle);
     }
 
-    public void addTrailer(Trailer trailer)
+   /* public void addTrailer(Trailer trailer)
     {
         if (trailers == null)
             trailers = new HashSet<>();
         trailers.add(trailer);
-    }
+    }*/
 
     public void addRating(Rate rate)
     {

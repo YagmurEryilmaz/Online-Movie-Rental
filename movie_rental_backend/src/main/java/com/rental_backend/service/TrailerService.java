@@ -1,4 +1,4 @@
-package com.rental_backend.service;
+/*package com.rental_backend.service;
 import com.rental_backend.entity.Suggestion;
 import com.rental_backend.exception.MovieNotFoundException;
 import com.rental_backend.repository.*;
@@ -28,4 +28,4 @@ public class TrailerService {
 
     }
 
-}
+}*/

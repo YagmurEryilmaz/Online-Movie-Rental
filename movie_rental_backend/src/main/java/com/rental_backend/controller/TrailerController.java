@@ -1,4 +1,4 @@
-package com.rental_backend.controller;
+/*package com.rental_backend.controller;
 
 import com.rental_backend.entity.Suggestion;
 import com.rental_backend.service.SuggestionService;
@@ -25,4 +25,4 @@ public class TrailerController {
     public ResponseEntity<String> getTrailerByMovie(@PathVariable Long movieId){
         return ResponseEntity.ok(trailerService.findTrailerByMovieId(movieId));
     }
-}
+}*/

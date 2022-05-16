@@ -1,4 +1,4 @@
-package com.rental_backend.entity;
+/*package com.rental_backend.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -22,7 +22,8 @@ public class Trailer {
     private String trailerUrl;
 
     @ManyToOne( fetch = FetchType.EAGER)
+    @JoinColumn(name = "m_id", insertable = false, updatable = false)
     private Movie movie;
 
 
-}
+}*/

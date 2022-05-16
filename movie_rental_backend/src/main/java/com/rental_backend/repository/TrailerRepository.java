@@ -1,4 +1,4 @@
-package com.rental_backend.repository;
+/*package com.rental_backend.repository;
 import com.rental_backend.entity.Trailer;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -21,4 +21,4 @@ public interface TrailerRepository extends CrudRepository<Trailer,Long> {
     @Modifying
     @Query("delete from Trailer t where t.movie.mId= :mId ")
     void deleteTrailer(@Param("mId") Long mId);
-}
+}*/
