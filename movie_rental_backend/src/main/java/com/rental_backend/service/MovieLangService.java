@@ -15,8 +15,9 @@ public class MovieLangService {
     private MovieService movieService;
 
     @Autowired
-    public MovieLangService(MovieLangRepository movieLangRepository) {
+    public MovieLangService(MovieLangRepository movieLangRepository,MovieService movieService) {
         this.movieLangRepository = movieLangRepository;
+        this.movieService=movieService;
     }
 
     public MovieLang addMovieLang(String mLang, Long mId ) {
