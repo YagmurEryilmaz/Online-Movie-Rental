@@ -35,7 +35,9 @@ public class MovieService {
     public Movie findMovieById(Long id) {
         return movieRepository.findMovieById(id);
     }
-
+    public List<String> getAllGenre(){
+        return movieRepository.getAllGenre();
+    }
     public List<Movie> getBySubtitleLang(String sLang) {
         return movieRepository.findBySubtitleLang(sLang);
     }

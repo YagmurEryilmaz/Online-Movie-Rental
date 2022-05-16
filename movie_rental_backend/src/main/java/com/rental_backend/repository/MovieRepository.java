@@ -22,10 +22,13 @@ public interface MovieRepository extends CrudRepository<Movie,Long>{
     @Query("select m from Movie m group by m.title")
     List<Movie> findByTitle(String title);
 
-    @Query("select m from Movie m group by m.genre")
+
     List <Movie> findByGenre(String genre);
 
-    @Query("select m from Movie m group by m.productionYear")
+    @Query("select distinct m.genre from Movie m")
+    List<String> getAllGenre();
+
+    @Query("select  m from Movie m group by m.productionYear")
     List <Movie> findByProductionYear(int productionYear);
 
     @Query("select m from Movie m group by m.subtitleLang")

@@ -12,7 +12,8 @@ import { movie_data } from "./Data";
 const Rent = () =>{
 	const [all_movie_data, setMovies] = useState([]);
 	const [filteredMovies, setFilteredMovies] = useState(all_movie_data);
-	const [genre,setGenre] = useState("")
+	const [genre,setGenre] = useState([])
+
 
 
 	const [filter,setFilter] = useState("");
@@ -23,6 +24,10 @@ const Rent = () =>{
 			setFilteredMovies(response.data)
 			setMovies(response.data);
 		}).catch((error)=>{console.log(error)})
+		axios.get("http://127.0.0.1:8080/api/v1/movie/getAllGenre").then((response)=>{
+			setGenre(response.data)
+		}).catch((error)=>{console.log(error)})
+			
 		
 
 	}, []);
@@ -41,8 +46,8 @@ const Rent = () =>{
 		})
 		setFilteredMovies(filteredMovies =>[...filteredMovies, ...theMoviesTitle])
 	}
-	const handleCheckbox = () =>{
-		var theGenre = genre.toLocaleLowerCase();
+	const handleCheckbox = (genreInp) =>{
+		var theGenre = genreInp.toLocaleLowerCase();
 		axios.get(`http://127.0.0.1:8080/api/v1/movie/getMovieByGenre/${theGenre}`).then((response)=>{
 			if(response.data.length === 0){
 				window.alert("No movies found with this genre")
@@ -64,6 +69,14 @@ const Rent = () =>{
 */
 
 
+	}
+	const getAll = () => {
+		axios.get("http://127.0.0.1:8080/api/v1/movie/getAllMovies").then((response) => {
+			console.log(response.data)
+
+			setFilteredMovies(response.data)
+			setMovies(response.data);
+		}).catch((error) => {console.log(error)})
 	}
 	return(
 		<div className='container'>
@@ -88,32 +101,19 @@ const Rent = () =>{
 								}} className="btn btn-outline-secondary" type="button">Search</button>
 							</div>
 						</div>
+						{genre.map((g)=>{
+							return(
+								<div class="form-check col-3 ms-3">
+									<input class="form-check-input" type="radio" name="flexRadioDefault" onClick={() =>  handleCheckbox(g)} id="flexRadioDefault1" />
+									<label class="form-check-label" for="flexRadioDefault1">
+										{g}
+									</label>
+								</div>
+							)
+						})}
+						
 						<div class="form-check col-3 ms-3">
-							<input class="form-check-input" type="radio" name="flexRadioDefault" onClick = {() => setGenre("Adventure")} id="flexRadioDefault1"/>
-								<label class="form-check-label" for="flexRadioDefault1">
-									Adventure
-								</label>
-						</div>
-						<div class="form-check col-3 ms-3">
-							<input class="form-check-input" type="radio" name="flexRadioDefault" onClick = {() => {setGenre("Action"); handleCheckbox();}}id="flexRadioDefault1"/>
-								<label class="form-check-label" for="flexRadioDefault1">
-									Action
-								</label>
-						</div>
-						<div class="form-check col-3 ms-3">
-							<input class="form-check-input" type="radio" name="flexRadioDefault" onClick = {() => {setGenre("Romantic"); handleCheckbox();}}id="flexRadioDefault1"/>
-								<label class="form-check-label" for="flexRadioDefault1">
-									Romantic
-								</label>
-						</div>
-						<div class="form-check col-3 ms-3">
-							<input class="form-check-input" type="radio" name="flexRadioDefault" onClick = {() => {setGenre("Animation"); handleCheckbox();}}id="flexRadioDefault1"/>
-								<label class="form-check-label" for="flexRadioDefault1">
-									Animation
-								</label>
-						</div>
-						<div class="form-check col-3 ms-3">
-							<input class="form-check-input" type="radio" name="flexRadioDefault" onClick = {() => {setGenre(""); handleCheckbox();}}id="flexRadioDefault1" />
+							<input class="form-check-input" type="radio" name="flexRadioDefault" onClick = {() => {getAll();}}id="flexRadioDefault1" />
 								<label class="form-check-label" for="flexRadioDefault1">
 									All Genre
 								</label>
