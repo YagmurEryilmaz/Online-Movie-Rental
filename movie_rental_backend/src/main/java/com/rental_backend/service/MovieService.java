@@ -17,10 +17,15 @@ import java.util.Set;
 public class MovieService {
 
     private MovieRepository movieRepository;
+    private SubtitleLangRepository subtitleLangRepository;
+    private MovieLangRepository movieLangRepository;
 
     @Autowired
-    public MovieService(MovieRepository movieRepository) {
+    public MovieService(MovieRepository movieRepository,SubtitleLangRepository subtitleLangRepository,MovieLangRepository movieLangRepository) {
+
         this.movieRepository = movieRepository;
+        this.movieLangRepository=movieLangRepository;
+        this.subtitleLangRepository=subtitleLangRepository;
     }
     public List<Movie> getAllMovies(){
         return movieRepository.findAll();
@@ -80,7 +85,10 @@ public class MovieService {
 
     public void deleteMovie(Long mId) throws MovieNotFoundException {
         if (movieRepository.existsById(mId)) {
+            subtitleLangRepository.deleteSubtitleLang(mId);
+            movieLangRepository.deleteMovieLang(mId);
             movieRepository.deleteMovie(mId);
+
         }
         else {
             throw new MovieNotFoundException("Movie with id " + mId + " does not exist.");
