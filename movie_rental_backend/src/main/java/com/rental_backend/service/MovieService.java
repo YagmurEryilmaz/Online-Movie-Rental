@@ -65,6 +65,10 @@ public class MovieService {
     {
         movieRepository.updateMoviePrice(mId,price);
     }
+    public void updateTrailer(Long mId, String url)
+    {
+        movieRepository.updateTrailer(mId,url);
+    }
 
     public List<Movie> findMovieByTitle(String title) {
         return movieRepository.findByTitle(title);
