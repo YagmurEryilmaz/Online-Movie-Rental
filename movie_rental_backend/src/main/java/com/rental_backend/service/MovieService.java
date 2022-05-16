@@ -1,6 +1,9 @@
 package com.rental_backend.service;
 
+import com.rental_backend.dto.MessageResponse;
 import com.rental_backend.entity.*;
+import com.rental_backend.exception.CustomerNotFoundException;
+import com.rental_backend.exception.MovieAlreadyExistsException;
 import com.rental_backend.exception.MovieNotFoundException;
 import com.rental_backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,30 +40,37 @@ public class MovieService {
         return movieRepository.save(m);
     }
 
-    public Movie addMovie(String title, String genre, String directorName, int productionYear, double price, String posterUrl, Date additionDate, List<String> subTitle, List<String> mLang, String trailerUrl) {
+    public Movie addMovie(String title, String genre, String directorName, int productionYear, double price, String posterUrl, Date additionDate, List<String> subTitle, List<String> mLang, String trailerUrl)
+            throws MovieAlreadyExistsException {
+        if (!movieRepository.existsMovieByTitle(title) && !movieRepository.existsMovieByDirectorName(directorName)) {
 
-        Movie movie = Movie.builder()
-                .title(title)
-                .genre(genre)
-                .directorName(directorName)
-                .productionYear(productionYear)
-                .price(price)
-                .posterUrl(posterUrl)
-                .additionDate(additionDate)
-                .trailerUrl(trailerUrl)
-                .build();
-        movieRepository.save(movie);
-        mLang.forEach((m) -> {
-            MovieLang mL = MovieLang.builder().movieLang(m).movie(movie).build();
-            movieLangRepository.save(mL);
+            Movie movie = Movie.builder()
+                    .title(title)
+                    .genre(genre)
+                    .directorName(directorName)
+                    .productionYear(productionYear)
+                    .price(price)
+                    .posterUrl(posterUrl)
+                    .additionDate(additionDate)
+                    .trailerUrl(trailerUrl)
+                    .build();
+            movieRepository.save(movie);
+            mLang.forEach((m) -> {
+                MovieLang mL = MovieLang.builder().movieLang(m).movie(movie).build();
+                movieLangRepository.save(mL);
 
-        });
-        subTitle.forEach((s) -> {
-            SubtitleLang sub = SubtitleLang.builder().s_lang(s).movie(movie).build();
-            subtitleLangRepository.save(sub);
-        });
+            });
+            subTitle.forEach((s) -> {
+                SubtitleLang sub = SubtitleLang.builder().s_lang(s).movie(movie).build();
+                subtitleLangRepository.save(sub);
+            });
 
-            return  movieRepository.save(movie);
+            return movieRepository.save(movie);
+        }
+        else
+        {
+            throw new MovieAlreadyExistsException("Movie with title " + title + " does not exist.");
+        }
 
     }
 

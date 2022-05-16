@@ -40,7 +40,6 @@ public class RentedMovie {
     @JoinColumn(name = "uId", insertable = false, updatable = false)
     private Customer customer;
 
-
     @ManyToOne
     @JoinColumn(name = "mId", insertable = false, updatable = false)
     private Movie movie;

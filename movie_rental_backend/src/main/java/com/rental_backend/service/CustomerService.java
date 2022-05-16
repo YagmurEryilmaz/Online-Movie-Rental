@@ -95,23 +95,7 @@ public class CustomerService {
     // methods related to Gift repo
     public int getReceivedGiftCount(Long receiverId){ return giftRepository.findNumOfReceivedGifts(receiverId);}
 
-    // methods that are come from customer entity
 
-    /*public Customer addRentedMovie(RentedMovie rentedMovie, Long userId) throws RentedMovieNotFoundException, CustomerNotFoundException {
-        if (customerRepository.existsById(userId)) {
-            Customer customer = customerRepository.findById(userId).get();
-            if (rentedMovieRepository.existsById(rentedMovie)) {
-                customer.addRentedMovie(rentedMovieRepository.findByUserId(userId).iterator().next(), userId);
-                return customerRepository.save(customer);
-            }
-            else {
-                throw new RentedMovieNotFoundException("Rented movie with name " + rentedMovie.getMovie() + " does not exist.");
-            }
-        }
-        else {
-            throw new CustomerNotFoundException("Customer with id " + userId + " does not exist.");
-        }
-    }*/
 
 
 

@@ -17,6 +17,9 @@ public interface MovieRepository extends CrudRepository<Movie,Long>{
 
     List <Movie> findByGenre(String genre);
 
+    boolean existsMovieByTitle(String title);
+    boolean existsMovieByDirectorName(String director);
+
     @Query("select distinct m.genre from Movie m")
     List<String> getAllGenre();
 

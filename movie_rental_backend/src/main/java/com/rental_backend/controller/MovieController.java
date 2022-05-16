@@ -2,6 +2,7 @@ package com.rental_backend.controller;
 
 import com.rental_backend.dto.MovieResponse;
 import com.rental_backend.entity.Movie;
+import com.rental_backend.exception.MovieAlreadyExistsException;
 import com.rental_backend.exception.MovieNotFoundException;
 import com.rental_backend.service.MovieLangService;
 import com.rental_backend.service.MovieService;
@@ -47,7 +48,7 @@ public class MovieController {
     }
 
     @PostMapping("/addMovieToSystem")
-    public ResponseEntity<Movie> addMovie(@RequestBody MovieResponse m){
+    public ResponseEntity<Movie> addMovie(@RequestBody MovieResponse m) throws MovieAlreadyExistsException {
         return new ResponseEntity<>(movieService.addMovie(
                 m.getTitle(),
                 m.getGenre(),

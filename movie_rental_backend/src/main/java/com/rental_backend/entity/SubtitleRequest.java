@@ -23,5 +23,4 @@ public class SubtitleRequest {
     @ManyToOne (fetch= FetchType.EAGER)
     private Customer customer;
 
-
 }
