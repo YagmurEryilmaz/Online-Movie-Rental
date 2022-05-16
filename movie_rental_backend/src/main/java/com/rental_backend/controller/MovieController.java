@@ -62,7 +62,6 @@ public class MovieController {
                 ,HttpStatus.CREATED);
     }
 
-
     @DeleteMapping("/deleteMovie/{mId}")
     public ResponseEntity<?> deleteMovie(@PathVariable("mId") Long mId) throws MovieNotFoundException {
         subtitleLangService.deleteSubtitleLang(mId);
@@ -86,6 +85,11 @@ public class MovieController {
     @GetMapping("/getAllGenre")
     public ResponseEntity<List<String>> getAllGenre(){
         return ResponseEntity.ok(movieService.getAllGenre());
+    }
+
+    @GetMapping("/search/{searchTerm}")
+    public ResponseEntity<List<Movie>> search(@PathVariable("searchTerm") String searchTerm){
+        return ResponseEntity.ok(movieService.searchMovie(searchTerm));
     }
 
 }

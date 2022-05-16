@@ -35,6 +35,11 @@ public interface CustomerRepository extends CrudRepository<Customer,Long> {
     @Query("update Customer c set c.email=:email where c.uId=:uId ")
     void updateUserByUId(@Param("uId") Long uId, @Param("email") String email);
 
+    @Modifying
+    @Transactional
+    @Query("update Customer c set c.balance=:balance where c.uId=:uId ")
+    void updateBalance(@Param("uId") Long uId, @Param("balance") Double balance);
+
     @Query("select c.email from Customer c")
     List<String> findAllEmails();
 

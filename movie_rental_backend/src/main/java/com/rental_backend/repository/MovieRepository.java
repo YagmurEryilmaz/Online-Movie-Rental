@@ -13,26 +13,22 @@ public interface MovieRepository extends CrudRepository<Movie,Long>{
 
     List<Movie> findAll();
 
-    @Query("select m from Movie m group by m.title")
     List<Movie> findByTitle(String title);
-
 
     List <Movie> findByGenre(String genre);
 
     @Query("select distinct m.genre from Movie m")
     List<String> getAllGenre();
 
-    @Query("select  m from Movie m group by m.productionYear")
     List <Movie> findByProductionYear(int productionYear);
 
-    @Query("select m from Movie m group by m.subtitleLang")
     List<Movie> findBySubtitleLang(String subtitleLang);
     Movie findById(long mId);
 
     @Query("select m from Movie m where m.mId = :id")
     Movie findMovieById(@Param("id") Long id);
 
-    @Query("select m.title from Movie m " +
+    @Query("select m from Movie m " +
             "where lower(m.title) like lower(concat('%', :searchTerm, '%')) " +
             "or lower(m.directorName) like lower(concat('%', :searchTerm, '%'))")
     List<Movie> search(@Param("searchTerm") String searchTerm);
