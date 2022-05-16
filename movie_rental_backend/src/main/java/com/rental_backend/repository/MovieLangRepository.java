@@ -20,4 +20,6 @@ public interface MovieLangRepository extends CrudRepository<MovieLang,Long> {
 
     @Query("select ml from MovieLang ml, Movie m where ml.movie.mId = :mId and ml.movie.mId=m.mId")
     List<MovieLang> findMovieLangByMovieId(@Param("mId") Long mId);
+
+
 }
