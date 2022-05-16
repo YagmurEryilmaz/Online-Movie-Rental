@@ -2,10 +2,11 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { connect } from "react-redux";
-const NotificationModal = ({uid, fetch_requests, role,friendRequests, numOfRequests, accept_request, email}) => {
+const NotificationModal = ({uid, fetch_requests, gifts, accept_gift,fetch_gifts, role,friendRequests, numOfRequests, accept_request, email}) => {
 	const [requests,setRequests] = useState([])
-	const [gifts, setGifts] = useState([])
+
 	const [subtReq, setSubtReq] = useState([])
+
 	
 	
 	useEffect(()=> {
@@ -25,18 +26,31 @@ const NotificationModal = ({uid, fetch_requests, role,friendRequests, numOfReque
 			axios.get(`http://127.0.0.1:8080/api/v1/gift/getGiftsByReceiver/${uid}`).then(
 				(response) =>{
 	
-					setGifts(response.data)
+
+					fetch_gifts(response.data)
 					
 				}
 			)
 		}else{
-			axios.get(`http://127.0.0.1:8080/api/v1/movieRequest/getAllMovieRequests`).then((response) => {
-				console.log(response.data)
-				fetch_requests(response.data)
-			}).catch((err) => {console.log(err)})
-		}
-			
-	},[])
+				axios.get(`http://127.0.0.1:8080/api/v1/movieRequest/getAllMovieRequests`).then((response) => {
+					console.log(response.data)
+					fetch_requests(response.data)
+
+				}).catch((err) => {console.log(err)})
+
+				axios.get(`http://127.0.0.1:8080/api/v1/subtitleRequest/getAllSubtitleRequests`).then(
+					
+				
+
+					(response) => {
+
+						console.log(response.data)
+						console.log("subbbbbttt")
+						fetch_gifts(response.data)
+						setSubtReq(response.data)
+					}).catch((err) => {console.log(err)})
+			}
+		},[])
 	const acceptRequest = (request) => {
 		var reqInfo = {
 			sender_email: request.sender.email,
@@ -68,6 +82,24 @@ const NotificationModal = ({uid, fetch_requests, role,friendRequests, numOfReque
 			}
 		)
 	}
+	const declineSubtRequest = (request) => {
+		axios.delete(`http://127.0.0.1:8080/api/v1/subtitleRequest/deleteSubtitleRequest/${request.subtitleReqId}`).then(
+			(response) => {
+				if(response)
+				{
+					window.alert("Request Deleted")
+					accept_gift(request)
+
+				}
+			}
+		)
+	}
+	const deleteMovieRequest = (request) => {
+		accept_request(request)
+	}
+	const deleteGift = (gift) => {
+		accept_gift(gift)
+	}
 	return(
 		<div class="modal fade" id="notifications" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
@@ -81,7 +113,8 @@ const NotificationModal = ({uid, fetch_requests, role,friendRequests, numOfReque
 							<div class="card-header">
 								{role === "customer" ? "Friend Requests" : "Movie Requests"}
 							</div>
-							{role === "customer" ? <ul class="list-group list-group-flush">
+							{role === "customer" ? 
+							<ul class="list-group list-group-flush">
 								{friendRequests.map((request)=>{
 									return(
 											<li class="list-group-item">
@@ -105,6 +138,9 @@ const NotificationModal = ({uid, fetch_requests, role,friendRequests, numOfReque
 											<span className="fw-bold">Movie Name: <span className = "fw-light">{request.movieName} </span></span>
 											<span className="fw-bold">Director Name: <span className = "fw-light">{request.directorName}</span> </span>
 											<span className="fw-bold">Prod Year: <span className = "fw-light">{request.movieProductionYear}</span> </span>
+											<div className="float-end btn btn-danger" onClick={() => deleteMovieRequest(request)}>
+												Delete
+											</div>
 												
 											</li>
 
@@ -126,7 +162,10 @@ const NotificationModal = ({uid, fetch_requests, role,friendRequests, numOfReque
 										<li class="list-group-item">
 											<span className="fw-bold">{gift.senderCustomer.name} </span>
 											 <span>has sent you the movie: </span>
-											 <span className="fw-bold">{gift.movie.title}</span>	
+											 <span className="fw-bold">{gift.movie.title}</span>
+											<div className="float-end btn btn-danger" onClick={() => deleteGift(gift)}>
+												Delete
+											</div>	
 										</li>
 
 									)
@@ -134,7 +173,7 @@ const NotificationModal = ({uid, fetch_requests, role,friendRequests, numOfReque
 							</ul>: 
 							
 								<ul class="list-group list-group-flush">
-									{subtReq.map((req) => {
+									{gifts.map((req) => {
 										
 										return (
 											<li class="list-group-item">
@@ -142,6 +181,9 @@ const NotificationModal = ({uid, fetch_requests, role,friendRequests, numOfReque
 												<span>{req.movieName}  </span>
 												<span className="fw-bold">Requested Language: </span>	
 												<span>{req.requestedSubLang}</span>
+												<div className="float-end btn btn-danger" onClick={() => declineSubtRequest(req)}>
+													Delete
+												</div>
 											</li>
 
 										)
@@ -166,13 +208,16 @@ const mapStateToProps = state => {
 		email: state.email,
 		friendRequests: state.friendRequests,
 		numOfRequests: state.numOfRequests,
-		role: state.accountType
+		role: state.accountType,
+		gifts: state.gifts,
 	}
 }
 const mapDispatchToProps = dispatch => {
 	return{
 		fetch_requests: (requests) => dispatch({type: "FETCH_REQUESTS", payload: {requests:requests}}),
-		accept_request: (request) => dispatch({type: "ACCEPT_REQUEST", payload: {request:request}})
+		accept_request: (request) => dispatch({type: "ACCEPT_REQUEST", payload: {request:request}}),
+		fetch_gifts: (gifts) => dispatch({type: "FETCH_GIFTS", payload: {gifts:gifts}}),
+		accept_gift: (gift) => dispatch({type: "ACCEPT_GIFT", payload: {gift:gift}}),
 	}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(NotificationModal);

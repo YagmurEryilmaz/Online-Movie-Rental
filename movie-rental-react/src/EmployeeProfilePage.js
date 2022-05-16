@@ -102,6 +102,8 @@ const EmployeeProfilePage = ({name, mail, uid,friendRequests,numOfRequests ,fetc
 				posterUrl: posterUrl,
 				additionDate: date,
 				trailerUrl: trailerUrl,
+				subtitleLang: subtitleArr,
+				movieLang: movieLang,
 				
 
 			}

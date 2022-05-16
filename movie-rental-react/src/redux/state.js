@@ -9,7 +9,8 @@ export const stateProto = {
 	friendRequests:[],
 	uid: -1,
 	numOfRequests:0,
-	allMovies:[]
+	allMovies:[],
+	gifts:[],
 
 
 }

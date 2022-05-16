@@ -4,7 +4,7 @@ const CartModal = ({cart, remove_from_cart,uid, empty_cart}) => {
 	const cartTotal = cart.reduce((acc, curr) => acc + curr.price, 0);
 	const checkout = () => {
 		var date = new Date();
-		date.setDate(date.getDate() - 7);
+		date.setDate(date.getDate() + 7);
 		for (let index = 0; index < cart.length; index++) {
 			var movieO = {
 				movie: cart[index].mid,
