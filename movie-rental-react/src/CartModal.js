@@ -12,7 +12,7 @@ const CartModal = ({cart, remove_from_cart,uid,balance,update_balance, email, em
 		else if(option == "balance" && cartTotal < balance){
 			var newBalance = balance - cartTotal;
 			var date = new Date();
-			date.setDate(date.getDate() + 7);
+			date.setDate(date.getDate() - 7);
 			for (let index = 0; index < cart.length; index++) {
 				var paymentObj = {
 					movie: cart[index].mid,
@@ -59,7 +59,7 @@ const CartModal = ({cart, remove_from_cart,uid,balance,update_balance, email, em
 
 				axios.post("http://127.0.0.1:8080/api/v1/payment/pay", paymentObj).then(
 					(response) => {
-						if(response.data == "rented") {
+						if(response) {
 							window.alert("Movie rented")
 							empty_cart();
 						}
@@ -137,7 +137,7 @@ const CartModal = ({cart, remove_from_cart,uid,balance,update_balance, email, em
 											<div className="col-12">
 												<div class="mb-3">
 													<label for="exampleInputEmail1" class="form-label">Card Number</label>
-													<input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+													<input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required/>
 												</div>
 											</div>
 										</div>
@@ -145,7 +145,7 @@ const CartModal = ({cart, remove_from_cart,uid,balance,update_balance, email, em
 											<div className="col-12">
 												<div class="mb-3">
 													<label for="exampleInputEmail1" class="form-label">Card Name</label>
-													<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+													<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required/>
 												</div>
 											</div>
 										</div>
@@ -153,13 +153,13 @@ const CartModal = ({cart, remove_from_cart,uid,balance,update_balance, email, em
 											<div className="col-6">
 												<div class="mb-3">
 													<label for="exampleInputEmail1" class="form-label">CVC</label>
-													<input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+													<input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required/>
 												</div>
 											</div>
 											<div className="col-6">
 												<div class="mb-3">
 													<label for="exampleInputEmail1" class="form-label">Expiration Date</label>
-													<input type="month" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+													<input type="month" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required/>
 												</div>
 											</div>
 										</div>
@@ -190,7 +190,7 @@ const CartModal = ({cart, remove_from_cart,uid,balance,update_balance, email, em
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target= "#cartModal">Back to Cart</button>
-							<button type="button" class="btn btn-success" onClick = {() => checkout()}>Pay</button>
+							<button type="button" class="btn btn-success" onClick = {() => {checkout(); }}>Pay</button>
 						</div>
 					</div>
 				</div>

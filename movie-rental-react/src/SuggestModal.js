@@ -14,11 +14,15 @@ const SuggestModal = ({uid, ...props}) => {
 	const [friends,setFriends] = useState([]);
 	const [customers, setCustomers] = useState([]);
 	useEffect(() => {
+		axios.get(`http://127.0.0.1:8080/api/v1/friendRequest/getFriendEmails/${uid}`).then(
+			(response) => {
+				setFriends(response.data);
+			}
+		).catch((err) => {console.log(err.response)});
 		axios.get("http://127.0.0.1:8080/api/v1/customer/getAllCustomers").then(
 			(response) => {
 				setCustomers(response.data);
-				var emails = response.data.map((customer) => customer.email);
-				setFriends(emails)
+				
 			}
 		).catch((err) => {console.log(err.response)});
 	}, [])

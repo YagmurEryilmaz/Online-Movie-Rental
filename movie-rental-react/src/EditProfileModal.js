@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-const EditProfileModal = ({update_mail,email, name, uid, ...props}) =>{
+const EditProfileModal = ({update_mail,email, role, name, uid, ...props}) =>{
 
 	const [mailM,setMailM] = useState(email);
 	const [bioM, setBioM] = useState(props.bio);
@@ -14,13 +14,25 @@ const EditProfileModal = ({update_mail,email, name, uid, ...props}) =>{
 			var updateData = {
 				email: mailM,
 			}
-			axios.patch(`http://127.0.0.1:8080/api/v1/customer/updateUserInfoByUId/${uid}/${mailM}`).then(
-				(response) => {
-					console.log(mailM);
-					window.alert("Profile Updated");
-					update_mail(mailM)
+			if(role == "customer"){
 
-				}).catch((err) => console.log(err.response));
+				axios.patch(`http://127.0.0.1:8080/api/v1/customer/updateUserInfoByUId/${uid}/${mailM}`).then(
+					(response) => {
+						console.log(mailM);
+						window.alert("Profile Updated");
+						update_mail(mailM)
+	
+					}).catch((err) => console.log(err.response));
+				}else{
+					axios.patch(`http://127.0.0.1:8080/api/v1/userAccount/updateUserInfoByUId/${uid}/${mailM}`).then(
+						(response) => {
+							console.log(mailM);
+							window.alert("Profile Updated");
+							update_mail(mailM)
+		
+						}
+					).catch((err)=>console.log(err))
+				}
 			}
 		props.changeBio(bioM);
 		setIsClicked(true)
@@ -65,7 +77,9 @@ const mapStateToProps = (state) => {
 	return {
 		email: state.email,
 		name: state.name,
-		uid: state.uid
+		uid: state.uid,
+		role:state.accountType
+
 	}
 }
 const mapDispatchToProps = (dispatch) => {

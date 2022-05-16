@@ -37,8 +37,13 @@ const AddFriendModal = ({uid, mail}) => {
 	useEffect(()=>{
 		axios.get("http://127.0.0.1:8080/api/v1/customer/getAllCustomers").then(
 			(response) => {
+				
 				setCustomers(response.data);
 				var emails = response.data.map((customer)=> customer.email);
+				var index = emails.indexOf(mail);
+				if(index>-1){
+					emails.splice(index,1);
+				}
 				setFriends(emails)
 			}
 		).catch((err)=>{console.log(err)});
