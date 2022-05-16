@@ -1,7 +1,10 @@
 package com.rental_backend.entity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Check;
+
 import javax.persistence.*;
+
 import java.io.Serializable;
 @Getter
 @Setter
@@ -9,8 +12,9 @@ import java.io.Serializable;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor
 @Entity
-
+@Check( constraints = "point >= 0 and point <= 5" )
 public class Rate {
+
 
     private int point;
     @Embeddable
