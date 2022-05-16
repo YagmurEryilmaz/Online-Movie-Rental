@@ -9,6 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -34,8 +35,11 @@ public class MovieService {
         return movieRepository.findBySubtitleLang(sLang);
     }
 
-    public Movie addMovie(String title, String genre, String directorName, int productionYear, double price, String posterUrl, Date additionDate, Set<MovieLang> movieLang, Set<SubtitleLang> subtitleLang, Set<Trailer> trailer) {
+    public Movie addMovie(String title, String genre, String directorName, int productionYear, double price, String posterUrl, Date additionDate, Set<MovieLang> movieLang, Set<SubtitleLang> subtitleLang, String trailer) {
 
+        Trailer t = Trailer.builder().trailerUrl(trailer).build();
+        HashSet <Trailer> trailers = new HashSet<>();
+        trailers.add(t);
             Movie s = Movie.builder()
                     .title(title)
                     .genre(genre)
@@ -46,7 +50,7 @@ public class MovieService {
                     .additionDate(additionDate)
                     .subtitleLang(subtitleLang)
                     .movieLang(movieLang)
-                    .trailers(trailer)
+                    .trailers(trailers)
                     .build();
             return movieRepository.save(s);
 

@@ -31,5 +31,5 @@ public class MovieResponse {
 
     private Set<SubtitleLang> subtitleLang;
 
-    private Set<Trailer> trailer;
+    private String trailer;
 }
