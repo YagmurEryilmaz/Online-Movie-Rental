@@ -72,6 +72,12 @@ public class FriendRequestService {
         return friendRequestRepository.getFriends(userId);
     }
 
+    public List <String> getFriendsEmail(Long userId)
+    {
+        List<String> list = friendRequestRepository.getSentReqs(userId);
+                list.addAll(friendRequestRepository.getReceivedReqs(userId));
+        return list ;
+    }
     public List <FriendRequest> getAcceptedRequests(Long senderId, Long receiverId)
     {
         return friendRequestRepository.findAcceptedFriendRequests(senderId,receiverId);
