@@ -31,32 +31,32 @@ public class Customer extends UserAccount{
     @JsonIgnore
     private Set<RentedMovie> rentedMovies;
 
-    @OneToMany(mappedBy ="senderCustomer")
+    @OneToMany(mappedBy ="senderCustomer",cascade = CascadeType.REMOVE)
     @JsonIgnore
     private Set<Gift> sentGifts;
 
-    @OneToMany(mappedBy ="receiverCustomer")
+    @OneToMany(mappedBy ="receiverCustomer",cascade = CascadeType.REMOVE)
     @JsonIgnore
     private Set<Gift> receivedGifts;
 
-    @OneToMany(mappedBy ="sender")
+    @OneToMany(mappedBy ="sender",cascade = CascadeType.REMOVE)
     @JsonIgnore
     private Set<FriendRequest> sentRequests;
 
-    @OneToMany(mappedBy ="receiver")
+    @OneToMany(mappedBy ="receiver", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private Set<FriendRequest> receivedRequests;
 
 
-    @OneToMany(mappedBy ="suggestionSender")
+    @OneToMany(mappedBy ="suggestionSender",cascade = CascadeType.REMOVE)
     @JsonIgnore
     private Set<Suggestion> sentSuggestions;
 
-    @OneToMany(mappedBy ="suggestionReceiver")
+    @OneToMany(mappedBy ="suggestionReceiver",cascade = CascadeType.REMOVE)
     @JsonIgnore
     private Set<Suggestion> receivedSuggestions;
 
-    @OneToMany(mappedBy ="customer")
+    @OneToMany(mappedBy ="customer",cascade = CascadeType.REMOVE)
     private Set<SubtitleRequest> subtitleRequests;
 
     @OneToMany
