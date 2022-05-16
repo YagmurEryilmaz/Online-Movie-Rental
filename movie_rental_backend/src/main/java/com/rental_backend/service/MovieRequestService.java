@@ -20,14 +20,18 @@ public class MovieRequestService {
     }
 
     public MovieRequest addRequest(Long cId, String movieName, String drectorName, int productionYear ) {
-
-        MovieRequest m = MovieRequest.builder()
-                                    .movieName(movieName)
-                                    .directorName(drectorName)
-                                    .movieProductionYear(productionYear)
-                                    .customer(customerRepository.findByUId(cId))
-                                    .build();
-        return movieRequestRepository.save(m);
+        if(productionYear > 2022){
+            throw new RuntimeException("Production year can not more than 2022");
+        }
+        else{
+            MovieRequest m = MovieRequest.builder()
+                    .movieName(movieName)
+                    .directorName(drectorName)
+                    .movieProductionYear(productionYear)
+                    .customer(customerRepository.findByUId(cId))
+                    .build();
+            return movieRequestRepository.save(m);
+        }
     }
 
     public void deleteMovieRequest(Long id) {
