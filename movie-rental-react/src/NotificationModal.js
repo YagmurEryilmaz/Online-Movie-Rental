@@ -95,9 +95,18 @@ const NotificationModal = ({uid, fetch_requests, gifts, accept_gift,fetch_gifts,
 		)
 	}
 	const deleteMovieRequest = (request) => {
-		accept_request(request)
+		axios.delete(`http://127.0.0.1:8080/api/v1/movieRequest/deleteMovieRequest/${request.movieReqId}`).then(
+			(response) => {
+				if(response)
+				{
+					window.alert("Request Deleted")
+					accept_request(request)
+				}
+			}
+		).catch((err) => {console.log(err)})
 	}
 	const deleteGift = (gift) => {
+
 		accept_gift(gift)
 	}
 	return(
