@@ -77,36 +77,6 @@ public class Movie {
     @JsonIgnore
     private Set<Suggestion> suggestions;
 
-   /* @OneToMany(mappedBy ="movie")
-    private Set<SubtitleRequest> requestedSubtitles;*/
-
-    public void addSubtitle(SubtitleLang subtitle)
-    {
-        if (subtitleLang == null)
-            subtitleLang = new HashSet<>();
-        subtitleLang.add(subtitle);
-    }
-
-   /* public void addTrailer(Trailer trailer)
-    {
-        if (trailers == null)
-            trailers = new HashSet<>();
-        trailers.add(trailer);
-    }*/
-
-    public void addRating(Rate rate)
-    {
-        if (rates == null)
-            rates = new HashSet<>();
-        rates.add(rate);
-    }
-
-    public void addRented(RentedMovie rentedMovie)
-    {
-        if (rentedMovieSet == null)
-            rentedMovieSet = new HashSet<>();
-        rentedMovieSet.add(rentedMovie);
-    }
 }
 
 
