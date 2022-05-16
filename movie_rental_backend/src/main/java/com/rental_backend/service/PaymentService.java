@@ -15,6 +15,8 @@ public class PaymentService {
     private RentedMovieService rentedMovieService;
     private CustomerService customerService;
 
+    private GiftRepository giftRepository;
+
     @Autowired
     public PaymentService(PaymentRepository paymentRepository, RentedMovieRepository rentedMovieRepository, @Lazy RentedMovieService rentedMovieService, CustomerService customerService) {
         this.paymentRepository = paymentRepository;
@@ -39,7 +41,25 @@ public class PaymentService {
                     .payStatus("paid")
                     .build();
             paymentRepository.save(payment);
-            rentedMovieService.rentMovie(c_id, m_id,  expDate);
+            rentedMovieService.rentMovie(c_id, m_id, payId,expDate);
+        }
+
+    }
+
+    public void payGift(String email, Long m_id, Long payId, String payType, Date expDate)
+    {
+        Long c_id = customerService.findByEmail(email).getUId();
+        if(rentedMovieService.isRentedPreviously(c_id,m_id)) {
+            throw new RuntimeException("Your Friend Already Rented the Movie");
+        }else {
+            Payment payment = Payment.builder()
+                    .payId(payId)
+                    .payType(payType)
+                    .payStatus("paid")
+                    .build();
+            paymentRepository.save(payment);
+            giftRepository.save(new Gift());
+            rentedMovieService.rentMovie(c_id, m_id, payId, expDate);
         }
 
     }
