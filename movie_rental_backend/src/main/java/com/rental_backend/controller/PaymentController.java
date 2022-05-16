@@ -40,7 +40,7 @@ public class PaymentController {
     public ResponseEntity<?> payMovie(@RequestBody PaymentDto paymentDto)
     {
         try {
-            paymentService.pay(paymentDto.getCustomer(), paymentDto.getMovie(), paymentDto.getPayId(), paymentDto.getPayType(), paymentDto.getExpDate());
+            paymentService.pay(paymentDto.getCustomerEmail(), paymentDto.getMovie(), paymentDto.getPayId(), paymentDto.getPayType(), paymentDto.getExpDate());
             return ResponseEntity.ok(new MessageResponse("paid"));
         }
         catch (RuntimeException r){

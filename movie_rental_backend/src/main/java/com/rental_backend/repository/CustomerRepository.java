@@ -42,4 +42,7 @@ public interface CustomerRepository extends CrudRepository<Customer,Long> {
     @Query("select c.email from Customer c")
     List<String> findAllEmails();
 
+    @Query("select c.email from FriendRequest fr, Customer c where c.uId= fr.primaryKey.receiver_id and fr.friendReq_status='accepted' and (fr.primaryKey.sender_id = :userId or fr.primaryKey.receiver_id = :userId)")
+    List<String> getFriendEmail(@Param("userId") Long userId);
+
 }

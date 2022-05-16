@@ -59,6 +59,11 @@ public class CustomerController {
         return customerService.getPendingFriendRequestCount(friendRequestDto.getReceiver_id());
     }
 
+    @GetMapping("/getFriendEmail/{uId}")
+    public List<String> getPendingRequests(@PathVariable("uId") Long uId){
+        return customerService.getFriendEmail(uId);
+    }
+
     @GetMapping("/getNumOfReceivedRequests")
     public int getNumOfReceivedRequests(@PathVariable FriendRequestDto friendRequestDto){
         return customerService.getReceivedFriendRequestCount(friendRequestDto.getReceiver_id());

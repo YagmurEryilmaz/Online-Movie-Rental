@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class CustomerService {
@@ -90,6 +91,10 @@ public class CustomerService {
     public int getReceivedFriendRequestCount(Long receiverId){ return friendRequestRepository.findNumOfReceivedRequests(receiverId);}
     public int getSentFriendRequestCount(Long senderId){ return friendRequestRepository.findNumOfSentRequests(senderId);}
     public int getFriendCount(Long receiverId, Long senderId){ return friendRequestRepository.findNumOfFriends(receiverId, senderId);}
+
+    public List<String> getFriendEmail(Long uId) {
+        return customerRepository.getFriendEmail(uId);
+    }
 
     // methods related to Gift repo
     public int getReceivedGiftCount(Long receiverId){ return giftRepository.findNumOfReceivedGifts(receiverId);}

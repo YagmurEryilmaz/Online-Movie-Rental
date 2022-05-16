@@ -14,7 +14,7 @@ public class PaymentDto {
 
     private Long movie;
 
-    private Long customer;
+    private String customerEmail;
 
     private Date expDate;
 }
