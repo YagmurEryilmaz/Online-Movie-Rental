@@ -40,9 +40,9 @@ public class MovieController {
         return new ResponseEntity<>(movieService.addMovieByMObj(m),HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/deleteMovie")
-    public ResponseEntity<?> deleteMovie(@PathVariable MovieResponse movieResponse) throws MovieNotFoundException {
-        movieService.deleteMovie(movieResponse.getTitle(), movieResponse.getDirectorName());
+    @DeleteMapping("/deleteMovie/{mId}")
+    public ResponseEntity<?> deleteMovie(@PathVariable("mId") Long mId) throws MovieNotFoundException {
+        movieService.deleteMovie(mId);
         return new ResponseEntity<>( HttpStatus.NO_CONTENT);
     }
 

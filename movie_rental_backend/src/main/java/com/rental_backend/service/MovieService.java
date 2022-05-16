@@ -78,12 +78,12 @@ public class MovieService {
         return movieRepository.search(searchTerm);
     }
 
-    public void deleteMovie(String title, String directorName) throws MovieNotFoundException {
-        if (movieRepository.existsByTitleAndDirectorName(title,directorName)) {
-            movieRepository.deleteMovie(title, directorName);
+    public void deleteMovie(Long mId) throws MovieNotFoundException {
+        if (movieRepository.existsById(mId)) {
+            movieRepository.deleteMovie(mId);
         }
         else {
-            throw new MovieNotFoundException("Movie with title " + title + " does not exist.");
+            throw new MovieNotFoundException("Movie with id " + mId + " does not exist.");
         }
     }
 
