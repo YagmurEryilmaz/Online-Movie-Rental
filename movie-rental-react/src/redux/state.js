@@ -8,7 +8,8 @@ export const stateProto = {
 	email: "",
 	friendRequests:[],
 	uid: -1,
-	numOfRequests:0
+	numOfRequests:0,
+	allMovies:[]
 
 
 }
