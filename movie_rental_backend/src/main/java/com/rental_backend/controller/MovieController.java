@@ -89,4 +89,9 @@ public class MovieController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("/getAllGenre")
+    public ResponseEntity<List<String>> getAllGenre(){
+        return ResponseEntity.ok(movieService.getAllGenre());
+    }
+
 }
