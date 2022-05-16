@@ -27,8 +27,9 @@ public class PaymentService {
         return paymentRepository.findByPayId(pay_id);
     }
 
-    public void pay(Long c_id, Long m_id, Long payId, String payType, Date expDate)
+    public void pay(String email, Long m_id, Long payId, String payType, Date expDate)
     {
+        Long c_id = customerService.findByEmail(email).getUId();
         if(rentedMovieService.isRentedPreviously(c_id,m_id)) {
             throw new RuntimeException("Already Paid");
         }else {
