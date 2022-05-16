@@ -51,6 +51,12 @@ public class FriendRequestController {
         return new ResponseEntity<>(friendRequestService.addFriendRequest(fr.getSender_email(), fr.getReceiver_email()), HttpStatus.CREATED);
     }
 
+    @GetMapping("/getFriendEmails/{uId}")
+    public ResponseEntity<List<String>> getFriendEmails(@PathVariable("uId") Long uId) {
+        return ResponseEntity.ok(friendRequestService.getFriendsEmail(uId));
+    }
+
+
     @Modifying
     @PostMapping("/accept")
     public ResponseEntity<?> acceptRequest(@RequestBody FriendRequestDto fr){
