@@ -6,7 +6,7 @@ import java.sql.Date;
 
 @Data
 public class PaymentDto {
-    private Long payId;
+    //private Long payId;
 
     private String payType;
 

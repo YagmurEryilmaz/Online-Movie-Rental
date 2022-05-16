@@ -21,16 +21,16 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
-    @GetMapping("/getPaymentById")
+    /*@GetMapping("/getPaymentById")
     public ResponseEntity<Payment> getPaymentById(@RequestBody PaymentDto paymentDto){
         return ResponseEntity.ok(paymentService.findById(paymentDto.getPayId()));
-    }
+    }*/
 
     @PostMapping("/pay")
     public ResponseEntity<?> payMovie(@RequestBody PaymentDto paymentDto)
     {
         try {
-            paymentService.pay(paymentDto.getCustomerEmail(), paymentDto.getMovie(), paymentDto.getPayId(), paymentDto.getPayType(), paymentDto.getExpDate());
+            paymentService.pay(paymentDto.getCustomerEmail(), paymentDto.getMovie(), paymentDto.getPayType(), paymentDto.getExpDate());
             return ResponseEntity.ok(new MessageResponse("paid"));
         }
         catch (RuntimeException r){
