@@ -91,9 +91,9 @@ public class CustomerController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("/deleteUserByUId")
-    public ResponseEntity<?> deleteUserByUId(@PathVariable CustomerDto customerDto) {
-        customerService.deleteUserByUId(customerDto.getUId());
+    @DeleteMapping("/deleteUserByUId/{uId}")
+    public ResponseEntity<?> deleteUserByUId(@PathVariable("uId") Long uId) {
+        customerService.deleteUserByUId(uId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
