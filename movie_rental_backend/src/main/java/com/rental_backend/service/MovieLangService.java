@@ -18,7 +18,7 @@ public class MovieLangService {
         this.movieLangRepository = movieLangRepository;
     }
 
-    public MovieLang addMovieLang(String mLang,Long mId ) {
+    public MovieLang addMovieLang(String mLang, Long mId ) {
 
         MovieLang ml = MovieLang.builder()
                 .movieLang(mLang)
