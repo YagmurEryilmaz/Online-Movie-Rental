@@ -22,8 +22,8 @@ public class SubtitleLangController {
         this.subtitleLangService = subtitleLangService;
     }
 
-    @PostMapping("/addSubtitleLang")
-    public ResponseEntity<SubtitleLang> addSubtitleLang(@RequestBody SubtitleLang s) {
-        return new ResponseEntity<>(subtitleLangService.addSubtitleLang(s.getMovie().getMId(),s.getS_lang()), HttpStatus.CREATED);
+    @PostMapping("/addSubtitleLang/{mId}")
+    public ResponseEntity<SubtitleLang> addSubtitleLang(@RequestBody SubtitleLang s, @PathVariable("mId") Long mId) {
+        return new ResponseEntity<>(subtitleLangService.addSubtitleLang(mId,s.getS_lang()), HttpStatus.CREATED);
     }
 }
