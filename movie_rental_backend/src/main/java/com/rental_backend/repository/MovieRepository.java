@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.ForeignKey;
 import java.util.List;
 import java.util.Set;
 
@@ -35,8 +36,8 @@ public interface MovieRepository extends CrudRepository<Movie,Long>{
 
     @Transactional
     @Modifying
-    @Query("delete from Movie where title= :title and directorName = :directorName")
-    void deleteMovie(@Param("title") String title, @Param("directorName") String directorName);
+    @Query("delete from Movie m where m.mId= :mId  ")
+    void deleteMovie(@Param("mId") Long mId);
 
     @Modifying
     @Transactional

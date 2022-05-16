@@ -20,21 +20,43 @@ const Signup = () => {
 	const signup = (e) => {
 		e.preventDefault();
 		if(validateEmail(mail) && password != "" && name != "" && birthday != ""){
-			window.alert("Success");
-			console.log(name, mail, password, birthday, user);
-			var registerInfo={
-				email:mail,
-				role:user,
-				password:password,
-				name:name,
-				birthday:birthday
-
+			var today = new Date();
+			var birthdate = new Date(birthday);
+			var age = today.getFullYear() - birthdate.getFullYear();
+			var m = today.getMonth() - birthdate.getMonth();
+			if (m < 0 || (m === 0 && today.getDate() < birthdate.getDate())) {
+				age--;
 			}
-			axios.post("http://127.0.0.1:8080/api/v1/auth/signup",
-				registerInfo
-			).then((response) => {
-				
-			}).catch(error => {console.log(error); window.alert("database error")});
+			if(age < 18){
+				window.alert("You must be 18 years old to sign up");
+			}
+			else if(password.length < 8){
+				window.alert("Password must be at least 8 characters long");
+			}
+			else{
+
+				console.log(name, mail, password, birthday, user);
+				var registerInfo={
+					email:mail,
+					role:user,
+					password:password,
+					name:name,
+					birthday:birthday
+	
+				}
+				axios.post("http://127.0.0.1:8080/api/v1/auth/signup",
+					registerInfo
+				).then((response) => {
+					if(response.data.message === "Error: Email is already in use!"){
+						window.alert("Email is already in use!")
+					}
+					else{
+						window.alert("Successfully registered!")
+					}
+					
+				}).catch(error => {console.log(error); window.alert("database error")});
+			}
+
 
 		}
 		else if(!validateEmail(mail)){

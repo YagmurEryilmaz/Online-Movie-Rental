@@ -65,7 +65,7 @@ public class AuthenticationController {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser( @RequestBody SignupRequest signUpRequest) {
         if (userAccountService.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+            return ResponseEntity.ok(new MessageResponse("Error: Email is already in use!"));
         }
 
         if(signUpRequest.getRole().equals("customer"))

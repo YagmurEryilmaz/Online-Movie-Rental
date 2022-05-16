@@ -88,6 +88,12 @@ const reducer = (state,action) =>{
 			cart: []
 		}
 	}
+	if(action.type == "FETCH_MOVIES"){
+		return{
+			...state,
+			allMovies: action.payload
+		}
+	}
 	return state;
 }
 export default reducer;

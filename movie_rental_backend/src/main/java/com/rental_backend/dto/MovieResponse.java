@@ -27,9 +27,9 @@ public class MovieResponse {
 
     private Date additionDate;
 
-    private Set<MovieLang> movieLang;
+    //private Set<MovieLang> movieLang;
 
-    private Set<SubtitleLang> subtitleLang;
+    //private Set<SubtitleLang> subtitleLang;
 
-    private String trailer;
+    //private Set<Trailer> trailer;
 }

@@ -9,7 +9,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -18,10 +17,18 @@ import java.util.Set;
 public class MovieService {
 
     private MovieRepository movieRepository;
+    private SubtitleLangRepository subtitleLangRepository;
+    private MovieLangRepository movieLangRepository;
+    private TrailerRepository trailerRepository;
 
     @Autowired
-    public MovieService(MovieRepository movieRepository) {
+    public MovieService(MovieRepository movieRepository,SubtitleLangRepository subtitleLangRepository,MovieLangRepository movieLangRepository,TrailerRepository trailerRepository) {
+
         this.movieRepository = movieRepository;
+        this.movieLangRepository=movieLangRepository;
+        this.subtitleLangRepository=subtitleLangRepository;
+        this.trailerRepository=trailerRepository;
+
     }
     public List<Movie> getAllMovies(){
         return movieRepository.findAll();
@@ -35,11 +42,12 @@ public class MovieService {
         return movieRepository.findBySubtitleLang(sLang);
     }
 
-    public Movie addMovie(String title, String genre, String directorName, int productionYear, double price, String posterUrl, Date additionDate, Set<MovieLang> movieLang, Set<SubtitleLang> subtitleLang, String trailer) {
+    public Movie addMovieByMObj(Movie m) {
+        return movieRepository.save(m);
+    }
 
-        Trailer t = Trailer.builder().trailerUrl(trailer).build();
-        HashSet <Trailer> trailers = new HashSet<>();
-        trailers.add(t);
+    public Movie addMovie(String title, String genre, String directorName, int productionYear, double price, String posterUrl, Date additionDate) {
+
             Movie s = Movie.builder()
                     .title(title)
                     .genre(genre)
@@ -48,9 +56,6 @@ public class MovieService {
                     .price(price)
                     .posterUrl(posterUrl)
                     .additionDate(additionDate)
-                    .subtitleLang(subtitleLang)
-                    .movieLang(movieLang)
-                    .trailers(trailers)
                     .build();
             return movieRepository.save(s);
 
@@ -81,12 +86,16 @@ public class MovieService {
         return movieRepository.search(searchTerm);
     }
 
-    public void deleteMovie(String title, String directorName) throws MovieNotFoundException {
-        if (movieRepository.existsByTitleAndDirectorName(title,directorName)) {
-            movieRepository.deleteMovie(title, directorName);
+    public void deleteMovie(Long mId) throws MovieNotFoundException {
+        if (movieRepository.existsById(mId)) {
+            subtitleLangRepository.deleteSubtitleLang(mId);
+            movieLangRepository.deleteMovieLang(mId);
+            trailerRepository.deleteTrailer(mId);
+            movieRepository.deleteMovie(mId);
+
         }
         else {
-            throw new MovieNotFoundException("Movie with title " + title + " does not exist.");
+            throw new MovieNotFoundException("Movie with id " + mId + " does not exist.");
         }
     }
 

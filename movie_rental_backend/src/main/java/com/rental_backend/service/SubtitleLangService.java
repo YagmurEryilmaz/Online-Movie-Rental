@@ -1,5 +1,6 @@
 package com.rental_backend.service;
 import com.rental_backend.entity.*;
+import com.rental_backend.exception.MovieNotFoundException;
 import com.rental_backend.repository.*;
 import org.hibernate.annotations.SQLInsert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,11 @@ public class SubtitleLangService {
                 .build();
         return subtitleLangRepository.save(s);
     }
+    public void deleteSubtitleLang(Long mId) throws MovieNotFoundException {
 
+            subtitleLangRepository.deleteSubtitleLang(mId);
+
+    }
 
     public Set<SubtitleLang> getSubtitleLang (Long movieId){
        return movieService.findMovieById(movieId).getSubtitleLang();

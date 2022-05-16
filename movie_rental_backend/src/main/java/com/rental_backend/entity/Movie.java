@@ -52,21 +52,20 @@ public class Movie {
         this.additionDate = additionDate;
     }
 
-    @OneToMany
-    @JoinColumn(name = "movie")
+    @OneToMany (mappedBy ="movie", cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private Set<MovieLang> movieLang;
 
-    @OneToMany
-    @JoinColumn(name = "movie")
+    @OneToMany(mappedBy ="movie", cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private Set<SubtitleLang> subtitleLang;
 
     @OneToMany
-    @JoinColumn(name = "movie")
+    @JoinColumn(name = "movie" )
     private Set<RentedMovie> rentedMovieSet;
 
-    @OneToMany
-    @JoinColumn(name = "movie")
-
+    @OneToMany(mappedBy = "movie",cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private Set<Trailer> trailers;
 
     @OneToMany

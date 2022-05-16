@@ -22,11 +22,9 @@ public class SubtitleLang {
 
     private String s_lang;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @PrimaryKeyJoinColumn(name = "subtitleLang", referencedColumnName = "m_id")
-    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "m_id", insertable = false, updatable = false)
     private Movie movie;
-
 
 }
 

@@ -64,7 +64,13 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 
 	const deleteMovie = () => {
 		if(window.confirm("Are you sure you want to delete this movie?")){
-			//Delete movie from database
+			axios.delete(`http://127.0.0.1:8080/api/v1/movie/deleteMovie/${mov.mid}`).then(
+				(response) => {
+					if(response){
+						window.alert("Movie deleted")
+					}
+				}
+			).catch((err) => {console.log(err)})
 		}
 	}
 	const editTrailer = () => {

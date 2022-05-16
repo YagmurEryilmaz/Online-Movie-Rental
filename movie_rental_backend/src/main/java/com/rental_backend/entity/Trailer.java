@@ -22,8 +22,6 @@ public class Trailer {
     private String trailerUrl;
 
     @ManyToOne( fetch = FetchType.EAGER)
-    @PrimaryKeyJoinColumn(name = "trailer", referencedColumnName = "mId")
-    @JsonIgnore
     private Movie movie;
 
 
