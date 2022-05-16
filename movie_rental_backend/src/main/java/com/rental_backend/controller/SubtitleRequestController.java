@@ -37,4 +37,5 @@ public class SubtitleRequestController {
     public ResponseEntity<SubtitleRequest> addSubtitleRequest(@RequestBody SubtitleRequest subtitleReq) {
         return new ResponseEntity<>(subtitleRequestService.addSubtitleRequest(subtitleReq), HttpStatus.CREATED);
     }
+
 }

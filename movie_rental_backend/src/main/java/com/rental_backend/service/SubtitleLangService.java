@@ -34,9 +34,11 @@ public class SubtitleLangService {
         return subtitleLangRepository.save(s);
     }
     public void deleteSubtitleLang(Long mId) throws MovieNotFoundException {
-
             subtitleLangRepository.deleteSubtitleLang(mId);
+    }
 
+    public List<SubtitleLang> getSubtitleLangByMovie (Long movieId){
+        return subtitleLangRepository.findSubtitleLangByMovieId(movieId);
     }
 
     public Set<SubtitleLang> getSubtitleLang (Long movieId){

@@ -17,6 +17,10 @@ public interface SubtitleLangRepository extends CrudRepository<SubtitleLang,Long
     @Query("select s from SubtitleLang s where s.subtitleLang_id = :id")
     SubtitleLang findSubtitleLangById(@Param("id") Long id);
 
+
+    @Query("select s from SubtitleLang s, Movie m where s.movie.mId = :mId and s.movie.mId=m.mId")
+    List<SubtitleLang> findSubtitleLangByMovieId(@Param("mId") Long mId);
+
     @Transactional
     @Modifying
     @Query("delete from SubtitleLang sl where sl.movie.mId= :mId ")

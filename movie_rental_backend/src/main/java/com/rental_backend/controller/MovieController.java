@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-
 import java.util.List;
 
 @RestController
@@ -35,6 +33,11 @@ public class MovieController {
         //this.trailerService=trailerService;
     }
 
+    @GetMapping("/getMovieById/{genre}")
+    public ResponseEntity<List<Movie>> getMovieByGenre(@PathVariable("genre") String genre) {
+        return ResponseEntity.ok(movieService.findMovieByGenre(genre));
+    }
+
     @GetMapping("/getAllMovies")
     public ResponseEntity<List<Movie>> getAllMovies() {
         return ResponseEntity.ok(movieService.getAllMovies());
@@ -54,7 +57,6 @@ public class MovieController {
     public ResponseEntity<?> deleteMovie(@PathVariable("mId") Long mId) throws MovieNotFoundException {
         subtitleLangService.deleteSubtitleLang(mId);
         movieLangService.deleteMovieLang(mId);
-        //trailerService.deleteTrailer(mId);
         movieService.deleteMovie(mId);
         return new ResponseEntity<>( HttpStatus.NO_CONTENT);
     }
