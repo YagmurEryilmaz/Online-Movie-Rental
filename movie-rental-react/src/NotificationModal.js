@@ -44,8 +44,6 @@ const NotificationModal = ({uid, fetch_requests, gifts, accept_gift,fetch_gifts,
 
 					(response) => {
 
-						console.log(response.data)
-						console.log("subbbbbttt")
 						fetch_gifts(response.data)
 						setSubtReq(response.data)
 					}).catch((err) => {console.log(err)})

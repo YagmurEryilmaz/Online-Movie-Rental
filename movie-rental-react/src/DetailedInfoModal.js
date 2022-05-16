@@ -89,7 +89,7 @@ const DetailedInfoModal = ({cart, uid, add_to_cart, ...props}) =>{
 		
 		var ratePost = {
 			movie: mov.mid,
-			customer: 1,
+			customer: uid,
 			point: rating
 		}
 		axios.post("http://127.0.0.1:8080/api/v1/rate/rateMovie",ratePost).then(

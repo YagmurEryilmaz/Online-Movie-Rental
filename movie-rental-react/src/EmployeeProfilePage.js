@@ -47,20 +47,13 @@ const EmployeeProfilePage = ({name, mail, uid, birthday}) => {
 
 	useEffect(() => {
 		axios.get(`http://127.0.0.1:8080/api/v1/suggestion/getSuggestionsByReceiver/${uid}`).then((response) => {
-			console.log(response.data)
+
 			setFriendSuggestions(response.data)
 		}).catch((error) => {console.log(error)})
 	}, [])
 
-	var trailers = 
-		{
-			trailerId: 7,
-			trailerUrl: "trailerUrl",
-		}
 	
-	var trailerSet = new Array()
-	trailerSet.push(trailers);
-	console.log(trailerSet)
+
 
 	const changePP = (avatar) => {
 		setProfilePhoto(avatar);
@@ -85,7 +78,7 @@ const EmployeeProfilePage = ({name, mail, uid, birthday}) => {
 
 			var trailerSet = new Set()
 			trailerSet.add(trailers);
-			console.log(trailerSet)
+
 
 			
 			var subtSet = new Set(subtitleArr);
@@ -101,9 +94,11 @@ const EmployeeProfilePage = ({name, mail, uid, birthday}) => {
 				trailerUrl: trailerUrl,
 				mlang: movieLang,
 				slang: subtitleArr,
+
 				
 
 			}
+			console.log(movieInfo);
 			axios.post("http://127.0.0.1:8080/api/v1/movie/addMovieToSystem", movieInfo).then(
 				(response) => {
 					if(response)
