@@ -1,5 +1,6 @@
 package com.rental_backend.service;
 import com.rental_backend.entity.Suggestion;
+import com.rental_backend.exception.MovieNotFoundException;
 import com.rental_backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,11 @@ public class TrailerService {
 
     public String findTrailerByMovieId(Long movieId) {
         return trailerRepository.findTrailerByMovieId(movieId);
+    }
+    public void deleteTrailer(Long mId) throws MovieNotFoundException {
+
+       trailerRepository.deleteTrailer(mId);
+
     }
 
 }
