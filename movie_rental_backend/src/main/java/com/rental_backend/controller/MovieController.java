@@ -65,7 +65,7 @@ public class MovieController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @PatchMapping("/updateTrailer/{mId}/{trailerUrl}")
-    public ResponseEntity<?> updateUserInfoByUId(@PathVariable Long mId, @PathVariable String trailerUrl) {
+    public ResponseEntity<?> updateUserInfoByUId(@PathVariable("mId") Long mId, @PathVariable("trailerUrl") String trailerUrl) {
         movieService.updateTrailer(mId,trailerUrl);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
