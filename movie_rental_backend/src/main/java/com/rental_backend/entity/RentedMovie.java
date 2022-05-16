@@ -27,8 +27,6 @@ public class RentedMovie {
         @Column(nullable = false, updatable = false)
         private long mId;
 
-
-
         public PrimaryKey() {
         }
         public PrimaryKey(Long uId, Long mId) {

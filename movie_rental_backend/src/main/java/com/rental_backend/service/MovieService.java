@@ -9,10 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class MovieService {
@@ -69,8 +66,6 @@ public class MovieService {
             subtitleLangRepository.save(sub);
         });
 
-
-
             return  movieRepository.save(movie);
 
     }
@@ -89,7 +84,7 @@ public class MovieService {
     }
 
     public List<Movie> findMovieByGenre(String genre) {
-        return movieRepository.findByGenre(genre);
+        return movieRepository.findByGenre(genre.toLowerCase(Locale.ROOT));
     }
 
     public Movie findById(long id) {
@@ -109,7 +104,6 @@ public class MovieService {
             subtitleLangRepository.deleteSubtitleLang(mId);
             movieLangRepository.deleteMovieLang(mId);
             movieRepository.deleteMovie(mId);
-
         }
         else {
             throw new MovieNotFoundException("Movie with id " + mId + " does not exist.");

@@ -46,6 +46,11 @@ public class MovieController {
         return ResponseEntity.ok(movieService.findById(mId));
     }
 
+    @GetMapping("/getMovieByGenre/{genre}")
+    public ResponseEntity<List<Movie>> getMovieByGenre(@PathVariable("genre") String genre) {
+        return ResponseEntity.ok(movieService.findMovieByGenre(genre));
+    }
+
     @PostMapping("/addMovieToSystem")
     public ResponseEntity<Movie> addMovie(@RequestBody MovieResponse m){
         return new ResponseEntity<>(movieService.addMovie(
