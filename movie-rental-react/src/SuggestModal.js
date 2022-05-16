@@ -70,8 +70,7 @@ const SuggestModal = ({uid, ...props}) => {
 							sx={{height: 90}}
 							renderInput={(params) => <TextField {...params} label="Friend Email" />}
 						/>
-						<h5>Your message (optional)</h5>
-						<input type="text" onChange={(e) => setMessage(e.target.value)} class="form-control" id="exampleFormControlInput1" placeholder="Send your message"></input>
+						
 						
 					</div>
 					<div class="modal-footer">

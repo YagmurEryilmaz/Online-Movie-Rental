@@ -1,5 +1,6 @@
 package com.rental_backend.service;
 import com.rental_backend.entity.*;
+import com.rental_backend.exception.CustomerNotFoundException;
 import com.rental_backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,5 +33,9 @@ public class MovieRequestService {
                                     .build();
         return movieRequestRepository.save(m);
     }
-    //public List<Movie> requestMovie(@RequestBody )
+
+    public void deleteMovieRequest(Long id) {
+            movieRequestRepository.deleteMovieRequest(id);
+    }
+
 }

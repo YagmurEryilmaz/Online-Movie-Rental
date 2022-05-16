@@ -28,6 +28,7 @@ const DetailedInfoModal = ({cart, uid, add_to_cart, ...props}) =>{
 	const [inputValue, setInputValue] = useState('');
 	const [reqEmail, setReqEmail] = useState(friends[0]);
 	const [inputValue1, setInputValue1] = useState('');
+	const [subtitlesMov, setSubtitlesMov] = useState([]);
 	
 	useEffect(() => {
 		var movieId = mov.mid;
@@ -41,22 +42,19 @@ const DetailedInfoModal = ({cart, uid, add_to_cart, ...props}) =>{
 		).catch((err) => {console.log(err)});
 		axios.get(`http://127.0.0.1:8080/api/v1/rate/getAveragePoint/${movieId}`).then(
 			(response) => {
-				setRatingAvg(response.data);
 				console.log(response.data)
+				setRatingAvg(response.data);
 			}
 			).catch((err)=>{console.log(err.response)})
-		axios.get(`http://127.0.0.1:8080/api/v1/trailer/getTrailerByMovie/${movieId}`).then(
-			(response) => {
-				setTrailer(response.data);
-				console.log(response.data)
-			}
-		).catch((err)=>{console.log(err.response)})
+		
+
 
 		},[isRated])
 
 		
 		var contains = cart.indexOf(mov);
-	var trailerLink = mov.trailers[0].trailerUrl
+	
+	var trailerLink = mov.trailerUrl
 	const handleClick = ()=>{
 		var subt = {
 

@@ -24,4 +24,8 @@ public class SubtitleRequestService {
     public SubtitleRequest addSubtitleRequest(SubtitleRequest subtitleRequest) {
         return subtitleRequestRepository.save(subtitleRequest);
     }
+
+    public void deleteSubtitleRequest(Long id) {
+        subtitleRequestRepository.deleteSubtitleRequest(id);
+    }
 }

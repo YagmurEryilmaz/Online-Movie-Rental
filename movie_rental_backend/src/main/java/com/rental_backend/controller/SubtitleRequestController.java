@@ -1,5 +1,6 @@
 package com.rental_backend.controller;
 
+import com.rental_backend.dto.CustomerDto;
 import com.rental_backend.entity.MovieRequest;
 import com.rental_backend.entity.SubtitleRequest;
 import com.rental_backend.service.MovieRequestService;
@@ -15,10 +16,7 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("api/v1/subtitleRequest")
-
 @RequiredArgsConstructor
-
-
 
 public class SubtitleRequestController {
 
@@ -37,4 +35,13 @@ public class SubtitleRequestController {
     public ResponseEntity<SubtitleRequest> addSubtitleRequest(@RequestBody SubtitleRequest subtitleReq) {
         return new ResponseEntity<>(subtitleRequestService.addSubtitleRequest(subtitleReq), HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/deleteSubtitleRequest/{id}")
+    public ResponseEntity<?> deleteSubtitleRequest(@PathVariable("id") Long id) {
+        subtitleRequestService.deleteSubtitleRequest(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+
+    
 }

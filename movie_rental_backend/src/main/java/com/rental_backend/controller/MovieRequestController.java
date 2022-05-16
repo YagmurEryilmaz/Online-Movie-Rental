@@ -1,5 +1,6 @@
 package com.rental_backend.controller;
 
+import com.rental_backend.dto.CustomerDto;
 import com.rental_backend.dto.MovieRequestDto;
 import com.rental_backend.entity.Movie;
 import com.rental_backend.entity.MovieRequest;
@@ -38,5 +39,11 @@ public class MovieRequestController {
     @PostMapping("/addMovieRequest")
     public ResponseEntity<MovieRequest> addMovieRequest(@RequestBody MovieRequestDto movieRequestDto) {
         return new ResponseEntity<>(movieRequestService.addRequest(movieRequestDto.getCustomerId(),movieRequestDto.getMovieName(),movieRequestDto.getDirectorName(),movieRequestDto.getMovieProductionYear()), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/deleteMovieRequest/{id}")
+    public ResponseEntity<?> deleteMovieRequest(@PathVariable("id") Long id) {
+        movieRequestService.deleteMovieRequest(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

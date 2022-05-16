@@ -28,6 +28,11 @@ const reducer = (state,action) =>{
 			rentedMovies: [],
 			accountType: "",
 			cart: [],
+			email: "",
+			friendRequests: [],
+			uid: -1,
+			numOfRequests: 0,
+			allMovies: []
 
 		}
 	}
@@ -64,7 +69,18 @@ const reducer = (state,action) =>{
 		return{
 			...state,
 			friendRequests: action.payload.requests,
-			numOfRequests: action.payload.requests.length
+			numOfRequests: action.payload.requests.length + state.gifts.length
+		}
+
+	}
+	if(action.type == "FETCH_GIFTS"){
+		var theNewGifts = []
+		
+
+		return{
+			...state,
+			gifts: action.payload.gifts,
+			numOfRequests: action.payload.gifts.length + state.friendRequests.length
 		}
 
 	}
@@ -81,6 +97,18 @@ const reducer = (state,action) =>{
 		}
 
 		
+	}
+	if(action.type =="ACCEPT_GIFT"){
+		var theNewGifts = []
+		var theNewNumOfRequests = state.numOfRequests - 1
+		if(action.payload){
+			theNewGifts = state?.gifts.filter(gift => gift !== action.payload.gift)
+		}
+		return{
+			...state,
+			gifts: theNewGifts,
+			numOfRequests: theNewNumOfRequests
+		}
 	}
 	if(action.type == "EMPTY_CART"){
 		return{

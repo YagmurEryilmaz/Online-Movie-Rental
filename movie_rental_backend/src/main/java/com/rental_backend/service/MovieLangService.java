@@ -33,5 +33,8 @@ public class MovieLangService {
         movieLangRepository.deleteMovieLang(mId);
 
     }
+    public List<MovieLang> getMovieLangByMovie (Long movieId){
+        return movieLangRepository.findMovieLangByMovieId(movieId);
+    }
 
 }

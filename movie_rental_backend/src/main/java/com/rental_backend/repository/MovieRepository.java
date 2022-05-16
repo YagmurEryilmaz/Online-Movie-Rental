@@ -17,13 +17,22 @@ import java.util.Set;
 @Repository
 public interface MovieRepository extends CrudRepository<Movie,Long>{
 
-
     List<Movie> findAll();
+
+    @Query("select m from Movie m group by m.title")
     List<Movie> findByTitle(String title);
+
+    @Query("select m from Movie m group by m.genre")
     List <Movie> findByGenre(String genre);
+
+    @Query("select m from Movie m group by m.productionYear")
     List <Movie> findByProductionYear(int productionYear);
+
+    @Query("select m from Movie m group by m.subtitleLang")
     List<Movie> findBySubtitleLang(String subtitleLang);
+
     boolean existsByTitleAndDirectorName(String title, String directorName);
+
     Movie findById(long mId);
 
     @Query("select m from Movie m where m.mId = :id")
@@ -48,10 +57,5 @@ public interface MovieRepository extends CrudRepository<Movie,Long>{
     @Transactional
     @Query("update Movie m set m.trailerUrl=:trailerUrl where m.mId=:mId ")
     void updateTrailer(@Param("mId") Long mId, @Param("trailerUrl") String trailerUrl);
-
-
-
-
-
 
 }
