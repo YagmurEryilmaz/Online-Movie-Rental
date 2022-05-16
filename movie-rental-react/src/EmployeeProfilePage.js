@@ -27,7 +27,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
 
-const EmployeeProfilePage = ({name, mail, uid, birthday}) => {
+const EmployeeProfilePage = ({name, mail, uid,friendRequests,numOfRequests ,fetch_requests, birthday}) => {
 	const subtitles = ["French", "Turkish", "German", "Arabic", "Dutch", "Spanish", "Chinese"]
 	const [profilePhoto, setProfilePhoto] = useState(defaultAvatar);
 
@@ -50,6 +50,9 @@ const EmployeeProfilePage = ({name, mail, uid, birthday}) => {
 			console.log(response.data)
 			setFriendSuggestions(response.data)
 		}).catch((error) => {console.log(error)})
+		
+
+	
 	}, [])
 
 	var trailers = 
@@ -265,7 +268,15 @@ const mapStateToProps = (state) => {
 		name: state.name,
 		mail: state.email,
 		birthday: state.birthday,
-		uid: state.uid
+		uid: state.uid,
+		friendRequests: state.friendRequests,
+		numOfRequests: state.numOfRequests,
+	}
+
+}
+const mapDispatchToProps = (dispatch) => {
+	return{
+		fetch_requests: (requests) => dispatch({type: "FETCH_REQUESTS", payload: {requests: requests}}),
 	}
 }
 export default connect(mapStateToProps)(EmployeeProfilePage);

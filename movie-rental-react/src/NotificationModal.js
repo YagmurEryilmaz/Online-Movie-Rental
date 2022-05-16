@@ -2,30 +2,39 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import { connect } from "react-redux";
-const NotificationModal = ({uid, fetch_requests, friendRequests, numOfRequests, accept_request, email}) => {
+const NotificationModal = ({uid, fetch_requests, role,friendRequests, numOfRequests, accept_request, email}) => {
 	const [requests,setRequests] = useState([])
 	const [gifts, setGifts] = useState([])
+	const [subtReq, setSubtReq] = useState([])
 	
 	
 	useEffect(()=> {
-		axios.get(`http://127.0.0.1:8080/api/v1/friendRequest/getFriendRequestsByReceiver/${uid}`).then(
-			(response) =>{
-				var pendingRequests = response.data.filter((request)=>{return request.friendReq_status === "pending"})
+		if(role === "customer"){
 
-				console.log(pendingRequests)
-
-				setRequests(pendingRequests);
-				fetch_requests(pendingRequests);
-				
-			}
-		).catch((err) => {console.log(err)})
-		axios.get(`http://127.0.0.1:8080/api/v1/gift/getGiftsByReceiver/${uid}`).then(
-			(response) =>{
-
-				setGifts(response.data)
-				
-			}
-		)
+			axios.get(`http://127.0.0.1:8080/api/v1/friendRequest/getFriendRequestsByReceiver/${uid}`).then(
+				(response) =>{
+					var pendingRequests = response.data.filter((request)=>{return request.friendReq_status === "pending"})
+	
+					console.log(pendingRequests)
+	
+					setRequests(pendingRequests);
+					fetch_requests(pendingRequests);
+					
+				}
+			).catch((err) => {console.log(err)})
+			axios.get(`http://127.0.0.1:8080/api/v1/gift/getGiftsByReceiver/${uid}`).then(
+				(response) =>{
+	
+					setGifts(response.data)
+					
+				}
+			)
+		}else{
+			axios.get(`http://127.0.0.1:8080/api/v1/movieRequest/getAllMovieRequests`).then((response) => {
+				console.log(response.data)
+				fetch_requests(response.data)
+			}).catch((err) => {console.log(err)})
+		}
 			
 	},[])
 	const acceptRequest = (request) => {
@@ -70,9 +79,9 @@ const NotificationModal = ({uid, fetch_requests, friendRequests, numOfRequests, 
 					<div class="modal-body overflow auto">
 						<div class="card" >
 							<div class="card-header">
-								Friend Requests
+								{role === "customer" ? "Friend Requests" : "Movie Requests"}
 							</div>
-							<ul class="list-group list-group-flush">
+							{role === "customer" ? <ul class="list-group list-group-flush">
 								{friendRequests.map((request)=>{
 									return(
 											<li class="list-group-item">
@@ -88,14 +97,28 @@ const NotificationModal = ({uid, fetch_requests, friendRequests, numOfRequests, 
 
 									)
 								})}	
-							</ul>
+							</ul>:
+							<ul class="list-group list-group-flush">
+								{friendRequests.map((request)=>{
+									return(
+											<li class="list-group-item">
+											<span className="fw-bold">Movie Name: <span className = "fw-light">{request.movieName} </span></span>
+											<span className="fw-bold">Director Name: <span className = "fw-light">{request.directorName}</span> </span>
+											<span className="fw-bold">Prod Year: <span className = "fw-light">{request.movieProductionYear}</span> </span>
+												
+											</li>
+
+									)
+								})}	
+							</ul>}
 						</div>
 					</div>
 					<div class="modal-body overflow auto">
 						<div class="card" >
 							<div class="card-header">
-								Gifts
+								{role === "customer" ? "Gifts": "Subtitle Requests"}
 							</div>
+							{role === "customer" ? 
 							<ul class="list-group list-group-flush">
 								{gifts.map((gift) => {
 									console.log(gifts)
@@ -108,7 +131,24 @@ const NotificationModal = ({uid, fetch_requests, friendRequests, numOfRequests, 
 
 									)
 								})}
-							</ul>
+							</ul>: 
+							
+								<ul class="list-group list-group-flush">
+									{subtReq.map((req) => {
+										
+										return (
+											<li class="list-group-item">
+												<span className="fw-bold">Movie Name</span>
+												<span>{req.movieName}  </span>
+												<span className="fw-bold">Requested Language: </span>	
+												<span>{req.requestedSubLang}</span>
+											</li>
+
+										)
+									})}
+								</ul>
+							}
+							
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -126,6 +166,7 @@ const mapStateToProps = state => {
 		email: state.email,
 		friendRequests: state.friendRequests,
 		numOfRequests: state.numOfRequests,
+		role: state.accountType
 	}
 }
 const mapDispatchToProps = dispatch => {

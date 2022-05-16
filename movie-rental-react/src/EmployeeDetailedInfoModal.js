@@ -85,7 +85,16 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 	const editTrailer = () => {
 		//axios post
 		if(trailerURL !== ""){
-			window.alert("Trailer URL Updated")
+			
+			axios.patch(`http://127.0.0.1:8080/api/v1/movie/updateTrailer/${mov.mid}`,{trailerUrl:trailerURL}).then(
+				(response) => {
+					if(response){
+						window.alert("Trailer updated")
+
+					}
+				}
+			).catch((err) => {console.log(err)})
+
 		}else{
 			window.alert("Please enter a valid URL")
 		}
@@ -234,10 +243,7 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-							<button type="button" onClick={() => {
-								
-							}}
-								class="btn btn-primary">Save changes</button>
+							
 						</div>
 					</div>
 				</div>
