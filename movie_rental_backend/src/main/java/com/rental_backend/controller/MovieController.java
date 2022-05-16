@@ -88,4 +88,9 @@ public class MovieController {
         return ResponseEntity.ok(movieService.getAllGenre());
     }
 
+    @GetMapping("/search/{searchTerm}")
+    public ResponseEntity<List<Movie>> search(@PathVariable("searchTerm") String searchTerm){
+        return ResponseEntity.ok(movieService.searchMovie(searchTerm));
+    }
+
 }
