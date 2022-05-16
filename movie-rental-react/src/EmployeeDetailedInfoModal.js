@@ -37,7 +37,7 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 	useEffect(() => {
 		var movieId = mov.mid;
 
-		console.log("inside useEffect")
+
 		axios.get("http://127.0.0.1:8080/api/v1/customer/getAllCustomers").then(
 			(response) => {
 				setCustomers(response.data);
@@ -48,7 +48,7 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 		axios.get(`http://127.0.0.1:8080/api/v1/rate/getAveragePoint/${movieId}`).then(
 			(response) => {
 				setRatingAvg(response.data);
-				console.log(response.data)
+
 			}
 		).catch((err) => {console.log(err.response)})
 		
@@ -105,7 +105,7 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 				var movLangObj = {
 					movieLang: movieLang,
 				}
-				console.log(movLangObj)
+
 				axios.post(`http://127.0.0.1:8080/api/v1/movieLang/addMovieLang/${mov.mid}`,movLangObj).then(
 					(response) => {
 						if(response){

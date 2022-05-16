@@ -62,7 +62,9 @@ public class MovieController {
                 m.getPosterUrl(),
                 m.getAdditionDate(),
                 m.getSLang(),
-                m.getMLang()),HttpStatus.CREATED);
+                m.getMLang(),
+                m.getTrailerUrl())
+                ,HttpStatus.CREATED);
     }
 
 
@@ -81,7 +83,7 @@ public class MovieController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PatchMapping("/updateTrailer/{mId}/{trailerUrl}")
+    @PatchMapping("/updateTrailer/{mId}")
     public ResponseEntity<?> updateUserInfoByUId(@PathVariable("mId") Long mId, @RequestBody MovieResponse m){
         movieService.updateTrailer(mId,m.getTrailerUrl());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

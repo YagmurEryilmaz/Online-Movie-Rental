@@ -38,7 +38,7 @@ const Sidebar = ({logout, role}) => {
 	)
 }
 const mapStateToProps = state => {
-	console.log(state)
+
 	return {role: state.accountType}
 }
 

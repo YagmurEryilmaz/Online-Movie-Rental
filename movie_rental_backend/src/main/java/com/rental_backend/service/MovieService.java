@@ -44,7 +44,7 @@ public class MovieService {
         return movieRepository.save(m);
     }
 
-    public Movie addMovie(String title, String genre, String directorName, int productionYear, double price, String posterUrl, Date additionDate, List<String> subTitle, List<String> mLang) {
+    public Movie addMovie(String title, String genre, String directorName, int productionYear, double price, String posterUrl, Date additionDate, List<String> subTitle, List<String> mLang, String trailerUrl) {
 
         Movie movie = Movie.builder()
                 .title(title)
@@ -54,6 +54,7 @@ public class MovieService {
                 .price(price)
                 .posterUrl(posterUrl)
                 .additionDate(additionDate)
+                .trailerUrl(trailerUrl)
                 .build();
         movieRepository.save(movie);
         mLang.forEach((m) -> {

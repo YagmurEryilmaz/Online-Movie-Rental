@@ -23,6 +23,7 @@ const Rent = () =>{
 			setFilteredMovies(response.data)
 			setMovies(response.data);
 		}).catch((error)=>{console.log(error)})
+		
 
 	}, []);
 	const filterMovies = () =>{
@@ -41,7 +42,17 @@ const Rent = () =>{
 		setFilteredMovies(filteredMovies =>[...filteredMovies, ...theMoviesTitle])
 	}
 	const handleCheckbox = () =>{
-		setFilteredMovies(all_movie_data);
+		var theGenre = genre.toLocaleLowerCase();
+		axios.get(`http://127.0.0.1:8080/api/v1/movie/getMovieByGenre/${theGenre}`).then((response)=>{
+			if(response.data.length === 0){
+				window.alert("No movies found with this genre")
+			}else{
+				setFilteredMovies(response.data)
+			}
+
+		}).catch((error)=>{console.log(error)})
+		
+		/*setFilteredMovies(all_movie_data);
 		console.log(filteredMovies);
 
 		var theMoviesGenre = all_movie_data.filter((movi)=>{
@@ -49,7 +60,8 @@ const Rent = () =>{
 				movi.genre.toLowerCase().includes(genre.toLowerCase())
 				)
 			})
-			setFilteredMovies(theMoviesGenre);
+			setFilteredMovies([theMoviesGenre]);
+*/
 
 
 	}
