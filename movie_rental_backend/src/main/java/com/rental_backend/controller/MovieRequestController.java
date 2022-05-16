@@ -1,5 +1,6 @@
 package com.rental_backend.controller;
 
+import com.rental_backend.dto.MessageResponse;
 import com.rental_backend.dto.MovieRequestDto;
 import com.rental_backend.entity.MovieRequest;
 import com.rental_backend.service.MovieRequestService;
@@ -29,8 +30,13 @@ public class MovieRequestController {
     }
 
     @PostMapping("/addMovieRequest")
-    public ResponseEntity<MovieRequest> addMovieRequest(@RequestBody MovieRequestDto movieRequestDto) {
-        return new ResponseEntity<>(movieRequestService.addRequest(movieRequestDto.getCustomerId(),movieRequestDto.getMovieName(),movieRequestDto.getDirectorName(),movieRequestDto.getMovieProductionYear()), HttpStatus.CREATED);
+    public ResponseEntity<?> addMovieRequest(@RequestBody MovieRequestDto movieRequestDto) {
+        try {
+            return new ResponseEntity<>(movieRequestService.addRequest(movieRequestDto.getCustomerId(), movieRequestDto.getMovieName(), movieRequestDto.getDirectorName(), movieRequestDto.getMovieProductionYear()), HttpStatus.CREATED);
+        }
+        catch(RuntimeException r) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Production year can not more than 2022"));
+        }
     }
 
     @DeleteMapping("/deleteMovieRequest/{id}")
