@@ -65,19 +65,15 @@ public class Movie {
     @JoinColumn(name = "movie" )
     private Set<RentedMovie> rentedMovieSet;
 
-    /*@OneToMany(mappedBy = "movie",cascade = CascadeType.REMOVE)
-    @JsonIgnore
-    private Set<Trailer> trailers;*/
-
     @OneToMany
     @JoinColumn(name = "movieRates")
     private Set<Rate> rates;
 
-    @OneToMany(mappedBy ="movie")
+    @OneToMany(mappedBy ="movie",cascade = CascadeType.REMOVE)
     @JsonIgnore
     private Set<Gift> gifts;
 
-    @OneToMany(mappedBy ="movie")
+    @OneToMany(mappedBy ="movie", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private Set<Suggestion> suggestions;
 
