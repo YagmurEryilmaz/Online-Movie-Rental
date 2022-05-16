@@ -18,19 +18,20 @@ const EmployeeHomepage = ({fetch_movies, allMovies}) => {
 
 	}, []);
 	const filterMovies = () => {
-		var theMoviesDir = all_movie_data.filter((movie) => {
-
-			return (
-				movie.directorName.toLowerCase().includes(filter.toLowerCase())
-			)
-		})
-		setFilteredMovies(theMoviesDir);
-		var theMoviesTitle = all_movie_data.filter((mov) => {
-			return (
-				mov.title.toLowerCase().includes(filter.toLowerCase())
-			)
-		})
-		setFilteredMovies(filteredMovies => [...filteredMovies, ...theMoviesTitle])
+		if(filter!==""){
+			axios.get(`http://127.0.0.1:8080/api/v1/movie/search/${filter}`).then((response) => {
+				setFilteredMovies(response.data)
+				fetch_movies(response.data);
+			}).catch((error) => {console.log(error)})
+		}else{
+			axios.get("http://127.0.0.1:8080/api/v1/movie/getAllMovies").then((response) => {
+				fetch_movies(response.data);
+				console.log(response.data)
+				setFilteredMovies(response.data)
+				setMovies(response.data);
+			}).catch((error) => {console.log(error)})
+		}
+		
 	}
 	return(
 		<div className='container'>

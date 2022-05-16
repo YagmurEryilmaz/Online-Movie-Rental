@@ -13,10 +13,10 @@ import { connect } from "react-redux";
 import WatchTrailerModal from "./WatchTrailerModal";
 
 
-const DetailedInfoModal = ({cart, uid, add_to_cart, ...props}) =>{
+const DetailedInfoModal = ({cart, uid, detMovie, add_to_cart, ...props}) =>{
 
 	
-	const [mov,setMov] = useState(props.movie);
+	const [mov,setMov] = useState({});
 	const [rating, setRating] = useState();
 	const [ratingAvg, setRatingAvg] = useState();
 	const [isRated,setIsRated] = useState(false);
@@ -31,7 +31,18 @@ const DetailedInfoModal = ({cart, uid, add_to_cart, ...props}) =>{
 	const [subtitlesMov, setSubtitlesMov] = useState([]);
 	
 	useEffect(() => {
-		var movieId = mov.mid;
+		console.log(props.movie.mid)
+		axios.get(`http://127.0.0.1:8080/api/v1/movie/getMovieById/${props.movie.mid}`).then(
+			(response) => {
+				console.log(response.data)
+				setMov(response.data);
+			}
+		).catch((err) => {console.log(err.response)});
+		console.log()
+		var movieId = props.movie.mid;
+
+
+		console.log(movieId)
 		console.log("inside useEffect")
 		axios.get("http://127.0.0.1:8080/api/v1/customer/getAllCustomers").then(
 			(response) => {
@@ -52,13 +63,13 @@ const DetailedInfoModal = ({cart, uid, add_to_cart, ...props}) =>{
 		},[isRated])
 
 		
-		var contains = cart.indexOf(mov);
+	var contains = cart.indexOf(props.movie);
 	
-	var trailerLink = mov.trailerUrl
+	var trailerLink = props.movie.trailerUrl
 	const handleClick = ()=>{
 		var subt = {
 
-			movieName: mov.title,
+			movieName: props.movie.title,
 			requestedSubLang: reqSubtitle
 		}
 		axios.post("http://127.0.0.1:8080/api/v1/subtitleRequest/addSubtitleRequest",subt ).then(
@@ -72,7 +83,7 @@ const DetailedInfoModal = ({cart, uid, add_to_cart, ...props}) =>{
 		var gift = {
 			sender_id: uid,
 			receiver_id: receiver.uid,
-			m_id: mov.mid,
+			m_id: props.movie.mid,
 			expDate: date
 		}
 		console.log(gift);
@@ -88,7 +99,7 @@ const DetailedInfoModal = ({cart, uid, add_to_cart, ...props}) =>{
 	const handleRate = () => {
 		
 		var ratePost = {
-			movie: mov.mid,
+			movie: props.movie.mid,
 			customer: uid,
 			point: rating
 		}
@@ -104,11 +115,11 @@ const DetailedInfoModal = ({cart, uid, add_to_cart, ...props}) =>{
 
 	return(
 		<>
-		<div class="modal fade" id= {`detailedInfoModal${props.movie.mid}`} tabindex="-1">
+			<div class="modal fade" id={`detailedInfoModal${props.movie.mid}`} tabindex="-1">
 			<div class="modal-dialog modal-lg modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title">{mov.title}</h5>
+						<h5 class="modal-title">{props.movie.title}</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
@@ -118,17 +129,17 @@ const DetailedInfoModal = ({cart, uid, add_to_cart, ...props}) =>{
 									<div class="card">
 										<div className="row">
 											<div className="col-4 d-flex align-items-center">
-												<img src= {mov.posterUrl} alt={mov.title} />
+												<img src={props.movie.posterUrl} alt={props.movie.title} />
 											</div>
 											<div class="col-8 overflow-auto card-body">
 												<h5 class="card-title"></h5>
-												<p class="card-text"><span className="fw-bold">Director:</span>{mov.directorName} </p>
-												<p class="card-text"><span className="fw-bold">Prod. Year:</span>{mov.productionYear}</p>
-												<p class="card-text"><span className="fw-bold">Price:</span>{mov.price} $</p>
-												<p class="card-text"><span className="fw-bold">Genre:</span> {mov.genre}</p>
+												<p class="card-text"><span className="fw-bold">Director:</span>{props.movie.directorName} </p>
+												<p class="card-text"><span className="fw-bold">Prod. Year:</span>{props.movie.productionYear}</p>
+												<p class="card-text"><span className="fw-bold">Price:</span>{props.movie.price} $</p>
+												<p class="card-text"><span className="fw-bold">Genre:</span> {props.movie.genre}</p>
 												<p class="card-text"><span className="fw-bold">Movie Languages:</span></p>
 												<ul>
-													{mov.movieLang.map((lang) => {
+													{props.movie.movieLang.map((lang) => {
 														return(
 															<li>{lang.movieLang}</li>
 														)
@@ -136,7 +147,7 @@ const DetailedInfoModal = ({cart, uid, add_to_cart, ...props}) =>{
 												</ul>
 											<p class="card-text"><span className="fw-bold">Subtitle Languages:</span></p>
 											<ul>
-												{mov.subtitleLang.map((subt)=>{
+													{props.movie.subtitleLang.map((subt)=>{
 													return(
 													<li>{subt.s_lang}</li>
 													)
@@ -167,7 +178,7 @@ const DetailedInfoModal = ({cart, uid, add_to_cart, ...props}) =>{
 									
 
 								</div>
-									{(contains === - 1) ? <div onClick = {() => add_to_cart(mov)} className="col-8 mb-3 btn btn-primary">Add To Cart</div> : <button type="button" className="col-8 mb-3 btn btn-secondary" disabled>Already In Cart</button> }
+									{(contains === - 1) ? <div onClick={() => add_to_cart(props.movie)} className="col-8 mb-3 btn btn-primary">Add To Cart</div> : <button type="button" className="col-8 mb-3 btn btn-secondary" disabled>Already In Cart</button> }
 
 									<a href={trailerLink} target="_blank" className="col-8 mb-3  btn btn-primary"> Watch Trailer </a>
 								
@@ -235,13 +246,15 @@ const mapStateToProps = (state) => {
 	return {
 		cart: state.cart,
 		uid: state.uid,
+		detMovie: state.detMovie,
 
 	}
 }
 const mapDispatchToProps = (dispatch) => {
 	return {
-		add_to_cart: (mov) => {
-			dispatch({type: "ADD_TO_CART", payload: {movie:mov}})
+		add_to_cart: (detMovie) => {
+			dispatch({type: "ADD_TO_CART", payload: {movie: detMovie
+}})
 		}
 	}
 }

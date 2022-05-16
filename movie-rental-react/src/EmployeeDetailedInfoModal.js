@@ -35,7 +35,7 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 
 
 	useEffect(() => {
-		var movieId = mov.mid;
+		var movieId = props.movie.mid;
 
 
 		axios.get("http://127.0.0.1:8080/api/v1/customer/getAllCustomers").then(
@@ -53,12 +53,12 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 		).catch((err) => {console.log(err.response)})
 		
 	}, [isRated])
-	var trailerLink = mov.trailerUrl
-	if(mov.movieLang && mov.subtitleLang){
-		var subtitlesArr = mov.subtitleLang.map((sub) => {
+	var trailerLink = props.movie.trailerUrl
+	if(props.movie.movieLang && props.movie.subtitleLang){
+		var subtitlesArr = props.movie.subtitleLang.map((sub) => {
 			return sub.s_lang
 		})
-		var movieLangArr = mov.movieLang.map((lang)=>{
+		var movieLangArr = props.movie.movieLang.map((lang)=>{
 			return lang.movieLang
 		})
 
@@ -71,11 +71,11 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 
 	const deleteMovie = () => {
 		if(window.confirm("Are you sure you want to delete this movie?")){
-			axios.delete(`http://127.0.0.1:8080/api/v1/movie/deleteMovie/${mov.mid}`).then(
+			axios.delete(`http://127.0.0.1:8080/api/v1/movie/deleteMovie/${props.movie.mid}`).then(
 				(response) => {
 					if(response){
 						window.alert("Movie deleted")
-						delete_movie(mov)
+						delete_movie(props.movie)
 
 					}
 				}
@@ -86,7 +86,7 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 		//axios post
 		if(trailerURL !== ""){
 			
-			axios.patch(`http://127.0.0.1:8080/api/v1/movie/updateTrailer/${mov.mid}`,{trailerUrl:trailerURL}).then(
+			axios.patch(`http://127.0.0.1:8080/api/v1/movie/updateTrailer/${props.movie.mid}`,{trailerUrl:trailerURL}).then(
 				(response) => {
 					if(response){
 						window.alert("Trailer updated")
@@ -106,7 +106,7 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 					movieLang: movieLang,
 				}
 
-				axios.post(`http://127.0.0.1:8080/api/v1/movieLang/addMovieLang/${mov.mid}`,movLangObj).then(
+				axios.post(`http://127.0.0.1:8080/api/v1/movieLang/addMovieLang/${props.movie.mid}`,movLangObj).then(
 					(response) => {
 						if(response){
 							window.alert("Added")
@@ -132,7 +132,7 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 				var subtObj = {
 					s_lang: subtitle
 				}
-				axios.post(`http://127.0.0.1:8080/api/v1/subtitleLang/addSubtitleLang/${mov.mid}`,subtObj).then(
+				axios.post(`http://127.0.0.1:8080/api/v1/subtitleLang/addSubtitleLang/${props.movie.mid}`,subtObj).then(
 					(response) => {
 						if(response){
 							window.alert("Added")
@@ -149,7 +149,7 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 		
 	const editPrice = () => {
 		if(price !== -1){
-			axios.patch(`http://127.0.0.1:8080/api/v1/movie/updateMoviePrice/${mov.mid}/${price}`).then(
+			axios.patch(`http://127.0.0.1:8080/api/v1/movie/updateMoviePrice/${props.movie.mid}/${price}`).then(
 				(response) => {
 					if(response){
 						window.alert("Price Updated")
@@ -167,7 +167,7 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 				<div class="modal-dialog modal-lg modal-dialog-centered">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title">{mov.title}</h5>
+							<h5 class="modal-title">{props.movie.title}</h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
@@ -177,14 +177,14 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 									<div class="card">
 										<div className="row">
 											<div className="col-4 d-flex align-items-center">
-												<img src={mov.posterUrl} alt={mov.title} />
+												<img src={props.movie.posterUrl} alt={props.movie.title} />
 											</div>
 											<div class="col-8 overflow-auto card-body">
 												<h5 class="card-title"></h5>
-												<p class="card-text"><span className="fw-bold">Director:</span>{mov.directorName} </p>
-												<p class="card-text"><span className="fw-bold">Prod. Year:</span>{mov.productionYear}</p>
-												<p class="card-text"><span className="fw-bold">Price:</span>{mov.price} $</p>
-												<p class="card-text"><span className="fw-bold">Genre:</span> {mov.genre}</p>
+												<p class="card-text"><span className="fw-bold">Director:</span>{props.movie.directorName} </p>
+												<p class="card-text"><span className="fw-bold">Prod. Year:</span>{props.movie.productionYear}</p>
+												<p class="card-text"><span className="fw-bold">Price:</span>{props.movie.price} $</p>
+												<p class="card-text"><span className="fw-bold">Genre:</span> {props.movie.genre}</p>
 												<p class="card-text"><span className="fw-bold">Movie Languages:</span></p>
 												<ul>
 													{movieLangArr.map((lang) => {
@@ -218,11 +218,11 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 									</div>
 
 									<h5>Edit Price</h5>
-									<input onChange= {(e) => setPrice(e.target.value)} className = "my-2" type="number" placeholder={mov.price} />
+									<input onChange={(e) => setPrice(e.target.value)} className="my-2" type="number" placeholder={props.movie.price} />
 									<button type="button" onClick={() => {editPrice()}} className="col-8 mb-3  btn btn-primary" >Edit Price </button>
 									
 									<h5>Edit Trailer URL</h5>
-									<input onChange={(e) => setTrailerUrl(e.target.value)}className="my-2" type="text" placeholder={mov.trailerUrl} />
+									<input onChange={(e) => setTrailerUrl(e.target.value)} className="my-2" type="text" placeholder={props.movie.trailerUrl} />
 									<button type="button" onClick={()=>{editTrailer()}} className="col-8 mb-3  btn btn-primary" >Edit Trailer URL</button>
 
 									<h5>Add Subtitle</h5>

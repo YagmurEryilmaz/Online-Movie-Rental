@@ -11,6 +11,7 @@ export const stateProto = {
 	numOfRequests:0,
 	allMovies:[],
 	gifts:[],
+	detMovie:{}
 
 
 }

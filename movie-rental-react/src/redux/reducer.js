@@ -132,6 +132,12 @@ const reducer = (state,action) =>{
 			allMovies: theNewMovies
 		}
 	}
+	if(action.type === "DET_MOVIE"){
+		return{
+			...state,
+			detMovie: action.payload
+		}
+	}
 	return state;
 }
 export default reducer;

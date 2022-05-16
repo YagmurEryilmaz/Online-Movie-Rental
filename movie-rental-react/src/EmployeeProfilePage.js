@@ -112,10 +112,15 @@ const EmployeeProfilePage = ({name, mail, uid, birthday}) => {
 			axios.post("http://127.0.0.1:8080/api/v1/movie/addMovieToSystem", movieInfo).then(
 				(response) => {
 					if(response)
-						window.alert("movie added")
+						window.alert("Movie Added")
 				}
 
-			).catch((err) => {console.log(err)})
+			).catch((err) => {
+
+				if(err.message == "Request failed with status code 500"){
+					window.alert("Movie Already Exists")
+				}
+			})
 
 			console.log(movieInfo);
 
@@ -172,19 +177,22 @@ const EmployeeProfilePage = ({name, mail, uid, birthday}) => {
 								<EditProfileModal bio={bio} changeBio={setBio} />
 
 							</div>
-							<h5>Please enter the email of the user:</h5>
-							<Autocomplete
-								disablePortal
-								value={value}
-								onChange={(event, newValue) => {
-									setValue(newValue);
-								}}
-								id="combo-box-demo"
-								options={friends}
-								sx={{height: 90}}
-								renderInput={(params) => <TextField {...params} label="User Email" />}
-							/>
-							<div onClick = {()=> handleDelete()} className="btn btn-danger">Delete user</div>
+							<div className="border p-2 my-3 border-info border-1" >
+
+								<h5 className="my-3">Please enter the email of the user:</h5>
+								<Autocomplete
+									disablePortal
+									value={value}
+									onChange={(event, newValue) => {
+										setValue(newValue);
+									}}
+									id="combo-box-demo"
+									options={friends}
+									sx={{height: 90}}
+									renderInput={(params) => <TextField {...params} label="User Email" />}
+								/>
+								<div onClick = {()=> handleDelete()} className="btn btn-danger">Delete user</div>
+							</div>
 						</div>
 						<div className="col-6 overflow-auto">
 							<div className="row overflow-auto createMovieRequest mt-5 ms-2 ">

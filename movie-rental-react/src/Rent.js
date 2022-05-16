@@ -6,10 +6,10 @@ import { useState } from "react";
 import { useEffect } from "react";
 import DetailedInfoModal from "./DetailedInfoModal";
 import { movie_data } from "./Data";
+import { connect } from "react-redux";
 
 
-
-const Rent = () =>{
+const Rent = ({fetch_movies, allMovies, det_movie}) =>{
 	const [all_movie_data, setMovies] = useState([]);
 	const [filteredMovies, setFilteredMovies] = useState(all_movie_data);
 	const [genre,setGenre] = useState([])
@@ -27,24 +27,27 @@ const Rent = () =>{
 		axios.get("http://127.0.0.1:8080/api/v1/movie/getAllGenre").then((response)=>{
 			setGenre(response.data)
 		}).catch((error)=>{console.log(error)})
+
 			
 		
 
 	}, []);
-	const filterMovies = () =>{
-		var theMoviesDir = all_movie_data.filter((movie)=> {
-			
-			return(
-				movie.directorName.toLowerCase().includes(filter.toLowerCase())
-			)
-		})
-		setFilteredMovies(theMoviesDir);
-		var theMoviesTitle = all_movie_data.filter((mov)=>{
-			return(
-				mov.title.toLowerCase().includes(filter.toLowerCase())
-			)
-		})
-		setFilteredMovies(filteredMovies =>[...filteredMovies, ...theMoviesTitle])
+
+	const filterMovies = () => {
+		if(filter !== "") {
+			axios.get(`http://127.0.0.1:8080/api/v1/movie/search/${filter}`).then((response) => {
+				fetch_movies(response.data)
+				setFilteredMovies(response.data)
+			}).catch((error) => {console.log(error)})
+		} else {
+			axios.get("http://127.0.0.1:8080/api/v1/movie/getAllMovies").then((response) => {
+				fetch_movies(response.data);
+				console.log(response.data)
+				setFilteredMovies(response.data)
+				setMovies(response.data);
+			}).catch((error) => {console.log(error)})
+		}
+
 	}
 	const handleCheckbox = (genreInp) =>{
 		var theGenre = genreInp.toLocaleLowerCase();
@@ -52,6 +55,7 @@ const Rent = () =>{
 			if(response.data.length === 0){
 				window.alert("No movies found with this genre")
 			}else{
+				fetch_movies(response.data)
 				setFilteredMovies(response.data)
 			}
 
@@ -73,7 +77,7 @@ const Rent = () =>{
 	const getAll = () => {
 		axios.get("http://127.0.0.1:8080/api/v1/movie/getAllMovies").then((response) => {
 			console.log(response.data)
-
+			fetch_movies(response.data)
 			setFilteredMovies(response.data)
 			setMovies(response.data);
 		}).catch((error) => {console.log(error)})
@@ -121,7 +125,8 @@ const Rent = () =>{
 						
 					</div>
 					<div class="row moviesRent overflow-auto">
-						{filteredMovies.map((movies) => {
+						{allMovies.map((movies) => {
+							
 							return(
 								<div class="col-sm-6 mt-3">
 									<div class="card">
@@ -139,12 +144,12 @@ const Rent = () =>{
 												
 
 											
-												<a data-bs-toggle="modal" href={String(`#detailedInfoModal${movies.mid}`)} class="btn btn-primary">Detailed Information</a>
-												<DetailedInfoModal movie = {movies}/>
+												<a data-bs-toggle="modal" href={String(`#detailedInfoModal${movies.mid}`)} onClick={()=>det_movie(movies)} class="btn btn-primary">Detailed Information</a>
 											</div>
 
 										</div>
 									</div>
+												<DetailedInfoModal movie = {movies} />
 								</div>
 							)
 						})}
@@ -157,4 +162,27 @@ const Rent = () =>{
 		</div>
 	)
 }
-export default Rent;
+const mapStateToProps = (state) => {
+	return {
+		allMovies: state.allMovies,
+	}
+}
+const mapDispatchToProps = (dispatch) => {
+	return {
+		fetch_movies: (movies) => {
+			dispatch({
+				type: "FETCH_MOVIES",
+				payload: movies
+			})
+		},
+		det_movie: (movie) => {
+			dispatch({
+				type: "DET_MOVIE",
+				payload: movie
+			})
+		}
+	}
+	
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Rent);	
