@@ -25,14 +25,13 @@ public class PaymentService {
         return paymentRepository.findByPayId(pay_id);
     }
 
-    public void pay(String email, Long m_id, Long payId, String payType, Date expDate)
+    public void pay(String email, Long m_id, String payType, Date expDate)
     {
         Long c_id = customerService.findByEmail(email).getUId();
         if(rentedMovieService.isRentedPreviously(c_id,m_id)) {
             throw new RuntimeException("Already Paid");
         }else {
             Payment payment = Payment.builder()
-                    .payId(payId)
                     .payType(payType)
                     .payStatus("paid")
                     .build();
