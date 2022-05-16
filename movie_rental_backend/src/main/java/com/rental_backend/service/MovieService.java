@@ -9,6 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -46,18 +47,31 @@ public class MovieService {
         return movieRepository.save(m);
     }
 
-    public Movie addMovie(String title, String genre, String directorName, int productionYear, double price, String posterUrl, Date additionDate) {
+    public Movie addMovie(String title, String genre, String directorName, int productionYear, double price, String posterUrl, Date additionDate, List<String> subTitle, List<String> mLang) {
 
-            Movie s = Movie.builder()
-                    .title(title)
-                    .genre(genre)
-                    .directorName(directorName)
-                    .productionYear(productionYear)
-                    .price(price)
-                    .posterUrl(posterUrl)
-                    .additionDate(additionDate)
-                    .build();
-            return movieRepository.save(s);
+        Movie movie = Movie.builder()
+                .title(title)
+                .genre(genre)
+                .directorName(directorName)
+                .productionYear(productionYear)
+                .price(price)
+                .posterUrl(posterUrl)
+                .additionDate(additionDate)
+                .build();
+        movieRepository.save(movie);
+        mLang.forEach((m) -> {
+            MovieLang mL = MovieLang.builder().movieLang(m).movie(movie).build();
+            movieLangRepository.save(mL);
+
+        });
+        subTitle.forEach((s) -> {
+            SubtitleLang sub = SubtitleLang.builder().s_lang(s).movie(movie).build();
+            subtitleLangRepository.save(sub);
+        });
+
+
+
+            return  movieRepository.save(movie);
 
     }
 

@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -46,9 +47,19 @@ public class MovieController {
     }
 
     @PostMapping("/addMovieToSystem")
-    public ResponseEntity<Movie> addMovie(@RequestBody Movie m){
-        return new ResponseEntity<>(movieService.addMovieByMObj(m),HttpStatus.CREATED);
+    public ResponseEntity<Movie> addMovie(@RequestBody MovieResponse m){
+        return new ResponseEntity<>(movieService.addMovie(
+                m.getTitle(),
+                m.getGenre(),
+                m.getDirectorName(),
+                m.getProductionYear(),
+                m.getPrice(),
+                m.getPosterUrl(),
+                m.getAdditionDate(),
+                m.getSLang(),
+                m.getMLang()),HttpStatus.CREATED);
     }
+
 
     @DeleteMapping("/deleteMovie/{mId}")
     public ResponseEntity<?> deleteMovie(@PathVariable("mId") Long mId) throws MovieNotFoundException {

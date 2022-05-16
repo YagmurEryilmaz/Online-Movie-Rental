@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -30,9 +31,14 @@ public class MovieResponse {
 
     private String trailerUrl;
 
-    //private Set<MovieLang> movieLang;
+    private List<MovieLang> movieLang;
 
-    //private Set<SubtitleLang> subtitleLang;
+    private List<SubtitleLang> subtitleLang;
+
+    private List<String> mLang;
+
+    private List<String> sLang;
+
 
     //private Set<Trailer> trailer;
 }

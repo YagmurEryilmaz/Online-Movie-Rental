@@ -22,8 +22,8 @@ public class SubtitleLang {
 
     private String s_lang;
 
-    @ManyToOne
-    @JoinColumn(name = "m_id", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @PrimaryKeyJoinColumn(name = "subtitleLang", referencedColumnName = "m_id")
     @JsonIgnore
     private Movie movie;
 

@@ -99,6 +99,8 @@ const EmployeeProfilePage = ({name, mail, uid, birthday}) => {
 				posterUrl: posterUrl,
 				additionDate: date,
 				trailerUrl: trailerUrl,
+				mlang: movieLang,
+				slang: subtitleArr,
 				
 
 			}
