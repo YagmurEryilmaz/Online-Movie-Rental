@@ -52,6 +52,10 @@ public class CustomerService {
     {
         customerRepository.updateUserByUId(uId,email);
     }
+    public void updateBalance(Long uId, Double amount)
+    {
+        customerRepository.updateBalance(uId,amount);
+    }
 
     public List<Customer> findAll() {
         return customerRepository.findAll();

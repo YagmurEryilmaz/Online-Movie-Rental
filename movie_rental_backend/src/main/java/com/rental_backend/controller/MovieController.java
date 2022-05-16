@@ -62,7 +62,6 @@ public class MovieController {
                 ,HttpStatus.CREATED);
     }
 
-
     @DeleteMapping("/deleteMovie/{mId}")
     public ResponseEntity<?> deleteMovie(@PathVariable("mId") Long mId) throws MovieNotFoundException {
         subtitleLangService.deleteSubtitleLang(mId);

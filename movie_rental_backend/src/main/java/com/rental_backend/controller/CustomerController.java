@@ -4,6 +4,7 @@ import com.rental_backend.dto.CustomerDto;
 import com.rental_backend.dto.FriendRequestDto;
 import com.rental_backend.dto.MovieResponse;
 import com.rental_backend.entity.Customer;
+import com.rental_backend.entity.Payment;
 import com.rental_backend.service.CustomerService;
 import com.rental_backend.entity.Movie;
 import com.rental_backend.service.MovieService;
@@ -94,6 +95,12 @@ public class CustomerController {
     @DeleteMapping("/deleteUserByUId/{uId}")
     public ResponseEntity<?> deleteUserByUId(@PathVariable("uId") Long uId) {
         customerService.deleteUserByUId(uId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping("/updateBalance/{mId}/{amount}")
+    public ResponseEntity<?> updateUserInfoByUId(@PathVariable("mId") Long mId, @PathVariable("amount") Double amount){
+        customerService.updateBalance(mId,amount);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
