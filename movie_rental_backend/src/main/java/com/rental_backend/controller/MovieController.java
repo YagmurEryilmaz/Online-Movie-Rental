@@ -60,7 +60,7 @@ public class MovieController {
     }
 
     @PatchMapping("/updateMoviePrice/{mId}/{price}")
-    public ResponseEntity<?> updateUserInfoByUId(@PathVariable Long mId, @PathVariable double price) {
+    public ResponseEntity<?> updateUserInfoByUId(@PathVariable("mId") Long mId, @PathVariable ("price") double price) {
         movieService.updateMoviePrice(mId, price);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

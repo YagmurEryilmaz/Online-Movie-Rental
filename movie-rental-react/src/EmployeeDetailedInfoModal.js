@@ -95,10 +95,9 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 			if(movieLangArr.indexOf(movieLang) === -1){
 				var movLangObj = {
 					movieLang: movieLang,
-					movie: mov
 				}
 				console.log(movLangObj)
-				axios.post("http://127.0.0.1:8080/api/v1/movieLang/addMovieLang",movLangObj).then(
+				axios.post(`http://127.0.0.1:8080/api/v1/movieLang/addMovieLang/${mov.mid}`,movLangObj).then(
 					(response) => {
 						if(response){
 							window.alert("Added")
@@ -121,15 +120,34 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 				window.alert("Subtitle language already exists")
 			}
 			else{
-				window.alert("Subtitle language added")
+				var subtObj = {
+					s_lang: subtitle
+				}
+				axios.post(`http://127.0.0.1:8080/api/v1/subtitleLang/addSubtitleLang/${mov.mid}`,subtObj).then(
+					(response) => {
+						if(response){
+							window.alert("Added")
+						}
+					}
+				).catch((err) => {console.log(err)})
+
 			}
+		}else{
+			window.alert("Please enter all fields")
 		}
 	}
 
 		
 	const editPrice = () => {
 		if(price !== -1){
-			window.alert("Price updated!")
+			axios.patch(`http://127.0.0.1:8080/api/v1/movie/updateMoviePrice/${mov.mid}/${price}`).then(
+				(response) => {
+					if(response){
+						window.alert("Price Updated")
+					}
+				}
+			).catch((err)=>{console.log(err)})
+
 		}else{
 			window.alert("Please enter a valid price")
 		}
