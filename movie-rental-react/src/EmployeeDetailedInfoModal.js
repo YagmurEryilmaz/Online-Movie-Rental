@@ -15,7 +15,7 @@ import WatchTrailerModal from "./WatchTrailerModal";
 
 const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...props}) => {
 
-
+	const subtitles = ["French", "Turkish", "German", "Arabic", "Dutch", "Spanish", "Chinese"]
 	const [mov, setMov] = useState(props.movie);
 	const [rating, setRating] = useState();
 	const [ratingAvg, setRatingAvg] = useState();
@@ -54,13 +54,20 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 		
 	}, [isRated])
 	var trailerLink = mov.trailerUrl
+	if(mov.movieLang && mov.subtitleLang){
+		var subtitlesArr = mov.subtitleLang.map((sub) => {
+			return sub.s_lang
+		})
+		var movieLangArr = mov.movieLang.map((lang)=>{
+			return lang.movieLang
+		})
 
-	/*var subtitlesArr = mov.subtitleLang.map((sub) => {
-		return sub.s_lang
-	})
-	var movieLangArr = mov.movieLang.map((lang)=>{
-		return lang.movieLang
-	})*/
+	}else{
+		var subtitlesArr = []
+		var movieLangArr = []
+	}
+
+
 
 	const deleteMovie = () => {
 		if(window.confirm("Are you sure you want to delete this movie?")){
@@ -83,7 +90,7 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 			window.alert("Please enter a valid URL")
 		}
 	}
-	/*const addLang = ()=> {
+	const addLang = ()=> {
 		if(movieLang !== ""){
 			if(movieLangArr.indexOf(movieLang)!== -1){
 				window.alert("Movie language already exists")
@@ -102,7 +109,7 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 				window.alert("Subtitle language added")
 			}
 		}
-	}*/
+	}
 
 		
 	const editPrice = () => {
@@ -137,21 +144,21 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 												<p class="card-text"><span className="fw-bold">Price:</span>{mov.price} $</p>
 												<p class="card-text"><span className="fw-bold">Genre:</span> {mov.genre}</p>
 												<p class="card-text"><span className="fw-bold">Movie Languages:</span></p>
-												{/*<ul>
-													{mov.movieLang.map((lang) => {
+												<ul>
+													{movieLangArr.map((lang) => {
 														return (
-															<li>{lang.movieLang}</li>
+															<li>{lang}</li>
 														)
 													})}
 												</ul>
 												<p class="card-text"><span className="fw-bold">Subtitle Languages:</span></p>
 												<ul>
-													{mov.subtitleLang.map((subt) => {
+													{subtitlesArr.map((subt) => {
 														return (
-															<li>{subt.s_lang}</li>
+															<li>{subt}</li>
 														)
 													})}
-												</ul>*/}
+												</ul>
 											</div>
 
 										</div>
