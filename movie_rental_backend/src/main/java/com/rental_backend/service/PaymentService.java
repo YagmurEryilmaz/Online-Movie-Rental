@@ -28,8 +28,8 @@ public class PaymentService {
     public void pay(String email, Long m_id, String payType, Date expDate)
     {
         Long c_id = customerService.findByEmail(email).getUId();
-        if(rentedMovieService.isRentedPreviously(c_id,m_id)) {
-            throw new RuntimeException("Already Paid");
+        if(rentedMovieService.isRentedPreviously(c_id,m_id) || rentedMovieService.isRentedCurrently(c_id, m_id)) {
+            throw new RuntimeException("Already rented");
         }else {
             Payment payment = Payment.builder()
                     .payType(payType)
