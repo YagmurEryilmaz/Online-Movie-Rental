@@ -52,7 +52,7 @@ public class CustomerService {
     {
         customerRepository.updateUserByUId(uId,email);
     }
-    public void updateBalance(Long uId, Double amount)
+    public void updateBalance(Long uId, float amount)
     {
         customerRepository.updateBalance(uId,amount);
     }

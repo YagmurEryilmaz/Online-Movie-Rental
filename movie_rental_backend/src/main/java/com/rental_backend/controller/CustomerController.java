@@ -90,7 +90,7 @@ public class CustomerController {
     }
 
     @PatchMapping("/updateBalance/{mId}/{amount}")
-    public ResponseEntity<?> updateBalance(@PathVariable("mId") Long mId, @PathVariable("amount") Double amount){
+    public ResponseEntity<?> updateBalance(@PathVariable("mId") Long mId, @PathVariable("amount") float amount){
         customerService.updateBalance(mId,amount);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

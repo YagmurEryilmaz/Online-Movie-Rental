@@ -138,6 +138,12 @@ const reducer = (state,action) =>{
 			detMovie: action.payload
 		}
 	}
+	if(action.type === "UPDATE_BALANCE"){
+		return{
+			...state,
+			balance: action.payload.balance
+		}
+	}
 	return state;
 }
 export default reducer;
