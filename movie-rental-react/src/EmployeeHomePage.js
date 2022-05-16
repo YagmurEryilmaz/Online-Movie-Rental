@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar"
 import {useState, useEffect} from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-const EmployeeHomepage = ({fetch_movies}) => {
+const EmployeeHomepage = ({fetch_movies, allMovies}) => {
 	const [all_movie_data, setMovies] = useState([]);
 	const [filteredMovies, setFilteredMovies] = useState(all_movie_data);
 	const [filter, setFilter] = useState("");
@@ -91,6 +91,11 @@ const EmployeeHomepage = ({fetch_movies}) => {
 		</div>
 	)
 }
+const mapStateToProps = (state) => {
+	return {
+		allMovies: state.allMovies
+	}
+}
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetch_movies: (movies) => {
@@ -101,4 +106,4 @@ const mapDispatchToProps = (dispatch) => {
 		}
 	}
 }
-export default connect(null, mapDispatchToProps)(EmployeeHomepage);
+export default connect(mapStateToProps, mapDispatchToProps)(EmployeeHomepage);

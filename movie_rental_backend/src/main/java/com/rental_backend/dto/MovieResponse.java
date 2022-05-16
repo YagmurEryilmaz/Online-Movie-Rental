@@ -2,7 +2,7 @@ package com.rental_backend.dto;
 
 import com.rental_backend.entity.MovieLang;
 import com.rental_backend.entity.SubtitleLang;
-import com.rental_backend.entity.Trailer;
+//import com.rental_backend.entity.Trailer;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +13,7 @@ import java.util.Set;
 @Setter
 
 public class MovieResponse {
+
     private String title;
 
     private String genre;
@@ -26,6 +27,8 @@ public class MovieResponse {
     private String posterUrl;
 
     private Date additionDate;
+
+    private String trailerUrl;
 
     //private Set<MovieLang> movieLang;
 

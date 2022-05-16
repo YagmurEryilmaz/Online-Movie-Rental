@@ -6,7 +6,7 @@ import com.rental_backend.exception.MovieNotFoundException;
 import com.rental_backend.service.MovieLangService;
 import com.rental_backend.service.MovieService;
 import com.rental_backend.service.SubtitleLangService;
-import com.rental_backend.service.TrailerService;
+//import com.rental_backend.service.TrailerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,14 +25,14 @@ public class MovieController {
     private MovieService movieService;
     private SubtitleLangService subtitleLangService;
     private MovieLangService movieLangService;
-    private TrailerService trailerService;
+    //private TrailerService trailerService;
 
     @Autowired
-    public MovieController(MovieService movieService,SubtitleLangService subtitleLangService,MovieLangService movieLangService,TrailerService trailerService) {
+    public MovieController(MovieService movieService,SubtitleLangService subtitleLangService,MovieLangService movieLangService) {//TrailerService trailerService) {
         this.movieService = movieService;
         this.subtitleLangService=subtitleLangService;
         this.movieLangService=movieLangService;
-        this.trailerService=trailerService;
+        //this.trailerService=trailerService;
     }
 
     @GetMapping("/getAllMovies")
@@ -54,14 +54,20 @@ public class MovieController {
     public ResponseEntity<?> deleteMovie(@PathVariable("mId") Long mId) throws MovieNotFoundException {
         subtitleLangService.deleteSubtitleLang(mId);
         movieLangService.deleteMovieLang(mId);
-        trailerService.deleteTrailer(mId);
+        //trailerService.deleteTrailer(mId);
         movieService.deleteMovie(mId);
         return new ResponseEntity<>( HttpStatus.NO_CONTENT);
     }
 
     @PatchMapping("/updateMoviePrice/{mId}/{price}")
-    public ResponseEntity<?> updateUserInfoByUId(@PathVariable Long mId, @PathVariable double price) {
+    public ResponseEntity<?> updateUserInfoByUId(@PathVariable("mId") Long mId, @PathVariable ("price") double price) {
         movieService.updateMoviePrice(mId, price);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping("/updateTrailer/{mId}/{trailerUrl}")
+    public ResponseEntity<?> updateUserInfoByUId(@PathVariable("mId") Long mId, @RequestBody MovieResponse m){
+        movieService.updateTrailer(mId,m.getTrailerUrl());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

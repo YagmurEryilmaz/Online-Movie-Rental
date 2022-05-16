@@ -94,6 +94,16 @@ const reducer = (state,action) =>{
 			allMovies: action.payload
 		}
 	}
+	if(action.type == "DELETE_MOVIE"){
+		var theNewMovies = []
+		if(action.payload){
+			theNewMovies = state?.allMovies.filter(movie => movie !== action.payload.movie)
+		}
+		return{
+			...state,
+			allMovies: theNewMovies
+		}
+	}
 	return state;
 }
 export default reducer;

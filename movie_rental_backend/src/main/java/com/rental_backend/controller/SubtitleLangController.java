@@ -5,12 +5,16 @@ import com.rental_backend.entity.SubtitleLang;
 import com.rental_backend.entity.Suggestion;
 import com.rental_backend.service.SubtitleLangService;
 import com.rental_backend.service.SubtitleRequestService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
+@RestController
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("api/v1/subtitleLang")
+@RequiredArgsConstructor
 public class SubtitleLangController {
     private SubtitleLangService subtitleLangService;
     @Autowired
@@ -18,8 +22,8 @@ public class SubtitleLangController {
         this.subtitleLangService = subtitleLangService;
     }
 
-    @PostMapping("/addSubtitleLang")
-    public ResponseEntity<SubtitleLang> addSubtitleLang(@RequestBody SubtitleLang s) {
-        return new ResponseEntity<>(subtitleLangService.addSubtitleLang(s.getMovie().getMId(),s.getS_lang()), HttpStatus.CREATED);
+    @PostMapping("/addSubtitleLang/{mId}")
+    public ResponseEntity<SubtitleLang> addSubtitleLang(@RequestBody SubtitleLang s, @PathVariable("mId") Long mId) {
+        return new ResponseEntity<>(subtitleLangService.addSubtitleLang(mId,s.getS_lang()), HttpStatus.CREATED);
     }
 }

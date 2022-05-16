@@ -13,9 +13,9 @@ import {connect} from "react-redux";
 import WatchTrailerModal from "./WatchTrailerModal";
 
 
-const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
+const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...props}) => {
 
-
+	const subtitles = ["French", "Turkish", "German", "Arabic", "Dutch", "Spanish", "Chinese"]
 	const [mov, setMov] = useState(props.movie);
 	const [rating, setRating] = useState();
 	const [ratingAvg, setRatingAvg] = useState();
@@ -23,8 +23,8 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 	const [trailer, setTrailer] = useState("");
 	const [friends, setFriends] = useState([]);
 	const [customers, setCustomers] = useState([]);
-	const subtitles = mov.subtitleLang;
-	const [reqSubtitle, setReqSubtitle] = useState(subtitles[0])
+	//const subtitles = mov.subtitleLang;
+	//const [reqSubtitle, setReqSubtitle] = useState(subtitles[0])
 	const [inputValue, setInputValue] = useState('');
 	const [reqEmail, setReqEmail] = useState(friends[0]);
 	const [inputValue1, setInputValue1] = useState('');
@@ -53,14 +53,21 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 		).catch((err) => {console.log(err.response)})
 		
 	}, [isRated])
-	var trailerLink = mov.trailers[0]?.trailerUrl
-	console.log(mov.trailers[0].trailerUrl)
-	var subtitlesArr = mov.subtitleLang.map((sub) => {
-		return sub.s_lang
-	})
-	var movieLangArr = mov.movieLang.map((lang)=>{
-		return lang.movieLang
-	})
+	var trailerLink = mov.trailerUrl
+	if(mov.movieLang && mov.subtitleLang){
+		var subtitlesArr = mov.subtitleLang.map((sub) => {
+			return sub.s_lang
+		})
+		var movieLangArr = mov.movieLang.map((lang)=>{
+			return lang.movieLang
+		})
+
+	}else{
+		var subtitlesArr = []
+		var movieLangArr = []
+	}
+
+
 
 	const deleteMovie = () => {
 		if(window.confirm("Are you sure you want to delete this movie?")){
@@ -68,6 +75,8 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 				(response) => {
 					if(response){
 						window.alert("Movie deleted")
+						delete_movie(mov)
+
 					}
 				}
 			).catch((err) => {console.log(err)})
@@ -83,12 +92,26 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 	}
 	const addLang = ()=> {
 		if(movieLang !== ""){
-			if(movieLangArr.indexOf(movieLang)!== -1){
-				window.alert("Movie language already exists")
+			if(movieLangArr.indexOf(movieLang) === -1){
+				var movLangObj = {
+					movieLang: movieLang,
+				}
+				console.log(movLangObj)
+				axios.post(`http://127.0.0.1:8080/api/v1/movieLang/addMovieLang/${mov.mid}`,movLangObj).then(
+					(response) => {
+						if(response){
+							window.alert("Added")
+						}
+					}
+				).catch((err) => {console.log(err)})
 			}
 			else{
-				window.alert("Movie language added")
+				window.alert("Movie language already exists")
+
 			}
+		}
+		else{
+			window.alert("Please enter all fields")
 		}
 	}
 	const addSubtitle = () =>{
@@ -97,15 +120,34 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 				window.alert("Subtitle language already exists")
 			}
 			else{
-				window.alert("Subtitle language added")
+				var subtObj = {
+					s_lang: subtitle
+				}
+				axios.post(`http://127.0.0.1:8080/api/v1/subtitleLang/addSubtitleLang/${mov.mid}`,subtObj).then(
+					(response) => {
+						if(response){
+							window.alert("Added")
+						}
+					}
+				).catch((err) => {console.log(err)})
+
 			}
+		}else{
+			window.alert("Please enter all fields")
 		}
 	}
 
 		
 	const editPrice = () => {
 		if(price !== -1){
-			window.alert("Price updated!")
+			axios.patch(`http://127.0.0.1:8080/api/v1/movie/updateMoviePrice/${mov.mid}/${price}`).then(
+				(response) => {
+					if(response){
+						window.alert("Price Updated")
+					}
+				}
+			).catch((err)=>{console.log(err)})
+
 		}else{
 			window.alert("Please enter a valid price")
 		}
@@ -136,17 +178,17 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 												<p class="card-text"><span className="fw-bold">Genre:</span> {mov.genre}</p>
 												<p class="card-text"><span className="fw-bold">Movie Languages:</span></p>
 												<ul>
-													{mov.movieLang.map((lang) => {
+													{movieLangArr.map((lang) => {
 														return (
-															<li>{lang.movieLang}</li>
+															<li>{lang}</li>
 														)
 													})}
 												</ul>
 												<p class="card-text"><span className="fw-bold">Subtitle Languages:</span></p>
 												<ul>
-													{mov.subtitleLang.map((subt) => {
+													{subtitlesArr.map((subt) => {
 														return (
-															<li>{subt.s_lang}</li>
+															<li>{subt}</li>
 														)
 													})}
 												</ul>
@@ -171,7 +213,7 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 									<button type="button" onClick={() => {editPrice()}} className="col-8 mb-3  btn btn-primary" >Edit Price </button>
 									
 									<h5>Edit Trailer URL</h5>
-									<input onChange={(e) => setTrailerUrl(e.target.value)}className="my-2" type="text" placeholder={mov.trailers[0].trailerUrl} />
+									<input onChange={(e) => setTrailerUrl(e.target.value)}className="my-2" type="text" placeholder={mov.trailerUrl} />
 									<button type="button" onClick={()=>{editTrailer()}} className="col-8 mb-3  btn btn-primary" >Edit Trailer URL</button>
 
 									<h5>Add Subtitle</h5>
@@ -216,6 +258,9 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		add_to_cart: (mov) => {
 			dispatch({type: "ADD_TO_CART", payload: {movie: mov}})
+		},
+		delete_movie: (mov) => {
+			dispatch({type: "DELETE_MOVIE", payload: {movie: mov}})
 		}
 	}
 }

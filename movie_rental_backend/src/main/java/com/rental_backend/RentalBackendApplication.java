@@ -30,8 +30,8 @@ public class RentalBackendApplication {
   private SubtitleLangRepository subtitleLangRepository;
   @Autowired
   private MovieLangRepository movieLangRepository;
-  @Autowired
-  private TrailerRepository trailerRepository;
+  //@Autowired
+  //private TrailerRepository trailerRepository;
   @Autowired
   private PaymentRepository paymentRepository;
 
@@ -56,12 +56,12 @@ public class RentalBackendApplication {
             HashSet<SubtitleLang> subtitleLangs5 = new HashSet<>();
             HashSet<SubtitleLang> subtitleLangs6 = new HashSet<>();
 
-            HashSet<Trailer> trailers = new HashSet<>();
+            /*HashSet<Trailer> trailers = new HashSet<>();
             HashSet<Trailer> trailers2 = new HashSet<>();
             HashSet<Trailer> trailers3 = new HashSet<>();
             HashSet<Trailer> trailers4 = new HashSet<>();
             HashSet<Trailer> trailers5 = new HashSet<>();
-            HashSet<Trailer> trailers6 = new HashSet<>();
+            HashSet<Trailer> trailers6 = new HashSet<>();*/
 
             HashSet<RentedMovie> rentedMovies = new HashSet<>();
             HashSet<Rate> rates = new HashSet<>();
@@ -95,12 +95,12 @@ public class RentalBackendApplication {
             movieLangs.add(movieLangRepository.save(new MovieLang(2L,movies,"English")));*/
 
 
-            Movie movie1 = movieRepository.save(new Movie(21001L,"Into the Wild" ,"Adventure","Can Önal",2002, 49.9, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(122,05,31),movieLangs,subtitleLangs,rentedMovies,trailers,rates,gifts,suggestions));
-            Movie movie2 = movieRepository.save(new Movie(21002L,"Up" ,"Animation","Yağmur Eryılmaz",2006, 35, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(121,05,31),movieLangs,subtitleLangs,rentedMovies,trailers,rates,gifts,suggestions));
-            Movie movie3 = movieRepository.save(new Movie(21003L,"Pride and Prejudice" ,"Romantic","Elif Cenesiz",1999, 65.5, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(120,05,31),movieLangs,subtitleLangs,rentedMovies,trailers,rates,gifts,suggestions));
-            Movie movie4 = movieRepository.save(new Movie(21004L,"Iron Man" ,"Action","Can Önal",2005, 50.5, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(120,05,10),movieLangs,subtitleLangs,rentedMovies,trailers,rates,gifts,suggestions));
-            Movie movie5 = movieRepository.save(new Movie(21005L,"Darkness In the Shadow" ,"Action","Cenk Duran",2009, 90, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(119,05,15),movieLangs,subtitleLangs,rentedMovies,trailers,rates,gifts,suggestions));
-            Movie movie6 = movieRepository.save(new Movie(21006L,"Undefined Memories" ,"Romantic","Can Önal",1997, 60.5, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(120,07,29),movieLangs,subtitleLangs,rentedMovies,trailers,rates,gifts,suggestions));
+            Movie movie1 = movieRepository.save(new Movie(21001L,"Into the Wild" ,"Adventure","Can Önal",2002, 49.9, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(122,05,31), "https://www.youtube.com/watch?v=T_var-mH9Gs",movieLangs,subtitleLangs,rentedMovies,rates,gifts,suggestions));
+            Movie movie2 = movieRepository.save(new Movie(21002L,"Up" ,"Animation","Yağmur Eryılmaz",2006, 35, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(121,05,31), "https://www.youtube.com/watch?v=T_var-mH9Gs",movieLangs,subtitleLangs,rentedMovies,rates,gifts,suggestions));
+            Movie movie3 = movieRepository.save(new Movie(21003L,"Pride and Prejudice" ,"Romantic","Elif Cenesiz",1999, 65.5, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(120,05,31),"https://www.youtube.com/watch?v=T_var-mH9Gs",movieLangs,subtitleLangs,rentedMovies,rates,gifts,suggestions));
+            Movie movie4 = movieRepository.save(new Movie(21004L,"Iron Man" ,"Action","Can Önal",2005, 50.5, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(120,05,10),"https://www.youtube.com/watch?v=T_var-mH9Gs",movieLangs,subtitleLangs,rentedMovies,rates,gifts,suggestions));
+            Movie movie5 = movieRepository.save(new Movie(21005L,"Darkness In the Shadow" ,"Action","Cenk Duran",2009, 90, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(119,05,15),"https://www.youtube.com/watch?v=T_var-mH9Gs",movieLangs,subtitleLangs,rentedMovies,rates,gifts,suggestions));
+            Movie movie6 = movieRepository.save(new Movie(21006L,"Undefined Memories" ,"Romantic","Can Önal",1997, 60.5, "https://image.tmdb.org/t/p/w440_and_h660_face/yHA9Fc37VmpUA5UncTxxo3rTGVA.jpg", new Date(120,07,29),"https://www.youtube.com/watch?v=T_var-mH9Gs",movieLangs,subtitleLangs,rentedMovies,rates,gifts,suggestions));
 
             movieLangs.add(movieLangRepository.save(new MovieLang(1111L, "English", movieRepository.findMovieById(102L))));
             movie1.setMovieLang(movieLangs);
@@ -161,7 +161,7 @@ public class RentalBackendApplication {
             movie6.setSubtitleLang(subtitleLangs6);
             movieRepository.save(movie6);
 
-            trailers.add(trailerRepository.save(new Trailer(1L,"https://www.youtube.com/watch?v=SDnYMbYB-nU",movieRepository.findMovieById(1L))));
+            /*trailers.add(trailerRepository.save(new Trailer(1L,"https://www.youtube.com/watch?v=SDnYMbYB-nU",movieRepository.findMovieById(1L))));
             movie1.setTrailers(trailers);
             movieRepository.save(movie1);
 
@@ -183,7 +183,7 @@ public class RentalBackendApplication {
 
             trailers6.add(trailerRepository.save(new Trailer(6L,"https://www.youtube.com/watch?v=JfVOs4VSpmA",movieRepository.findMovieById(6L))));
             movie6.setTrailers(trailers6);
-            movieRepository.save(movie6);
+            movieRepository.save(movie6);*/
 
             /*userAccountRepository.save(new UserAccount(0000000001, "Can Önal", "can", new Date(102, 02, 05), "bjk@gmail.com", "customer"));
             userAccountRepository.save(new UserAccount(0000000002, "Yağmur Eryılmaz" ,"yağmur", new Date(106,01,01),"yagmurery12@gmail.com","customer"));

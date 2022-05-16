@@ -19,15 +19,15 @@ public class MovieService {
     private MovieRepository movieRepository;
     private SubtitleLangRepository subtitleLangRepository;
     private MovieLangRepository movieLangRepository;
-    private TrailerRepository trailerRepository;
+    //private TrailerRepository trailerRepository;
 
     @Autowired
-    public MovieService(MovieRepository movieRepository,SubtitleLangRepository subtitleLangRepository,MovieLangRepository movieLangRepository,TrailerRepository trailerRepository) {
+    public MovieService(MovieRepository movieRepository,SubtitleLangRepository subtitleLangRepository,MovieLangRepository movieLangRepository) {
 
         this.movieRepository = movieRepository;
         this.movieLangRepository=movieLangRepository;
         this.subtitleLangRepository=subtitleLangRepository;
-        this.trailerRepository=trailerRepository;
+        //this.trailerRepository=trailerRepository;
 
     }
     public List<Movie> getAllMovies(){
@@ -65,6 +65,10 @@ public class MovieService {
     {
         movieRepository.updateMoviePrice(mId,price);
     }
+    public void updateTrailer(Long mId, String url)
+    {
+        movieRepository.updateTrailer(mId,url);
+    }
 
     public List<Movie> findMovieByTitle(String title) {
         return movieRepository.findByTitle(title);
@@ -90,7 +94,6 @@ public class MovieService {
         if (movieRepository.existsById(mId)) {
             subtitleLangRepository.deleteSubtitleLang(mId);
             movieLangRepository.deleteMovieLang(mId);
-            trailerRepository.deleteTrailer(mId);
             movieRepository.deleteMovie(mId);
 
         }

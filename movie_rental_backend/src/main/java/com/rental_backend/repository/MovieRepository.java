@@ -44,6 +44,10 @@ public interface MovieRepository extends CrudRepository<Movie,Long>{
     @Query("update Movie m set m.price=:price where m.mId=:mId ")
     void updateMoviePrice(@Param("mId") Long mId, @Param("price") double price);
 
+    @Modifying
+    @Transactional
+    @Query("update Movie m set m.trailerUrl=:trailerUrl where m.mId=:mId ")
+    void updateTrailer(@Param("mId") Long mId, @Param("trailerUrl") String trailerUrl);
 
 
 
