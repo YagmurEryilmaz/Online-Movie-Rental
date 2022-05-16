@@ -3,12 +3,14 @@ import Navbar from "./Navbar"
 import Sidebar from "./Sidebar"
 import {useState, useEffect} from "react";
 import axios from "axios";
-const EmployeeHomepage = () => {
+import { connect } from "react-redux";
+const EmployeeHomepage = ({fetch_movies}) => {
 	const [all_movie_data, setMovies] = useState([]);
 	const [filteredMovies, setFilteredMovies] = useState(all_movie_data);
 	const [filter, setFilter] = useState("");
 	useEffect(() => {
 		axios.get("http://127.0.0.1:8080/api/v1/movie/getAllMovies").then((response) => {
+			fetch_movies(response.data);
 			console.log(response.data)
 			setFilteredMovies(response.data)
 			setMovies(response.data);
@@ -89,4 +91,14 @@ const EmployeeHomepage = () => {
 		</div>
 	)
 }
-export default EmployeeHomepage;
+const mapDispatchToProps = (dispatch) => {
+	return {
+		fetch_movies: (movies) => {
+			dispatch({
+				type: "FETCH_MOVIES",
+				payload: movies
+			})
+		}
+	}
+}
+export default connect(null, mapDispatchToProps)(EmployeeHomepage);
