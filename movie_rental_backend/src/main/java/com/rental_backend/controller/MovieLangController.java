@@ -21,8 +21,8 @@ public class MovieLangController {
         this.movieLangService = movieLangService;
     }
 
-    @PostMapping("/addMovieLang")
-    public ResponseEntity<MovieLang> addMovieLang(@RequestBody MovieLang ml) {
-        return new ResponseEntity<>(movieLangService.addMovieLang(ml.getMovieLang(),ml.getMovie().getMId()), HttpStatus.CREATED);
+    @PostMapping("/addMovieLang/{mId}")
+    public ResponseEntity<MovieLang> addMovieLang(@RequestBody MovieLang ml, @PathVariable("mId") Long mId) {
+        return new ResponseEntity<>(movieLangService.addMovieLang(ml.getMovieLang(), mId), HttpStatus.CREATED);
     }
 }
