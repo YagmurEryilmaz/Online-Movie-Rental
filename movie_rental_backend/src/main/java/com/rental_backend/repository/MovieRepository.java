@@ -1,19 +1,13 @@
 package com.rental_backend.repository;
 
-
 import com.rental_backend.entity.Movie;
-import com.rental_backend.entity.UserAccount;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.ForeignKey;
 import java.util.List;
-import java.util.Set;
-
 @Repository
 public interface MovieRepository extends CrudRepository<Movie,Long>{
 
@@ -33,9 +27,6 @@ public interface MovieRepository extends CrudRepository<Movie,Long>{
 
     @Query("select m from Movie m group by m.subtitleLang")
     List<Movie> findBySubtitleLang(String subtitleLang);
-
-    boolean existsByTitleAndDirectorName(String title, String directorName);
-
     Movie findById(long mId);
 
     @Query("select m from Movie m where m.mId = :id")

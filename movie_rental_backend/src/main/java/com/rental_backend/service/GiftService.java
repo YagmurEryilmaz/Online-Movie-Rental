@@ -13,17 +13,13 @@ public class GiftService {
     private GiftRepository giftRepository;
     private CustomerService customerService;
     private MovieService movieService;
-    private PaymentService paymentService;
-    private RentedMovieRepository rentedMovieRepository;
     private RentedMovieService rentedMovieService;
 
     @Autowired
-    public GiftService(GiftRepository giftRepository, CustomerService customerService, MovieService movieService, PaymentService paymentService, RentedMovieRepository rentedMovieRepository, RentedMovieService rentedMovieService) {
+    public GiftService(GiftRepository giftRepository, CustomerService customerService, MovieService movieService, RentedMovieService rentedMovieService) {
         this.giftRepository = giftRepository;
         this.customerService = customerService;
         this.movieService = movieService;
-        this.paymentService = paymentService;
-        this.rentedMovieRepository=rentedMovieRepository;
         this.rentedMovieService = rentedMovieService;
     }
 

@@ -11,14 +11,12 @@ import java.sql.Date;
 public class PaymentService {
 
     private PaymentRepository paymentRepository;
-    private RentedMovieRepository rentedMovieRepository;
     private RentedMovieService rentedMovieService;
     private CustomerService customerService;
 
     @Autowired
-    public PaymentService(PaymentRepository paymentRepository, RentedMovieRepository rentedMovieRepository, @Lazy RentedMovieService rentedMovieService, CustomerService customerService) {
+    public PaymentService(PaymentRepository paymentRepository,@Lazy RentedMovieService rentedMovieService, CustomerService customerService) {
         this.paymentRepository = paymentRepository;
-        this.rentedMovieRepository = rentedMovieRepository;
         this.rentedMovieService = rentedMovieService;
         this.customerService = customerService;
     }

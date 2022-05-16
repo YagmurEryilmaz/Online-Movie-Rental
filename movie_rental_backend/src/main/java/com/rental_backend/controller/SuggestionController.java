@@ -18,8 +18,6 @@ import java.util.List;
 
 public class SuggestionController {
     private SuggestionService suggestionService;
-    private CustomerService customerService;
-    private Suggestion suggestion;
 
     @Autowired
     public SuggestionController(SuggestionService suggestionService) {

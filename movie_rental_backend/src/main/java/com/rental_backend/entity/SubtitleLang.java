@@ -2,19 +2,13 @@ package com.rental_backend.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.springframework.context.annotation.Primary;
-
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Set;
-
 @Getter
 @Setter
 @SuperBuilder
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor
 @Entity
-
 public class SubtitleLang {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

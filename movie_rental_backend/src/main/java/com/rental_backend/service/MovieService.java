@@ -3,11 +3,8 @@ package com.rental_backend.service;
 import com.rental_backend.entity.*;
 import com.rental_backend.exception.MovieNotFoundException;
 import com.rental_backend.repository.*;
-import org.hibernate.annotations.SQLInsert;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
-
 import java.sql.Date;
 import java.util.*;
 
@@ -17,7 +14,6 @@ public class MovieService {
     private MovieRepository movieRepository;
     private SubtitleLangRepository subtitleLangRepository;
     private MovieLangRepository movieLangRepository;
-    //private TrailerRepository trailerRepository;
 
     @Autowired
     public MovieService(MovieRepository movieRepository,SubtitleLangRepository subtitleLangRepository,MovieLangRepository movieLangRepository) {
@@ -25,8 +21,6 @@ public class MovieService {
         this.movieRepository = movieRepository;
         this.movieLangRepository=movieLangRepository;
         this.subtitleLangRepository=subtitleLangRepository;
-        //this.trailerRepository=trailerRepository;
-
     }
     public List<Movie> getAllMovies(){
         return movieRepository.findAll();
@@ -37,9 +31,6 @@ public class MovieService {
     }
     public List<String> getAllGenre(){
         return movieRepository.getAllGenre();
-    }
-    public List<Movie> getBySubtitleLang(String sLang) {
-        return movieRepository.findBySubtitleLang(sLang);
     }
 
     public Movie addMovieByMObj(Movie m) {
@@ -112,17 +103,4 @@ public class MovieService {
             throw new MovieNotFoundException("Movie with id " + mId + " does not exist.");
         }
     }
-
-    public MovieRepository getMovieRepository() {
-        return movieRepository;
-    }
-
-    public Movie addRented(Long m_id, RentedMovie rm){
-        Movie movie = movieRepository.findMovieById(m_id);
-        movie.addRented(rm);
-        return movieRepository.save(movie);
-    }
-
-
-
 }

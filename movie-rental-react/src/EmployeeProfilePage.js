@@ -43,6 +43,9 @@ const EmployeeProfilePage = ({name, mail, uid, birthday}) => {
 	const [subtitleArr, setSubtitleArr] = useState([]);
 	const [movieLang, setMovieLang] = useState([]);
 	const [friendSuggestions, setFriendSuggestions] = useState([]);
+	const [customers, setCustomers] = useState([]);
+	const [friends, setFriends] = useState([]);
+	const [value, setValue] = useState("");
 
 
 	useEffect(() => {
@@ -50,6 +53,13 @@ const EmployeeProfilePage = ({name, mail, uid, birthday}) => {
 
 			setFriendSuggestions(response.data)
 		}).catch((error) => {console.log(error)})
+		axios.get("http://127.0.0.1:8080/api/v1/customer/getAllCustomers").then(
+			(response) => {
+				setCustomers(response.data);
+				var emails = response.data.map((customer) => customer.email);
+				setFriends(emails)
+			}
+		).catch((err) => {console.log(err)});
 	}, [])
 
 	
@@ -112,6 +122,21 @@ const EmployeeProfilePage = ({name, mail, uid, birthday}) => {
 		}
 
 	}
+	const handleDelete = () => {
+		if(value.length>0)
+		{
+			var receiver = customers.find(c => {return c.email === value});
+			var id = receiver.uid
+			if(window.confirm("Are sure you want to delete this user?")){
+				axios.delete(`http://127.0.0.1:8080/api/v1/customer/deleteUserByUId/${id}`).then(
+					(response) => {
+						if(response)
+							window.alert("user deleted")
+					}
+				).catch((err) => {console.log(err)})
+			}
+		}
+	}
 
 	return (
 		<div className='container'>
@@ -147,7 +172,19 @@ const EmployeeProfilePage = ({name, mail, uid, birthday}) => {
 								<EditProfileModal bio={bio} changeBio={setBio} />
 
 							</div>
-							
+							<h5>Please enter the email of the user:</h5>
+							<Autocomplete
+								disablePortal
+								value={value}
+								onChange={(event, newValue) => {
+									setValue(newValue);
+								}}
+								id="combo-box-demo"
+								options={friends}
+								sx={{height: 90}}
+								renderInput={(params) => <TextField {...params} label="User Email" />}
+							/>
+							<div onClick = {()=> handleDelete()} className="btn btn-danger">Delete user</div>
 						</div>
 						<div className="col-6 overflow-auto">
 							<div className="row overflow-auto createMovieRequest mt-5 ms-2 ">

@@ -2,19 +2,15 @@ package com.rental_backend.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-
 @Getter
 @Setter
 @SuperBuilder
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor
 @Entity
-
 public class Suggestion {
-
     @Embeddable
     public static class PrimaryKey implements Serializable {
         @Column(nullable = false, updatable = false)
@@ -26,7 +22,6 @@ public class Suggestion {
         @Column(nullable = false, updatable = false)
         private Long m_id;
 
-
         public PrimaryKey(Long msender_id,Long mreceiver_id,Long m_id) {
 
             this.msender_id = msender_id;
@@ -34,7 +29,6 @@ public class Suggestion {
             this.m_id = m_id;
 
         }
-
         public PrimaryKey() {
 
         }
