@@ -37,10 +37,10 @@ public class PaymentController {
     }
 
     @PostMapping("/pay")
-    public ResponseEntity<?> payMovie(@RequestBody PaymentDto paymentDto, @RequestBody RentRequest request)
+    public ResponseEntity<?> payMovie(@RequestBody PaymentDto paymentDto)
     {
         try {
-            paymentService.pay(request.getCustomer(), request.getMovie(), paymentDto.getPayId(), paymentDto.getPayType(), request.getExpDate());
+            paymentService.pay(paymentDto.getCustomer(), paymentDto.getMovie(), paymentDto.getPayId(), paymentDto.getPayType(), paymentDto.getExpDate());
             return ResponseEntity.ok(new MessageResponse("paid"));
         }
         catch (RuntimeException r){
