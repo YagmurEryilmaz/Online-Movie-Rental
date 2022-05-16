@@ -1,11 +1,8 @@
 package com.rental_backend.controller;
 
-import com.rental_backend.dto.FriendRequestDto;
 import com.rental_backend.dto.GiftDto;
-import com.rental_backend.entity.FriendRequest;
 import com.rental_backend.entity.Gift;
 import com.rental_backend.service.GiftService;
-import com.rental_backend.service.SubtitleRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -2,7 +2,6 @@ package com.rental_backend.controller;
  import com.rental_backend.dto.FriendRequestDto;
  import com.rental_backend.dto.MessageResponse;
  import com.rental_backend.entity.FriendRequest;
- import com.rental_backend.entity.Suggestion;
  import com.rental_backend.service.CustomerService;
  import com.rental_backend.service.FriendRequestService;
  import lombok.RequiredArgsConstructor;
@@ -21,7 +20,6 @@ package com.rental_backend.controller;
 public class FriendRequestController {
 
     private FriendRequestService friendRequestService;
-    private CustomerService customerService;
     @Autowired
     public FriendRequestController(FriendRequestService friendRequestService) {
         this.friendRequestService = friendRequestService;

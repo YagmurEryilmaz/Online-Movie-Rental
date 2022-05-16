@@ -14,5 +14,4 @@ public class MovieRequestDto {
 
     private String directorName;
 
-    private String movieReqStatus;
 }

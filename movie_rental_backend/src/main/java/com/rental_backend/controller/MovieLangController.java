@@ -1,9 +1,7 @@
 package com.rental_backend.controller;
 
 import com.rental_backend.entity.MovieLang;
-import com.rental_backend.entity.SubtitleLang;
 import com.rental_backend.service.MovieLangService;
-import com.rental_backend.service.SubtitleLangService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

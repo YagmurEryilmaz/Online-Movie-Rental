@@ -1,12 +1,8 @@
 package com.rental_backend.controller;
 
-import com.rental_backend.dto.CustomerDto;
 import com.rental_backend.dto.MovieRequestDto;
-import com.rental_backend.entity.Movie;
 import com.rental_backend.entity.MovieRequest;
-import com.rental_backend.service.CustomerService;
 import com.rental_backend.service.MovieRequestService;
-import com.rental_backend.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,10 +18,6 @@ import java.util.List;
 public class MovieRequestController {
 
     private MovieRequestService movieRequestService;
-    private MovieService movieService;
-    private MovieRequest movieRequest;
-    private CustomerService customerService;
-
     @Autowired
     public MovieRequestController(MovieRequestService movieRequestService){
         this.movieRequestService = movieRequestService;

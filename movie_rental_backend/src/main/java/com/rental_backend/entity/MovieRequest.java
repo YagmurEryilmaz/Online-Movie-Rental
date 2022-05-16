@@ -25,8 +25,6 @@ public class MovieRequest {
 
     private String directorName;
 
-    private String movieReqStatus;
-
     @ManyToOne (fetch= FetchType.EAGER)
     private Customer customer;
 

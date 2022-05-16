@@ -28,7 +28,6 @@ public class MovieRequestService {
                                     .movieName(movieName)
                                     .directorName(drectorName)
                                     .movieProductionYear(productionYear)
-                                    .movieReqStatus("pending")
                                     .customer(customerRepository.findByUId(cId))
                                     .build();
         return movieRequestRepository.save(m);

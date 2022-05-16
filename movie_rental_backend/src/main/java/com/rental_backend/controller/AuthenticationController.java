@@ -11,11 +11,7 @@ import com.rental_backend.entity.Customer;
 import com.rental_backend.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-//import javax.validation.Valid;
-import java.io.IOException;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("api/v1/auth")
@@ -24,8 +20,6 @@ public class AuthenticationController {
     private final UserAccountService userAccountService;
     private final CustomerService customerService;
     private final EmployeeService employeeService;
-
-    //private final PasswordEncoder encoder = new BCryptPasswordEncoder();
     @PostMapping("/signin")
     public UserResponse signIn ( @RequestBody LoginRequest loginRequest)  {
 
