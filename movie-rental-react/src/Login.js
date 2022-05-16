@@ -42,6 +42,9 @@ const Login = ({login_account, loggedIn}) => {
 							window.alert("Logged In")
 
 						}
+						else{
+							window.alert("Wrong email or password")
+						}
 					}
 
 				}).catch((error => {console.log(error); window.alert("DB Err")}))
