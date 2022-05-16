@@ -13,7 +13,7 @@ import {connect} from "react-redux";
 import WatchTrailerModal from "./WatchTrailerModal";
 
 
-const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
+const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...props}) => {
 
 
 	const [mov, setMov] = useState(props.movie);
@@ -23,8 +23,8 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 	const [trailer, setTrailer] = useState("");
 	const [friends, setFriends] = useState([]);
 	const [customers, setCustomers] = useState([]);
-	const subtitles = mov.subtitleLang;
-	const [reqSubtitle, setReqSubtitle] = useState(subtitles[0])
+	//const subtitles = mov.subtitleLang;
+	//const [reqSubtitle, setReqSubtitle] = useState(subtitles[0])
 	const [inputValue, setInputValue] = useState('');
 	const [reqEmail, setReqEmail] = useState(friends[0]);
 	const [inputValue1, setInputValue1] = useState('');
@@ -53,14 +53,14 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 		).catch((err) => {console.log(err.response)})
 		
 	}, [isRated])
-	var trailerLink = mov.trailers[0]?.trailerUrl
-	console.log(mov.trailers[0].trailerUrl)
-	var subtitlesArr = mov.subtitleLang.map((sub) => {
+	var trailerLink = mov.trailerUrl
+
+	/*var subtitlesArr = mov.subtitleLang.map((sub) => {
 		return sub.s_lang
 	})
 	var movieLangArr = mov.movieLang.map((lang)=>{
 		return lang.movieLang
-	})
+	})*/
 
 	const deleteMovie = () => {
 		if(window.confirm("Are you sure you want to delete this movie?")){
@@ -68,6 +68,8 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 				(response) => {
 					if(response){
 						window.alert("Movie deleted")
+						delete_movie(mov)
+
 					}
 				}
 			).catch((err) => {console.log(err)})
@@ -81,7 +83,7 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 			window.alert("Please enter a valid URL")
 		}
 	}
-	const addLang = ()=> {
+	/*const addLang = ()=> {
 		if(movieLang !== ""){
 			if(movieLangArr.indexOf(movieLang)!== -1){
 				window.alert("Movie language already exists")
@@ -100,7 +102,7 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 				window.alert("Subtitle language added")
 			}
 		}
-	}
+	}*/
 
 		
 	const editPrice = () => {
@@ -135,7 +137,7 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 												<p class="card-text"><span className="fw-bold">Price:</span>{mov.price} $</p>
 												<p class="card-text"><span className="fw-bold">Genre:</span> {mov.genre}</p>
 												<p class="card-text"><span className="fw-bold">Movie Languages:</span></p>
-												<ul>
+												{/*<ul>
 													{mov.movieLang.map((lang) => {
 														return (
 															<li>{lang.movieLang}</li>
@@ -149,7 +151,7 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 															<li>{subt.s_lang}</li>
 														)
 													})}
-												</ul>
+												</ul>*/}
 											</div>
 
 										</div>
@@ -171,17 +173,17 @@ const EmployeeDetailedInfoModal = ({cart, uid, add_to_cart, ...props}) => {
 									<button type="button" onClick={() => {editPrice()}} className="col-8 mb-3  btn btn-primary" >Edit Price </button>
 									
 									<h5>Edit Trailer URL</h5>
-									<input onChange={(e) => setTrailerUrl(e.target.value)}className="my-2" type="text" placeholder={mov.trailers[0].trailerUrl} />
+									<input onChange={(e) => setTrailerUrl(e.target.value)}className="my-2" type="text" placeholder={mov.trailerUrl} />
 									<button type="button" onClick={()=>{editTrailer()}} className="col-8 mb-3  btn btn-primary" >Edit Trailer URL</button>
 
-									<h5>Add Subtitle</h5>
+									{/*<h5>Add Subtitle</h5>
 									<input onChange={(e) => setSubtitle(e.target.value)}className="my-2" type="text" />
 									<button type="button" onClick={()=>{addSubtitle()}} className="col-8 mb-3  btn btn-primary" >Add Subtitle</button>
 
 									<h5>Add Movie Language</h5>
 									<input onChange={(e) => setLang(e.target.value)}className="my-2" type="text" />
 									<button type="button" onClick={() => {addLang()}} className="col-8 mb-3  btn btn-primary" >Add Language</button>
-
+*/}
 									
 									<a href={trailerLink} target = "_blank" className="col-8 mb-3  btn btn-primary"> Watch Trailer </a>
 
@@ -216,6 +218,9 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		add_to_cart: (mov) => {
 			dispatch({type: "ADD_TO_CART", payload: {movie: mov}})
+		},
+		delete_movie: (mov) => {
+			dispatch({type: "DELETE_MOVIE", payload: {movie: mov}})
 		}
 	}
 }

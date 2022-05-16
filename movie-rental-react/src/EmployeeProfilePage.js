@@ -98,7 +98,7 @@ const EmployeeProfilePage = ({name, mail, uid, birthday}) => {
 				price: price,
 				posterUrl: posterUrl,
 				additionDate: date,
-				trailers: trailerSet,
+				trailerUrl: trailerUrl,
 				
 
 			}
