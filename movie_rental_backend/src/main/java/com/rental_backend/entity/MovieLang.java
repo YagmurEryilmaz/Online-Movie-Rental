@@ -23,7 +23,6 @@ public class MovieLang {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @PrimaryKeyJoinColumn(name = "movieLang", referencedColumnName = "m_id")
-    @JsonIgnore
     private Movie movie;
 
 

@@ -92,12 +92,27 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 	}
 	const addLang = ()=> {
 		if(movieLang !== ""){
-			if(movieLangArr.indexOf(movieLang)!== -1){
-				window.alert("Movie language already exists")
+			if(movieLangArr.indexOf(movieLang) === -1){
+				var movLangObj = {
+					movieLang: movieLang,
+					movie: mov
+				}
+				console.log(movLangObj)
+				axios.post("http://127.0.0.1:8080/api/v1/movieLang/addMovieLang",movLangObj).then(
+					(response) => {
+						if(response){
+							window.alert("Added")
+						}
+					}
+				).catch((err) => {console.log(err)})
 			}
 			else{
-				window.alert("Movie language added")
+				window.alert("Movie language already exists")
+
 			}
+		}
+		else{
+			window.alert("Please enter all fields")
 		}
 	}
 	const addSubtitle = () =>{
@@ -183,14 +198,14 @@ const EmployeeDetailedInfoModal = ({cart, uid, delete_movie,add_to_cart, ...prop
 									<input onChange={(e) => setTrailerUrl(e.target.value)}className="my-2" type="text" placeholder={mov.trailerUrl} />
 									<button type="button" onClick={()=>{editTrailer()}} className="col-8 mb-3  btn btn-primary" >Edit Trailer URL</button>
 
-									{/*<h5>Add Subtitle</h5>
+									<h5>Add Subtitle</h5>
 									<input onChange={(e) => setSubtitle(e.target.value)}className="my-2" type="text" />
 									<button type="button" onClick={()=>{addSubtitle()}} className="col-8 mb-3  btn btn-primary" >Add Subtitle</button>
 
 									<h5>Add Movie Language</h5>
 									<input onChange={(e) => setLang(e.target.value)}className="my-2" type="text" />
 									<button type="button" onClick={() => {addLang()}} className="col-8 mb-3  btn btn-primary" >Add Language</button>
-*/}
+
 									
 									<a href={trailerLink} target = "_blank" className="col-8 mb-3  btn btn-primary"> Watch Trailer </a>
 
