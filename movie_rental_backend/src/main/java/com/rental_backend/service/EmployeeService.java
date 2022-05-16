@@ -14,4 +14,8 @@ public class EmployeeService {
     public Employee addUser(Employee employee) {
         return employeeRepository.save(employee);
     }
+    public void updateEmployeeByUId(Long uId, String email)
+    {
+        employeeRepository.updateEmployeeByUId(uId,email);
+    }
 }
