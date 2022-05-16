@@ -24,6 +24,7 @@ public class SubtitleLang {
 
     @ManyToOne
     @JoinColumn(name = "m_id", insertable = false, updatable = false)
+    @JsonIgnore
     private Movie movie;
 
 }

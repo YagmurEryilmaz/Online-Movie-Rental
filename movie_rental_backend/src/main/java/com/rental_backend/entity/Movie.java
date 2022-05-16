@@ -56,11 +56,9 @@ public class Movie {
     }
 
     @OneToMany (mappedBy ="movie", cascade = CascadeType.REMOVE)
-    @JsonIgnore
     private Set<MovieLang> movieLang;
 
     @OneToMany(mappedBy ="movie", cascade = CascadeType.REMOVE)
-    @JsonIgnore
     private Set<SubtitleLang> subtitleLang;
 
     @OneToMany
