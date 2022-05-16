@@ -46,21 +46,6 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.getFriendEmail(uId));
     }
 
-    @PostMapping("/searchMoviesByTitle")
-    public ResponseEntity<List<Movie>> searchMoviesByTitle(@RequestBody MovieResponse movieResponse) {
-        return ResponseEntity.ok(movieService.searchMovie(movieResponse.getTitle()));
-    }
-
-    @PostMapping("/searchMoviesByDirector")
-    public ResponseEntity<List<Movie>> searchMoviesByDirector(@RequestBody MovieResponse movieResponse) {
-        return ResponseEntity.ok(movieService.searchMovie(movieResponse.getDirectorName()));
-    }
-
-    @PostMapping("/searchMoviesByGenre")
-    public ResponseEntity<List<Movie>> searchMoviesByGenre(@RequestBody MovieResponse movieResponse) {
-        return ResponseEntity.ok(movieService.searchMovie(movieResponse.getGenre()));
-    }
-
     @GetMapping("/getPendingRequests")
     public int getPendingRequests(@PathVariable FriendRequestDto friendRequestDto){
         return customerService.getPendingFriendRequestCount(friendRequestDto.getReceiver_id());
@@ -105,7 +90,7 @@ public class CustomerController {
     }
 
     @PatchMapping("/updateBalance/{mId}/{amount}")
-    public ResponseEntity<?> updateUserInfoByUId(@PathVariable("mId") Long mId, @PathVariable("amount") Double amount){
+    public ResponseEntity<?> updateBalance(@PathVariable("mId") Long mId, @PathVariable("amount") Double amount){
         customerService.updateBalance(mId,amount);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
