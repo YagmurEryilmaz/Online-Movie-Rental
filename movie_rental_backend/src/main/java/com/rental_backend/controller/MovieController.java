@@ -3,7 +3,9 @@ package com.rental_backend.controller;
 import com.rental_backend.dto.MovieResponse;
 import com.rental_backend.entity.Movie;
 import com.rental_backend.exception.MovieNotFoundException;
+import com.rental_backend.service.MovieLangService;
 import com.rental_backend.service.MovieService;
+import com.rental_backend.service.SubtitleLangService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,9 +22,14 @@ import java.util.List;
 public class MovieController {
 
     private MovieService movieService;
+    private SubtitleLangService subtitleLangService;
+    private MovieLangService movieLangService;
+
     @Autowired
-    public MovieController(MovieService movieService) {
+    public MovieController(MovieService movieService,SubtitleLangService subtitleLangService,MovieLangService movieLangService) {
         this.movieService = movieService;
+        this.subtitleLangService=subtitleLangService;
+        this.movieLangService=movieLangService;
     }
 
     @GetMapping("/getAllMovies")
@@ -42,6 +49,8 @@ public class MovieController {
 
     @DeleteMapping("/deleteMovie/{mId}")
     public ResponseEntity<?> deleteMovie(@PathVariable("mId") Long mId) throws MovieNotFoundException {
+        subtitleLangService.deleteSubtitleLang(mId);
+        movieLangService.deleteMovieLang(mId);
         movieService.deleteMovie(mId);
         return new ResponseEntity<>( HttpStatus.NO_CONTENT);
     }
