@@ -34,8 +34,9 @@ public class GiftService {
     public List<Gift> findBySenderId(Long senderId) {
         return giftRepository.findbySenderId(senderId);
     }
-    public Gift addGift(Long sender_id, Long receiver_id, Long m_id, Long pay_id, Date expDate) {
-        rentedMovieService.rentMovie(receiver_id, m_id, pay_id, expDate);
+    public Gift addGift(Long sender_id, Long receiver_id, Long m_id, Date expDate) {
+        System.out.println(m_id);
+        rentedMovieService.rentMovie(receiver_id, m_id, expDate);
 
         Gift.PrimaryKey primaryKey = new Gift.PrimaryKey(sender_id,receiver_id,m_id);
 

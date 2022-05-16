@@ -37,16 +37,4 @@ public class PaymentController {
             return ResponseEntity.badRequest().body(new MessageResponse(r.getMessage()));
         }
     }
-
-    @PostMapping("/payAsGift")
-    public ResponseEntity<?> payAsGift(@RequestBody PaymentDto paymentDto)
-    {
-        try {
-            paymentService.pay(paymentDto.getCustomerEmail(), paymentDto.getMovie(), paymentDto.getPayId(), paymentDto.getPayType(), paymentDto.getExpDate());
-            return ResponseEntity.ok(new MessageResponse("paid"));
-        }
-        catch (RuntimeException r){
-            return ResponseEntity.badRequest().body(new MessageResponse(r.getMessage()));
-        }
-    }
 }

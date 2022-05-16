@@ -35,7 +35,7 @@ public class RentedMovieService {
         return rentedMovieRepository.findRentedMovieByMovieId(id);
     }
 
-    public void rentMovie( Long c_id, Long m_id, Long pay_id, Date expDate )
+    public void rentMovie( Long c_id, Long m_id, Date expDate )
     {
         if (isRentedCurrently(c_id, m_id))
             throw new RuntimeException("currently rented");
@@ -45,7 +45,6 @@ public class RentedMovieService {
                     .pk(key)
                     .customer(customerService.findById(c_id))
                     .movie(movieService.findMovieById(m_id))
-                    .payment(paymentService.findById(pay_id))
                     .expDate(expDate)
                     .build();
             rentedMovieRepository.save(rentedMovie);

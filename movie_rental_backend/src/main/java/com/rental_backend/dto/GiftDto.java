@@ -8,7 +8,6 @@ import java.sql.Date;
 public class GiftDto {
     private Long sender_id;
     private Long receiver_id;
-    private Long pay_id;
     private Long m_id;
     private Date expDate;
 }

@@ -13,15 +13,17 @@ public class RateService {
     private final RateRepository rateRepository;
     private final MovieService movieService;
     private final CustomerService customerService;
+    private final ReviewService reviewService;
     private final RentedMovieService rentedMovieService;
 
     @Autowired
     public RateService(RateRepository rateRepository, MovieService movieService,
-                       CustomerService customerService, RentedMovieService rentedMovieService) {
+                       CustomerService customerService, ReviewService reviewService, RentedMovieService rentedMovieService) {
 
         this.rateRepository = rateRepository;
         this.movieService = movieService;
         this.customerService = customerService;
+        this.reviewService = reviewService;
         this.rentedMovieService = rentedMovieService;
     }
 

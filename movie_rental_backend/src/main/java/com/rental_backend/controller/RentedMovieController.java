@@ -25,7 +25,7 @@ public class RentedMovieController {
     public ResponseEntity<?> rentMovie(@RequestBody RentRequest request)
     {
         //try {
-            rentedMovieService.rentMovie(request.getCustomer(), request.getMovie(),request.getPay_id(),request.getExpDate());
+            rentedMovieService.rentMovie(request.getCustomer(), request.getMovie(),request.getExpDate());
             return ResponseEntity.ok(new MessageResponse("rented"));
         //}
         //catch (RuntimeException r){

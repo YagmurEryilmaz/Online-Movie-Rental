@@ -11,7 +11,6 @@ public class RentRequest {
 
     private Long movie;
     private Long customer;
-    private Long pay_id;
     private Date expDate;
 
 }
