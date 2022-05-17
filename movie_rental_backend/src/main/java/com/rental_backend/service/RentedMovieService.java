@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -58,15 +59,17 @@ public class RentedMovieService {
     }
 
     public Boolean isRentedCurrently(Long c_id, Long m_id){
-        List <RentedMovie> current = getCurrentlyRented(c_id);
+        List <Movie> current = new ArrayList<>();
+        getCurrentlyRented(c_id).forEach((rm)-> current.add(rm.getMovie()));
         Movie movie = movieService.findMovieById(m_id);
         return current.contains(movie);
     }
 
     public Boolean isRentedPreviously(Long c_id, Long m_id){
-        List <RentedMovie> current = getPreviouslyRented(c_id);
+        List <Movie> prev = new ArrayList<>();
+        getPreviouslyRented(c_id).forEach((rm)-> prev.add(rm.getMovie()));
         Movie movie = movieService.findMovieById(m_id);
-        return current.contains(movie);
+        return prev.contains(movie);
     }
 
 
