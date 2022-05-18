@@ -4,6 +4,11 @@ import {useState} from "react";
 const CartModal = ({cart, remove_from_cart,uid,balance,update_balance, email, empty_cart}) => {
 
 	const [option, setOption] = useState("balance")
+	var isRented = false
+	const [cardNumber,setCardNumber ] = useState(-1);
+	const [cardName, setCardName] = useState("");
+	const [expDate, setExpDate] = useState();
+	const [cvv, setCvv] = useState(-1);
 	const cartTotal = cart.reduce((acc, curr) => acc + curr.price, 0);
 	const checkout = () => {
 		if(cartTotal > balance && option == "balance"){
@@ -12,7 +17,7 @@ const CartModal = ({cart, remove_from_cart,uid,balance,update_balance, email, em
 		else if(option == "balance" && cartTotal < balance){
 			var newBalance = balance - cartTotal;
 			var date = new Date();
-			date.setDate(date.getDate() + 7);
+			date.setDate(date.getDate() - 7);
 			for (let index = 0; index < cart.length; index++) {
 				var paymentObj = {
 					movie: cart[index].mid,
@@ -26,17 +31,21 @@ const CartModal = ({cart, remove_from_cart,uid,balance,update_balance, email, em
 	
 				axios.post("http://127.0.0.1:8080/api/v1/payment/pay", paymentObj).then(
 					(response) => {
-						if(response.data == "rented"){
+						console.log(response.data)
+						if(response){
 							window.alert("Movie rented")
 						}
 					}
-				).catch((err) => console.log(err.response))
+				).catch((err) => {
+					window.alert("Movie already rented");
+
+				})
 				
 				
 			}
 			axios.patch(`http://127.0.0.1:8080/api/v1/customer/updateBalance/${uid}/${newBalance}`).then(
 				(response) => {
-					if(response){
+					if(response ){
 						console.log("balance update")
 						update_balance(newBalance)
 						empty_cart();
@@ -44,28 +53,33 @@ const CartModal = ({cart, remove_from_cart,uid,balance,update_balance, email, em
 				}
 			).catch((err) => console.log(err))
 		}else{
-			var date = new Date();
-			date.setDate(date.getDate() + 7);
-			for(let index = 0;index < cart.length;index++) {
-				var paymentObj = {
-					movie: cart[index].mid,
-					customerEmail: email,
-					payStatus: "card",
-					expDate: date,
-					payType: option
+			if(cardName == "" || cardNumber == "" || expDate == "" || cvv == ""){
+				window.alert("Please fill all the fields")
+			}else{
+				var date = new Date();
+				date.setDate(date.getDate() + 7);
+				for(let index = 0;index < cart.length;index++) {
+					var paymentObj = {
+						movie: cart[index].mid,
+						customerEmail: email,
+						payStatus: "card",
+						expDate: date,
+						payType: option
 
-				}
-				console.log(paymentObj)
-
-				axios.post("http://127.0.0.1:8080/api/v1/payment/pay", paymentObj).then(
-					(response) => {
-						if(response) {
-							window.alert("Movie rented")
-							empty_cart();
-						}
 					}
-				).catch((err) => console.log(err.response))
+					console.log(paymentObj)
+
+					axios.post("http://127.0.0.1:8080/api/v1/payment/pay", paymentObj).then(
+						(response) => {
+							if(response) {
+								window.alert("Movie rented")
+								empty_cart();
+							}
+						}
+					).catch((err) => console.log(err.response))
+				}
 			}
+			
 		}
 
 		
@@ -137,7 +151,7 @@ const CartModal = ({cart, remove_from_cart,uid,balance,update_balance, email, em
 											<div className="col-12">
 												<div class="mb-3">
 													<label for="exampleInputEmail1" class="form-label">Card Number</label>
-													<input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required/>
+													<input type="number" class="form-control" id="exampleInputEmail1" onChange = {(e) => setCardNumber(e.target.value)} aria-describedby="emailHelp" />
 												</div>
 											</div>
 										</div>
@@ -145,7 +159,7 @@ const CartModal = ({cart, remove_from_cart,uid,balance,update_balance, email, em
 											<div className="col-12">
 												<div class="mb-3">
 													<label for="exampleInputEmail1" class="form-label">Card Name</label>
-													<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required/>
+													<input type="text" class="form-control" id="exampleInputEmail1" onChange={(e) => setCardName(e.target.value)} aria-describedby="emailHelp" />
 												</div>
 											</div>
 										</div>
@@ -153,13 +167,13 @@ const CartModal = ({cart, remove_from_cart,uid,balance,update_balance, email, em
 											<div className="col-6">
 												<div class="mb-3">
 													<label for="exampleInputEmail1" class="form-label">CVC</label>
-													<input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required/>
+													<input type="number" class="form-control" id="exampleInputEmail1" onChange={(e) => setCvv(e.target.value)} aria-describedby="emailHelp" />
 												</div>
 											</div>
 											<div className="col-6">
 												<div class="mb-3">
 													<label for="exampleInputEmail1" class="form-label">Expiration Date</label>
-													<input type="month" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required/>
+													<input type="month" class="form-control" id="exampleInputEmail1" onChange={(e) => setExpDate(e.target.value)} aria-describedby="emailHelp" />
 												</div>
 											</div>
 										</div>

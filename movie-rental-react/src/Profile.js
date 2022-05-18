@@ -110,6 +110,8 @@ const Profile = ({name, mail, uid,birthday}) => {
 							<div className="col-6 mt-5">
 								<button className = "btn btn-primary" data-bs-toggle = "modal" data-bs-target = "#addFriend">Add Friend</button>
 							</div>
+
+							
 						</div>
 						<div className="col-6 overflow-auto">
 							<div className="row createMovieRequest mt-5 ms-2 ">
